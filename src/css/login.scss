@@ -1,0 +1,55 @@
+#SignInForm{
+    
+    text-align: center; 
+    .label{
+       text-align: left;
+       padding-left: 60px; 
+    }
+    input{
+        height: 35px;
+        width: 250px;
+        padding-left: 6px;
+        margin: 10px;
+        border: .5px solid lightgray;
+        border-radius: 4px;
+    }
+    span .button, span p{
+        display: inline-block;
+        cursor: pointer;
+    }
+    span .button{
+        width: 60px;
+        background: rgb(110, 1, 1); 
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+}
+
+#SignUpForm{
+    
+    text-align: center; 
+    .label{
+       text-align: left;
+       padding-left: 60px; 
+    }
+    input{
+        height: 35px;
+        width: 250px;
+        padding-left: 6px;
+        margin: 10px;
+        border: .5px solid lightgray;
+        border-radius: 4px;
+    }
+    span .button, span p{
+        display: inline-block;
+        cursor: pointer;
+    }
+    span .button{
+        width: 60px;
+        background: rgb(110, 1, 1); 
+        color: white;
+        border: none;
+        border-radius: 10px;
+    }
+}

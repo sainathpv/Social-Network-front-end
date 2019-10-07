@@ -8,35 +8,7 @@ class QRcode extends Component{
     }
 
     sendCode(){
-        var options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: this.state.email,
-                password: this.state.password
-            })
-        }
-
-        fetch("http://localhost:8080/users/login", options).then( result =>{
-            console.log(result.status);
-            if(result.status === 200){
-                return result.json();
-            }else{
-                console.log('failed');
-                return null;
-            }
-        }).then( result => {
-            if(result === null){
-                //add cookie
-                localStorage.setItem('JWT', result.token);
-                //redirect to 2factor
-                window.location.href = "http://localhost:3000/2factor";
-            }else{
-                console.log("successful");
-            }
-        });
+        window.location.href = "http://localhost:3000/2factor";
     }
 
     render(){

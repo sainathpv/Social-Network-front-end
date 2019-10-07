@@ -41,7 +41,6 @@ export default class SignUpForm extends Component{
             }
 
             fetch("http://localhost:8080/users/signup", options).then( result =>{
-            console.log(result.status);
             if(result.status === 200){
                 return result.json();
             }else{
@@ -52,7 +51,9 @@ export default class SignUpForm extends Component{
             if(result === null){
 
             }else{
-                this.img = result;
+                this.img = result.img;
+                localStorage.setItem("email", document.getElementById('signup_email').value);
+                localStorage.setItem("JWT", result.token);
                 this.setState({
                     fname: document.getElementById('signup_fname').value,
                     lname: document.getElementById('signup_lname').value,

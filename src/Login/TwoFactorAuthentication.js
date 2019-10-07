@@ -16,9 +16,12 @@ class TwoFactorAuthentication extends Component{
     }
     
     handleSubmit(event){
+        event.preventDefault();
         var data = {
-            key: this.state.key
+            email: localStorage.getItem("email"),
+            token: this.state.key
         }
+
         var options = {
             method: 'POST',
             headers: {
@@ -27,7 +30,8 @@ class TwoFactorAuthentication extends Component{
             },
             body: JSON.stringify(data)
         }
-        fetch("localhost:8080/", options).then( data => {
+        
+        fetch("http://localhost:8080/twoFA/twoFALogin", options).then( data => {
             if(data.status === 200){
                 return data.json()
             }else{

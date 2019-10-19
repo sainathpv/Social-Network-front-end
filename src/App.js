@@ -4,6 +4,9 @@ import TwoFactorAuthentication from './Login/TwoFactorAuthentication';
 import Profile from './Profile';
 import MainPage from './Login/MainPage';
 import QRcode from './Login/QRcode';
+import FP from './Login/FP';
+import EnterEmail from './Login/EnterEmail';
+import  ResetPassword from './Login/ResetPassword';
 
 import { BrowserRouter as Router, Route, Redirect} from 'react-router-dom';
 
@@ -28,8 +31,12 @@ class App extends Component {
         <Route path="/profile"strict render={ () => (
           <Profile></Profile>)
         } />
-
+        <Route path="/EnterEmail" exact component={EnterEmail}/>
+        <Route path="/ResetPassword" exact component={ResetPassword}/>
       </Router>
+
+        
+       
     );
   }
 }

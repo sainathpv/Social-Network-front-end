@@ -11,19 +11,24 @@
     color: #fff;
     text-shadow: 2px 2px black; }
     #MainPage .titleBox h1 {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
       font-size: 50px; }
     #MainPage .titleBox h3 {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      margin-left: 8%;
       font-size: 20px;
       padding-left: 10px; }
     #MainPage .titleBox h4 {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      margin-left: 15%;
       font-size: 20px;
       padding-left: 20px; }
   #MainPage .formBox {
     transform: translate(0%, 26vh);
     border: .5px lightgray solid;
-    border-radius: 4px;
+    border-radius: 20px;
     background-color: #fff;
-    width: 400px;
+    width: 380px;
     padding: 10px; }
     #MainPage .formBox img {
       display: inline-block;
@@ -33,5 +38,7 @@
       position: relative;
       line-height: 5px;
       top: -20px; }
+
+
 
 /*# sourceMappingURL=main.css.map */

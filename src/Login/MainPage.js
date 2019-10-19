@@ -3,6 +3,10 @@ import logo from './../images/HC.svg';
 import './../css/main.css';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
+import EnterEmail from './EnterEmail';
+import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+
+
 class MainPage extends React.Component{
   constructor(props){
     super(props);
@@ -11,6 +15,7 @@ class MainPage extends React.Component{
 
   render(){
       return(
+        
         <div id="MainPage">
           <div>
             <div className="titleBox">
@@ -21,11 +26,13 @@ class MainPage extends React.Component{
           </div>
           <div>
             <div className="formBox">
-              <span> <img src={logo} alt=""></img> <h4>Hoosier Connection</h4> </span>
-              { !this.state.login ? <SignUpForm /> : <SignInForm /> }
-            </div>
+              
+              { !this.state.login ? <SignInForm /> : <SignUpForm /> }
+           
+             </div>
           </div>
         </div> 
+        
       );
   }
 }

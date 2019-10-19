@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import './../css/login.css';
+import './../css/main.css';
 import SignInForm from './SignInForm';
+import logo from './../images/HC.svg';
 import QRCode from './QRcode'
 export default class SignUpForm extends Component{
     constructor(props){
@@ -77,6 +79,8 @@ export default class SignUpForm extends Component{
         if(this.state.signup && !this.state.QRCode){
             return(
                 <form id="SignUpForm" onSubmit={this.handleSubmit}>
+                     <span> <img src={logo} alt=""></img> <h4>Create a new account</h4> </span>
+                    
                     <div className="label"><label>First Name:</label></div>
                     <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>
                     <div className="label"><label>Last Name:</label></div>
@@ -87,7 +91,7 @@ export default class SignUpForm extends Component{
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
                     <div className="label"><label>Re-Enter Password:</label></div>
                     <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
-                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login?</p></span>
+                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login</p></span>
                 </form>
             );
         }else if(this.state.QRCode){

@@ -1,6 +1,11 @@
 import React, {Component} from 'react';
 import './../css/login.css';
+import logo from './../images/HC.svg';
 import SignUpForm from './SignUpForm';
+import EnterEmail from './EnterEmail';
+import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
+import bg from './../images/FP.jpg';
+import './../css/main.css';
 
 export default class SignInForm extends Component{
     constructor(props){
@@ -23,6 +28,7 @@ export default class SignInForm extends Component{
 
     handleSubmit(event){
         event.preventDefault();
+        window.location.href = "EnterEmail";
         var options = {
             method: 'POST',
             headers: {
@@ -65,20 +71,28 @@ export default class SignInForm extends Component{
             signin: false
         });
     }
-
+    
     render() {
        if(this.state.signin){
             return(
+                
+               
                 <form id="SignInForm" onSubmit={this.handleSubmit}>  
+                 <span> <img src={logo} alt=""></img> <h4> Log In to Hoosier Connection</h4> </span>
                     <div className="label"><label>Email:</label><br /></div>    
                     <input type="text" id="login_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
                     <div className="label"><label>Password:</label><br /></div>
                     <input type="password" onChange={this.handleChange} id="login_password" required></input><br />
-                    <span><input type="submit" className="button" value="Login" /> <p onClick={this.swapForm}>Sign up?</p></span>
+                    <span><input type="submit" className="button" value="Login" /> <p onClick={this.swapForm}>Sign up</p></span>
+                    
+                            <Link to="/EnterEmail"><div input type="submit"> Forgot Password? </div> </Link>
                 </form>
+               
             );
         }else{
            return ( <SignUpForm /> ); 
         }
     }
 }
+
+

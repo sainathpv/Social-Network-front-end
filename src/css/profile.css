@@ -1,166 +1,15 @@
-
-
-/*The top most block*/
-.heading {
-  padding-top: 10px;
-  display: flex;
-  width: 85%; 
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  /*align-content: flex-start;*/
-}
-
-.logo {
-  margin: 10px;
-  
-}
-
-.title {
-  margin: 10px;
-}
-
-.buttonArea{
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-.button {
-  position: relative;
-  left: 200px;
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  padding: 12px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
- .button1 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #4CAF50;
-}
-
- .button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
- .button2 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #008CBA;
-}
-
- .button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
-
- .button3 {
-  background-color: white; 
-  color: black; 
-  border: 2px solid #f44336;
-}
-
- .button3:hover {
-  background-color: #f44336;
-  color: white;
-}
-
- .button4 {
-  background-color: white;
-  color: black;
-  border: 2px solid #e7e7e7;
-}
-
- .button4:hover {
-  background-color: #e7e7e7;
-}
-
-.button5 {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-  border-radius: 50%;
-  padding: 35px 32px;
-  
-}
-
-.button5:hover {
-  background-color: #555555;
-  color: white;
-  border-radius: 50%;
-  padding: 35px 32px;
-}
-
-/*The top most block Ends*/
-
-
-
-/*Middle Block*/
-.middle {
-  padding-top: 20px;
-  display: flex;
-  width: 85%; 
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-  /*align-content: flex-start;*/
-}
-
-.image {
-  width: 300px;
-  height: 300px;
-  border-radius: 4px; 
-}
-
-.uploadImg {
-  position: relative;
-  left: -285px;
-  bottom: -130px;
-}
-
-
-
-
-
-
-
-/*
 #profileSettings .flex {
-  display: flex;
-}
-
+  display: flex; }
 #profileSettings .justify-content-center {
-  justify-content: center;
-}
-
+  justify-content: center; }
 #profileSettings nav ul {
-  display: inline;
-}
-
-#profileSettings nav ul li {
+  display: inline; }
+  #profileSettings nav ul li {
     line-height: 50px;
-    display: inline;
-}
-
+    display: inline; }
 #profileSettings .container {
   margin: auto;
-  width: 85%; 
-}
-
-
+  width: 85%; }
   #profileSettings .container .profile .split {
     padding: 0 80px; }
   #profileSettings .container .profile .profileField label {
@@ -177,13 +26,11 @@
     height: 185px;
     border: .5px solid lightgray;
     border-radius: 4px;
-    padding: 10px 0 0 10px; 
-  }
+    padding: 10px 0 0 10px; }
   #profileSettings .container .profile .profileField img {
     width: 300px;
     height: 300px;
-    border-radius: 4px; 
-  }
+    border-radius: 4px; }
   #profileSettings .container .profile .profileField button {
     position: relative;
     left: -285px;
@@ -192,8 +39,7 @@
     border: none;
     color: white;
     padding: 5px 10px;
-    border-radius: 10px; 
-  }
+    border-radius: 10px; }
   #profileSettings .container .profile .field_button {
     background: #0065fc;
     color: white;
@@ -202,33 +48,27 @@
     width: 80px;
     margin-left: 1em;
     margin-top: 10px;
-    padding: 10px 10px; 
-  }
+    padding: 10px 10px; }
   #profileSettings .container .security .center {
     padding: 20px 18%;
-    margin: auto; 
-  }
+    margin: auto; }
     #profileSettings .container .security .center .profileField .p-10 {
-      padding-left: 10px; 
-    }
+      padding-left: 10px; }
     #profileSettings .container .security .center .profileField .no_padding {
-      padding: 0 !important; 
-    }
+      padding: 0 !important; }
     #profileSettings .container .security .center .profileField input {
       display: flex;
       display: block;
       border: .5px solid lightgray;
       height: 27px;
-      width: 90%; 
-    }
+      width: 90%; }
     #profileSettings .container .security .center .profileField .warn_button {
       background: red;
       color: white;
       border: none;
       border-radius: 10px;
       margin-left: 3em;
-      padding: 10px 10px; 
-    }
+      padding: 10px 10px; }
     #profileSettings .container .security .center .field_button {
       text-align: center;
       width: 80px;
@@ -238,7 +78,6 @@
       border-radius: 10px;
       margin-left: 1em;
       margin-top: 10px;
-      padding: 10px 10px; 
-    }
+      padding: 10px 10px; }
 
 /*# sourceMappingURL=profile.css.map */

@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
-import './../css/login.css';
-import logo from './../images/HC.svg';
+import './../css/login/login.css';
 import SignUpForm from './SignUpForm';
-import EnterEmail from './EnterEmail';
-import {BrowserRouter as Router, Switch, Route,Link} from "react-router-dom";
-import bg from './../images/FP.jpg';
-import './../css/main.css';
-
+import Cookie from '../Utility/Cookie';
+import TwoFactor from './TwoFactor';
 export default class SignInForm extends Component{
     constructor(props){
         super(props);
-        this.state = {email: "", password: "", signin: true};
+        this.state = {email: "", password: "", signin: true, twofactor: false};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
@@ -22,13 +18,11 @@ export default class SignInForm extends Component{
         this.setState({
             email: document.getElementById('login_email').value, 
             password: document.getElementById('login_password').value,
-            signin: this.state.signin
         });
     }
 
     handleSubmit(event){
         event.preventDefault();
-        window.location.href = "EnterEmail";
         var options = {
             method: 'POST',
             headers: {
@@ -39,12 +33,8 @@ export default class SignInForm extends Component{
                 password: this.state.password
             })
         };
-        console.log(JSON.stringify({
-            email: this.state.email,
-            password: this.state.password
-        }));
+
         fetch("http://localhost:8080/users/login", options).then( result =>{
-            console.log(result.status);
             if(result.status === 200){
                 return result.json();
             }else{
@@ -55,11 +45,12 @@ export default class SignInForm extends Component{
             if(result === null){
 
             }else{
-                console.log("successful cookie");
                 //add cookie
-                localStorage.setItem('JWT', result.token);
+                var date = new Date();
+                date = new Date(date.getTime() + (60*60*1000));
+                Cookie.setCookie('HC_JWT', result.token, date); 
                 //redirect to 2factor
-                window.location.href = "http://localhost:3000/2factor";
+                this.setState({twofactor: true});
             }
         });
     }
@@ -71,28 +62,26 @@ export default class SignInForm extends Component{
             signin: false
         });
     }
-    
+
     render() {
-       if(this.state.signin){
+        if(this.state.twofactor){
+            console.log("here");
+            return (<TwoFactor email={this.state.email}></TwoFactor>);
+        }else if(this.state.signin){
             return(
-                
-               
                 <form id="SignInForm" onSubmit={this.handleSubmit}>  
-                 <span> <img src={logo} alt=""></img> <h4> Log In to Hoosier Connection</h4> </span>
+                    <h2>Login In</h2>
                     <div className="label"><label>Email:</label><br /></div>    
                     <input type="text" id="login_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
                     <div className="label"><label>Password:</label><br /></div>
                     <input type="password" onChange={this.handleChange} id="login_password" required></input><br />
-                    <span><input type="submit" className="button" value="Login" /> <p onClick={this.swapForm}>Sign up</p></span>
-                    
-                            <Link to="/EnterEmail"><div input type="submit"> Forgot Password? </div> </Link>
+                    <a href="SendResetEmail">Forgot Password?</a>
+                    <span><input type="submit" className="button" value="Login" /> <p onClick={this.swapForm}>Sign up?</p></span>
                 </form>
-               
             );
         }else{
+            console.log("here2");
            return ( <SignUpForm /> ); 
         }
     }
 }
-
-

@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import './../css/login.css';
-import './../css/main.css';
+import './../css/login/login.css';
 import SignInForm from './SignInForm';
-import logo from './../images/HC.svg';
 import QRCode from './QRcode'
+import Cookie from './../Utility/Cookie';
 export default class SignUpForm extends Component{
     constructor(props){
         super(props);
@@ -54,14 +53,10 @@ export default class SignUpForm extends Component{
 
             }else{
                 this.img = result.img;
-                localStorage.setItem("email", document.getElementById('signup_email').value);
-                localStorage.setItem("JWT", result.token);
+                var date = new Date();
+                console.log(result.token);
+                Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
                 this.setState({
-                    fname: document.getElementById('signup_fname').value,
-                    lname: document.getElementById('signup_lname').value,
-                    email: document.getElementById('signup_email').value,
-                    password: document.getElementById('signup_pwd').value,
-                    signup: true,
                     QRCode: true
                 });
             }
@@ -72,15 +67,14 @@ export default class SignUpForm extends Component{
     }
     
     swapForm(){
-        this.setState({fname: this.state.fname, lname: this.state.lname, email: this.state.email, password: this.state.password, signup: false});
+        this.setState({signup: false});
     }
 
     render() {
         if(this.state.signup && !this.state.QRCode){
             return(
                 <form id="SignUpForm" onSubmit={this.handleSubmit}>
-                     <span> <img src={logo} alt=""></img> <h4>Create a new account</h4> </span>
-                    
+                    <h2>Sign Up</h2>
                     <div className="label"><label>First Name:</label></div>
                     <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>
                     <div className="label"><label>Last Name:</label></div>
@@ -91,12 +85,11 @@ export default class SignUpForm extends Component{
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
                     <div className="label"><label>Re-Enter Password:</label></div>
                     <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
-                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login</p></span>
+                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login?</p></span>
                 </form>
             );
         }else if(this.state.QRCode){
-            console.log(this.img);
-            return( <QRCode code={this.img} email={this.state.email} pwd={this.state.pwd} />);
+            return( <QRCode code={this.img} email={this.state.email} />);
         }else{
             return( <SignInForm />);
         }

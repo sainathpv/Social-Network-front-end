@@ -1,37 +1,8 @@
 #dashboard {
     grid-template-columns: 400px auto 400px;
-    nav {
-        text-align: left;
-        background: white;
-        height: 65px;
-        border-bottom: 1px lightgray solid;
-        padding: 0 5%;
-        ul li {
-           margin: 0 20px;
-           line-height: 65px;
-           font-size: 17px;
-
-        }
-
-        .active{
-            color: #840606;
-            position: relative;
-            &::before{
-                content: '';
-                position: absolute;
-                width: 100%;
-                transform: scaleX(1);
-                height: 2px;
-                bottom: 20px;
-                left: 0;
-                background: #840606;
-                transform-origin: bottom right;
-                transition:  transform 0.25 ease-out;
-            }
-        }
-    }
-    #dash_profilePanel{
-        z-index: 1;
+    #dash_profilePanel .p-fixed{
+        z-index: 2;
+        width: 400px;
         height: 100vh;
         background: #ffffff;
         box-shadow: 2px 0 2px 0 lightgray;
@@ -144,7 +115,7 @@
                     border: none;
                     margin: 12.5px 0;
                     margin-left: 30px;
-                    height: 25px;
+                    height: 30px;
                     padding: 0 10px;
                     background: #3F99EE;
                     color: white;
@@ -153,9 +124,45 @@
             }
         }
     }
-
+    #dash_postPanel{
+        nav .p-fixed {
+            z-index: 1;
+            text-align: left;
+            background: white;
+            width: 100%;
+            height: 65px;
+            border-bottom: 1px lightgray solid;
+            padding: 0 5%;
+            ul li {
+               margin: 0 20px;
+               line-height: 65px;
+               font-size: 17px;
+    
+            }
+            .active{
+                color: #840606;
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(1);
+                    height: 2px;
+                    bottom: 20px;
+                    left: 0;
+                    background: #840606;
+                    transform-origin: bottom right;
+                    transition:  transform 0.25 ease-out;
+                }
+            }
+        }
+        .posts{
+            padding: 65px 0;
+        }
+    }
     #dash_networkpanel{
         background: white;
+        z-index: 1;
         .panel-header{
             height: 65px;
             border-bottom: .5px solid lightgray;
@@ -163,9 +170,10 @@
                 line-height: 65px;
                 text-align: center;
             }
+
         }
         .network-panel{
-            height: 100%;
+            height: calc(100vh - 65.5px);
             border-left: .5px solid lightgray;
             h3{ padding: 4px 0 0 20px; }
             a{

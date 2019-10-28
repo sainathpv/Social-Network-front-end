@@ -2,6 +2,9 @@
 body {
   background: #F5F5F5;
 }
+.p-fixed{
+  position: fixed;
+}
 
 .text-nunito{
   font-family: 'Nunito Sans', sans-serif;
@@ -10,12 +13,16 @@ body {
 .text-roboto{
   font-family: 'Roboto', sans-serif;  
 }
-
+.d-inline{
+  display: inline;
+}
 *{ 
+  box-sizing: border-box;
   margin: 0;
   font-family: 'Roboto', sans-serif;  
   padding: 0;
 }
+
 h1, h2, h3{
   font-weight: normal;
   font-family: 'Nunito Sans', sans-serif;

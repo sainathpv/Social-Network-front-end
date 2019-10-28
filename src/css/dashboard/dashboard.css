@@ -1,19 +1,116 @@
 #dashboard {
   grid-template-columns: 400px auto 400px; }
-  #dashboard nav {
+  #dashboard #dash_profilePanel .p-fixed {
+    z-index: 2;
+    width: 400px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: 2px 0 2px 0 lightgray; }
+    #dashboard #dash_profilePanel .p-fixed .logobox {
+      padding: 5px; }
+      #dashboard #dash_profilePanel .p-fixed .logobox img {
+        width: 50px; }
+      #dashboard #dash_profilePanel .p-fixed .logobox h1 {
+        line-height: 50px;
+        margin-left: 10px; }
+    #dashboard #dash_profilePanel .p-fixed .profile {
+      justify-content: center; }
+      #dashboard #dash_profilePanel .p-fixed .profile img {
+        border: solid darkgray 1px;
+        border-radius: 50%;
+        height: 100px;
+        margin: 10px; }
+      #dashboard #dash_profilePanel .p-fixed .profile .description {
+        padding: 10px; }
+        #dashboard #dash_profilePanel .p-fixed .profile .description h1 {
+          font-size: 26px; }
+        #dashboard #dash_profilePanel .p-fixed .profile .description h3 {
+          font-size: 24px; }
+        #dashboard #dash_profilePanel .p-fixed .profile .description h4 {
+          font-size: 18px;
+          font-weight: normal; }
+        #dashboard #dash_profilePanel .p-fixed .profile .description h5 {
+          color: grey;
+          font-size: 15px;
+          font-weight: 100; }
+    #dashboard #dash_profilePanel .p-fixed .activity {
+      margin: 20px 0; }
+      #dashboard #dash_profilePanel .p-fixed .activity li {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 20%;
+        font-size: 18px; }
+        #dashboard #dash_profilePanel .p-fixed .activity li .description {
+          color: gray; }
+        #dashboard #dash_profilePanel .p-fixed .activity li .amount {
+          color: #840606; }
+    #dashboard #dash_profilePanel .p-fixed #dash_createPost {
+      display: block;
+      font-size: 16px;
+      margin: 20px auto;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      background: #3F99EE;
+      color: white; }
+    #dashboard #dash_profilePanel .p-fixed form {
+      padding: 10px; }
+      #dashboard #dash_profilePanel .p-fixed form h4 {
+        margin-left: 15%; }
+    #dashboard #dash_profilePanel .p-fixed .findFriend input {
+      margin: auto;
+      display: block;
+      border: none;
+      border-radius: 4px;
+      height: 30px;
+      padding: 0 5px;
+      background: #F1F1F1;
+      width: 55%;
+      max-width: 400px; }
+    #dashboard #dash_profilePanel .p-fixed .findFriend button {
+      display: inline;
+      font-size: 16px;
+      margin: 5px 25% 0 0;
+      border: none;
+      border-radius: 10px;
+      padding: 5px 15px;
+      background: #3F99EE;
+      color: white; }
+    #dashboard #dash_profilePanel .p-fixed .activeFriendRequests li {
+      padding: 0 10%; }
+      #dashboard #dash_profilePanel .p-fixed .activeFriendRequests li img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin: 5px; }
+      #dashboard #dash_profilePanel .p-fixed .activeFriendRequests li h5 {
+        margin: 5px;
+        line-height: 40px; }
+      #dashboard #dash_profilePanel .p-fixed .activeFriendRequests li button {
+        border: none;
+        margin: 12.5px 0;
+        margin-left: 30px;
+        height: 30px;
+        padding: 0 10px;
+        background: #3F99EE;
+        color: white;
+        border-radius: 10px; }
+  #dashboard #dash_postPanel nav .p-fixed {
+    z-index: 1;
     text-align: left;
     background: white;
+    width: 100%;
     height: 65px;
     border-bottom: 1px lightgray solid;
     padding: 0 5%; }
-    #dashboard nav ul li {
+    #dashboard #dash_postPanel nav .p-fixed ul li {
       margin: 0 20px;
       line-height: 65px;
       font-size: 17px; }
-    #dashboard nav .active {
+    #dashboard #dash_postPanel nav .p-fixed .active {
       color: #840606;
       position: relative; }
-      #dashboard nav .active::before {
+      #dashboard #dash_postPanel nav .p-fixed .active::before {
         content: '';
         position: absolute;
         width: 100%;
@@ -24,102 +121,11 @@
         background: #840606;
         transform-origin: bottom right;
         transition: transform 0.25 ease-out; }
-  #dashboard #dash_profilePanel {
-    z-index: 1;
-    height: 100vh;
-    background: #ffffff;
-    box-shadow: 2px 0 2px 0 lightgray; }
-    #dashboard #dash_profilePanel .logobox {
-      padding: 5px; }
-      #dashboard #dash_profilePanel .logobox img {
-        width: 50px; }
-      #dashboard #dash_profilePanel .logobox h1 {
-        line-height: 50px;
-        margin-left: 10px; }
-    #dashboard #dash_profilePanel .profile {
-      justify-content: center; }
-      #dashboard #dash_profilePanel .profile img {
-        border: solid darkgray 1px;
-        border-radius: 50%;
-        height: 100px;
-        margin: 10px; }
-      #dashboard #dash_profilePanel .profile .description {
-        padding: 10px; }
-        #dashboard #dash_profilePanel .profile .description h1 {
-          font-size: 26px; }
-        #dashboard #dash_profilePanel .profile .description h3 {
-          font-size: 24px; }
-        #dashboard #dash_profilePanel .profile .description h4 {
-          font-size: 18px;
-          font-weight: normal; }
-        #dashboard #dash_profilePanel .profile .description h5 {
-          color: grey;
-          font-size: 15px;
-          font-weight: 100; }
-    #dashboard #dash_profilePanel .activity {
-      margin: 20px 0; }
-      #dashboard #dash_profilePanel .activity li {
-        display: flex;
-        justify-content: space-between;
-        padding: 5px 20%;
-        font-size: 18px; }
-        #dashboard #dash_profilePanel .activity li .description {
-          color: gray; }
-        #dashboard #dash_profilePanel .activity li .amount {
-          color: #840606; }
-    #dashboard #dash_profilePanel #dash_createPost {
-      display: block;
-      font-size: 16px;
-      margin: 20px auto;
-      border: none;
-      border-radius: 10px;
-      padding: 10px 20px;
-      background: #3F99EE;
-      color: white; }
-    #dashboard #dash_profilePanel form {
-      padding: 10px; }
-      #dashboard #dash_profilePanel form h4 {
-        margin-left: 15%; }
-    #dashboard #dash_profilePanel .findFriend input {
-      margin: auto;
-      display: block;
-      border: none;
-      border-radius: 4px;
-      height: 30px;
-      padding: 0 5px;
-      background: #F1F1F1;
-      width: 55%;
-      max-width: 400px; }
-    #dashboard #dash_profilePanel .findFriend button {
-      display: inline;
-      font-size: 16px;
-      margin: 5px 25% 0 0;
-      border: none;
-      border-radius: 10px;
-      padding: 5px 15px;
-      background: #3F99EE;
-      color: white; }
-    #dashboard #dash_profilePanel .activeFriendRequests li {
-      padding: 0 10%; }
-      #dashboard #dash_profilePanel .activeFriendRequests li img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        margin: 5px; }
-      #dashboard #dash_profilePanel .activeFriendRequests li h5 {
-        margin: 5px;
-        line-height: 40px; }
-      #dashboard #dash_profilePanel .activeFriendRequests li button {
-        border: none;
-        margin: 12.5px 0;
-        margin-left: 30px;
-        height: 25px;
-        padding: 0 10px;
-        background: #3F99EE;
-        color: white;
-        border-radius: 10px; }
+  #dashboard #dash_postPanel .posts {
+    padding: 65px 0; }
   #dashboard #dash_networkpanel {
-    background: white; }
+    background: white;
+    z-index: 1; }
     #dashboard #dash_networkpanel .panel-header {
       height: 65px;
       border-bottom: .5px solid lightgray; }
@@ -127,7 +133,7 @@
         line-height: 65px;
         text-align: center; }
     #dashboard #dash_networkpanel .network-panel {
-      height: 100%;
+      height: calc(100vh - 65.5px);
       border-left: .5px solid lightgray; }
       #dashboard #dash_networkpanel .network-panel h3 {
         padding: 4px 0 0 20px; }

@@ -5,23 +5,37 @@ import logo from "./images/HC.svg";
 import { Helmet } from "react-helmet";
 import {Redirect} from 'react-router-dom'
 import SignInForm from './Login/SignInForm';
+import ReactBootstrap from 'react-bootstrap';
+import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Dropdown, DropdownButton} from "react-bootstrap";
+import * as ReactDOM from 'react-dom';
+
+
+
+
+import {FormControl, Container, Form, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button, Row, Col, Grid} from 'react-bootstrap';
+
 
 const TiTLE = "User Profile"
 
 class Profile extends Component{
-    
+     
+  
     constructor(props){
-        super(props);
+        
+    super(props);
         this.state = {major: "", infomation: "", tags: "", profileIMG: "", pageStatus: "profile"};
         this.toSignIn = this.toSignIn.bind(this);
         this.toHome = this.toHome.bind(this);
         this.toChat = this.toChat.bind(this);
+       
+        
         //TODO: check if there is a token redirect to signin if invalid
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
+    
     handleChange(event){
         this.setState({
             major: document.getElementById('profile_major').value,
@@ -96,11 +110,11 @@ class Profile extends Component{
         this.setState({fname: this.state.fname, lname: this.state.lname, email: this.state.email, password: this.state.password, pageStatus: 'chat'});
     }
 
-
-
+   
     //TO DO, for some reason the button part does not work
     //TO DO, when jump to another page, the another page seems to losing all its css.
     render(){
+       
         if(this.state.pageStatus === "profile" || this.state.pageStatus === "home" || this.state.pageStatus === "chat"){
             return(
                 <div id="profileSettings">
@@ -123,72 +137,83 @@ class Profile extends Component{
                         </div>
                     </div>
                     <hr />
-                            
-                    <div class="middle">
-                        <img className="image" src={profileIMG} alt="): Something went wrong"></img>
+                        <div className= "middle">    
+                    
+ 
+                        
+                        </div>
+                        <br/><br/>
+                        
+                        
+                        
+                        <Container>
+                            <h2 >Settings</h2>
+                           <Container>
+                            <h4 class="line">Profile</h4>
+                        
+                            <Container>
+                            <h5>Bio</h5>
+                            <img className="image" src={profileIMG} alt="): Something went wrong"></img>
                         <button class="uploadImg">Upload</button>
+                                    <Form.Row> <textarea class="" id="profile_info" placeholder="A little section dedicated to you!"></textarea></Form.Row>
+                         
+                                  <Form.Row ><Row>
+                                             <Form.Group as={Col} >
+                                                <label>First Name</label><br/>
+                                                <input type="text"></input>  
+                                               
+                                                
+                                               
+                                                </Form.Group> 
 
-                        <textarea class="" id="profile_info" placeholder="A little section dedicated to you!"></textarea>
+                                                <Form.Group as={Col} >
+                                                <label>Last Name</label><br/>
+                                                                  
+                                                <input type="text"></input>  
+                                                </Form.Group>
+                                                </Row>
+                                                </Form.Row>
 
+                                                <Form.Row>
+                                                <DropdownButton id="dropdown-basic-button" title="Interests">
+  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+</DropdownButton>
+                                                </Form.Row>
 
+                                            
 
-
-                        <form class="profile">
-                            
-                            <span className="flex justify-content-center">   
-                                <div className="split">
-                                        
-                                        <span className="flex">
-                                            <div className="profileField">
-                                                <label>First Name</label><br />
-                                                <input type="text"></input>
-                                            </div>
-                                            <div className="profileField">
-                                                <label>Last Name</label><br />
-                                                <input type="text"></input>
-                                            </div>
-                                        </span>
-                                        <span className="flex">
-                                            <div className="profileField">
-                                                <label>Email</label><br />
-                                                <input type="text"></input>
-                                            </div>
-                                        </span>
-                                    <button className="field_button">Update</button>
-                                </div>
-                                
-                            </span>
-                            
-                        </form>
-
-                        <form className="security">
-                            <h2>Security:</h2>
-                            <hr />
-                            <div class="center">
-                                <span className="flex">
-                                    <div className="profileField">
-                                        <label className="p-10">Reset Password</label><br />
-                                        <input type="text"></input>
-                                    </div>
-                                    <div className="profileField">
-                                        <label className="p-10">Re-enter Password</label><br />
-                                        <input type="text"></input>
-                                    </div>
-                                </span>
+                                               
+                                                <Form.Row><button className="field_button"  >Update</button></Form.Row>
+                                               
+                       
+                            <h4>Security:</h4>
+                           
+                           
+                                <Form.Row><Row><Form.Group as={Col}>
+                                        <label >Reset Password</label><br />
+                                        <input type="password"></input></Form.Group>
+                                    <Form.Group as={Col}>
+                                        <label >Re-enter Password</label><br />
+                                        <input type="password"></input></Form.Group>
+                                        </Row></Form.Row>
+                               
                                 <button className="field_button">Reset</button>
                                 <div className="profileField">
                                     <label className="no-padding">Delete Account</label>
                                     <button className="warn_button">Delete Account</button>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
+                                </Container>
+                                </Container>
+                        </Container>
                 </div>
             );
         } else if(this.state.pageStatus === "signin"){
             return(<Redirect to='./Login/SignInForm'/>);
         }
-    }
+    
+}
 }
 
 export default Profile;

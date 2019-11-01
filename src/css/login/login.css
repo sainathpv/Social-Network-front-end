@@ -1,0 +1,73 @@
+#SignInForm {
+  text-align: center; }
+  #SignInForm .label {
+    text-align: left;
+    padding-left: 60px; }
+  #SignInForm input {
+    height: 35px;
+    width: 250px;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; }
+  #SignInForm span .button, #SignInForm span p {
+    display: inline-block;
+    cursor: pointer; }
+  #SignInForm span .button {
+    width: 60px;
+    background: #6e0101;
+    color: white;
+    border: none;
+    border-radius: 10px; }
+  #SignInForm a, #SignInForm:visited{
+    text-decoration: none;
+    color: gray;
+  }
+
+#SignUpForm {
+  text-align: center; }
+  #SignUpForm .label {
+    text-align: left;
+    padding-left: 60px; }
+  #SignUpForm input {
+    height: 35px;
+    width: 250px;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; }
+  #SignUpForm span .button, #SignUpForm span p {
+    display: inline-block;
+    cursor: pointer; }
+  #SignUpForm span .button {
+    width: 60px;
+    background: #6e0101;
+    color: white;
+    border: none;
+    border-radius: 10px; }
+
+    #login_2fForm {
+      text-align: center; }
+      #login_2fForm .label {
+        text-align: left;
+        padding-left: 60px; }
+      #login_2fForm input {
+        height: 35px;
+        width: 250px;
+        padding-left: 6px;
+        margin: 10px;
+        border: .5px solid lightgray;
+        border-radius: 4px; }
+      #login_2fForm button, #login_2fForm span p {
+        display: inline-block;
+        cursor: pointer; }
+      #login_2fForm button {
+        width: 60px;
+        height: 30px;
+        margin-right: 20%;
+        background: #6e0101;
+        color: white;
+        border: none;
+        border-radius: 10px; }
+
+/*# sourceMappingURL=login.css.map */

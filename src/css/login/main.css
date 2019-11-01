@@ -1,0 +1,36 @@
+#MainPage {
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-image: url("../../images/IU_Gates.jpg");
+  height: 100vh;
+  display: flex;
+  justify-content: space-around; }
+  #MainPage .titleBox {
+    transform: translate(0%, 40vh);
+    color: #fff;
+    text-shadow: 2px 2px black; }
+    #MainPage .titleBox h1 {
+      font-size: 50px; }
+    #MainPage .titleBox h3 {
+      font-size: 20px; }
+    #MainPage .titleBox h4 {
+      font-size: 20px; }
+  #MainPage .formBox {
+    text-align: center;
+    transform: translate(0%, 26vh);
+    border: .5px lightgray solid;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 400px;
+    padding: 10px; }
+    #MainPage .formBox img {
+      display: inline-block;
+      width: 50px; }
+    #MainPage .formBox h4 {
+      display: inline-block;
+      position: relative;
+      line-height: 5px;
+      top: -20px; }
+
+/*# sourceMappingURL=main.css.map */

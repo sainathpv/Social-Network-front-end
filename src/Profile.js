@@ -7,9 +7,6 @@ import {Redirect} from 'react-router-dom'
 import SignInForm from './Login/SignInForm';
 import ReactBootstrap from 'react-bootstrap';
 import {ButtonDropdown, DropdownItem, DropdownMenu, DropdownToggle, Dropdown, DropdownButton} from "react-bootstrap";
-import * as ReactDOM from 'react-dom';
-
-
 
 
 import {FormControl, Container, Form, FormGroup, ControlLabel, HelpBlock, Checkbox, Radio, Button, Row, Col, Grid} from 'react-bootstrap';
@@ -27,14 +24,33 @@ class Profile extends Component{
         this.toSignIn = this.toSignIn.bind(this);
         this.toHome = this.toHome.bind(this);
         this.toChat = this.toChat.bind(this);
-       
+        this.states = {items: props.items, showMenu: false, label: this.props.label, handle: props.handle };
         
         //TODO: check if there is a token redirect to signin if invalid
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+     }
+     getMenu(event){
+        if(this.states.showMenu){
+            return(
+                <ul>
+                    {this.states.items.map((item, i) => <li onClick={() => {
+                        this.states.handle(item.toLowerCase());
+                        this.showMenu();
+                    }}>{item}</li>)}
+                </ul>
+            );
+        }else{
+            return("");
+        }
     }
-    
+
+    showMenu(){
+        event.preventDefault();
+        this.setStates({showMenu: !this.states.showMenu});
+    }
     
     handleChange(event){
         this.setState({
@@ -162,8 +178,7 @@ class Profile extends Component{
                                                 <label>First Name</label><br/>
                                                 <input type="text"></input>  
                                                
-                                                
-                                               
+               
                                                 </Form.Group> 
 
                                                 <Form.Group as={Col} >
@@ -175,16 +190,13 @@ class Profile extends Component{
                                                 </Form.Row>
 
                                                 <Form.Row>
-                                                <DropdownButton id="dropdown-basic-button" title="Interests">
-  <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-  <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-  <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-</DropdownButton>
+                                                <div className="dropdown">
+                <button onClick={this.showMenu.bind(this)}>{this.states.label}</button>
+                {this.getMenu()}
+            </div>
                                                 </Form.Row>
-
-                                            
-
-                                               
+                                              
+                     
                                                 <Form.Row><button className="field_button"  >Update</button></Form.Row>
                                                
                        

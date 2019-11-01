@@ -5,7 +5,8 @@
     background: white;
     border: solid .5px lightgrey;
     border-radius: 4px;
-    h3, h5{
+
+    h2, h5{
         padding: 1px 40px;
     }
     .postMetaData{
@@ -47,6 +48,7 @@
     
     .comments{
         width: 100%;
+        
         .comment{
             border: solid .5px darkgray;
             border-radius: 4px;
@@ -54,6 +56,29 @@
             background: whitesmoke;
             width: 90%;
             margin: 10px auto; 
+        }
+        textarea{
+            border: .5px solid lightgray;
+            font-size: 15px;
+            padding: 5px;
+            border-radius: 4px;
+            display: block;
+            margin: auto;
+            width: 80%;
+            height: 200px;
+            resize: none;
+        }
+        h3{
+            margin: 0 13%;
+        }
+        button{
+            border: none;
+            border-radius: 10px;
+            background: #3F99EE;
+            color: white;
+            margin: 0 15%;
+            width: 75px;
+            height: 30px;
         }
     }
 }

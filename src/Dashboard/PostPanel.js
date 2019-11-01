@@ -1,12 +1,23 @@
 import React from 'react';
 import Post from './Post';
+import PostForm from'./PostForm';
 import person from './../images/person-generic.jpg'
 class PostPanel extends React.Component{
     constructor(props){
         super(props);
         //TODO: fetch posts
-        this.state = {posts: []};
+        this.state = {posts: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden};
     }
+
+    renderPostForm(){
+        if(this.state.isPostFormHidden){
+            return <PostForm />
+        }else{
+            return;
+        }
+        
+    }
+
     render(){
         var user = {
             name: "User Name",
@@ -18,7 +29,7 @@ class PostPanel extends React.Component{
             {
                 comment: "Commenting Something",
                 user: "User Name",
-                profile: "adsodoj345fa",
+                profile  : "adsodoj345fa",
 
             },
             {
@@ -34,6 +45,7 @@ class PostPanel extends React.Component{
 
             }
         ]
+        
         return (
         <div id="dash_postPanel">
             <nav>
@@ -45,6 +57,7 @@ class PostPanel extends React.Component{
                     </ul>
                 </div>
             </nav>
+            {this.renderPostForm()}
             <ul className="posts" >
                 <Post title="Computer science is cool!" tags={tags} dislikes={4} likes={19} comments={comments} type="text" content="This is a sample paragraph for this text post. I am thinking of types listed in the state. I don't know how we are going to implement a like dislike system."
                     user={user}

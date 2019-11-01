@@ -4,12 +4,24 @@ import PostPanel from './PostPanel';
 import NetworkPanel from './NetworkPanel';
 import './../css/dashboard/dashboard.css';
 class Dashboard extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {showPostForm: false};
+    }
+
+    showPostForm(){
+        this.setState({showPostForm: !this.state.showPostForm});
+    }
+
+    isPostFormHidden(){
+        return this.state.showPostForm();
+    }
 
     render(){
         return (
             <div id="dashboard" className="d-grid">
-                <ProfilePanel />
-                <PostPanel />
+                <ProfilePanel showPostForm={this.showPostForm.bind(this)} />
+                <PostPanel showPostForm={this.showPostForm} isPostFormHidden={this.isPostFormHidden} />
                 <NetworkPanel />
             </div>
         );

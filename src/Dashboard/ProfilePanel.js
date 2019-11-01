@@ -3,6 +3,12 @@ import logo from './../images/HC.svg';
 import person from './../images/person-generic.jpg';
 class ProfilePanel extends React.Component{
 
+    constructor(props){
+        super(props);
+        this.state = {
+            showPostForm: props.showPostForm
+        }
+    }
     render(){
         return (
             <div id="dash_profilePanel">
@@ -29,8 +35,7 @@ class ProfilePanel extends React.Component{
                         <li><a className="description">Friends</a><a className="amount">2</a></li>
                         <li><a className="description">Messages</a><a className="amount">0</a></li>
                     </ul>
-                    {/* TODO: Create Post Component */}
-                    <button id="dash_createPost">Create A Post</button>
+                    <button id="dash_createPost" onClick={this.state.showPostForm}>Create A Post</button>
                     <hr />
                     <form className="findFriend">
                         {/* TODO: Find Friend Component */}
@@ -45,7 +50,7 @@ class ProfilePanel extends React.Component{
                             <li className="d-flex">
                                 <img src={person} alt=""/>
                                 <h5>James Cameron</h5>
-                                <button>Accept</button>
+                                <span> <button>Accept</button> <i className="fas fa-times"></i></span>
                             </li>
                         </ul>
                     </form>

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import './../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
@@ -30,7 +31,7 @@ class Post extends React.Component{
             case "video":
                 return (
                 <div className="vidcontainer" style={s}>
-                    <iframe src={this.state.content}  frameborder="0" allowFullScreen/>
+                    <iframe origin="http://localhost:3000/" src={this.state.content}  frameBorder="0" allowFullScreen/>
                 </div>);
             case "advert":
                 return (<img src={this.state.content} alt=""></img>);
@@ -60,35 +61,43 @@ class Post extends React.Component{
                     <hr />
                     <div className="d-flex postMetaData">
                         <div className="label" onClick={this.showComments} >
-                            <i class="fas fa-comments"></i>
+                            <i className="fas fa-comments"></i>
                             <h5 className="d-inline">Comments: {this.state.comments.length}</h5>
                         </div>
                         <div className="label" onClick={this.votePost(1)}>
-                            <i style={{color: "#45c450"}} class="fas fa-thumbs-up"></i>
+                            <i style={{color: "#45c450"}} className="fas fa-thumbs-up"></i>
                             <h5 className="d-inline">Likes: {this.state.likes}</h5>
                         </div>
                         <div className="label" onClick={this.votePost(-1)}>
-                            <i style={{color: "#c44545"}} class="fas fa-thumbs-down"></i>
+                            <i style={{color: "#c44545"}} className="fas fa-thumbs-down"></i>
                             <h5 className="d-inline">Dislikes: {this.state.dislikes}</h5>
                         </div>
                         <div>
-                            <i class="fas fa-tags"></i>
+                            <i className="fas fa-tags"></i>
                             <ul className="d-inline">
                                 {this.state.tags.map((tag, i) =>
-                                    <li className="d-inline">{tag}</li>
+                                    <li className="d-inline" key={i.toString()}>{tag}</li>
                                     )}
                             </ul>
                         </div>
                     </div>
                     {
                             this.state.showComments ?
-                            <ul className="comments">{
-                            this.state.comments.map((comment, i) =>
-                            <li className="comment">
-                                    <h5>{comment.user}</h5>
-                                    <hr />
-                                    <p>{comment.comment}</p>
-                            </li>)
+                            <ul className="comments">
+                                <li>
+                                <h3>Create A Comment</h3>
+                                    <form className="text-right" onSubmit={this.postComment}>
+                                        <textarea required></textarea><br />
+                                        <button type="submit">Submit</button>
+                                    </form> 
+                                </li>
+                                {
+                                this.state.comments.map((comment, i) =>
+                                <li className="comment">
+                                        <h5>{comment.user}</h5>
+                                        <hr />
+                                        <p>{comment.comment}</p>
+                                </li>)
                             }</ul>
                             : ""
                         }
@@ -99,7 +108,7 @@ class Post extends React.Component{
     render(){
         return (
         <div className="post">
-            <h3>{this.state.title}</h3>
+            <h2>{this.state.title}</h2>
             <h5>{this.state.user.name}</h5>
             <hr />
             {this.getContent()}

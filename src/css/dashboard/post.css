@@ -5,7 +5,7 @@
   background: white;
   border: solid .5px lightgrey;
   border-radius: 4px; }
-  .post h3, .post h5 {
+  .post h2, .post h5 {
     padding: 1px 40px; }
   .post .postMetaData {
     padding: 0 40px; }
@@ -44,5 +44,25 @@
       background: whitesmoke;
       width: 90%;
       margin: 10px auto; }
+    .post .comments textarea {
+      border: .5px solid lightgray;
+      font-size: 15px;
+      padding: 5px;
+      border-radius: 4px;
+      display: block;
+      margin: auto;
+      width: 80%;
+      height: 200px;
+      resize: none; }
+    .post .comments h3 {
+      margin: 0 13%; }
+    .post .comments button {
+      border: none;
+      border-radius: 10px;
+      background: #3F99EE;
+      color: white;
+      margin: 0 15%;
+      width: 75px;
+      height: 30px; }
 
 /*# sourceMappingURL=post.css.map */

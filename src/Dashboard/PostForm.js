@@ -5,7 +5,7 @@ import sample from '../images/sample.jpg';
 class PostForm extends Component {
     constructor(props){
         super(props);
-        this.state = {type: "text"};
+        this.state = {type: "text", closeForm: props.closeForm};
         this.changeType = this.changeType.bind(this);
     }
 
@@ -60,7 +60,7 @@ class PostForm extends Component {
     render(){
         return (
             <div className="postForm" >
-                <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i className="d-inline fas fa-times"></i></div>
+                <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="d-inline fas fa-times"></i></div>
                 <hr />
                 <form onSubmit={this.createPost}>
                     <label>Type Of Post:</label>

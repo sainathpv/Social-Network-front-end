@@ -5,13 +5,15 @@ import person from './../images/person-generic.jpg'
 class PostPanel extends React.Component{
     constructor(props){
         super(props);
+        console.log(props.isPostFormHidden());
         //TODO: fetch posts
         this.state = {posts: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden};
     }
 
     renderPostForm(){
-        if(this.state.isPostFormHidden){
-            return <PostForm />
+
+        if(this.state.isPostFormHidden()){
+            return <PostForm closeForm={this.state.showPostForm} />
         }else{
             return;
         }

@@ -6,7 +6,7 @@ class Profile extends Component{
     constructor(props){
         super(props);
         //TODO: check if there is a token redirect to login if invalid
-        if(!this.validateJWT()){
+        if(this.validateJWT()){
             window.location.href = "/login";
         }
         this.handleChange = this.handleChange.bind(this);

@@ -1,37 +1,8 @@
 #dashboard {
     grid-template-columns: 400px auto 400px;
-    nav {
-        text-align: left;
-        background: white;
-        height: 65px;
-        border-bottom: 1px lightgray solid;
-        padding: 0 5%;
-        ul li {
-           margin: 0 20px;
-           line-height: 65px;
-           font-size: 17px;
-
-        }
-
-        .active{
-            color: #840606;
-            position: relative;
-            &::before{
-                content: '';
-                position: absolute;
-                width: 100%;
-                transform: scaleX(1);
-                height: 2px;
-                bottom: 20px;
-                left: 0;
-                background: #840606;
-                transform-origin: bottom right;
-                transition:  transform 0.25 ease-out;
-            }
-        }
-    }
-    #dash_profilePanel{
-        z-index: 1;
+    #dash_profilePanel .p-fixed{
+        z-index: 2;
+        width: 400px;
         height: 100vh;
         background: #ffffff;
         box-shadow: 2px 0 2px 0 lightgray;
@@ -90,6 +61,7 @@
         }
         #dash_createPost{
             display: block;
+            cursor: pointer;
             font-size: 16px;
             margin: 20px auto;
             border: none;
@@ -140,11 +112,17 @@
                     margin: 5px;
                     line-height: 40px;
                 }
+                i{
+                    cursor: pointer;
+                    margin-left: 10px;
+                    color: gray;
+                }
                 button{
+                    cursor: pointer;
                     border: none;
                     margin: 12.5px 0;
                     margin-left: 30px;
-                    height: 25px;
+                    height: 30px;
                     padding: 0 10px;
                     background: #3F99EE;
                     color: white;
@@ -153,9 +131,135 @@
             }
         }
     }
+    #dash_postPanel{
+        position: relative;
+        .postForm{
+            top: 80px;
+            left: calc(50% - 15vw);
+            display: block;
+            margin: auto;
+            background: white;
+            width: 30vw;
+            z-index: 3;
+            position: fixed;
+            border: .5px solid lightgrey;
+            border-radius: 4px;
+            .header{
+                i{
+                    line-height: 50px;
+                    font-size: 20px;
+                    color: gray;
+                    margin-right: 30px;
+                    cursor: pointer;
+                }
+            }
+            textarea{
+                width: 100%;
+                height: 100px;
+                border-radius: 4px;
+                resize: none;
+                margin: 0 0 0 10px;
+            }
+            input{
+                display: block;
+                border: .5px solid lightgray;
+                border-radius: 4px;
+                height: 40px;
+                font-size: 16px;
+                width: 100%;
+                padding: 5px;
+                margin: 15px auto;
+            }
+            button{
+                border: none;
+                background: #3F99EE;
+                color: white;
+                border-radius: 10px;
+                width: 75px;
+                font-size: 16px;
+                margin: 0 20px 0 10px;
+                height: 30px;   
+            }
+            .dropdown{
+                position: relative;
+                button{
+                    border: none;
+                    background: #3F99EE;
+                    color: white;
+                    border-radius: 4px;
+                    width: 75px;
+                    font-size: 16px;
+                    margin: 0 0 0 10px;
+                    height: 30px;
+                }
+                ul{
+                    z-index: 3;
+                    top: 30px;
+                    left: 10px;
+                    background: whitesmoke;
+                    position: absolute;
+                    width: 75px;
+                    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+                    li{
+                        position: relative;
+                        width: 75px; 
+                        padding: 5px;  
+                        cursor: pointer;
+                    }
+                    li:hover{
+                        background: lightgray;
+                        transition: .05s;
+                    }
+                }
+
+                
+            }
+            h3{
+                margin: 10px 40px;
+            }
+            form{
+                padding: 10px 40px;
+            }
+        }
+        nav .p-fixed {
+            z-index: 1;
+            text-align: left;
+            background: white;
+            width: 100%;
+            height: 65px;
+            border-bottom: 1px lightgray solid;
+            padding: 0 5%;
+            ul li {
+               margin: 0 20px;
+               line-height: 65px;
+               font-size: 17px;
+    
+            }
+            .active{
+                color: #840606;
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(1);
+                    height: 2px;
+                    bottom: 20px;
+                    left: 0;
+                    background: #840606;
+                    transform-origin: bottom right;
+                    transition:  transform 0.25 ease-out;
+                }
+            }
+        }
+        .posts{
+            padding: 65px 0;
+        }
+    }
 
     #dash_networkpanel{
         background: white;
+        z-index: 1;
         .panel-header{
             height: 65px;
             border-bottom: .5px solid lightgray;
@@ -163,9 +267,10 @@
                 line-height: 65px;
                 text-align: center;
             }
+
         }
         .network-panel{
-            height: 100%;
+            height: calc(100vh - 65.5px);
             border-left: .5px solid lightgray;
             h3{ padding: 4px 0 0 20px; }
             a{

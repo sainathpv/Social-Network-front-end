@@ -11,6 +11,21 @@ class Profile extends Component{
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+
+     }
+     getMenu(event){
+        if(this.states.showMenu){
+            return(
+                <ul>
+                    {this.states.items.map((item, i) => <li onClick={() => {
+                        this.states.handle(item.toLowerCase());
+                        this.showMenu();
+                    }}>{item}</li>)}
+                </ul>
+            );
+        }else{
+            return("");
+        }
     }
 
     validateJWT(token){

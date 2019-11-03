@@ -1,0 +1,68 @@
+.post {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  background: white;
+  border: solid .5px lightgrey;
+  border-radius: 4px; }
+  .post h2, .post h5 {
+    padding: 1px 40px; }
+  .post .postMetaData {
+    padding: 0 40px; }
+    .post .postMetaData div {
+      margin: 10px; }
+    .post .postMetaData h5 {
+      padding: 5px;
+      font-size: 15px; }
+    .post .postMetaData i {
+      color: #3F99EE; }
+    .post .postMetaData .label {
+      cursor: pointer; }
+    .post .postMetaData ul li {
+      margin: 2px;
+      padding: 3px; }
+  .post p {
+    padding: 5px 40px; }
+  .post img, .post iframe {
+    margin: 5px 40px; }
+  .post img {
+    max-width: calc(100% - 80px);
+    position: relative; }
+  .post iframe {
+    z-index: 0;
+    position: absolute;
+    width: calc(100% - 80px);
+    height: 100%;
+    left: 0;
+    top: 0; }
+  .post .comments {
+    width: 100%; }
+    .post .comments .comment {
+      border: solid .5px darkgray;
+      border-radius: 4px;
+      padding: 20px 10px;
+      background: whitesmoke;
+      width: 90%;
+      margin: 10px auto; }
+    .post .comments textarea {
+      border: .5px solid lightgray;
+      font-size: 15px;
+      padding: 5px;
+      border-radius: 4px;
+      display: block;
+      margin: auto;
+      width: 80%;
+      height: 200px;
+      resize: none; }
+    .post .comments h3 {
+      margin: 0 13%; }
+    .post .comments button {
+      border: none;
+      border-radius: 10px;
+      background: #3F99EE;
+      color: white;
+      margin: 0 15%;
+      width: 75px;
+      height: 30px; }
+
+/*# sourceMappingURL=post.css.map */

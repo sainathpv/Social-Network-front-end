@@ -2,7 +2,16 @@
 body {
   background: #F5F5F5;
 }
-
+.p-fixed{
+  position: fixed;
+}
+button{
+  cursor: pointer;
+}
+button:hover{
+  box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+  transition: .1s;
+}
 .text-nunito{
   font-family: 'Nunito Sans', sans-serif;
 }
@@ -10,12 +19,16 @@ body {
 .text-roboto{
   font-family: 'Roboto', sans-serif;  
 }
-
+.d-inline{
+  display: inline;
+}
 *{ 
+  box-sizing: border-box;
   margin: 0;
   font-family: 'Roboto', sans-serif;  
   padding: 0;
 }
+
 h1, h2, h3{
   font-weight: normal;
   font-family: 'Nunito Sans', sans-serif;
@@ -27,7 +40,7 @@ h4, h5{
 ul{
   list-style-type: none;
 }
-textarea:focus, input:focus{
+*:focus{
   outline: none;
 }
 .d-block{
@@ -35,6 +48,9 @@ textarea:focus, input:focus{
 }
 .d-flex{
   display: flex;
+}
+.space-between{
+  justify-content: space-between;
 }
 .d-grid{
   display: grid;
@@ -44,6 +60,12 @@ textarea:focus, input:focus{
 }
 .text-right{
   text-align: right;
+}
+.p-relative{
+  position: relative;
+}
+.p-absolute{
+  position: absolute;
 }
 hr{
   border: solid lightgray .5px;

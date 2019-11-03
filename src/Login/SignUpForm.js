@@ -34,8 +34,8 @@ export default class SignUpForm extends Component{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    firstname: this.state.fname,
-                    lastname: this.state.lname,
+                    firstName: this.state.fname,
+                    lastName: this.state.lname,
                     email: this.state.email,
                     password: this.state.password
                 })
@@ -52,7 +52,7 @@ export default class SignUpForm extends Component{
             if(result === null){
 
             }else{
-                this.img = result.img;
+                this.data_url = result.data_url;
                 var date = new Date();
                 console.log(result.token);
                 Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
@@ -85,11 +85,11 @@ export default class SignUpForm extends Component{
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
                     <div className="label"><label>Re-Enter Password:</label></div>
                     <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
-                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login?</p></span>
+                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login</p></span>
                 </form>
             );
         }else if(this.state.QRCode){
-            return( <QRCode code={this.img} email={this.state.email} />);
+            return( <QRCode code={this.data_url} email={this.state.email} />);
         }else{
             return( <SignInForm />);
         }

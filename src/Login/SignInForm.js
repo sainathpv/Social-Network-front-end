@@ -115,10 +115,10 @@ export default class SignInForm extends Component{
                         />
                     </div>
 
-                    <a href="SendResetEmail">Forgot Password?</a>
+                    <a href="SendResetEmail">Forgot Password</a>
                     <span>
                         <input type="submit" className="button" value="Login" /> 
-                        <p onClick={this.swapForm}>Sign up?</p>
+                        <p onClick={this.swapForm}>Sign up</p>
                     </span>
                 </form>
             );

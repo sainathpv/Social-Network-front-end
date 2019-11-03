@@ -22,7 +22,7 @@ class MainPage extends React.Component{
           <div>
             <div className="formBox">
               <span> <img src={logo} alt=""></img> <h4>Hoosier Connection</h4> </span>
-              { !this.state.login ? <SignUpForm /> : <SignInForm /> }
+              { !this.state.login ? <SignInForm /> : <SignUpForm /> }
             </div>
           </div>
         </div> 

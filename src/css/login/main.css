@@ -18,7 +18,7 @@
       font-size: 20px; }
   #MainPage .formBox {
     text-align: center;
-    transform: translate(0%, 26vh);
+    transform: translate(0%, 24vh);
     border: .5px lightgray solid;
     border-radius: 4px;
     background-color: #fff;

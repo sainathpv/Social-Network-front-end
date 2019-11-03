@@ -1,0 +1,99 @@
+  <Form className="profile_info">
+  <div className="profileField "><Form><Form.Row>
+                                             <Form.Group as={Col} >
+                                                <label>First Name</label><br/>
+                                                <input type="text"></input> 
+                                                </Form.Group>
+
+                                                <Form.Group as={Col} >
+                                                <label>Last Name</label><br/>                         
+                                                <input type="text"></input>  
+                                                </Form.Group>
+                                                </Form.Row></div>
+
+                                                #profileSettings .container .profile .split {
+    padding: 0 80px;
+  margin-top: 10%; }
+  #profileField  {
+    padding-left: 10px; 
+    margin-left: 30px;
+  }
+  #profileSettings .container .profile .profileField input {
+    display: flex;
+    display: block;
+    border: .5px solid lightgray;
+    height: 27px;
+    width: 90%; }
+  #profileSettings .container .profile .profileField textarea {
+    resize: none;
+    width: 500px;
+    height: 185px;
+    border: .5px solid lightgray;
+    border-radius: 4px;
+    padding: 10px 0 0 10px; 
+  }
+  #profileSettings .container .profile .profileField img {
+    width: 300px;
+    height: 300px;
+    border-radius: 4px; 
+  }
+  #profileSettings .container .profile .profileField button {
+    position: relative;
+    left: -285px;
+    bottom: 15px;
+    background: rgba(0, 0, 0, 0.774);
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px; 
+  }
+  #profileSettings .container .profile .field_button {
+    background: #0065fc;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    width: 80px;
+    margin-left: 1em;
+    margin-top: 10px;
+    padding: 10px 10px; 
+  }
+  #profileSettings .container .security .center {
+    padding: 20px 18%;
+    margin: auto; 
+  }
+    #profileSettings .container .security .center .profileField .p-10 {
+      padding-left: 10px; 
+    }
+    #profileSettings .container .security .center .profileField .no_padding {
+      padding: 0 !important; 
+    }
+    #profileSettings .container .security .center .profileField input {
+      display: flex;
+      display: block;
+      border: .5px solid lightgray;
+      height: 27px;
+      width: 90%; 
+    }
+    #profileSettings .container .security .center .profileField .warn_button {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-left: 3em;
+      padding: 10px 10px; 
+    }
+    #profileSettings .container .security .center .field_button {
+      text-align: center;
+      width: 80px;
+      background: #0065fc;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-left: 1em;
+      margin-top: 10px;
+      padding: 10px 10px; 
+    }
+
+    if(!this.validateJWT()){
+            window.location.href = "/login";
+        }

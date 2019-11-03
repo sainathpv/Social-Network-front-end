@@ -1,15 +1,46 @@
 import React from 'react';
 import Post from './Post';
 import PostForm from'./PostForm';
-import person from './../images/person-generic.jpg'
+import person from './../images/person-generic.jpg';
+import Cookie from './../Utility/Cookie';
 class PostPanel extends React.Component{
     constructor(props){
         super(props);
         console.log(props.isPostFormHidden());
-        //TODO: fetch posts
-        this.state = {posts: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden};
+        this.state = {posts: [], tags: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden};
+        this.getPosts = this.getPosts.bind(this);
+        this.getProfile = this.getProfile(this);
     }
 
+    getPosts(tags){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        fetch("http://localhost:8080/posts/getPosts?tags=" + JSON.stringify(tags), options).then( result => {
+            return result.json();
+        }).then(result => {
+            this.setState({posts: result.return});
+        });
+    }
+
+    getProfile(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        };
+
+        fetch("http://localhost:8080/profiles/profile", options).then( result => {
+            return result.json();
+        }).then( result => {
+            this.getPosts(result.interests);
+        });
+    }
     renderPostForm(){
 
         if(this.state.isPostFormHidden()){
@@ -51,7 +82,7 @@ class PostPanel extends React.Component{
         return (
         <div id="dash_postPanel">
             <nav>
-                <div className="p-fixed">
+                <div className="p-fixed bg-primary w-100">
                     <ul className="d-flex">
                         <li className="active">Home</li>
                         <li>Chats</li>
@@ -61,21 +92,22 @@ class PostPanel extends React.Component{
             </nav>
             {this.renderPostForm()}
             <ul className="posts" >
-                <Post title="Computer science is cool!" tags={tags} dislikes={4} likes={19} comments={comments} type="text" content="This is a sample paragraph for this text post. I am thinking of types listed in the state. I don't know how we are going to implement a like dislike system."
-                    user={user}
-                />
-                <Post title="Computer science is cool!" tags={tags} dislikes={4} likes={19} comments={comments} type="video" content="https://www.youtube.com/embed/am6xD677SyA"
-                    user={user}
-                />
-                <Post title="Computer science is cool!" tags={tags} dislikes={4} likes={19} comments={comments} type="advert" content="https://i.imgur.com/9QpTmxm.jpg"
-                    user={user}
-                />
-                <Post title="Computer science is cool!" tags={tags} dislikes={4} likes={19} comments={comments} type="image" content="https://i0.wp.com/digital-photography-school.com/wp-content/uploads/2019/02/Landscapes-04-jeremy-flint.jpg?resize=1500%2C1000&ssl=1"
-                    user={user}
-                />
+                {
+                    this.state.posts.map((post, i) => 
+                    <Post title={post.title} key={i}
+                    tags={post.tags} dislikes={post.numDislikes}
+                    likes={post.numLikes} comments={post.comments}
+                    type={post.type} content={post.content}
+                    user={post.user} name={post.name}
+                />)
+                }
             </ul>
         </div>
         );
     }
 }
 export default PostPanel;
+
+
+// WEBPACK FOOTER //
+// src/Dashboard/PostPanel.js

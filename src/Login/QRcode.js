@@ -109,3 +109,7 @@ class QRcode extends Component{
 }
 
 export default QRcode;
+
+
+// WEBPACK FOOTER //
+// src/Login/QRcode.js

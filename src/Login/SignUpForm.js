@@ -34,8 +34,8 @@ export default class SignUpForm extends Component{
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    firstname: this.state.fname,
-                    lastname: this.state.lname,
+                    firstName: this.state.fname,
+                    lastName: this.state.lname,
                     email: this.state.email,
                     password: this.state.password
                 })
@@ -52,7 +52,7 @@ export default class SignUpForm extends Component{
             if(result === null){
 
             }else{
-                this.img = result.img;
+                this.img = result.data_url;
                 var date = new Date();
                 console.log(result.token);
                 Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
@@ -95,3 +95,7 @@ export default class SignUpForm extends Component{
         }
     }
 }
+
+
+// WEBPACK FOOTER //
+// src/Login/SignUpForm.js

@@ -57,3 +57,7 @@ export default class SendResetEmail extends Component{
         );   
     }
 }
+
+
+// WEBPACK FOOTER //
+// src/Login/SendResetEmail.js

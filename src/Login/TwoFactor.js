@@ -45,10 +45,14 @@ export default class SignInForm extends Component{
             <form id="login_2fForm" onSubmit={this.handleSubmit}>  
                 <h2>Two Factor</h2>
                 <div className="label"><label>Code:</label><br /></div>    
-                <input type="text" id="login_2f" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
+                <input type="text" id="login_2f" onChange={this.handleChange} placeholder="Ex. 123456" required></input><br/>
                 <div className="text-right"><button type="submit">Verify</button></div>
             </form>
         );
 
     }
 }
+
+
+// WEBPACK FOOTER //
+// src/Login/TwoFactor.js

@@ -62,3 +62,8 @@ export default class ResetPassword extends Component{
         );
     }
 }
+
+
+
+// WEBPACK FOOTER //
+// src/Login/ResetPassword.js

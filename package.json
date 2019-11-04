@@ -10,13 +10,9 @@
     "react-helmet": "^5.2.1",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.1.1",
-    "react-scripts": "0.9.5",
-    "request": "^2.88.0"
+    "react-scripts": "0.9.5"
   },
-  "devDependencies": {
-    "concurrently": "^5.0.0",
-    "nodemon": "^1.19.4"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",

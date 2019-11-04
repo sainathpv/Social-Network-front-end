@@ -67,7 +67,7 @@ class PostForm extends Component {
             fetch("http://localhost:8080/posts/postPosts", options).then(result => {
                 result.json()
             }).then(result => {
-                location.reload();
+                console.log(result);
             });
         });
     }

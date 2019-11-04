@@ -7,13 +7,6 @@ import Cookie from '../Utility/Cookie';
 import TwoFactor from './TwoFactor';
 
 
-/*var a = Math.ceil(Math.random() * 9)+ '';
-var b = Math.ceil(Math.random() * 9)+ '';
-var c = Math.ceil(Math.random() * 9)+ '';
-var d = Math.ceil(Math.random() * 9)+ '';
-var e = Math.ceil(Math.random() * 9)+ '';
-var code = a + b + c + d + e;
-*/
 export default class SignInForm extends Component{
     constructor(props){
         super(props);
@@ -116,7 +109,6 @@ export default class SignInForm extends Component{
                         />
                     </div>
 
-                    <a href="SendResetEmail">Forgot Password</a>
                     <span>
                         <a href="SendResetEmail">Forgot Password?</a>
                         

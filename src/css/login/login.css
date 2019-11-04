@@ -1,98 +1,161 @@
 #SignInForm {
-  text-align: center; }
-  #SignInForm .label {
-    text-align: left;
-    padding-left: 60px; }
+  text-align: center;
+  height: 470px;
+  width: 450px;
+}
 
-  #SignInForm input {
-    height: 35px;
-    width: 250px;
-    padding-left: 6px;
-    margin: 10px;
-    border: .5px solid lightgray;
-    border-radius: 4px; 
-  }
+#SignInForm .formBox {
+  text-align: center;
+  transform: translate(0%, 24vh);
+  border: 0.5px lightgray solid;
+  height: 400px;
+  background-color: #fff;
+  width: 450px;
+  padding: 10px;
+  border-radius: 25px;
+}
+#SignInForm .label {
+  text-align: left;
+  padding-left: 60px;
+}
 
-    
-  #SignInForm .google-cap{
-    padding-left: 35px;
-    margin: 10px;
-  }
-  
-  #SignInForm .captcha{
-    height: 35px;
-    width: 80px;
-    margin: 10px;
-    background-color: white;
-    color: black;
-  }
+#SignInForm input {
+  height: 45px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: 0.5px solid lightgray;
+  border-radius: 4px;
 
-  #SignInForm .ctc_input{
-    height: 35px;
-    width: 140px;
-    margin: 10px;
-  }
+  border-radius: 4px;
 
-  #SignInForm span .button, #SignInForm span p {
-    display: inline-block;
-    cursor: pointer; }
-  #SignInForm span .button {
-    left: 0;
-    width: 60px;
-    background: #6e0101;
-    color: white;
-    border: none;
-    border-radius: 10px; }
-  #SignInForm a, #SignInForm:visited{
-    text-decoration: none;
-    color: gray;
-  }
+  border: 2px solid brown;
+}
+
+#SignInForm .google-cap {
+  padding-left: 35px;
+  margin: 10px;
+}
+
+#SignInForm .captcha {
+  height: 35px;
+  width: 80px;
+  margin: 10px;
+  background-color: white;
+  color: black;
+}
+
+#SignInForm .ctc_input {
+  height: 35px;
+  width: 140px;
+  margin: 10px;
+}
+
+#SignInForm span .button,
+#SignInForm span p {
+  display: inline-block;
+  cursor: pointer;
+  cursor: pointer;
+  left: 60px;
+  position: relative;
+  align-content: left;
+  font-size: 22px;
+  margin: 10px;
+  padding: 10px;
+  display: inline;
+  width: 100px;
+}
+#SignInForm span .button {
+  width: 20px;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  width: 100px;
+  height: 45px;
+  left: 0%;
+}
+#SignInForm a,
+#SignInForm:visited {
+  text-decoration: none;
+  color: gray;
+  text-align: left;
+  margin: 10px;
+}
 
 #SignUpForm {
-  text-align: center; }
-  #SignUpForm .label {
-    text-align: left;
-    padding-left: 60px; }
-  #SignUpForm input {
-    height: 35px;
-    width: 250px;
-    padding-left: 6px;
-    margin: 10px;
-    border: .5px solid lightgray;
-    border-radius: 4px; }
-  #SignUpForm span .button, #SignUpForm span p {
-    display: inline-block;
-    cursor: pointer; }
-  #SignUpForm span .button {
-    left: 0;
-    width: 60px;
-    background: #6e0101;
-    color: white;
-    border: none;
-    border-radius: 10px; }
+  text-align: center;
+  border-radius: 40%;
+  height: 600px;
+  width: 450px;
+}
+#SignUpForm .label {
+  text-align: left;
+  padding-left: 60px;
+}
+#SignUpForm input {
+  height: 45px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: 0.5px solid lightgray;
+  border-radius: 4px;
+  border: 1px solid brown;
+}
+#SignUpForm span .button,
+#SignUpForm span p {
+  cursor: pointer;
+  left: 60px;
+  position: relative;
+  align-content: left;
+  font-size: 25px;
+  margin: 10px;
+  padding: 10px;
+  display: inline;
+}
+#SignUpForm span .button {
+  width: 100px;
+  background: #6e0101;
+  color: white;
+  border: none;
+  position: absolute;
+  font-size: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 10px;
+  box-sizing: content-box;
+  padding: 10px;
+  display: inline;
+}
 
-    #login_2fForm {
-      text-align: center; }
-      #login_2fForm .label {
-        text-align: left;
-        padding-left: 60px; }
-      #login_2fForm input {
-        height: 35px;
-        width: 250px;
-        padding-left: 6px;
-        margin: 10px;
-        border: .5px solid lightgray;
-        border-radius: 4px; }
-      #login_2fForm button, #login_2fForm span p {
-        display: inline-block;
-        cursor: pointer; }
-      #login_2fForm button {
-        width: 60px;
-        height: 30px;
-        margin-right: 20%;
-        background: #6e0101;
-        color: white;
-        border: none;
-        border-radius: 10px; }
+#login_2fForm {
+  text-align: center;
+}
+#login_2fForm .label {
+  text-align: left;
+  padding-left: 60px;
+}
+#login_2fForm input {
+  height: 35px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: 0.5px solid lightgray;
+  border-radius: 4px;
+}
+#login_2fForm button,
+#login_2fForm span p {
+  display: inline-block;
+  cursor: pointer;
+}
+#login_2fForm button {
+  width: 60px;
+  height: 30px;
+  margin-right: 20%;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px;
+}
 
 /*# sourceMappingURL=login.css.map */

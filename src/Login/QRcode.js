@@ -17,7 +17,7 @@ class QRcode extends Component{
     handleSubmit(event){
         event.preventDefault();
         var data = {
-            otp: document.getElementById('qr_code').value
+            token: document.getElementById('qr_code').value
         }
         console.log(Cookie.getCookie('HC_JWT'));
         var options = {

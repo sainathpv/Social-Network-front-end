@@ -29,7 +29,6 @@ export default class SignInForm extends Component{
     }
 
     handleSubmit(event){
-        console.log(this.captcha)
         event.preventDefault();
         var options = {
             method: 'POST',
@@ -43,7 +42,7 @@ export default class SignInForm extends Component{
             })
         };
 
-        fetch("http://localhost:8080/users/login", options).then( result =>{
+        fetch("http://localhost:8080/newusers/login", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
@@ -70,7 +69,6 @@ export default class SignInForm extends Component{
             password: this.state.password,
             signin: false
         });
-    
     }
 
     callback = function () {

@@ -4,18 +4,13 @@ import './css/profile.css';
 import logo from './images/HC.svg';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-
-
 import axios from 'axios';
-
-import {
-  Container,
-  Form,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Container, Form, Row, Col,} from 'react-bootstrap';
+import Cookie from './Utility/Cookie';
 
 const TiTLE = 'User Profile';
+
+console.log(Cookie.getCookie('HC_JWT'))
 
 //TODO: check if there is a token redirect to signin if invalid
 
@@ -23,32 +18,31 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      major: '',
-      infomation: '',
-      tags: '',
-      profileIMG: '',
-      pageStatus: 'profile'
+      //profileId: props.profileId, 
+      major: '', 
+      infomation: '', 
+      tags: '', 
+      profileIMG: '', 
+      pageStatus: 'profile', 
+      changed: 0
     };
     this.toSignIn = this.toSignIn.bind(this);
     this.toHome = this.toHome.bind(this);
     this.toChat = this.toChat.bind(this);
-    this.states = {
-      items: props.items,
-      showMenu: false,
-      label: this.props.label,
-      handle: props.handle
-    };
+    this.states = {items: props.items, showMenu: false, label: this.props.label, handle: props.handle};
     //TODO: check if there is a token redirect to login if invalid
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
     this.checkProfile();
   }
+
   checkProfile = () => {
     axios.get('/profile').then(res => {
       console.log(res.data);
     });
   };
+
   getMenu(event) {
     if (this.states.showMenu) {
       return (
@@ -75,29 +69,32 @@ class Profile extends Component {
     this.setStates({ showMenu: !this.states.showMenu });
   }
 
+  handleOpen(event){
+    
+  }
+
   handleChange(event) {
     this.setState({
       major: document.getElementById('profile_major').value,
       infomation: document.getElementById('profile_info').value,
       tags: document.getElementById('profile_interests').value,
       profileIMG: document.getElementById('profile_image').value,
-      pageStatus: 'profile'
+      pageStatus: 'profile',
+      changed: 1
     });
   }
   validateJWT(token) {}
 
   handleSubmit(event) {
     event.preventDefault();
-    if (
-      //TO DO: this should be checking if there are any state changed by user
-      true
-    ) {
+    if (this.state.changed) {
       var options = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
+          //profileId: this.state.profileId,
           profileIMG: this.state.profileIMG,
           basicInfo: this.state.infomation,
           tags: this.state.tags,
@@ -105,7 +102,7 @@ class Profile extends Component {
         })
       };
 
-      fetch('the route in backend', options)
+      fetch('http://localhost:8080/profiles/editprofile', options)
         .then(result => {
           if (result.status === 200) {
             return result.json();
@@ -115,7 +112,7 @@ class Profile extends Component {
           }
         })
         .then(result => {
-          /*if(result === null){
+          if(result === null){
 
             }else{
                 this.img = result.img;
@@ -129,7 +126,7 @@ class Profile extends Component {
                     signup: true,
                     QRCode: true
                 });
-            }*/
+            }
         });
     } else {
       //TODO notify the user of the bad match

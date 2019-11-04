@@ -27,7 +27,6 @@
     color: black;
   }
 
-
   #SignInForm .ctc_input{
     height: 35px;
     width: 140px;
@@ -38,6 +37,7 @@
     display: inline-block;
     cursor: pointer; }
   #SignInForm span .button {
+    left: 0;
     width: 60px;
     background: #6e0101;
     color: white;
@@ -64,6 +64,7 @@
     display: inline-block;
     cursor: pointer; }
   #SignUpForm span .button {
+    left: 0;
     width: 60px;
     background: #6e0101;
     color: white;

@@ -52,7 +52,7 @@ export default class SignUpForm extends Component{
             if(result === null){
 
             }else{
-                this.data_url = result.data_url;
+                this.img = result.data_url;
                 var date = new Date();
                 console.log(result.token);
                 Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
@@ -95,3 +95,7 @@ export default class SignUpForm extends Component{
         }
     }
 }
+
+
+// WEBPACK FOOTER //
+// src/Login/SignUpForm.js

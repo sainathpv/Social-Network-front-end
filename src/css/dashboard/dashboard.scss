@@ -1,181 +1,142 @@
 #dashboard {
     grid-template-columns: 400px auto 400px;
-    #dash_profilePanel .p-fixed{
-        z-index: 2;
-        width: 400px;
-        height: 100vh;
-        background: #ffffff;
-        box-shadow: 2px 0 2px 0 lightgray;
-        .logobox{
-            padding: 5px;
-            img{
-                width: 50px;
-            }
-            h1{
-            line-height: 50px;
-            margin-left: 10px; 
-            }
-        }
-        .profile{
-            justify-content: center;
-            img{
-                border: solid darkgray 1px;
-                border-radius: 50%;
-                height: 100px;
-                margin: 10px;
-            }
-            .description{
-                padding: 10px;
-                h1{
-                    font-size: 26px;
-                }
-                h3{
-                    font-size: 24px;
-                    
-                }
-                h4{
-                    font-size: 18px;
-                    font-weight: normal;
-                }
-                h5{
-                    color: grey;
-                    font-size: 15px;
-                    font-weight: 100;
-                }
-            }
-        }
-        .activity{
-            margin: 20px 0;
-            li{
-                display: flex;
-                justify-content: space-between;
-                padding: 5px 20%;
-                font-size: 18px;
-                .description{
-                    color: gray;
-                }
-                .amount{
-                    color: #840606;
-                }
-            }
-        }
-        #dash_createPost{
-            display: block;
-            cursor: pointer;
-            font-size: 16px;
-            margin: 20px auto;
-            border: none;
-            border-radius: 10px;
-            padding: 10px 20px;
-            background: #3F99EE;
-            color: white;
-        }
-        form{
-            padding: 10px;
-            h4{
-                margin-left: 15%;
-            }
-        }
-        .findFriend{
-            input{
-                margin: auto;
-                display: block;
-                border: none;
-                border-radius: 4px;
-                height: 30px;
-                padding: 0 5px;
-                background: #F1F1F1;
-                width: 55%;
-                max-width: 400px;
-            }
-            button{
-                display: inline;
-                font-size: 16px;
-                margin: 5px 25% 0 0;
-                border: none;
-                border-radius: 10px;
-                padding: 5px 15px;
-                background: #3F99EE;
-                color: white;
-            }
-        }
-        .activeFriendRequests{
-            li{
-                padding: 0 10%;
+    #dash_profilePanel{
+        position: relative;
+        .p-fixed{
+            width: 400px;
+            z-index: 2;
+            left: 0;
+            box-shadow: 2px 0 2px 0 lightgray;
+            .logobox{
+                padding: 5px;
                 img{
-                    width: 40px;
-                    height: 40px;
-                    border-radius: 50%;
-                    margin: 5px;
+                    width: 50px;
                 }
-                h5{
-                    margin: 5px;
-                    line-height: 40px;
+                h1{
+                line-height: 50px;
+                margin-left: 10px; 
                 }
                 i{
-                    cursor: pointer;
-                    margin-left: 10px;
-                    color: gray;
+                    color: darkgray;
+                    font-size: 20px;
+                    top: 20px;
+                    right: 20px;
+                }
+            }
+            .profile{
+                justify-content: center;
+                img{
+                    height: 100px;
+                    width: 100px;
+                    margin: 10px;
+                }
+                .description{
+                    padding: 10px;
+                    position: relative;
+                    h3{
+                        font-size: 24px;
+                        color: black;
+                    }
+                    h4{
+                        font-size: 18px;
+                        font-weight: normal;
+                    }
+                    h5{
+                        font-size: 15px;
+                        font-weight: 100;
+                        color: darkgray;
+                    }
+                    i{
+                        display: none;
+                        position: absolute;
+                        top: 10px;
+                        right: -30px;
+                    }
+                }
+            }
+            .profile:hover .description i{
+                display: block;
+            }
+            .activity{
+                margin: 20px 0;
+                li{
+                    display: flex;
+                    padding: 5px 20%;
+                    font-size: 18px;
+                }
+            }
+            #dash_createPost{
+                margin: 20px auto;
+                padding: 10px 20px;
+            }
+            form{
+                padding: 10px;
+                h4{
+                    margin-left: 15%;
+                }
+            }
+            .findFriend{
+                input{
+                    height: 30px;
+                    padding: 5px;
+                    width: 55%;
+                    max-width: 400px;
                 }
                 button{
-                    cursor: pointer;
-                    border: none;
-                    margin: 12.5px 0;
-                    margin-left: 30px;
-                    height: 30px;
-                    padding: 0 10px;
-                    background: #3F99EE;
-                    color: white;
-                    border-radius: 10px;
+                    display: inline;
+                    margin: 5px 25% 0 0;
+                }
+            }
+            .activeFriendRequests{
+                li{
+                    position: relative;
+                    padding: 0 10%;
+                    img{
+                        width: 40px;
+                        height: 40px;
+                        margin: 5px;
+                    }
+                    h5{
+                        position: absolute;
+                        top: 20px;
+                        margin: 5px;
+                        line-height: 0px;
+                    }
+                    i{
+                        margin-left: 10px;
+                    }
+                    button{
+                        margin: 12.5px 0;
+                        margin-left: 30px;
+                    }
                 }
             }
         }
     }
     #dash_postPanel{
-        position: relative;
         .postForm{
             top: 80px;
             left: calc(50% - 15vw);
-            display: block;
-            margin: auto;
-            background: white;
-            width: 30vw;
+            width: 30%;
             z-index: 3;
-            position: fixed;
-            border: .5px solid lightgrey;
-            border-radius: 4px;
             .header{
                 i{
                     line-height: 50px;
                     font-size: 20px;
-                    color: gray;
                     margin-right: 30px;
-                    cursor: pointer;
                 }
             }
             textarea{
-                width: 100%;
                 height: 100px;
-                border-radius: 4px;
                 resize: none;
-                margin: 0 0 0 10px;
             }
             input{
-                display: block;
-                border: .5px solid lightgray;
-                border-radius: 4px;
                 height: 40px;
                 font-size: 16px;
-                width: 100%;
                 padding: 5px;
-                margin: 15px auto;
+                margin: 5px auto;
             }
             button{
-                border: none;
-                background: #3F99EE;
-                color: white;
-                border-radius: 10px;
-                width: 75px;
                 font-size: 16px;
                 margin: 0 20px 0 10px;
                 height: 30px;   
@@ -210,9 +171,7 @@
                         background: lightgray;
                         transition: .05s;
                     }
-                }
-
-                
+                }                
             }
             h3{
                 margin: 10px 40px;
@@ -224,8 +183,6 @@
         nav .p-fixed {
             z-index: 1;
             text-align: left;
-            background: white;
-            width: 100%;
             height: 65px;
             border-bottom: 1px lightgray solid;
             padding: 0 5%;
@@ -256,18 +213,21 @@
             padding: 65px 0;
         }
     }
-
-    #dash_networkpanel{
-        background: white;
-        z-index: 1;
+    #dash_networkPanel{
+        z-index: 2;
         .panel-header{
             height: 65px;
+            width: 100%;
             border-bottom: .5px solid lightgray;
             h2{
                 line-height: 65px;
-                text-align: center;
             }
-
+            i{
+                color: darkgray;
+                font-size: 20px;
+                top: 20px;
+                right: 20px;
+            }
         }
         .network-panel{
             height: calc(100vh - 65.5px);
@@ -276,23 +236,19 @@
             a{
                 margin: 0 50px;
                 font-size: 13px;
-                color: #840606;
             }
             .friends{ 
                 ul{
                     justify-content: center;
                     grid-template-columns: 85px 85px 85px 85px;
-                    grid-template-rows: 85px 85px; 
+                    grid-template-rows: 85px 85px;
                     li{
                         img{
-                            display: block;
-                            border-radius: 50%;
                             width: 50px;
-                            margin: auto;
+                            height: 50px;
                         }
                         h5{
                             font-size: 12px;
-                            text-align: center;
                         }
                     }
                 }
@@ -302,7 +258,6 @@
                     padding: 15px; 
                     li{
                         display: inline-block;
-                        color: #840606;;
                         border: 2px solid #840606;;
                         border-radius: 10px;
                         padding: 2px 10px;
@@ -313,7 +268,6 @@
             .events{
                 ul {
                     padding: 0 15px; 
-                    
                     li{
                         justify-content: space-around;
                         border-radius: 10px;
@@ -324,4 +278,50 @@
             }
         }
     }
+    
+    #tab_profilePanel, #tab_networkPanel{
+        background: rgb(255, 255, 255);
+        color: rgb(110, 110, 110);
+        border: solid 1.5px lightgray;
+        border-radius: 15px 15px 0 0;
+        padding: 5px 25px;
+        position: fixed;
+        display: none;
+    }
+
+    #tab_profilePanel:hover, #tab_networkPanel:hover{
+        box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);
+        transition: .1s;
+        cursor: pointer;
+    }
+
+
+    #tab_networkPanel{
+        top: 165px;
+        right: -60px;
+        transform: rotate(-90deg);
+    }
+    #tab_profilePanel{
+        top: 150px;
+        left: -48px;
+        transform: rotate(90deg);
+    }
 }
+
+@media only screen and (max-width: 1600px) {
+    #dashboard{
+        grid-template-columns: inherit;
+        #dash_profilePanel{
+            display: none;
+        }
+        #dash_networkPanel{
+            display: none;
+        }
+        #tab_profilePanel{
+            display: block;
+        }
+        #tab_networkPanel{
+            display: block;
+        }
+    }
+  }

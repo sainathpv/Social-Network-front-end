@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import DropDownMenu from './../Utility/DropDown';
-import sample from '../images/sample.jpg';
+
+import Cookie from './../Utility/Cookie';
 
 class PostForm extends Component {
     constructor(props){
         super(props);
-        this.state = {type: "text", closeForm: props.closeForm};
+        this.state = {type: "text", title: "", tag: "", content: "", closeForm: props.closeForm};
         this.changeType = this.changeType.bind(this);
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
+        this.createPost = this.createPost.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     changeType(type){
@@ -15,58 +19,99 @@ class PostForm extends Component {
         console.log(type);
     }
 
+    fileSelectedHandler(event){
+        this.setState({content: event.target.result});
+    }
+    
+    handleChange(event){
+        event.preventDefault();
+        console.log(this.state.content);
+        this.setState({content: document.getElementById("postFormContent").value});
+    }
+
+    createPost(event){
+        event.preventDefault();
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        };
+
+        fetch("http://localhost:8080/profiles/profile", options).then( result => {
+            return result.json();
+        }).then( result => {
+            console.log(this.state);
+            var body = {
+                profileID: result._id,
+                numLikes: 0,
+                numDislikes: 0,
+                tags: document.getElementById("postFormTag").value,
+                comments: [],
+                name: result.name,
+                title: document.getElementById("postFormTitle").value,
+                type: this.state.type,
+                content: this.state.content
+            }
+            console.log(body);
+            options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+                },
+                body: JSON.stringify(body)
+            };
+
+            fetch("http://localhost:8080/posts/postPosts", options).then(result => {
+                result.json()
+            }).then(result => {
+                location.reload();
+            });
+        });
+    }
+
     getType(){
         if(this.state.type === "text"){
             return (
             <div>
                 <label>Text Content:</label>
-                <textarea></textarea>
+                <textarea onChange={this.handleChange} id="postFormContent" className="w-100 border-round-small border-lg"></textarea>
             </div>
             );
         }else if(this.state.type === "video"){
-            var vid = {
-                display: "none"
-            };
 
             return(
                 <div>
-                    <iframe style={vid} src="" frameBorder="0"  allowFullScreen></iframe>
-                    <input type="text" placeholder="Enter an Youtube URL."></input>
+                    <label>Youtube URL: </label>
+                    <input onChange={this.handleChange} id="postFormContent" className="w-100 border-round-small border-lg d-block" type="text" placeholder="Ex. https://www.youtube.com/watch?v=Tzl0ELY_TiM"></input>
                 </div>
             );
         }else{
-            var img = {
-                margin: "10px auto",
-                display: "block"
-            }
-
-            var button = {
-                bottom: "10px",
-                left: "0"
-            }
+            
             return(
                 <div className="p-relative">
-                    <img style={img} width="100%" src={sample} alt=""></img>
-                    <button style={button} className="p-absolute">Upload</button>
+                    <input type="file" onChange={this.fileSelectedHandler}/>
                 </div>
             );
         }
     }
 
-    createPost(){
-
-    }
-
     render(){
         return (
-            <div className="postForm" >
-                <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="d-inline fas fa-times"></i></div>
+            <div className="postForm d-block m-auto bg-primary p-fixed border-lg border-round-small" >
+                <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i></div>
                 <hr />
                 <form onSubmit={this.createPost}>
+                    <label>Title:</label><br />
+                    <input id="postFormTitle" className="d-block border-round-small border-lg w-100"></input>
                     <label>Type Of Post:</label>
-                    <DropDownMenu items={["Video","Image","Text"]} label="Text" handle={this.changeType}/>
+                    <DropDownMenu items={["Video","Image","Text"]} label="Text" handle={this.changeType}/><br/>
+                    <label>Tag:</label>
+                    <input id="postFormTag" className="d-block border-round-small border-lg w-100" placeholder="Ex. Computer Science"></input>
                     {this.getType()}
-                    <div className="text-right"><button type="submit">Post</button></div>
+                    <div className="text-right"><button className="btn-primary" type="submit">Post</button></div>
                 </form>
             </div>
         );
@@ -74,3 +119,8 @@ class PostForm extends Component {
 }
 
 export default PostForm;
+
+
+
+// WEBPACK FOOTER //
+// src/Dashboard/PostForm.js

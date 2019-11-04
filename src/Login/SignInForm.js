@@ -95,6 +95,7 @@ export default class SignInForm extends Component{
             console.log("here");
             return (<TwoFactor email={this.state.email}></TwoFactor>);
         }else if(this.state.signin){
+
             return(
                 <form id="SignInForm" onSubmit={this.handleSubmit}>  
                     <Helmet>
@@ -117,8 +118,10 @@ export default class SignInForm extends Component{
 
                     <a href="SendResetEmail">Forgot Password</a>
                     <span>
-                        <input type="submit" className="button" value="Login" /> 
-                        <p onClick={this.swapForm}>Sign up</p>
+                        <a href="SendResetEmail">Forgot Password?</a>
+                        
+                        <input  type="submit" className="button" value="Login" /> 
+                        <p onClick={this.swapForm}>Sign up?</p>
                     </span>
                 </form>
             );

@@ -1,5 +1,5 @@
 /*The top most block*/
-.heading {
+#profileSettings .heading {
   padding-top: 10px;
   display: flex;
   width: 85%;
@@ -9,22 +9,22 @@
   /*align-content: flex-start;*/
 }
 
-.logo {
+#profileSettings .logo {
   margin: 10px;
 }
 
-.title {
+#profileSettings .title {
   margin: 10px;
 }
 
-.buttonArea {
+#profileSettings .buttonArea {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
 }
 
-.button {
+#profileSettings .button {
   position: relative;
   left: 200px;
   background-color: #4caf50; /* Green */
@@ -42,50 +42,50 @@
   border-radius: 12px;
 }
 
-.button1 {
+#profileSettings .button1 {
   background-color: white;
   color: black;
   border: 2px solid #4caf50;
 }
 
-.button1:hover {
+#profileSettings .button1:hover {
   background-color: #4caf50;
   color: white;
 }
 
-.button2 {
+#profileSettings .button2 {
   background-color: white;
   color: black;
   border: 2px solid #008cba;
 }
 
-.button2:hover {
+#profileSettings .button2:hover {
   background-color: #008cba;
   color: white;
 }
 
-.button3 {
+#profileSettings .button3 {
   background-color: white;
   color: black;
   border: 2px solid #f44336;
 }
 
-.button3:hover {
+#profileSettings .button3:hover {
   background-color: #f44336;
   color: white;
 }
 
-.button4 {
+#profileSettings .button4 {
   background-color: white;
   color: black;
   border: 2px solid #e7e7e7;
 }
 
-.button4:hover {
+#profileSettings .button4:hover {
   background-color: #e7e7e7;
 }
 
-.button5 {
+#profileSettings .button5 {
   background-color: white;
   color: black;
   border: 2px solid #555555;
@@ -93,7 +93,7 @@
   padding: 35px 32px;
 }
 
-.button5:hover {
+#profileSettings .button5:hover {
   background-color: #555555;
   color: white;
   border-radius: 50%;
@@ -103,7 +103,7 @@
 /*The top most block Ends*/
 
 /*Middle Block*/
-.middle {
+#profileSettings .middle {
   padding-top: 10px;
   display: flex;
   width: 85%;
@@ -113,7 +113,7 @@
   /*align-content: flex-start;*/
 }
 
-.image {
+#profileSettings .image {
   width: 400px;
   height: 380px;
   border-radius: 4px;
@@ -121,7 +121,7 @@
   margin-left: 40%;
 }
 
-.uploadImg {
+#profileSettings .uploadImg {
   position: absolute;
   margin-top: 19%;
   margin-left: 41%;
@@ -203,7 +203,7 @@
 #profileSettings .container .security .center .profileField .p-10 {
   padding-left: 10px;
 }
-.no_padding {
+#profileSettings .no_padding {
   padding: 0 !important;
   background: red;
 }
@@ -214,7 +214,8 @@
   height: 27px;
   width: 90%;
 }
-.warn_button {
+
+#profileSettings .warn_button {
   background: red;
   color: white;
   border: none;
@@ -234,33 +235,27 @@
   padding: 10px 10px;
 }
 
-.line {
+#profileSettings .line {
   width: 1050px;
   height: 47px;
   border-bottom: 1px solid grey;
   position: relative;
 }
 
-* {
-  margin: 0px;
-  padding: 0px;
-  outline: none;
-}
-
-.ms-container {
+#profileSettings .ms-container {
   background: #fff;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.dropdown {
+#profileSettings .dropdown {
   position: relative;
   display: inline-block;
   color: black;
 }
 
-.dropdown-content {
+#profileSettings .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;

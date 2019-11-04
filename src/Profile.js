@@ -4,31 +4,15 @@ import './css/profile.css';
 import logo from './images/HC.svg';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
-import SignInForm from './Login/SignInForm';
-import ReactBootstrap from 'react-bootstrap';
-import {
-  ButtonDropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Dropdown,
-  DropdownButton
-} from 'react-bootstrap';
+
+
 import axios from 'axios';
 
 import {
-  FormControl,
   Container,
   Form,
-  FormGroup,
-  ControlLabel,
-  HelpBlock,
-  Checkbox,
-  Radio,
-  Button,
   Row,
   Col,
-  Grid
 } from 'react-bootstrap';
 
 const TiTLE = 'User Profile';
@@ -233,7 +217,7 @@ class Profile extends Component {
           <br />
           <br />
 
-          <Container>
+          <Container style={{width: "1200px", display: "block", margin: "auto"}}>
             <h2>Settings</h2>
             <Container>
               <h4 class='line'>Profile</h4>

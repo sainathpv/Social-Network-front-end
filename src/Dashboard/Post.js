@@ -1,12 +1,14 @@
 import React from 'react';
-
+import Cookie from './../Utility/Cookie';
 import './../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            id: props.id,
             title: props.title,
             type: props.type,
+            name: props.name,
             content: props.content, //text, img, video url, etc
             user: props.user, //user id
             comments: props.comments,
@@ -16,6 +18,7 @@ class Post extends React.Component{
             showComments: false
         }
         this.showComments = this.showComments.bind(this);
+        this.postComment = this.postComment.bind(this);
     }
     getContent(){
         var s = {
@@ -31,7 +34,7 @@ class Post extends React.Component{
             case "video":
                 return (
                 <div className="vidcontainer" style={s}>
-                    <iframe origin="http://localhost:3000/" src={this.state.content}  frameBorder="0" allowFullScreen/>
+                    <iframe src={this.state.content}  frameBorder="0" allowFullScreen/>
                 </div>);
             case "advert":
                 return (<img src={this.state.content} alt=""></img>);
@@ -47,7 +50,40 @@ class Post extends React.Component{
     showComments(event){
         this.setState({showComments: !this.state.showComments});
     }
+    postComment(event){
+        event.preventDefault();
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        }
+        try{
+            fetch("http://localhost:8080/profiles/profile", options).then( result => {
+                return result.json();
+            }).then( result => {
+                var options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        comment: document.getElementById("postComment").value,
+                        user: result.name,
+                        profile: result._id,
+                        postID: this.state.id
+                    })
+                }
+                fetch("http://localhost:8080/posts/postComment", options).then( result => {
+                    location.reload();
+                });
+            });
+        }catch(err){
+            console.log(err);
+        }
 
+    }
     votePost(vote){
 
     }
@@ -82,34 +118,34 @@ class Post extends React.Component{
                         </div>
                     </div>
                     {
-                            this.state.showComments ?
-                            <ul className="comments">
-                                <li>
+                        this.state.showComments ?
+                        <ul className="comments">
+                            <li>
                                 <h3>Create A Comment</h3>
-                                    <form className="text-right" onSubmit={this.postComment}>
-                                        <textarea required></textarea><br />
-                                        <button type="submit">Submit</button>
-                                    </form> 
-                                </li>
-                                {
-                                this.state.comments.map((comment, i) =>
-                                <li className="comment">
-                                        <h5>{comment.user}</h5>
-                                        <hr />
-                                        <p>{comment.comment}</p>
-                                </li>)
-                            }</ul>
-                            : ""
-                        }
+                                <form className="text-right" onSubmit={this.postComment}>
+                                    <textarea id="postComment" className="d-block m-auto border-round-small border-lg" required></textarea><br />
+                                    <button className="btn-primary" type="submit">Submit</button>
+                                </form> 
+                            </li>
+                            {
+                            this.state.comments.map((comment, i) =>
+                            <li key={i.toString()} className="comment bg-secondary">
+                                <h5>{comment.user}</h5>
+                                <hr />
+                                <p>{comment.comment}</p>
+                            </li>)
+                        }</ul>
+                        : ""
+                    }
                 </div>
             );
         }
     }
     render(){
         return (
-        <div className="post">
+        <div className="post bg-primary border-lg border-round-small">
             <h2>{this.state.title}</h2>
-            <h5>{this.state.user.name}</h5>
+            <h5>{this.state.name}</h5>
             <hr />
             {this.getContent()}
             {this.getPostMetaData()}
@@ -118,3 +154,7 @@ class Post extends React.Component{
     }
 }
 export default Post;
+
+
+// WEBPACK FOOTER //
+// src/Dashboard/Post.js

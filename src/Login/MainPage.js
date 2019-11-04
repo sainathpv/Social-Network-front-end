@@ -3,35 +3,37 @@ import logo from './../images/HC.svg';
 import './../css/login/main.css';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-class MainPage extends React.Component{
-  constructor(props){
+import { Container } from 'react-bootstrap';
+class MainPage extends React.Component {
+  constructor(props) {
     super(props);
-    this.state = {login: false};
+    this.state = { login: false };
   }
 
-  render(){
-      return(
-        <div id="MainPage">
-          <div>
-            <div className="titleBox">
+  render() {
+    return (
+      <div id='MainPage'>
+        <div>
+          <div className='titleBox'>
+            <div>
               <h1>Hoosier Connection</h1>
-              <h4>A social network.</h4>
-              <h4>For the students, by the students!</h4>
+              <Container>
+                <h3>A social network.</h3>
+                <Container>
+                  <h4>For the students, by the students!</h4>
+                </Container>
+              </Container>
             </div>
           </div>
-          <div>
-            <div className="formBox">
-              <span> <img src={logo} alt=""></img> <h4>Hoosier Connection</h4> </span>
-              { !this.state.login ? <SignInForm /> : <SignUpForm /> }
-            </div>
-          </div>
-        </div> 
-      );
+        </div>
+
+        {!this.state.login ? <SignInForm /> : <SignUpForm />}
+      </div>
+    );
   }
 }
 
 export default MainPage;
-
 
 // WEBPACK FOOTER //
 // src/Login/MainPage.js

@@ -5,15 +5,9 @@ import logo from './images/HC.svg';
 import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 
-
 import axios from 'axios';
 
-import {
-  Container,
-  Form,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Container, Form, Row, Col } from 'react-bootstrap';
 
 const TiTLE = 'User Profile';
 
@@ -217,7 +211,9 @@ class Profile extends Component {
           <br />
           <br />
 
-          <Container style={{width: "1200px", display: "block", margin: "auto"}}>
+          <Container
+            style={{ width: '1200px', display: 'block', margin: 'auto' }}
+          >
             <h2>Settings</h2>
             <Container>
               <h4 class='line'>Profile</h4>
@@ -293,17 +289,8 @@ class Profile extends Component {
                     </Form.Row>
                     <div>
                       <br />
-                      <Form.Row>
-                        <Row>
-                          <Form.Group as={Col}>
-                            <label className='no-padding'>Delete Account</label>
 
-                            <button className='warn_button'>
-                              Delete Account
-                            </button>
-                          </Form.Group>
-                        </Row>
-                      </Form.Row>
+                      <button className='warn_button'>Delete Account</button>
                     </div>
                   </div>
                 </Container>

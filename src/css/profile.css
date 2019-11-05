@@ -6,6 +6,7 @@
   flex-flow: row wrap;
   align-items: center;
   justify-content: center;
+
   /*align-content: flex-start;*/
 }
 
@@ -220,7 +221,7 @@
   color: white;
   border: none;
   border-radius: 10px;
-  margin-left: 3em;
+  margin-left: 1em;
   padding: 10px 10px;
 }
 #profileSettings .container .security .center .field_button {

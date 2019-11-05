@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './../images/HC.svg';
 import './../css/login/main.css';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';

@@ -17,7 +17,7 @@ export default class SignInForm extends Component{
                 'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
             },
             body: JSON.stringify({
-                otp: document.getElementById("login_2f").value
+                token: document.getElementById("login_2f").value
             })
         };
 

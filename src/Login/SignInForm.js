@@ -27,32 +27,29 @@ export default class SignInForm extends Component {
     });
   }
 
-  handleSubmit(event) {
-    console.log(this.captcha);
-    event.preventDefault();
-    var options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: this.state.email,
-        password: this.state.password,
-        captcha: this.captcha
-      })
-    };
+    handleSubmit(event){
+        event.preventDefault();
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email: this.state.email,
+                password: this.state.password,
+                captcha: this.captcha
+            })
+        };
 
-    fetch('http://localhost:8080/users/login', options)
-      .then(result => {
-        if (result.status === 200) {
-          return result.json();
-        } else {
-          console.log('failed');
-          return null;
-        }
-      })
-      .then(result => {
-        if (result === null) {
+        fetch("http://localhost:8080/newusers/login", options).then( result =>{
+            if(result.status === 200){
+                return result.json();
+            }else{
+                console.log('failed');
+                return null;
+            }
+        }).then( result => {
+            if(result === null){
         } else {
           //add cookie
           var date = new Date();

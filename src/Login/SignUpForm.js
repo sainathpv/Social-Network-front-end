@@ -158,7 +158,7 @@ export default class SignUpForm extends Component {
         </form>
       );
     } else if (this.state.QRCode) {
-      return <QRCode code={this.data_url} email={this.state.email} />;
+      return <QRCode code={this.img} email={this.state.email} />;
     } else {
       return <SignInForm />;
     }

@@ -9,6 +9,7 @@ export default class SendResetEmail extends Component{
     }
 
     handleSubmit(event){
+        document.getElementById("warning").textContent = "One Second!!";
         event.preventDefault();
         var data = {
             email: document.getElementById("reset_email").value
@@ -24,18 +25,20 @@ export default class SendResetEmail extends Component{
             body: JSON.stringify(data)
         };
 
-        fetch("http://localhost:8080/forget_psw_email", options).then( result =>{
+        fetch("http://localhost:8080/forget_psw_email/forget_psw_email", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
+                result.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
                 return null;
             }
         }).then( result => {
             if(result === null){
 
             }else{
-
-
+                document.getElementById("warning").textContent = "A Reset Password Email has been send!!";
             }
         });
     }
@@ -51,6 +54,7 @@ export default class SendResetEmail extends Component{
                     <p id="reset_email_msg"></p>
                     <div className="label"><label>Email:</label></div>   
                     <input type="text" placeholder="Ex. you@gmail.com" onChange={this.handleChange} id="reset_email" required></input><br />
+                    <p className="warning_msg" id="warning"></p> <br/>
                     <div className="text-right"><button type="submit">Send Link</button></div>
                 </form>
             </div>

@@ -18,6 +18,10 @@
     padding-left: 35px;
     margin: 10px;
   }
+
+  #SignInForm .warning_msg{
+    color: red;
+  }
   
   #SignInForm .captcha{
     height: 35px;
@@ -60,6 +64,13 @@
     margin: 10px;
     border: .5px solid lightgray;
     border-radius: 4px; }
+  
+    #SignUpForm .warning_msg{
+      color: red;
+    }
+
+
+
   #SignUpForm span .button, #SignUpForm span p {
     display: inline-block;
     cursor: pointer; }

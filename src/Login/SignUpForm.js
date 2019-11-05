@@ -41,11 +41,14 @@ export default class SignUpForm extends Component{
                 })
             }
 
-            fetch("http://localhost:8080/users/signup", options).then( result =>{
+            fetch("http://localhost:8080/newusers/signup", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
                 console.log('failed');
+                result.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
                 return null;
             }
         }).then( result => {
@@ -62,7 +65,7 @@ export default class SignUpForm extends Component{
             }
         });
         }else{
-            //TODO notify the user of the bad match
+            document.getElementById("warning").textContent = "Your Re-Enter Password is not the same";
         }
     }
     
@@ -85,6 +88,8 @@ export default class SignUpForm extends Component{
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
                     <div className="label"><label>Re-Enter Password:</label></div>
                     <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
+                    <p className="warning_msg" id="warning"></p>
+                    <br/>
                     <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login</p></span>
                 </form>
             );

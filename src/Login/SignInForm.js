@@ -17,6 +17,7 @@ export default class SignInForm extends Component{
         this.callback = this.callback.bind(this);
         this.setCaptcha = this.setCaptcha.bind(this);
         this.captcha = "";
+        this.warning_message = "Everything works fine";
     }
 
     handleChange(event){
@@ -43,10 +44,14 @@ export default class SignInForm extends Component{
         };
 
         fetch("http://localhost:8080/newusers/login", options).then( result =>{
+            
             if(result.status === 200){
                 return result.json();
             }else{
                 console.log('failed');
+                result.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
                 return null;
             }
         }).then( result => {
@@ -86,6 +91,7 @@ export default class SignInForm extends Component{
             console.log("here");
             return (<TwoFactor email={this.state.email}></TwoFactor>);
         }else if(this.state.signin){
+            
 
             return(
                 <form id="SignInForm" onSubmit={this.handleSubmit}>  
@@ -107,6 +113,8 @@ export default class SignInForm extends Component{
                         />
                     </div>
 
+                    <p className="warning_msg" id="warning"></p>
+                    <br/>
                     <span>
                         <a href="SendResetEmail">Forgot Password?</a>
                         

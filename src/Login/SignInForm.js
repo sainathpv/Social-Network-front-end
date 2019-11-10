@@ -94,7 +94,7 @@ export default class SignInForm extends Component{
             
 
             return(
-                <form id="SignInForm" onSubmit={this.handleSubmit}>  
+                <form id="SignInForm" className="formBox" onSubmit={this.handleSubmit}>  
                     <Helmet>
                         <script src='https://www.google.com/recaptcha/api.js'>aha</script>
                     </Helmet>

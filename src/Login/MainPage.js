@@ -2,7 +2,7 @@ import React from 'react';
 import './../css/login/main.css';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-import { Container } from 'react-bootstrap';
+
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -12,21 +12,16 @@ class MainPage extends React.Component {
   render() {
     return (
       <div id='MainPage'>
-        <div>
-          <div className='titleBox'>
+        <div className='titleBox'>
+          <h1>Hoosier Connection</h1>
+          <div>
+            <h3>A social network.</h3>
             <div>
-              <h1>Hoosier Connection</h1>
-              <Container>
-                <h3>A social network.</h3>
-                <Container>
-                  <h4>For the students, by the students!</h4>
-                </Container>
-              </Container>
+              <h4>For the students, by the students!</h4>
             </div>
           </div>
         </div>
-
-        {!this.state.login ? <SignInForm /> : <SignUpForm />}
+        <div>{!this.state.login ? <SignInForm /> : <SignUpForm />}</div>
       </div>
     );
   }

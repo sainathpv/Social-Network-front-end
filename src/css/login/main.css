@@ -1,49 +1,36 @@
+
 #MainPage {
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-  background-image: url('../../images/IU_Gates.jpg');
+  background-image: url("../../images/IU_Gates.jpg");
   height: 100vh;
   display: flex;
-  justify-content: space-around;
-}
-#MainPage .titleBox {
-  transform: translate(0%, 40vh);
-  color: #fff;
-  text-shadow: 2px 2px black;
-}
-#MainPage .titleBox h1 {
-  font-size: 70px;
-}
-#MainPage .titleBox h3 {
-  font-size: 40px;
-  margin-left: 10%;
-}
-#MainPage .titleBox h4 {
-  font-size: 30px;
-  margin-left: 20%;
-}
-#MainPage .formBox {
-  text-align: center;
-  transform: translate(0%, 24vh);
-  border: 0.5px lightgray solid;
-
-  background-color: #fff;
-
-  padding: 10px;
-  border-radius: 25px;
-}
-#MainPage .formBox img {
-  display: inline-block;
-  width: 50px;
-  height: 50px;
-  align: left;
-}
-#MainPage #MainPage .formBox h4 {
-  display: inline-block;
-  position: relative;
-  line-height: 5px;
-  top: -20px;
-}
-
-/*# sourceMappingURL=main.css.map */
+  justify-content: space-around; }
+  #MainPage .titleBox {
+    transform: translate(0%, 40vh);
+    color: #fff;
+    text-shadow: 2px 2px black; }
+    #MainPage .titleBox h1 {
+      font-size: 50px; }
+    #MainPage .titleBox h3 {
+      font-size: 20px; }
+    #MainPage .titleBox h4 {
+      font-size: 20px; }
+  #MainPage .formBox {
+    display: block;
+    text-align: center;
+    transform: translate(0%, 24vh);
+    border: .5px lightgray solid;
+    border-radius: 4px;
+    background-color: #fff;
+    width: 400px;
+    padding: 10px; }
+    #MainPage .formBox img {
+      display: inline-block;
+      width: 50px; }
+    #MainPage .formBox h4 {
+      display: inline-block;
+      position: relative;
+      line-height: 5px;
+    }

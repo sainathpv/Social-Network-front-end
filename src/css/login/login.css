@@ -1,5 +1,6 @@
 #SignInForm {
-  text-align: center; }
+  text-align: center; 
+}
   #SignInForm .label {
     text-align: left;
     padding-left: 60px; }
@@ -68,6 +69,7 @@
     #SignUpForm .warning_msg{
       color: red;
     }
+
 
 
   #SignUpForm span .button, #SignUpForm span p {

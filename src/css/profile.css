@@ -186,7 +186,7 @@
   padding: 5px 10px;
   border-radius: 10px;
 }
-.field_button {
+#profileSettings .field_button {
   background: steelblue;
   color: white;
   border: none;

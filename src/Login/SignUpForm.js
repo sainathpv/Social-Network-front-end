@@ -76,7 +76,7 @@ export default class SignUpForm extends Component{
     render() {
         if(this.state.signup && !this.state.QRCode){
             return(
-                <form id="SignUpForm" onSubmit={this.handleSubmit}>
+                <form id="SignUpForm" className="formBox" onSubmit={this.handleSubmit}>
                     <h2>Sign Up</h2>
                     <div className="label"><label>First Name:</label></div>
                     <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>

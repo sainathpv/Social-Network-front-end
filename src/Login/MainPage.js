@@ -31,7 +31,3 @@ class MainPage extends React.Component{
 }
 
 export default MainPage;
-
-
-// WEBPACK FOOTER //
-// src/Login/MainPage.js

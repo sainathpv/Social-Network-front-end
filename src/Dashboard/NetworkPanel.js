@@ -30,7 +30,7 @@ class NetworkPanel extends React.Component{
                     'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
                 }
             }
-            fetch("http://localhost:8080/profiles/profile", options).then( result => {
+            fetch("http://" + process.env.REACT_APP_API_HOST  + "/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
 
@@ -140,7 +140,7 @@ class NetworkPanel extends React.Component{
                                             if(i < 9 && friend.accepted){
                                                 return(
                                                 <li key={i}>
-                                                    <img height="50px" width="50px" className="d-block border-lg border-round m-auto" src={"http://localhost:8080" + friend.profileImageURL} alt={person}  />
+                                                    <img height="50px" width="50px" className="d-block border-lg border-round m-auto" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileImageURL} alt={person}  />
                                                     <h5 className="text-center">{friend.name}</h5>
                                                 </li>
                                                 )
@@ -180,7 +180,3 @@ class NetworkPanel extends React.Component{
     }
 }
 export default NetworkPanel;
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/NetworkPanel.js

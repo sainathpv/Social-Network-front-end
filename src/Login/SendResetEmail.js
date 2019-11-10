@@ -25,7 +25,7 @@ export default class SendResetEmail extends Component{
             body: JSON.stringify(data)
         };
 
-        fetch("http://localhost:8080/forget_psw_email/forget_psw_email", options).then( result =>{
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/forget_psw_email/forget_psw_email", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
@@ -61,7 +61,3 @@ export default class SendResetEmail extends Component{
         );   
     }
 }
-
-
-// WEBPACK FOOTER //
-// src/Login/SendResetEmail.js

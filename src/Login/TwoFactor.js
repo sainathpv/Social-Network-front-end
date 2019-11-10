@@ -21,7 +21,7 @@ export default class SignInForm extends Component{
             })
         };
 
-        fetch("http://localhost:8080/twoFA/twoFALogin", options).then( data => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/twoFA/twoFALogin", options).then( data => {
             if(data.status === 200){
                 return data.json();
             }else{
@@ -51,7 +51,3 @@ export default class SignInForm extends Component{
 
     }
 }
-
-
-// WEBPACK FOOTER //
-// src/Login/TwoFactor.js

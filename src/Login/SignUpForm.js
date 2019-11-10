@@ -41,7 +41,7 @@ export default class SignUpForm extends Component{
                 })
             }
 
-            fetch("http://localhost:8080/newusers/signup", options).then( result =>{
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/signup", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
@@ -100,7 +100,3 @@ export default class SignUpForm extends Component{
         }
     }
 }
-
-
-// WEBPACK FOOTER //
-// src/Login/SignUpForm.js

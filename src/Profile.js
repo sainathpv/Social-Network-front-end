@@ -102,7 +102,7 @@ class Profile extends Component {
         })
       };
 
-      fetch('http://localhost:8080/profiles/editprofile', options)
+      fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
         .then(result => {
           if (result.status === 200) {
             return result.json();

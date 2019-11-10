@@ -30,7 +30,7 @@ class QRcode extends Component{
             body: JSON.stringify(data)
         }
         
-        fetch("http://localhost:8080/twoFA/twoFALogin", options).then( data => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/twoFA/twoFALogin", options).then( data => {
             if(data.status === 200){
                 return data.json();
             }else{
@@ -115,7 +115,3 @@ class QRcode extends Component{
 }
 
 export default QRcode;
-
-
-// WEBPACK FOOTER //
-// src/Login/QRcode.js

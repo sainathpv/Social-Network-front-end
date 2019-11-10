@@ -30,7 +30,7 @@ export default class ResetPassword extends Component{
             body: JSON.stringify(data)
         };
 
-        fetch("http://localhost:8080/forget_psw/reset", options).then( result =>{
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/forget_psw/reset", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
@@ -63,8 +63,3 @@ export default class ResetPassword extends Component{
         );
     }
 }
-
-
-
-// WEBPACK FOOTER //
-// src/Login/ResetPassword.js

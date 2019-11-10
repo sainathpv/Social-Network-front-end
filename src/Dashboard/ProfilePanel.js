@@ -27,9 +27,7 @@ class ProfilePanel extends React.Component{
         this.expandPanel = this.expandPanel.bind(this);
         this.closePanel = this.closePanel.bind(this);
         this.getProfileData = this.getProfileData.bind(this);
-        if(!this.getProfileData()){
-            window.location.href = "/login";
-        }
+        this.getProfileData()
     }
 
     getProfileData(){
@@ -42,7 +40,7 @@ class ProfilePanel extends React.Component{
             }
         }
         try{
-            fetch("http://localhost:8080/profiles/profile", options).then( result => {
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
                 if(result.status === "401") return false;
                 return result.json();
             }).then( result => {
@@ -76,10 +74,8 @@ class ProfilePanel extends React.Component{
             });
         }catch(err){
             console.log(err);
-            return false;
+            window.location.href = "login";
         }
-        
-        return true;
     }
 
     updateWindowDimensions() {
@@ -148,7 +144,7 @@ class ProfilePanel extends React.Component{
                         </div>
                         <hr />
                         <div className="profile d-flex">
-                            <img onClick={this.goToProfile} className="cursor-pointer border-lg border-round" src={ "http://localhost:8080" + this.state.profileIMG} alt=""/>
+                            <img onClick={this.goToProfile} className="cursor-pointer border-lg border-round" src={ "http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt=""/>
                             <div className="color-grey description">
                                 <h3 className="text-nunito">{this.state.name}</h3>
                                 <div className="text-roboto ">
@@ -181,7 +177,7 @@ class ProfilePanel extends React.Component{
                                         return(
                                             <li key={i} className="d-flex space-between">
                                                 <div>
-                                                    <img className="border-round border-lg d-inline" src={"http://localhost:8080" + friend.profileImageURL} alt={person}/>
+                                                    <img className="border-round border-lg d-inline" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileImageURL} alt={person}/>
                                                     <h5 className="d-inline">{friend.name}</h5>
                                                 </div>
                                                 <span> <button className="btn-primary">Accept</button> <i className="cursor-pointer text-secondary  fas fa-times"></i></span>

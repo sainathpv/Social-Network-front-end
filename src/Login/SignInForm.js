@@ -43,7 +43,7 @@ export default class SignInForm extends Component{
             })
         };
 
-        fetch("http://localhost:8080/newusers/login", options).then( result =>{
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/login", options).then( result =>{
             
             if(result.status === 200){
                 return result.json();

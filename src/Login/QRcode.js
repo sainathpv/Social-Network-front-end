@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Cookie from './../Utility/Cookie';
+import logo from './../images/HC.svg';
 
 class QRcode extends Component{
     constructor(props){
@@ -100,7 +101,8 @@ class QRcode extends Component{
 
         return(
             <div style={container}>
-                <form id="loginQRCode" style={form} onSubmit={this.handleSubmit}>
+                <form id="loginQRCode" className="formBox_loginQRCode" style={form} onSubmit={this.handleSubmit}>
+                    <img src={logo} alt="" />
                     <h3 style={header}>Use your phone to scan the QR code.</h3>
                     <p id="qr_errorMessage"></p>
                     <img style={image} src={this.state.code} alt="" />

@@ -83,8 +83,26 @@
     border: none;
     border-radius: 10px; }
 
+
+
     #login_2fForm {
-      text-align: center; }
+      text-align: center; 
+    }
+
+      .formBox_login_2fForm {
+        display: block;
+        text-align: center;
+        transform: translate(0%, 30vh);
+        border: .5px lightgray solid;
+        border-radius: 4px;
+        background-color: #fff;
+        width: 400px;
+        padding: 10px; }
+
+        .formBox_login_2fForm img {
+          display: inline-block;
+          width: 50px; }
+        
       #login_2fForm .label {
         text-align: left;
         padding-left: 60px; }
@@ -98,10 +116,54 @@
       #login_2fForm button, #login_2fForm span p {
         display: inline-block;
         cursor: pointer; }
-      #login_2fForm button {
+
+      #login_2fForm .button {
         width: 60px;
         height: 30px;
-        margin-right: 20%;
+        margin-left: 50%;
+        background: #6e0101;
+        color: white;
+        border: none;
+        border-radius: 10px; }
+
+
+        
+    #loginQRCode {
+      text-align: center; 
+    }
+
+      .formBox_loginQRCode {
+        display: block;
+        text-align: center;
+        transform: translate(0%, 16vh);
+        border: .5px lightgray solid;
+        border-radius: 4px;
+        background-color: #fff;
+        width: 400px;
+        padding: 10px; }
+
+        .formBox_loginQRCode img {
+          display: inline-block;
+          width: 50px; }
+        
+      #loginQRCode .label {
+        text-align: left;
+        padding-left: 60px; }
+      #loginQRCode input {
+        height: 35px;
+        width: 250px;
+        padding-left: 6px;
+        margin: 10px;
+        border: .5px solid lightgray;
+        border-radius: 4px; }
+      #loginQRCode button, #loginQRCode span p {
+        display: inline-block;
+        cursor: pointer; }
+
+      #loginQRCode .button {
+        width: 60px;
+        height: 30px;
+        margin-left: 50%;
         background: #6e0101;
         color: white;
         border: none;

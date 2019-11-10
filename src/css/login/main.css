@@ -16,11 +16,13 @@
     #MainPage .titleBox h3 {
       font-size: 20px; }
     #MainPage .titleBox h4 {
-      font-size: 20px; }
+      font-size: 20px; 
+      padding-left: 40px;
+    }
   #MainPage .formBox {
     display: block;
     text-align: center;
-    transform: translate(0%, 24vh);
+    transform: translate(0%, 18vh);
     border: .5px lightgray solid;
     border-radius: 4px;
     background-color: #fff;

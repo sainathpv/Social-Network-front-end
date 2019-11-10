@@ -15,7 +15,7 @@ class MainPage extends React.Component {
         <div className='titleBox'>
           <h1>Hoosier Connection</h1>
           <div>
-            <h3>A social network.</h3>
+            <h2>A Social Network,</h2>
             <div>
               <h4>For the students, by the students!</h4>
             </div>

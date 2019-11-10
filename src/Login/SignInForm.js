@@ -5,12 +5,18 @@ import './../css/login/login.css';
 import SignUpForm from './SignUpForm';
 import Cookie from '../Utility/Cookie';
 import TwoFactor from './TwoFactor';
+import logo from './../images/HC.svg';
 
 
 export default class SignInForm extends Component{
     constructor(props){
         super(props);
-        this.state = {email: "", password: "", signin: true, twofactor: false};
+        this.state = {
+            email: "", 
+            password: "", 
+            signin: true, 
+            twofactor: false, 
+            isResetted: props.isResetted};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
@@ -64,6 +70,11 @@ export default class SignInForm extends Component{
                 Cookie.setCookie('HC_JWT', result.token, date); 
                 //redirect to 2factor
                 this.setState({twofactor: true});
+
+                //redirect directly to dashboard if the user does not reset the password
+                //if(!this.state.isResetted){
+                //    window.location.href = "../";
+                //}
             }
         });
     }
@@ -88,16 +99,14 @@ export default class SignInForm extends Component{
     
     render() {
         if(this.state.twofactor){
-            console.log("here");
             return (<TwoFactor email={this.state.email}></TwoFactor>);
         }else if(this.state.signin){
-            
-
             return(
                 <form id="SignInForm" className="formBox" onSubmit={this.handleSubmit}>  
                     <Helmet>
                         <script src='https://www.google.com/recaptcha/api.js'>aha</script>
                     </Helmet>
+                    <img src={logo} alt="" />
                     <h2>Login In</h2>
                     <div className="label"><label>Email:</label><br /></div>    
                     <input type="text" id="login_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
@@ -117,9 +126,11 @@ export default class SignInForm extends Component{
                     <br/>
                     <span>
                         <a href="SendResetEmail">Forgot Password?</a>
-                        
+                        <br />
                         <input  type="submit" className="button" value="Login" /> 
                         <p onClick={this.swapForm}>Sign up?</p>
+                        
+                        
                     </span>
                 </form>
             );

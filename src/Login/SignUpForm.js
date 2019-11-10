@@ -3,6 +3,8 @@ import './../css/login/login.css';
 import SignInForm from './SignInForm';
 import QRCode from './QRcode'
 import Cookie from './../Utility/Cookie';
+import logo from './../images/HC.svg';
+
 export default class SignUpForm extends Component{
     constructor(props){
         super(props);
@@ -77,6 +79,7 @@ export default class SignUpForm extends Component{
         if(this.state.signup && !this.state.QRCode){
             return(
                 <form id="SignUpForm" className="formBox" onSubmit={this.handleSubmit}>
+                    <img src={logo} alt="" />
                     <h2>Sign Up</h2>
                     <div className="label"><label>First Name:</label></div>
                     <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>

@@ -1,37 +1,45 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './../css/login/login.css';
 import SignInForm from './SignInForm';
-import QRCode from './QRcode';
+import QRCode from './QRcode'
 import Cookie from './../Utility/Cookie';
-import logo from './../images/HC.svg';
+export default class SignUpForm extends Component{
+    constructor(props){
+        super(props);
+        this.img = "";
+        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.swapForm = this.swapForm.bind(this);
+    }
 
-export default class SignUpForm extends Component {
-  constructor(props) {
-    super(props);
-    this.img = '';
-    this.state = {
-      fname: '',
-      lname: '',
-      email: '',
-      password: '',
-      signup: true,
-      QRCode: false
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.swapForm = this.swapForm.bind(this);
-  }
+    handleChange(event){
+        this.setState({
+            fname: document.getElementById('signup_fname').value,
+            lname: document.getElementById('signup_lname').value,
+            email: document.getElementById('signup_email').value,
+            password: document.getElementById('signup_pwd').value,
+            signup: true,
+            QRCode: this.state.QRCode
+        });
+    }
 
-  handleChange(event) {
-    this.setState({
-      fname: document.getElementById('signup_fname').value,
-      lname: document.getElementById('signup_lname').value,
-      email: document.getElementById('signup_email').value,
-      password: document.getElementById('signup_pwd').value,
-      signup: true,
-      QRCode: this.state.QRCode
-    });
-  }
+    handleSubmit(event){
+        event.preventDefault();
+        if(document.getElementById('signup_pwd').value ===
+           document.getElementById('signup_pwd2').value){
+            var options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    firstName: this.state.fname,
+                    lastName: this.state.lname,
+                    email: this.state.email,
+                    password: this.state.password
+                })
+            }
 
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/signup", options).then( result =>{
             if(result.status === 200){
@@ -46,40 +54,24 @@ export default class SignUpForm extends Component {
         }).then( result => {
             if(result === null){
 
-      fetch('http://localhost:8080/users/signup', options)
-        .then(result => {
-          if (result.status === 200) {
-            return result.json();
-          } else {
-            console.log('failed');
-            return null;
-          }
-        })
-        .then(result => {
-          if (result === null) {
-          } else {
-            this.img = result.data_url;
-            var date = new Date();
-            console.log(result.token);
-            Cookie.setCookie(
-              'HC_JWT',
-              result.token,
-              new Date(date.getTime() + 60 * 60 * 1000)
-            );
-            this.setState({
-              QRCode: true
-            });
-          }
+            }else{
+                this.img = result.data_url;
+                var date = new Date();
+                console.log(result.token);
+                Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
+                this.setState({
+                    QRCode: true
+                });
+            }
         });
         }else{
             document.getElementById("warning").textContent = "Your Re-Enter Password is not the same";
         }
     }
-
+    
     swapForm(){
         this.setState({signup: false});
     }
-  }
 
     render() {
         if(this.state.signup && !this.state.QRCode){
@@ -107,5 +99,4 @@ export default class SignUpForm extends Component {
             return( <SignInForm />);
         }
     }
-  }
 }

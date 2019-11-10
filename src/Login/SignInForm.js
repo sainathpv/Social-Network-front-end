@@ -19,13 +19,27 @@ export default class SignInForm extends Component {
     this.captcha = '';
   }
 
-  handleChange(event) {
-    this.setState({
-      email: document.getElementById('login_email').value,
-      password: document.getElementById('login_password').value
-      //captcha: document.getElementById("login_captcha").value
-    });
-  }
+export default class SignInForm extends Component{
+    constructor(props){
+        super(props);
+        this.state = {email: "", password: "", signin: true, twofactor: false};
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.swapForm = this.swapForm.bind(this);
+        this.callback = this.callback.bind(this);
+        this.setCaptcha = this.setCaptcha.bind(this);
+        this.captcha = "";
+        this.warning_message = "Everything works fine";
+    }
+
+    handleChange(event){
+
+        this.setState({
+            email: document.getElementById('login_email').value,
+            password: document.getElementById('login_password').value,
+            //captcha: document.getElementById("login_captcha").value
+        });
+    }
 
     handleSubmit(event){
         event.preventDefault();
@@ -41,11 +55,15 @@ export default class SignInForm extends Component {
             })
         };
 
-        fetch("http://localhost:8080/newusers/login", options).then( result =>{
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/login", options).then( result =>{
+
             if(result.status === 200){
                 return result.json();
             }else{
                 console.log('failed');
+                result.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
                 return null;
             }
         }).then( result => {
@@ -73,11 +91,22 @@ export default class SignInForm extends Component {
     console.log('Done!!!!');
   };
 
-  // specifying verify callback function
-  setCaptcha(response) {
-    console.log(response);
-    this.captcha = response;
-  }
+    callback = function () {
+        console.log('Done!!!!');
+    };
+
+      // specifying verify callback function
+    setCaptcha(response) {
+        console.log(response)
+        this.captcha = response
+    };
+
+    render() {
+        if(this.state.twofactor){
+            console.log("here");
+            return (<TwoFactor email={this.state.email}></TwoFactor>);
+        }else if(this.state.signin){
+
 
   render() {
     if (this.state.twofactor) {
@@ -132,13 +161,22 @@ export default class SignInForm extends Component {
             <p onClick={this.swapForm}>Sign up</p>
             <br />
 
-            <a href='SendResetEmail'>Forgot Password?</a>
-          </span>
-        </form>
-      );
-    } else {
-      console.log('here2');
-      return <SignUpForm />;
+                    <p className="warning_msg" id="warning"></p>
+                    <br/>
+                    <span>
+                        <a href="SendResetEmail">Forgot Password?</a>
+
+                        <input  type="submit" className="button" value="Login" />
+                        <p onClick={this.swapForm}>Sign up?</p>
+                    </span>
+                </form>
+            );
+
+        }else{
+            console.log("here2");
+           return ( <SignUpForm /> );
+        }
+
     }
   }
 }

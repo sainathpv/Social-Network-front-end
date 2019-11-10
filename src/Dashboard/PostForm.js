@@ -39,7 +39,7 @@ class PostForm extends Component {
             }
         };
 
-        fetch("http://localhost:8080/profiles/profile", options).then( result => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
             return result.json();
         }).then( result => {
             console.log(this.state);
@@ -64,7 +64,7 @@ class PostForm extends Component {
                 body: JSON.stringify(body)
             };
 
-            fetch("http://localhost:8080/posts/postPosts", options).then(result => {
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postPosts", options).then(result => {
                 result.json()
             }).then(result => {
                 console.log(result);
@@ -119,8 +119,3 @@ class PostForm extends Component {
 }
 
 export default PostForm;
-
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/PostForm.js

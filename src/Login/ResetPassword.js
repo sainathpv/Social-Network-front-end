@@ -17,19 +17,20 @@ export default class ResetPassword extends Component{
         if(document.getElementById("reset_password1").value !== document.getElementById("reset_password2").value){ return; }
         console.log("pwd are same");
         var data = {
-            password: document.getElementById("reset_password1").value
+            password: document.getElementById("reset_password1").value,
+            token: token
         }
         
         var options = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                //'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(data)
         };
 
-        fetch("http://localhost:8080/forget_psw/reset", options).then( result =>{
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/forget_psw/reset", options).then( result =>{
             if(result.status === 200){
                 return result.json();
             }else{
@@ -62,8 +63,3 @@ export default class ResetPassword extends Component{
         );
     }
 }
-
-
-
-// WEBPACK FOOTER //
-// src/Login/ResetPassword.js

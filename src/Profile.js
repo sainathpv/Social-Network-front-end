@@ -99,7 +99,7 @@ class Profile extends Component {
         })
       };
 
-      fetch('the route in backend', options)
+      fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
         .then(result => {
           if (result.status === 200) {
             return result.json();

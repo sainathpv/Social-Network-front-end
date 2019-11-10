@@ -60,7 +60,7 @@ class Post extends React.Component{
             }
         }
         try{
-            fetch("http://localhost:8080/profiles/profile", options).then( result => {
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
                 var options = {
@@ -75,7 +75,7 @@ class Post extends React.Component{
                         postID: this.state.id
                     })
                 }
-                fetch("http://localhost:8080/posts/postComment", options).then( result => {
+                fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postComment", options).then( result => {
                     location.reload();
                 });
             });

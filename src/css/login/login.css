@@ -19,13 +19,23 @@
   padding-left: 60px;
 }
 
-#SignInForm input {
-  height: 45px;
-  width: 250px;
-  padding-left: 6px;
-  margin: 10px;
-  border: 0.5px solid lightgray;
-  border-radius: 4px;
+
+  #SignInForm .google-cap{
+    padding-left: 35px;
+    margin: 10px;
+  }
+
+  #SignInForm .warning_msg{
+    color: red;
+  }
+
+  #SignInForm .captcha{
+    height: 35px;
+    width: 80px;
+    margin: 10px;
+    background-color: white;
+    color: black;
+  }
 
   border-radius: 4px;
 
@@ -102,59 +112,34 @@
 }
 
 #SignUpForm {
-  text-align: center;
-  border-radius: 40%;
-  height: 600px;
-  width: 450px;
-}
-#SignUpForm .label {
-  text-align: left;
-  padding-left: 60px;
-}
-#SignUpForm input {
-  height: 40px;
-  width: 230px;
-  padding-left: 6px;
-  margin: 10px;
-  border: 0.5px solid lightgray;
-  border-radius: 4px;
-  border: 1px solid brown;
-}
+  text-align: center; }
+  #SignUpForm .label {
+    text-align: left;
+    padding-left: 60px; }
+  #SignUpForm input {
+    height: 35px;
+    width: 250px;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; }
 
-#SignUpForm span p {
-  cursor: pointer;
-  left: 7px;
-  position: relative;
-  align-content: left;
-  font-size: 22px;
-  margin: 10px;
-  padding: 10px;
-  display: inline;
-  color: #6e0101;
-}
-#SignUpForm span .button {
-  width: 100px;
-  background: #6e0101;
-  color: white;
-  border: none;
-  position: relative;
-  font-size: 15px;
-  border-radius: 10px;
-  text-align: center;
-  margin: 10px;
-  box-sizing: content-box;
-  padding: 10px;
-  display: inline;
-  left: 8px;
-}
-#SignUpForm span img {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
+    #SignUpForm .warning_msg{
+      color: red;
+    }
 
-  left: 11px;
-  position: absolute;
-}
+
+
+  #SignUpForm span .button, #SignUpForm span p {
+    display: inline-block;
+    cursor: pointer; }
+  #SignUpForm span .button {
+    left: 0;
+    width: 60px;
+    background: #6e0101;
+    color: white;
+    border: none;
+    border-radius: 10px; }
 
 #SignUpForm span h4 {
   font-size: 20px;

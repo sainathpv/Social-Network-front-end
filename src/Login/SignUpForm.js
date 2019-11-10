@@ -33,24 +33,18 @@ export default class SignUpForm extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    if (
-      document.getElementById('signup_pwd').value ===
-      document.getElementById('signup_pwd2').value
-    ) {
-      var options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          firstName: this.state.fname,
-          lastName: this.state.lname,
-          email: this.state.email,
-          password: this.state.password
-        })
-      };
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/signup", options).then( result =>{
+            if(result.status === 200){
+                return result.json();
+            }else{
+                console.log('failed');
+                result.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
+                return null;
+            }
+        }).then( result => {
+            if(result === null){
 
       fetch('http://localhost:8080/users/signup', options)
         .then(result => {
@@ -77,93 +71,41 @@ export default class SignUpForm extends Component {
             });
           }
         });
-    } else {
-      //TODO notify the user of the bad match
+        }else{
+            document.getElementById("warning").textContent = "Your Re-Enter Password is not the same";
+        }
+    }
+
+    swapForm(){
+        this.setState({signup: false});
     }
   }
 
-  swapForm() {
-    this.setState({ signup: false });
-  }
-
-  render() {
-    if (this.state.signup && !this.state.QRCode) {
-      return (
-        <form id='SignUpForm' className='formBox' onSubmit={this.handleSubmit}>
-          {' '}
-          <br />
-          <span>
-            {' '}
-            <img src={logo} alt=''></img>{' '}
-            <h4>Sign Up for Hoosier Connection</h4>{' '}
-          </span>
-          <br />
-          <div className='label'>
-            <label>First Name:</label>
-          </div>
-          <input
-            type='text'
-            id='signup_fname'
-            onChange={this.handleChange}
-            placeholder='Ex. Jon'
-            required
-          ></input>
-          <br />
-          <div className='label'>
-            <label>Last Name:</label>
-          </div>
-          <input
-            type='text'
-            id='signup_lname'
-            onChange={this.handleChange}
-            placeholder='Ex. Smith'
-            required
-          ></input>
-          <br />
-          <div className='label'>
-            <label>Email:</label>
-          </div>
-          <input
-            type='text'
-            id='signup_email'
-            onChange={this.handleChange}
-            placeholder='Ex. you@gmail.com'
-            required
-          ></input>
-          <br />
-          <div className='label'>
-            <label>Password:</label>
-          </div>
-          <input
-            type='password'
-            id='signup_pwd'
-            onChange={this.handleChange}
-            required
-          ></input>
-          <br />
-          <div className='label'>
-            <label>Re-Enter Password:</label>
-          </div>
-          <input
-            type='password'
-            id='signup_pwd2'
-            onChange={this.handleChange}
-            required
-          ></input>
-          <br />
-          <span>
-            <input type='submit' className='button' value='Signup' />{' '}
-            <p onClick={this.swapForm}>Login</p>
-          </span>
-        </form>
-      );
-    } else if (this.state.QRCode) {
-      return <QRCode code={this.img} email={this.state.email} />;
-    } else {
-      return <SignInForm />;
+    render() {
+        if(this.state.signup && !this.state.QRCode){
+            return(
+                <form id="SignUpForm" onSubmit={this.handleSubmit}>
+                    <h2>Sign Up</h2>
+                    <div className="label"><label>First Name:</label></div>
+                    <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>
+                    <div className="label"><label>Last Name:</label></div>
+                    <input type="text" id="signup_lname" onChange={this.handleChange} placeholder="Ex. Smith" required></input><br/>
+                    <div className="label"><label>Email:</label></div>
+                    <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
+                    <div className="label"><label>Password:</label></div>
+                    <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
+                    <div className="label"><label>Re-Enter Password:</label></div>
+                    <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
+                    <p className="warning_msg" id="warning"></p>
+                    <br/>
+                    <span><input type="submit" className="button" value="Signup" /> <p onClick={this.swapForm}>Login</p></span>
+                </form>
+            );
+        }else if(this.state.QRCode){
+            return( <QRCode code={this.img} email={this.state.email} />);
+        }else{
+            return( <SignInForm />);
+        }
     }
   }
 }
-
-// WEBPACK FOOTER //
-// src/Login/SignUpForm.js

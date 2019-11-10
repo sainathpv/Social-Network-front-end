@@ -18,7 +18,7 @@ class PostPanel extends React.Component{
                 'Content-Type': 'application/json'
             }
         };
-        fetch("http://localhost:8080/posts/getPosts?tags=" + JSON.stringify(tags), options).then( result => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/getPosts?tags=" + JSON.stringify(tags), options).then( result => {
             return result.json();
         }).then(result => {
             this.setState({posts: result.return});
@@ -34,7 +34,7 @@ class PostPanel extends React.Component{
             }
         };
 
-        fetch("http://localhost:8080/profiles/profile", options).then( result => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
             return result.json();
         }).then( result => {
             this.getPosts(result.interests);

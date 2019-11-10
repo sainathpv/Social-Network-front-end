@@ -30,10 +30,13 @@ class QRcode extends Component{
             body: JSON.stringify(data)
         }
         
-        fetch("http://localhost:8080/twoFA/twoFALogin", options).then( data => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/twoFA/twoFALogin", options).then( data => {
             if(data.status === 200){
                 return data.json();
             }else{
+                data.json().then(nr =>{
+                    document.getElementById("warning").textContent = nr.message;
+                })
                 return null;
             }
         }).then(result => {
@@ -86,10 +89,13 @@ class QRcode extends Component{
 
         const label = {
             textAlign: 'left',
-            paddingLeft: '60px'
         }
         const container = {
             width: '400px',
+        }
+
+        const warning_msg = {
+            color: "red",
         }
 
         return(
@@ -100,6 +106,7 @@ class QRcode extends Component{
                     <img style={image} src={this.state.code} alt="" />
                     <label style={label}>Enter Code:</label><br/>
                     <input style={input} type="text" id="qr_code" required placeholder="Ex. 234565"></input><br />
+                    <p style={warning_msg} id="warning"></p> <br/>
                     <button type="submit" style={button}>Verify</button>
                 </form>
             </div>
@@ -108,7 +115,3 @@ class QRcode extends Component{
 }
 
 export default QRcode;
-
-
-// WEBPACK FOOTER //
-// src/Login/QRcode.js

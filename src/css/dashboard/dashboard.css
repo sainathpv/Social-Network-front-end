@@ -165,7 +165,7 @@
     z-index: 2; }
     #dashboard #dash_networkPanel .panel-header {
       height: 65px;
-      width: 100%;
+      width: 400px;
       border-bottom: .5px solid lightgray; }
       #dashboard #dash_networkPanel .panel-header h2 {
         line-height: 65px; }

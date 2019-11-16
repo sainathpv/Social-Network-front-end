@@ -27,7 +27,7 @@ class ProfilePanel extends React.Component{
         this.expandPanel = this.expandPanel.bind(this);
         this.closePanel = this.closePanel.bind(this);
         this.getProfileData = this.getProfileData.bind(this);
-        this.getProfileData()
+        this.getProfileData();
     }
 
     getProfileData(){
@@ -41,10 +41,8 @@ class ProfilePanel extends React.Component{
         }
         try{
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
-                if(result.status === "401") return false;
                 return result.json();
             }).then( result => {
-                
                 var friends = [
                     {name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
                     {name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
@@ -74,7 +72,6 @@ class ProfilePanel extends React.Component{
             });
         }catch(err){
             console.log(err);
-            window.location.href = "login";
         }
     }
 

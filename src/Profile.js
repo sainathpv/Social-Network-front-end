@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import profileIMG from './images/college.jpg';
 import './css/profile.css';
 import logo from './images/HC.svg';
-import { Helmet } from 'react-helmet';
 import { Redirect } from 'react-router-dom';
 
 import axios from 'axios';
-
-import { Container, Form, Row, Col } from 'react-bootstrap';
-
-const TiTLE = 'User Profile';
-
 //TODO: check if there is a token redirect to signin if invalid
 
 class Profile extends Component {
@@ -78,7 +72,7 @@ class Profile extends Component {
       pageStatus: 'profile'
     });
   }
-  validateJWT(token) {}
+  validateJWT(token) { }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -163,6 +157,12 @@ class Profile extends Component {
     });
   }
 
+  swapToHome() { }
+  changeImg() { }
+  addInterest() { }
+  delInterest() {}
+  delAccount() {}
+
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
   render() {
@@ -172,131 +172,102 @@ class Profile extends Component {
       this.state.pageStatus === 'chat'
     ) {
       return (
-        <div id='profileSettings'>
-          <Helmet>
-            <title>{TiTLE}</title>
-          </Helmet>
-          <div class='heading'>
-            <div class='logo'>
-              <img src={logo} alt='' width='50px' />
-            </div>
-            <div class='title'>
+        <div id="profilePage">
+          
+          <div className="heading">
+            <div>
+              <img src={logo} alt='' width='50px'/>
               <h1>Hoosier Connection</h1>
             </div>
-            <div class='buttonArea'>
-              <input type='button' class='button button1' value='Profile' />
-              <input
-                type='button'
-                onClick={this.toHome}
-                class='button button2'
-                value='Home'
-              />
-              <input
-                type='button'
-                onClick={this.toChat}
-                class='button button3'
-                value='Chat'
-              />
-              <input
-                type='button'
-                onClick={this.toSignIn}
-                class='button button4'
-                value='Logout'
-              />
-              <button class='button button5'>Icon</button>
+            <div> 
+              <button className="return" onClick={this.swapToHome}> Back To Dashboard </button> 
             </div>
           </div>
-          <hr />
-          <div className='middle'></div>
-          <br />
-          <br />
 
-          <Container
-            style={{ width: '1200px', display: 'block', margin: 'auto' }}
-          >
-            <h2>Settings</h2>
-            <Container>
-              <h4 class='line'>Profile</h4>
+          <hr/>
 
-              <Container>
-                <h5>Bio</h5>
-                <img
-                  className='image'
-                  src={profileIMG}
-                  alt='): Something went wrong'
-                ></img>
-                <button class='uploadImg'>Upload</button>
-                <Form.Row>
-                  {' '}
-                  <textarea
-                    class=''
-                    id='profile_info'
-                    placeholder='A little section dedicated to you!'
-                  ></textarea>
-                </Form.Row>
+          <div className="imgAndBio">
+            <div className="profileimg">
+              <img id="profileIMG" src={profileIMG} alt=''/>
+              <button className="changeImg" onClick={this.changeImg}> Choose File </button>
+            </div>
 
-                <Form.Row>
-                  <Row>
-                    <Form.Group as={Col}>
-                      <label>First Name</label>
-                      <br />
-                      <input type='text'></input>
-                    </Form.Group>
+            <div className="profilebio">
+              <p id="username">This is my super long username with no reason so sorry I have to restrict the display</p>
+              <textarea id="profileBio" onChange={this.handleChange} placeholder='A little section dedicated to you!'></textarea>
+            </div>
+          </div>
 
-                    <Form.Group as={Col}>
-                      <label>Last Name</label>
-                      <br />
 
-                      <input type='text'></input>
-                    </Form.Group>
-                  </Row>
-                </Form.Row>
+          <div className="basicInfo">
 
-                <Form.Row>
-                  <div className='dropdown'>
-                    <button onClick={this.showMenu.bind(this)}>
-                      {this.states.label}
-                    </button>
-                    {this.getMenu()}
-                  </div>
-                </Form.Row>
+            <div className="firstLastName">
+              <h3>First Name: </h3><br/>
+              <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
+              <br/>
+              <h3>Last Name: </h3><br/>
+              <input type="text" id="lastName" onChange={this.handleChange} placeholder="Smith" required></input>
+            </div>
 
-                <Form.Row>
-                  <button className='field_button'>Update</button>
-                </Form.Row>
-                <br />
-                <Container>
-                  <div>
-                    <h4 class='line'>Security:</h4>
+            <div className="studentInfo">
+              <h3>Student Type:</h3><br/>
+              
+              <select id="studentType" onChange={this.handleChange}>
+                <option value="undergraduate">Undergraduate</option>
+                <option value="graduate">Graduate</option>
+                <option value="phd">Ph.D.</option>
+                <option value="others">Others</option>
+              </select>
+              <br/>
 
-                    <Form.Row>
-                      <Row>
-                        <Form.Group as={Col}>
-                          <label>Reset Password</label>
-                          <br />
-                          <input type='password'></input>
-                        </Form.Group>
-                        <Form.Group as={Col}>
-                          <label>Re-enter Password</label>
-                          <br />
-                          <input type='password'></input>
-                        </Form.Group>
-                      </Row>
-                    </Form.Row>
+              <h3>Year:</h3>
+              <br/>
+              <select id="year" onChange={this.handleChange}>
+                <option value="freshman">Freshman</option>
+                <option value="sophomore">Sophomore</option>
+                <option value="junior">Junior</option>
+                <option value="senior">Senior</option>
+              </select>
+            </div>
 
-                    <Form.Row>
-                      <button className='field_button'>Reset</button>
-                    </Form.Row>
-                    <div>
-                      <br />
+            <div className="interestHeading">
+              <h3>Your Interests</h3>
+              <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
+              <button onClick={this.addInterest} className="addInterest">Add Interest</button>
+              <br/>
+              <ul id="interestsList" className="myList">
+                <li><button onClick={this.delInterest}>Computer Science</button></li>
+                <li><button onClick={this.delInterest}>AI</button></li>
+                <li><button onClick={this.delInterest}>Play Fortnite</button></li>
+                <li><button onClick={this.delInterest}>ok Boomer</button></li>
+                <li><button onClick={this.delInterest}>BringBackNationalDex</button></li>
+                <li><button onClick={this.delInterest}>hos mad</button></li>
+              </ul>
+            </div>
+          </div>
 
-                      <button className='warn_button'>Delete Account</button>
-                    </div>
-                  </div>
-                </Container>
-              </Container>
-            </Container>
-          </Container>
+          <hr/>
+
+          <div className="criticalInfo">
+            <h3>Reset Email</h3>
+            <input type="text" id="reEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
+
+            <div>
+              <h3>Reset Password</h3>
+              <input type="text" id="password" onChange={this.handleChange} placeholder="123456" required></input>
+
+              <h3>Re-enter Password</h3>
+              <input type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
+            </div>
+          </div>
+
+          <hr/>
+
+          <button type="submit" className="editButton">Edit Account</button>
+          <button onClick={this.delAccount} className="delButton">Delete Account</button>
+
+          
+          
         </div>
       );
     } else if (this.state.pageStatus === 'signin') {
@@ -306,3 +277,39 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+/*
+          <br />
+          <p>Profile: </p>
+          <br />
+          <h3>First Name</h3>
+          <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
+
+          <h3>Last Name</h3>
+          <input type="text" id="lastName" onChange={this.handleChange} placeholder="Smith" required></input>
+
+          <h3>Student Type</h3>
+          <select id="studentType" onChange={this.handleChange}>
+            <option value="undergraduate">Undergraduate</option>
+            <option value="graduate">Graduate</option>
+            <option value="phd">Ph.D.</option>
+            <option value="others">Others</option>
+          </select>
+
+          <h3>Year</h3>
+          <select id="year" onChange={this.handleChange}>
+            <option value="freshman">Freshman</option>
+            <option value="sophomore">Sophomore</option>
+            <option value="junior">Junior</option>
+            <option value="senior">Senior</option>
+          </select>
+
+
+          <h3>Your Interests</h3>
+          <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
+          <button onClick={this.addInterest}>Add Interest</button>
+
+
+          <h3>Reset Password</h3>
+          <h3>Re-enter Password</h3>
+          <h3>Change Backgroup</h3>*/

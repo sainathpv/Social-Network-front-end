@@ -1,4 +1,286 @@
-/*The top most block*/
+#profilePage{
+  margin: auto;
+  width: 80%;
+  justify-content: space-around;}
+
+  #profilePage button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+  }
+
+
+  #profilePage h3{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  
+  #profilePage hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
+
+  #profilePage input {
+    height: 35px;
+    width: 70%;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; 
+  }
+
+  #profilePage select {
+    background: white;
+    font-size: 20px;
+    font-weight: bold;
+    height: 35px;
+    width: 70%;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; 
+    padding: 2px 10px;
+    -webkit-appearance: none;
+ }
+
+  #profilePage .heading {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /*align-content: flex-start;*/
+  }
+    
+    #profilePage .heading div img{
+      display: inline;
+    }
+
+    #profilePage .heading div h1{
+      font-weight: bold;
+      position: relative;
+      top: -13px;
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    #profilePage .heading div .return {
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+    }
+
+    #profilePage .heading div .return:hover {
+      background-color: #990000;
+      color: white;
+    }
+
+    
+  #profilePage .imgAndBio {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+    
+    #profilePage .imgAndBio .profileimg img{
+      display: block;
+      width: 220px; 
+      height: 220px;
+    }
+
+    #profilePage .imgAndBio .profileimg h3{
+      margin-top: 10px;
+      font-size: 15px;
+      display: block;
+    }
+
+    #profilePage .imgAndBio .profileimg .changeImg {
+      margin-top: 10px;
+      padding: 4px 15px;
+      display: block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+    }
+
+    #profilePage .imgAndBio .profileimg .changeImg:hover {
+      display: inline;
+      background-color: #990000;
+      color: white;
+    }
+
+    #profilePage .imgAndBio .profilebio{
+      position: relative;
+      left: 2%;
+      width: 100%;
+      display: block;
+    }
+    #profilePage .imgAndBio .profilebio p{
+      width: 500px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      font-size: 20px;
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+    }
+
+    #profilePage .imgAndBio .profilebio textarea{
+      height: 220px;
+      width: 97%;
+      background-color: white;
+      display: inline-block;
+    }
+  
+
+  #profilePage .basicInfo {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    
+  }
+
+    #profilePage .basicInfo .firstLastName{
+      position: relative;
+      width: 30%;
+      display: block;
+    }
+
+    #profilePage .basicInfo .studentInfo{
+      position: relative;
+      left: -5%;
+      width: 30%;
+      display: block;
+    }
+
+    #profilePage .basicInfo .interestHeading{
+      position: relative;
+      width: 60%;
+      top: -15px;
+    }
+
+    #profilePage .basicInfo div h3{
+      display: inline;
+    }
+
+    #profilePage .basicInfo div input{
+      display: inline-block;
+      width: 100px;
+      position: relative;
+    }
+
+    #profilePage .basicInfo div .addInterest {
+      margin-top: 10px;
+      padding: 4px 15px;
+      display: inline-block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #291ca3;
+      border-radius: 5px;
+    }
+    #profilePage .basicInfo div .addInterest:hover {
+      display: inline;
+      background-color: #291ca3;
+      color: white;
+    }
+    
+    #profilePage .basicInfo .interestHeading .myList{
+      position: relative;
+      top: -2px;
+      display: inline-block;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li{
+      display: inline;
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li button{
+      padding: 4px 15px;
+      display: inline-block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+      border-radius: 12px;
+      margin: 5px;
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li button:hover {
+      display: inline;
+      background-color: #990000;
+      color: white;
+    }
+
+  #profilePage .editButton {
+      padding: 9px 20px;
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+      margin: 10px;
+    }
+
+  #profilePage .editButton:hover {
+      display: inline;
+      background-color: #990000;
+      color: white;
+    }
+
+  #profilePage .delButton {
+      padding: 9px 20px;
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #19a70c;
+      margin: 10px;
+    }
+
+  #profilePage .delButton:hover {
+      display: inline;
+      background-color: #19a70c;
+      color: white;
+    }
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+/*The top most block
 #profileSettings .heading {
   padding-top: 10px;
   display: flex;
@@ -7,7 +289,7 @@
   align-items: center;
   justify-content: center;
 
-  /*align-content: flex-start;*/
+  /*align-content: flex-start;
 }
 
 #profileSettings .logo {
@@ -28,7 +310,7 @@
 #profileSettings .button {
   position: relative;
   left: 200px;
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50; /* Green 
   border: none;
   color: white;
   padding: 12px 32px;
@@ -37,7 +319,7 @@
   display: flex;
   font-size: 16px;
   margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
+  -webkit-transition-duration: 0.4s; /* Safari 
   transition-duration: 0.4s;
   cursor: pointer;
   border-radius: 12px;
@@ -101,9 +383,9 @@
   padding: 35px 32px;
 }
 
-/*The top most block Ends*/
+/*The top most block Ends
 
-/*Middle Block*/
+/*Middle Block
 #profileSettings .middle {
   padding-top: 10px;
   display: flex;
@@ -111,7 +393,7 @@
   flex-flow: row wrap;
   align-items: center;
 
-  /*align-content: flex-start;*/
+  /*align-content: flex-start;
 }
 
 #profileSettings .image {
@@ -265,3 +547,4 @@
   padding: 12px 16px;
   z-index: 1;
 }
+*/

@@ -55,7 +55,7 @@ class PostPanel extends React.Component{
         return (
         <div id="dash_postPanel">
             <nav>
-                <div className="p-fixed bg-primary w-100">
+                <div className="p-fixed bg-primary border-lg w-100">
                     <ul className="d-flex">
                         <li className="active">Home</li>
                         <li>Chats</li>

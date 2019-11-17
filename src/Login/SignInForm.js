@@ -31,7 +31,6 @@ export default class SignInForm extends Component{
         this.setState({
             email: document.getElementById('login_email').value, 
             password: document.getElementById('login_password').value,
-            //captcha: document.getElementById("login_captcha").value
         });
     }
 
@@ -54,7 +53,6 @@ export default class SignInForm extends Component{
             if(result.status === 200){
                 return result.json();
             }else{
-                console.log('failed');
                 result.json().then(nr =>{
                     document.getElementById("warning").textContent = nr.message;
                 })
@@ -88,10 +86,10 @@ export default class SignInForm extends Component{
     }
 
     callback = function () {
-        console.log('Done!!!!');
+
     };
        
-      // specifying verify callback function
+    // specifying verify callback function
     setCaptcha(response) {
         console.log(response)
         this.captcha = response
@@ -127,8 +125,8 @@ export default class SignInForm extends Component{
                     <span>
                         <a href="SendResetEmail">Forgot Password?</a>
                         <br />
-                        <input  type="submit" className="button" value="Login" /> 
-                        <p onClick={this.swapForm}>Sign up?</p>
+                        <button  type="submit">Log In</button>
+                        <p onClick={this.swapForm}>Sign up</p>
                         
                         
                     </span>

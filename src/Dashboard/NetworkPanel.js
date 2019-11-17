@@ -172,7 +172,7 @@ class NetworkPanel extends React.Component{
                         </div>
                     </div>
                 </div>
-                <div id="tab_networkPanel" onClick={this.expandPanel}>
+                <div id="tab_networkPanel" className="border-lg bg-primary" onClick={this.expandPanel}>
                     <h2>Network</h2>
                 </div>
             </div>

@@ -1,3 +1,8 @@
+.darkmode #dash_profilePanel .p-fixed {
+  box-shadow: 2px 0 2px 0 #2c2c2c !important; }
+.darkmode #dash_networkPanel .network-panel {
+  border-left: 0.5px solid #5c5c5c !important; }
+
 #dashboard {
   grid-template-columns: 400px auto 400px; }
   #dashboard #dash_profilePanel {
@@ -29,8 +34,7 @@
           padding: 10px;
           position: relative; }
           #dashboard #dash_profilePanel .p-fixed .profile .description h3 {
-            font-size: 24px;
-            color: black; }
+            font-size: 24px; }
           #dashboard #dash_profilePanel .p-fixed .profile .description h4 {
             font-size: 18px;
             font-weight: normal; }
@@ -104,33 +108,6 @@
       font-size: 16px;
       margin: 0 20px 0 10px;
       height: 30px; }
-    #dashboard #dash_postPanel .postForm .dropdown {
-      position: relative; }
-      #dashboard #dash_postPanel .postForm .dropdown button {
-        border: none;
-        background: #3F99EE;
-        color: white;
-        border-radius: 4px;
-        width: 75px;
-        font-size: 16px;
-        margin: 0 0 0 10px;
-        height: 30px; }
-      #dashboard #dash_postPanel .postForm .dropdown ul {
-        z-index: 3;
-        top: 30px;
-        left: 10px;
-        background: whitesmoke;
-        position: absolute;
-        width: 75px;
-        box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.2); }
-        #dashboard #dash_postPanel .postForm .dropdown ul li {
-          position: relative;
-          width: 75px;
-          padding: 5px;
-          cursor: pointer; }
-        #dashboard #dash_postPanel .postForm .dropdown ul li:hover {
-          background: lightgray;
-          transition: .05s; }
     #dashboard #dash_postPanel .postForm h3 {
       margin: 10px 40px; }
     #dashboard #dash_postPanel .postForm form {
@@ -139,7 +116,6 @@
     z-index: 1;
     text-align: left;
     height: 65px;
-    border-bottom: 1px lightgray solid;
     padding: 0 5%; }
     #dashboard #dash_postPanel nav .p-fixed ul li {
       margin: 0 20px;
@@ -165,8 +141,7 @@
     z-index: 2; }
     #dashboard #dash_networkPanel .panel-header {
       height: 65px;
-      width: 400px;
-      border-bottom: .5px solid lightgray; }
+      width: 400px; }
       #dashboard #dash_networkPanel .panel-header h2 {
         line-height: 65px; }
       #dashboard #dash_networkPanel .panel-header i {
@@ -176,6 +151,7 @@
         right: 20px; }
     #dashboard #dash_networkPanel .network-panel {
       height: calc(100vh - 65.5px);
+      border: 0;
       border-left: .5px solid lightgray; }
       #dashboard #dash_networkPanel .network-panel h3 {
         padding: 4px 0 0 20px; }
@@ -207,10 +183,7 @@
           margin: 10px 0;
           padding: 10px 0px; }
   #dashboard #tab_profilePanel, #dashboard #tab_networkPanel {
-    background: white;
-    color: #6e6e6e;
-    border: solid 1.5px lightgray;
-    border-radius: 15px 15px 0 0;
+    border-radius: 6px 6px 0 0;
     padding: 5px 25px;
     position: fixed;
     display: none; }

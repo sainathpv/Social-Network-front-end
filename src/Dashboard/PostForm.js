@@ -16,7 +16,6 @@ class PostForm extends Component {
     changeType(type){
         event.preventDefault();
         this.setState({type: type});
-        console.log(type);
     }
 
     fileSelectedHandler(event){
@@ -25,7 +24,6 @@ class PostForm extends Component {
     
     handleChange(event){
         event.preventDefault();
-        console.log(this.state.content);
         this.setState({content: document.getElementById("postFormContent").value});
     }
 
@@ -42,7 +40,7 @@ class PostForm extends Component {
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
             return result.json();
         }).then( result => {
-            console.log(this.state);
+
             var body = {
                 profileID: result._id,
                 numLikes: 0,
@@ -54,7 +52,7 @@ class PostForm extends Component {
                 type: this.state.type,
                 content: this.state.content
             }
-            console.log(body);
+;
             options = {
                 method: 'POST',
                 headers: {
@@ -74,18 +72,23 @@ class PostForm extends Component {
 
     getType(){
         if(this.state.type === "text"){
+            var style = {
+                padding: "5px",
+                minHeight: "150px",
+                height: "auto"
+            }
             return (
-            <div>
-                <label>Text Content:</label>
-                <textarea onChange={this.handleChange} id="postFormContent" className="w-100 border-round-small border-lg"></textarea>
-            </div>
+                <div>
+                    <label>Text Content:</label>
+                    <textarea onChange={this.handleChange} style={style} id="postFormContent" className="w-100 text-primary border-round-small bg-secondary border-lg"></textarea>
+                </div>
             );
         }else if(this.state.type === "video"){
 
             return(
                 <div>
                     <label>Youtube URL: </label>
-                    <input onChange={this.handleChange} id="postFormContent" className="w-100 border-round-small border-lg d-block" type="text" placeholder="Ex. https://www.youtube.com/watch?v=Tzl0ELY_TiM"></input>
+                    <input onChange={this.handleChange} id="postFormContent" className="w-100 text-primary border-round-small bg-secondary border-lg d-block" type="text" placeholder="Ex. https://www.youtube.com/watch?v=Tzl0ELY_TiM"></input>
                 </div>
             );
         }else{
@@ -105,11 +108,11 @@ class PostForm extends Component {
                 <hr />
                 <form onSubmit={this.createPost}>
                     <label>Title:</label><br />
-                    <input id="postFormTitle" className="d-block border-round-small border-lg w-100"></input>
+                    <input id="postFormTitle" className="d-block text-primary border-round-small bg-secondary border-lg w-100"></input>
                     <label>Type Of Post:</label>
                     <DropDownMenu items={["Video","Image","Text"]} label="Text" handle={this.changeType}/><br/>
                     <label>Tag:</label>
-                    <input id="postFormTag" className="d-block border-round-small border-lg w-100" placeholder="Ex. Computer Science"></input>
+                    <input id="postFormTag" className="d-block text-primary border-round-small bg-secondary border-lg w-100" placeholder="Ex. Computer Science"></input>
                     {this.getType()}
                     <div className="text-right"><button className="btn-primary" type="submit">Post</button></div>
                 </form>

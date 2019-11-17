@@ -100,15 +100,15 @@ class Post extends React.Component{
                     <div className="d-flex postMetaData">
                         <div className="label" onClick={this.showComments} >
                             <i className="fas fa-comments"></i>
-                            <h5 className="d-inline">Comments: {this.state.comments.length}</h5>
+                            <h5 className="d-inline"> {this.state.comments.length}</h5>
                         </div>
                         <div className="label" onClick={this.votePost(1)}>
                             <i style={{color: "#45c450"}} className="fas fa-thumbs-up"></i>
-                            <h5 className="d-inline">Likes: {this.state.likes}</h5>
+                            <h5 className="d-inline">{this.state.likes}</h5>
                         </div>
                         <div className="label" onClick={this.votePost(-1)}>
                             <i style={{color: "#c44545"}} className="fas fa-thumbs-down"></i>
-                            <h5 className="d-inline">Dislikes: {this.state.dislikes}</h5>
+                            <h5 className="d-inline">{this.state.dislikes}</h5>
                         </div>
                         <div>
                             <i className="fas fa-tags"></i>

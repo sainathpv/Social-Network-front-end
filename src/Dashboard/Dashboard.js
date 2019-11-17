@@ -11,7 +11,6 @@ class Dashboard extends React.Component{
     }
 
     showPostForm(){
-        console.log(this.state.showPostForm);
         this.setState({showPostForm: !this.state.showPostForm}); 
     }
 

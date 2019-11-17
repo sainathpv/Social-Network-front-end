@@ -55,14 +55,18 @@ class ProfilePanel extends React.Component{
                     {name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false},
                     {name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false}
                 ]
-
+                if(result.settings.darkMode){
+                    document.body.className = "darkMode";
+                }else{
+                    document.body.className = "";                    
+                }
                 this.setState({
                     name: result.name,
                     profileIMG: result.profileImageUrl,
                     major: result.major,
                     studentType: result.studentType,
                     year: result.year,
-                    
+                    settings: result.settings,
                     interests: result.interests,
                     posts: result.posts,
                     events: result.events,
@@ -163,7 +167,7 @@ class ProfilePanel extends React.Component{
                         <form className="findFriend">
                             {/* TODO: Find Friend Component */}
                             <h4>Find Friend</h4>
-                            <input className="d-block m-auto border-lg border-round-small bg-secondary" placeholder="Username"></input>
+                            <input className="d-block m-auto text-primary border-lg border-round-small bg-secondary" placeholder="Username"></input>
                             <div className="text-right"><button className="btn-primary" id="btn_findFriend">Send</button></div>
                         </form>
                         <form className="activeFriendRequests">
@@ -186,7 +190,7 @@ class ProfilePanel extends React.Component{
                         </form>
                     </div>
                 </div>
-                <div id="tab_profilePanel" onClick={this.expandPanel}>
+                <div id="tab_profilePanel" className="border-lg bg-primary" onClick={this.expandPanel}>
                     <h2>Profile</h2>
                 </div>
             </div>

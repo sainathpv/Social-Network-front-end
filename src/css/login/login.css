@@ -1,172 +1,173 @@
 #SignInForm {
   text-align: center; 
 }
-  #SignInForm .label {
-    text-align: left;
-    padding-left: 60px; }
+#SignInForm .label {
+  text-align: left;
+  padding-left: 60px; }
 
-  #SignInForm input {
-    height: 35px;
-    width: 250px;
-    padding-left: 6px;
-    margin: 10px;
-    border: .5px solid lightgray;
-    border-radius: 4px; 
-  }
-
-    
-  #SignInForm .google-cap{
-    padding-left: 35px;
-    margin: 10px;
-  }
-
-  #SignInForm .warning_msg{
-    color: red;
-  }
+#SignInForm input {
+  height: 35px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: .5px solid lightgray;
+  border-radius: 4px; 
+}
+.dropdown{
+  margin-left: 54px;
+}
   
-  #SignInForm .captcha{
-    height: 35px;
-    width: 80px;
-    margin: 10px;
-    background-color: white;
-    color: black;
-  }
+#SignInForm .google-cap{
+  padding-left: 35px;
+  margin: 10px;
+}
 
-  #SignInForm .ctc_input{
-    height: 35px;
-    width: 140px;
-    margin: 10px;
-  }
+#SignInForm .warning_msg{
+  color: red;
+}
 
-  #SignInForm span .button, #SignInForm span p {
-    display: inline-block;
-    cursor: pointer; }
-  #SignInForm span .button {
-    left: 0;
-    width: 60px;
-    background: #6e0101;
-    color: white;
-    border: none;
-    border-radius: 10px; }
-  #SignInForm a, #SignInForm:visited{
-    text-decoration: none;
-    color: gray;
-  }
+#SignInForm .captcha{
+  height: 35px;
+  width: 80px;
+  margin: 10px;
+  background-color: white;
+  color: black;
+}
+
+#SignInForm .ctc_input{
+  height: 35px;
+  width: 140px;
+  margin: 10px;
+}
+
+#SignInForm span .button, #SignInForm span p {
+  display: inline-block;
+  cursor: pointer; }
+#SignInForm span button {
+  left: 0;
+  width: 70px;
+  padding: 5px 10px;
+  margin: 10px;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px; }
+#SignInForm a, #SignInForm:visited{
+  text-decoration: none;
+  color: gray;
+}
 
 #SignUpForm {
   text-align: center; }
-  #SignUpForm .label {
-    text-align: left;
-    padding-left: 60px; }
-  #SignUpForm input {
-    height: 35px;
-    width: 250px;
-    padding-left: 6px;
-    margin: 10px;
-    border: .5px solid lightgray;
-    border-radius: 4px; }
+#SignUpForm .label {
+  text-align: left;
+  padding-left: 60px; }
+#SignUpForm input {
+  height: 35px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: .5px solid lightgray;
+  border-radius: 4px; }
+
+#SignUpForm .warning_msg{
+  color: red;
+}
+
+#SignUpForm span .button, #SignUpForm span p {
+  display: inline-block;
+  cursor: pointer; }
+#SignUpForm span button {
+  left: 0;
+  padding: 10px;
+  margin: 5px;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px; }
+
+
+
+#login_2fForm {
+  text-align: center; 
+}
+
+.formBox_login_2fForm {
+  display: block;
+  text-align: center;
+  transform: translate(0%, 30vh);
+  border: .5px lightgray solid;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 400px;
+  padding: 10px; }
+
+.formBox_login_2fForm img {
+  display: inline-block;
+  width: 50px; }
+
+#login_2fForm .label {
+  text-align: left;
+  padding-left: 60px; }
+#login_2fForm input {
+  height: 35px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: .5px solid lightgray;
+  border-radius: 4px; }
+#login_2fForm button, #login_2fForm span p {
+  display: inline-block;
+  cursor: pointer; }
+
+#login_2fForm .button {
+  width: 60px;
+  height: 30px;
+  margin-left: 50%;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px; }
+
+
   
-    #SignUpForm .warning_msg{
-      color: red;
-    }
+#loginQRCode {
+  text-align: center; 
+}
 
+.formBox_loginQRCode {
+  display: block;
+  text-align: center;
+  transform: translate(0%, 16vh);
+  border: .5px lightgray solid;
+  border-radius: 4px;
+  background-color: #fff;
+  width: 400px;
+  padding: 10px; }
 
+.formBox_loginQRCode img {
+  display: inline-block;
+  width: 50px; }
+  
+#loginQRCode .label {
+  text-align: left;
+  padding-left: 60px; }
+#loginQRCode input {
+  height: 35px;
+  width: 250px;
+  padding-left: 6px;
+  margin: 10px;
+  border: .5px solid lightgray;
+  border-radius: 4px; }
+#loginQRCode button, #loginQRCode span p {
+  display: inline-block;
+  cursor: pointer; }
 
-  #SignUpForm span .button, #SignUpForm span p {
-    display: inline-block;
-    cursor: pointer; }
-  #SignUpForm span .button {
-    left: 0;
-    width: 60px;
-    background: #6e0101;
-    color: white;
-    border: none;
-    border-radius: 10px; }
-
-
-
-    #login_2fForm {
-      text-align: center; 
-    }
-
-      .formBox_login_2fForm {
-        display: block;
-        text-align: center;
-        transform: translate(0%, 30vh);
-        border: .5px lightgray solid;
-        border-radius: 4px;
-        background-color: #fff;
-        width: 400px;
-        padding: 10px; }
-
-        .formBox_login_2fForm img {
-          display: inline-block;
-          width: 50px; }
-        
-      #login_2fForm .label {
-        text-align: left;
-        padding-left: 60px; }
-      #login_2fForm input {
-        height: 35px;
-        width: 250px;
-        padding-left: 6px;
-        margin: 10px;
-        border: .5px solid lightgray;
-        border-radius: 4px; }
-      #login_2fForm button, #login_2fForm span p {
-        display: inline-block;
-        cursor: pointer; }
-
-      #login_2fForm .button {
-        width: 60px;
-        height: 30px;
-        margin-left: 50%;
-        background: #6e0101;
-        color: white;
-        border: none;
-        border-radius: 10px; }
-
-
-        
-    #loginQRCode {
-      text-align: center; 
-    }
-
-      .formBox_loginQRCode {
-        display: block;
-        text-align: center;
-        transform: translate(0%, 16vh);
-        border: .5px lightgray solid;
-        border-radius: 4px;
-        background-color: #fff;
-        width: 400px;
-        padding: 10px; }
-
-        .formBox_loginQRCode img {
-          display: inline-block;
-          width: 50px; }
-        
-      #loginQRCode .label {
-        text-align: left;
-        padding-left: 60px; }
-      #loginQRCode input {
-        height: 35px;
-        width: 250px;
-        padding-left: 6px;
-        margin: 10px;
-        border: .5px solid lightgray;
-        border-radius: 4px; }
-      #loginQRCode button, #loginQRCode span p {
-        display: inline-block;
-        cursor: pointer; }
-
-      #loginQRCode .button {
-        width: 60px;
-        height: 30px;
-        margin-left: 50%;
-        background: #6e0101;
-        color: white;
-        border: none;
-        border-radius: 10px; }
-
-/*# sourceMappingURL=login.css.map */
+#loginQRCode .button {
+  width: 60px;
+  height: 30px;
+  margin-left: 50%;
+  background: #6e0101;
+  color: white;
+  border: none;
+  border-radius: 10px; }

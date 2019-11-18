@@ -26,6 +26,8 @@
   .post img, .post iframe {
     margin: 5px 40px; }
   .post img {
+    display: block;
+    margin: auto;
     max-width: calc(100% - 80px);
     position: relative; }
   .post iframe {

@@ -68,10 +68,10 @@ class Post extends React.Component{
                 });
                 break;
             case "advert":
-                this.setState({post: <img src={this.state.content} alt=""></img>});
+                this.setState({post: <img src={"http://" + process.env.REACT_APP_API_HOST + this.state.content} alt=""></img>});
                 break;
             case "image":
-                this.setState({post: <img src={this.state.content} alt=""></img>})
+                this.setState({post: <img className="m-auto" src={"http://" + process.env.REACT_APP_API_HOST + this.state.content} alt=""></img>})
                 break;    
             case "article":
                 this.setState({post: <a href={this.state.content}></a>});

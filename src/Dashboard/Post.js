@@ -127,14 +127,17 @@ class Post extends React.Component{
         }
 
     }
+    
     votePost(vote){
 
     }
+
     share(event){
         event.preventDefault();
         console.log(this.state.id);
         this.state.showShareForm(this.state.id);
     }
+    
     getPostMetaData(){
         if(this.state.type === "advert"){
             return;

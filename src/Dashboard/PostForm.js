@@ -1,33 +1,34 @@
 import React, { Component } from 'react';
 import DropDownMenu from './../Utility/DropDown';
-
+import axios from 'axios';
 import Cookie from './../Utility/Cookie';
 
 class PostForm extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state = {type: "text", title: "", tag: "", content: "", closeForm: props.closeForm};
+        this.state = { type: "text", title: "", tag: "", content: "", closeForm: props.closeForm };
         this.changeType = this.changeType.bind(this);
         this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
         this.createPost = this.createPost.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
-    changeType(type){
+    changeType(type) {
         event.preventDefault();
-        this.setState({type: type});
+        this.setState({ type: type });
     }
 
-    fileSelectedHandler(event){
-        this.setState({content: event.target.result});
-    }
-    
-    handleChange(event){
-        event.preventDefault();
-        this.setState({content: document.getElementById("postFormContent").value});
+    fileSelectedHandler(event) {
+        console.log(event.target.files[0]);
+        this.setState({ content: event.target.files[0] });
     }
 
-    createPost(event){
+    handleChange(event) {
+        event.preventDefault();
+        this.setState({ content: document.getElementById("postFormContent").value });
+    }
+
+    createPost(event) {
         event.preventDefault();
         var options = {
             method: 'GET',
@@ -37,10 +38,9 @@ class PostForm extends Component {
             }
         };
 
-        fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
+        fetch("http://" + process.env.REACT_APP_API_HOST + "/profiles/profile", options).then(result => {
             return result.json();
-        }).then( result => {
-
+        }).then(result => {
             var body = {
                 profileID: result._id,
                 numLikes: 0,
@@ -51,27 +51,64 @@ class PostForm extends Component {
                 title: document.getElementById("postFormTitle").value,
                 type: this.state.type,
                 content: this.state.content
-            }
-;
-            options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-                },
-                body: JSON.stringify(body)
             };
 
-            fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postPosts", options).then(result => {
-                result.json()
-            }).then(result => {
-                location.reload();
-            });
+            if (this.state.type === "image") {
+                var acceptedimages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
+                if(!acceptedimages.includes(this.state.content.type)){
+                    return;
+                }
+                const formdata = new FormData();
+                formdata.append('image', this.state.content, this.state.content.name);
+                var reader = new FileReader();
+                reader.readAsDataURL(this.state.content);
+                reader.onload = (e) => {
+                    options = {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+                        },
+                        body: JSON.stringify({image: e.target.result})
+                    };
+    
+                    fetch("http://" + process.env.REACT_APP_API_HOST + "/images/imageUpload", options).then(result => {
+                        return result.json();
+                    }).then(result => {
+                        body.content = result.url;
+                        
+                        options.body = JSON.stringify(body);
+
+                        fetch("http://" + process.env.REACT_APP_API_HOST + "/posts/postPosts", options).then(result => {
+                            result.json()
+                        }).then(result => {
+                            location.reload();
+                        });
+                    });
+                }
+            } else {
+
+                options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+                    },
+                    body: JSON.stringify(body)
+                };
+
+                fetch("http://" + process.env.REACT_APP_API_HOST + "/posts/postPosts", options).then(result => {
+                    result.json()
+                }).then(result => {
+                    location.reload();
+                });
+            }
+
         });
     }
 
-    getType(){
-        if(this.state.type === "text"){
+    getType() {
+        if (this.state.type === "text") {
             var style = {
                 padding: "5px",
                 minHeight: "150px",
@@ -83,25 +120,25 @@ class PostForm extends Component {
                     <textarea onChange={this.handleChange} style={style} id="postFormContent" className="w-100 text-primary border-round-small bg-secondary border-lg"></textarea>
                 </div>
             );
-        }else if(this.state.type === "video"){
+        } else if (this.state.type === "video") {
 
-            return(
+            return (
                 <div>
                     <label>Youtube URL: </label>
                     <input onChange={this.handleChange} id="postFormContent" className="w-100 text-primary border-round-small bg-secondary border-lg d-block" type="text" placeholder="Ex. https://www.youtube.com/watch?v=Tzl0ELY_TiM"></input>
                 </div>
             );
-        }else{
-            
-            return(
+        } else {
+
+            return (
                 <div className="p-relative">
-                    <input type="file" onChange={this.fileSelectedHandler}/>
+                    <input type="file" onChange={this.fileSelectedHandler} />
                 </div>
             );
         }
     }
 
-    render(){
+    render() {
         return (
             <div className="postForm d-block m-auto bg-primary p-fixed border-lg border-round-small" >
                 <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i></div>
@@ -110,7 +147,7 @@ class PostForm extends Component {
                     <label>Title:</label><br />
                     <input id="postFormTitle" className="d-block text-primary border-round-small bg-secondary border-lg w-100"></input>
                     <label>Type Of Post:</label>
-                    <DropDownMenu items={["Video","Image","Text"]} label="Text" handle={this.changeType}/><br/>
+                    <DropDownMenu items={["Video", "Image", "Text"]} label="Text" handle={this.changeType} /><br />
                     <label>Tag:</label>
                     <input id="postFormTag" className="d-block text-primary border-round-small bg-secondary border-lg w-100" placeholder="Ex. Computer Science"></input>
                     {this.getType()}

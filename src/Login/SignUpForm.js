@@ -44,7 +44,7 @@ export default class SignUpForm extends Component{
         if(document.getElementById('signup_pwd').value ===
             document.getElementById('signup_pwd2').value){
             var options;
-            if(this.state.accountType == "Student"){
+            if(this.state.accountType === "student"){
                 options = {
                     method: 'POST',
                     headers: {

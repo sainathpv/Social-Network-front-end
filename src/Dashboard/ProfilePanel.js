@@ -54,9 +54,9 @@ class ProfilePanel extends React.Component{
                     {name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
                     {name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false},
                     {name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false}
-                ]
-                if(result.settings.darkMode){
-                    document.body.className = "darkMode";
+                ];
+                if(result.settings.darkmode){
+                    document.body.className = "darkmode";
                 }else{
                     document.body.className = "";                    
                 }

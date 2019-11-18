@@ -43,7 +43,7 @@ class NetworkPanel extends React.Component{
                     {name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
                     {name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
                     {name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true}
-                ]
+                ];
         
                 var events = [
                     {name: "Guy Fawkes Night", location: "232 Walnut Str.", company: "The English Pub", date: "November 5th"},

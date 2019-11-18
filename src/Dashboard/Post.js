@@ -15,12 +15,40 @@ class Post extends React.Component{
             likes: props.likes,
             dislikes: props.dislikes,
             tags: props.tags,
-            showComments: false
+            showComments: false,
+            post: "",
+            shareable: props.shareable,
+            showShareForm: props.showShareForm          
         }
+        this.share = this.share.bind(this);
         this.showComments = this.showComments.bind(this);
+        this.getSharedPost = this.getSharedPost.bind(this);
         this.postComment = this.postComment.bind(this);
     }
+
+    getSharedPost(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+        
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postByID/" + this.state.content, options).then( result => {
+            return result.json();
+        }).then(result => {
+
+            this.setState({post: 
+                <Post id={result._id} title={result.title} tags={result.tags}
+                dislikes={result.numDislikes} likes={result.numLikes}
+                comments={result.comments} type={result.type}
+                user={result.user} name={result.name} shareable={false} content={result.content} />
+            });
+        });
+    }
+
     getContent(){
+                    
         var s = {
             position: "relative",
             width: "100%",
@@ -30,26 +58,39 @@ class Post extends React.Component{
         };
         switch(this.state.type){
             case "text":
-                return (<p>{this.state.content}</p>);
-            case "video":
-                return (
-                <div className="vidcontainer" style={s}>
-                    <iframe src={this.state.content}  frameBorder="0" allowFullScreen/>
-                </div>);
-            case "advert":
-                return (<img src={this.state.content} alt=""></img>);
-            case "image":
-                return (<img src={this.state.content} alt=""></img>);
-            case "article":
-                return (<a href={this.state.content}></a>);
-            default:
+                this.setState({post: (<p>{this.state.content}</p>) });
                 break;
+            case "video":
+                this.setState({post: 
+                    <div className="vidcontainer" style={s}>
+                        <iframe src={this.state.content}  frameBorder="0" allowFullScreen/>
+                    </div>
+                });
+                break;
+            case "advert":
+                this.setState({post: <img src={"http://" + process.env.REACT_APP_API_HOST + this.state.content} alt=""></img>});
+                break;
+            case "image":
+                this.setState({post: <img className="m-auto" src={"http://" + process.env.REACT_APP_API_HOST + this.state.content} alt=""></img>})
+                break;    
+            case "article":
+                this.setState({post: <a href={this.state.content}></a>});
+                break;
+            case "post":
+                this.getSharedPost();
+                break;
+            default:
+
+            
         }
     }
-    
+    componentDidMount(){
+        this.getContent();
+    }
     showComments(event){
         this.setState({showComments: !this.state.showComments});
     }
+
     postComment(event){
         event.preventDefault();
         var options = {
@@ -87,17 +128,25 @@ class Post extends React.Component{
         }
 
     }
+    
     votePost(vote){
 
     }
 
+    share(event){
+        event.preventDefault();
+        console.log(this.state.id);
+        this.state.showShareForm(this.state.id);
+    }
+    
     getPostMetaData(){
         if(this.state.type === "advert"){
             return;
         }else{
             return (
                 <div>
-                    <hr />
+                    { this.state.shareable ? <hr /> : "" }
+                    { this.state.shareable ?
                     <div className="d-flex postMetaData">
                         <div className="label" onClick={this.showComments} >
                             <i className="fas fa-comments"></i>
@@ -111,17 +160,24 @@ class Post extends React.Component{
                             <i style={{color: "#c44545"}} className="fas fa-thumbs-down"></i>
                             <h5 className="d-inline">{this.state.dislikes}</h5>
                         </div>
+                        
+                            <div className="label">
+                                <i className="fas fa-share" onClick={this.share}></i>
+                            </div>
+
                         <div>
                             <i className="fas fa-tags"></i>
                             <ul className="d-inline">
                                 {this.state.tags.map((tag, i) =>
                                     <li className="d-inline" key={i.toString()}>{tag}</li>
-                                    )}
+                                )}
                             </ul>
                         </div>
                     </div>
+                    : ""
+                    }
                     {
-                        this.state.showComments ?
+                        this.state.showComments && this.state.shareable ?
                         <ul className="comments">
                             <li>
                                 <h3>Create A Comment</h3>
@@ -150,7 +206,7 @@ class Post extends React.Component{
             <h2>{this.state.title}</h2>
             <h5>{this.state.name}</h5>
             <hr />
-            {this.getContent()}
+            {this.state.post}
             {this.getPostMetaData()}
         </div>
         );

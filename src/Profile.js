@@ -3,12 +3,18 @@ import profileIMG from './images/college.jpg';
 import './css/profile.css';
 import logo from './images/HC.svg';
 import { Redirect } from 'react-router-dom';
+import DropDownMenu from './Utility/DropDown';
+import Cookie from './Utility/Cookie';
 
 import axios from 'axios';
 //TODO: check if there is a token redirect to signin if invalid
 
 class Profile extends Component {
+
   constructor(props) {
+    
+
+
     super(props);
     this.state = {
       major: '',
@@ -160,81 +166,94 @@ class Profile extends Component {
   swapToHome() { }
   changeImg() { }
   addInterest() { }
-  delInterest() {}
-  delAccount() {}
+  delInterest() { }
+  delAccount() { }
+  changeStudentType() { }
 
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
   render() {
+    console.log("it works here 1")
+    var options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+      },
+    };
+
+    fetch("http://" + process.env.REACT_APP_API_HOST + "/profiles/profile", options).then(result => {
+      if (result.status === 200) {
+        console.log(result)
+        return result.json();
+      } else {
+        result.json().then(nr => {
+          document.getElementById("warning").textContent = nr.message;
+        })
+        return null;
+      }
+    }).then(result => {
+      if (result === null) {
+      } else {
+      }
+    });
     if (
       this.state.pageStatus === 'profile' ||
       this.state.pageStatus === 'home' ||
-      this.state.pageStatus === 'chat'
-    ) {
+      this.state.pageStatus === 'chat') {
       return (
         <div id="profilePage">
-          
+
           <div className="heading">
             <div>
-              <img src={logo} alt='' width='50px'/>
+              <img src={logo} alt='' width='50px' />
               <h1>Hoosier Connection</h1>
             </div>
-            <div> 
-              <button className="return" onClick={this.swapToHome}> Back To Dashboard </button> 
+            <div>
+              <button className="return" onClick={this.swapToHome}> Back To Dashboard </button>
             </div>
           </div>
 
-          <hr/>
+          <hr />
+          <p id="username">This is my super long username with no reason so sorry I have to restrict the display</p>
 
           <div className="imgAndBio">
             <div className="profileimg">
-              <img id="profileIMG" src={profileIMG} alt=''/>
+              <img id="profileIMG" src={profileIMG} alt='' />
               <button className="changeImg" onClick={this.changeImg}> Choose File </button>
+
             </div>
 
             <div className="profilebio">
-              <p id="username">This is my super long username with no reason so sorry I have to restrict the display</p>
+              <h3>Bio: </h3>
               <textarea id="profileBio" onChange={this.handleChange} placeholder='A little section dedicated to you!'></textarea>
             </div>
           </div>
 
 
           <div className="basicInfo">
+            <div className="labels">
+              <h3>First Name: </h3>
+              <h3>Last Name: </h3>
+              <h3>Student Type:</h3>
+              <h3>Current Year:</h3>
+            </div>
 
-            <div className="firstLastName">
-              <h3>First Name: </h3><br/>
+            <div className="buttons">
               <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
-              <br/>
-              <h3>Last Name: </h3><br/>
+              <br />
               <input type="text" id="lastName" onChange={this.handleChange} placeholder="Smith" required></input>
+              <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label="Undergraduate" handle={this.changeStudentType} />
+              <DropDownMenu items={["freshman", "sophomore", "junior", "senior"]} label="freshman" handle={this.changeStudentType} />
             </div>
 
-            <div className="studentInfo">
-              <h3>Student Type:</h3><br/>
-              
-              <select id="studentType" onChange={this.handleChange}>
-                <option value="undergraduate">Undergraduate</option>
-                <option value="graduate">Graduate</option>
-                <option value="phd">Ph.D.</option>
-                <option value="others">Others</option>
-              </select>
-              <br/>
-
-              <h3>Year:</h3>
-              <br/>
-              <select id="year" onChange={this.handleChange}>
-                <option value="freshman">Freshman</option>
-                <option value="sophomore">Sophomore</option>
-                <option value="junior">Junior</option>
-                <option value="senior">Senior</option>
-              </select>
-            </div>
+            <br />
 
             <div className="interestHeading">
-              <h3>Your Interests</h3>
+              <h3>Your Interests: </h3>
               <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
               <button onClick={this.addInterest} className="addInterest">Add Interest</button>
-              <br/>
+              <br />
               <ul id="interestsList" className="myList">
                 <li><button onClick={this.delInterest}>Computer Science</button></li>
                 <li><button onClick={this.delInterest}>AI</button></li>
@@ -246,11 +265,14 @@ class Profile extends Component {
             </div>
           </div>
 
-          <hr/>
+          <hr />
 
           <div className="criticalInfo">
             <h3>Reset Email</h3>
             <input type="text" id="reEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
+
+            <h3>Current Password</h3>
+            <input type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
 
             <div>
               <h3>Reset Password</h3>
@@ -261,13 +283,13 @@ class Profile extends Component {
             </div>
           </div>
 
-          <hr/>
+          <hr />
 
           <button type="submit" className="editButton">Edit Account</button>
           <button onClick={this.delAccount} className="delButton">Delete Account</button>
 
-          
-          
+
+
         </div>
       );
     } else if (this.state.pageStatus === 'signin') {

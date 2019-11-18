@@ -9,7 +9,7 @@ export default class SignUpForm extends Component{
     constructor(props){
         super(props);
         this.img = "";
-        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false, accountType: "Student", company: "", userName: ""};
+        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false, accountType: "student", company: "", userName: ""};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
@@ -17,7 +17,7 @@ export default class SignUpForm extends Component{
     }
 
     handleChange(event){
-        if(this.state.accountType === "Student"){
+        if(this.state.accountType === "student"){
             this.setState({
                 userName: document.getElementById('signup_username').value,
                 fname: document.getElementById('signup_fname').value,
@@ -110,10 +110,12 @@ export default class SignUpForm extends Component{
 
     changeType(type){
         event.preventDefault();
+        console.log(type);
         this.setState({accountType: type});
     }
     getForm(){
-        if(this.state.accountType === "Student"){
+        console.log(this.state.accountType);
+        if(this.state.accountType === "student"){
             return (
                 <div>
                     <div className="label"><label>First Name:</label></div>
@@ -144,9 +146,9 @@ export default class SignUpForm extends Component{
                     <div className="label"><label>Account Type:</label></div>
                     <DropDownMenu items={["Student", "Company"]} label="Student" handle={this.changeType}/><br />
                     <div className="label"><label>Email:</label></div>
-                    <input type="text" id="signup_username" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
+                    <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
                     <div className="label"><label>Username:</label></div>
-                    <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
+                    <input type="text" id="signup_username" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
                     {this.getForm()}
                     <div className="label"><label>Password:</label></div>
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>

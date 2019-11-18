@@ -1,14 +1,32 @@
 import React from 'react';
 import Post from './Post';
-import PostForm from'./PostForm';
+import PostForm from './PostForm';
+import ShareForm from './ShareForm';
 import Cookie from './../Utility/Cookie';
 class PostPanel extends React.Component{
     constructor(props){
         super(props);
-        console.log(props.isPostFormHidden());
-        this.state = {posts: [], tags: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden};
+        this.state = {posts: [], tags: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden, showShareForm: false};
         this.getPosts = this.getPosts.bind(this);
-        this.getProfile = this.getProfile(this);
+        this.showShareForm = this.showShareForm.bind(this);
+        this.getProfile();
+        this.postID = "";
+    }
+
+    showShareForm(postID){
+        this.postID = postID;
+        this.setState({showShareForm: !this.state.showShareForm});
+    }
+
+    renderShareForm(){
+        console.log(this.postID);
+        if(this.state.showShareForm){
+            return (
+                <ShareForm postID={this.postID} showShareForm={this.showShareForm}/>
+            );
+        }else{
+            return("");
+        }
     }
 
     getPosts(tags){
@@ -64,15 +82,18 @@ class PostPanel extends React.Component{
                 </div>
             </nav>
             {this.renderPostForm()}
+            {this.renderShareForm()}
             <ul className="posts" >
                 {
                     this.state.posts.map((post, i) => 
                     <Post id={post._id} title={post.title} key={i}
-                    tags={post.tags} dislikes={post.numDislikes}
-                    likes={post.numLikes} comments={post.comments}
-                    type={post.type} content={post.content}
-                    user={post.user} name={post.name}
-                />)
+                          tags={post.tags} dislikes={post.numDislikes}
+                          likes={post.numLikes} comments={post.comments}
+                          type={post.type} content={post.content}
+                          user={post.user} name={post.name}
+                          showShareForm={this.showShareForm}
+                          shareable={true}
+                    />)
                 }
             </ul>
         </div>
@@ -80,7 +101,3 @@ class PostPanel extends React.Component{
     }
 }
 export default PostPanel;
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/PostPanel.js

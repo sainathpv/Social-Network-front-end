@@ -1,267 +1,343 @@
-/*The top most block*/
-#profileSettings .heading {
-  padding-top: 10px;
-  display: flex;
-  width: 85%;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-
-  /*align-content: flex-start;*/
-}
-
-#profileSettings .logo {
-  margin: 10px;
-}
-
-#profileSettings .title {
-  margin: 10px;
-}
-
-#profileSettings .buttonArea {
-  display: flex;
-  flex-flow: row wrap;
-  align-items: center;
-  justify-content: center;
-}
-
-#profileSettings .button {
-  position: relative;
-  left: 200px;
-  background-color: #4caf50; /* Green */
-  border: none;
-  color: white;
-  padding: 12px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: flex;
-  font-size: 16px;
-  margin: 4px 2px;
-  -webkit-transition-duration: 0.4s; /* Safari */
-  transition-duration: 0.4s;
-  cursor: pointer;
-  border-radius: 12px;
-}
-
-#profileSettings .button1 {
-  background-color: white;
-  color: black;
-  border: 2px solid #4caf50;
-}
-
-#profileSettings .button1:hover {
-  background-color: #4caf50;
-  color: white;
-}
-
-#profileSettings .button2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008cba;
-}
-
-#profileSettings .button2:hover {
-  background-color: #008cba;
-  color: white;
-}
-
-#profileSettings .button3 {
-  background-color: white;
-  color: black;
-  border: 2px solid #f44336;
-}
-
-#profileSettings .button3:hover {
-  background-color: #f44336;
-  color: white;
-}
-
-#profileSettings .button4 {
-  background-color: white;
-  color: black;
-  border: 2px solid #e7e7e7;
-}
-
-#profileSettings .button4:hover {
-  background-color: #e7e7e7;
-}
-
-#profileSettings .button5 {
-  background-color: white;
-  color: black;
-  border: 2px solid #555555;
-  border-radius: 50%;
-  padding: 35px 32px;
-}
-
-#profileSettings .button5:hover {
-  background-color: #555555;
-  color: white;
-  border-radius: 50%;
-  padding: 35px 32px;
-}
-
-/*The top most block Ends*/
-
-/*Middle Block*/
-#profileSettings .middle {
-  padding-top: 10px;
-  display: flex;
-  width: 85%;
-  flex-flow: row wrap;
-  align-items: center;
-
-  /*align-content: flex-start;*/
-}
-
-#profileSettings .image {
-  width: 400px;
-  height: 380px;
-  border-radius: 4px;
-  position: absolute;
-  margin-left: 40%;
-}
-
-#profileSettings .uploadImg {
-  position: absolute;
-  margin-top: 19%;
-  margin-left: 41%;
-  background-color: black;
-  color: white;
-  width: 70px;
-  height: 35px;
-}
-
-#profile_info {
-  display: flex;
-
-  width: 550px;
-  height: 180px;
-}
-
-#profile nav ul {
-  display: inline;
-}
-
-#profile nav ul li {
-  line-height: 50px;
-  display: inline;
-}
-
-#profile .container {
+#profilePage{
   margin: auto;
-  width: 85%;
-}
+  width: 80%;
+  justify-content: space-around;}
 
-#profileSettings .container .Form.Row .button {
-  background-color: #008cba;
-}
-#profileSettings .container .profile .profileField input {
-  display: flex;
-  display: block;
-  border: 0.5px solid lightgray;
-  height: 27px;
-  width: 90%;
-}
-#profileSettings .container .profile .profileField textarea {
-  resize: none;
-  width: 500px;
-  height: 185px;
-  border: 0.5px solid lightgray;
-  border-radius: 4px;
-  padding: 10px 0 0 10px;
-}
-#profileSettings .container .profile .profileField img {
-  width: 300px;
-  height: 300px;
-  border-radius: 4px;
-}
-#profileSettings .container .profile .profileField button {
-  position: relative;
-  left: -285px;
-  bottom: 15px;
-  background: rgba(0, 0, 0, 0.774);
-  border: none;
-  color: white;
-  padding: 5px 10px;
-  border-radius: 10px;
-}
-#profileSettings .field_button {
-  background: steelblue;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  width: 90px;
-  height: 40px;
-  margin-left: 1em;
-  margin-top: 10px;
-  padding: 10px 10px;
-}
-#profileSettings .container .security .center {
-  padding: 20px 18%;
-  margin: auto;
-}
-#profileSettings .container .security .center .profileField .p-10 {
-  padding-left: 10px;
-}
-#profileSettings .no_padding {
-  padding: 0 !important;
-  background: red;
-}
-#profileSettings .container .security .center .profileField input {
-  display: flex;
-  display: block;
-  border: 0.5px solid lightgray;
-  height: 27px;
-  width: 90%;
-}
+  #profilePage button {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+  }
 
-#profileSettings .warn_button {
-  background: red;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  margin-left: 1em;
-  padding: 10px 10px;
-}
-#profileSettings .container .security .center .field_button {
-  text-align: center;
-  width: 80px;
-  background: #0065fc;
-  color: white;
-  border: none;
-  border-radius: 10px;
-  margin-left: 1em;
-  margin-top: 10px;
-  padding: 10px 10px;
-}
+  #profilePage p{
+    width: 400px;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
 
-#profileSettings .line {
-  width: 1050px;
-  height: 47px;
-  border-bottom: 1px solid grey;
-  position: relative;
-}
 
-#profileSettings .ms-container {
-  background: #fff;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-#profileSettings .dropdown {
-  position: relative;
-  display: inline-block;
-  color: black;
-}
+  #profilePage h3{
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+  }
+  
+  #profilePage hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+  }
 
-#profileSettings .dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 12px 16px;
-  z-index: 1;
-}
+  #profilePage input {
+    height: 35px;
+    width: 70%;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; 
+  }
+
+  #profilePage select {
+    background: white;
+    font-size: 20px;
+    font-weight: bold;
+    height: 35px;
+    width: 70%;
+    padding-left: 6px;
+    margin: 10px;
+    border: .5px solid lightgray;
+    border-radius: 4px; 
+    padding: 2px 10px;
+    -webkit-appearance: none;
+ }
+
+  #profilePage .heading {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    /*align-content: flex-start;*/
+  }
+    
+    #profilePage .heading div img{
+      display: inline;
+    }
+
+    
+
+    #profilePage .heading div h1{
+      font-weight: bold;
+      position: relative;
+      top: -13px;
+      display: inline-block;
+      margin: 0 10px;
+    }
+
+    #profilePage .heading div .return {
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+    }
+
+    #profilePage .heading div .return:hover {
+      background-color: #990000;
+      color: white;
+    }
+
+    
+  #profilePage .imgAndBio {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+    #profilePage .imgAndBio .profileimg img {
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+      width: 220px; 
+      height: 220px;
+    }
+    
+    #profilePage .imgAndBio .profileimg img:hover {
+      box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+    }
+
+    #profilePage .imgAndBio .profileimg h3{
+      margin-top: 10px;
+      font-size: 15px;
+      display: block;
+    }
+
+    #profilePage .imgAndBio .profileimg .changeImg {
+      margin-top: 10px;
+      padding: 4px 15px;
+      display: block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+    }
+
+    #profilePage .imgAndBio .profileimg .changeImg:hover {
+      display: block;
+      background-color: #990000;
+      color: white;
+    }
+
+    #profilePage .imgAndBio .profilebio{
+      position: relative;
+      left: 2%;
+      width: 100%;
+      display: block;
+    }
+
+
+    #profilePage .imgAndBio .profilebio textarea{
+      padding: 12px 20px;
+      box-sizing: border-box;
+      border: 2px solid #ccc;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+      font-size: 16px;
+      resize: none;
+      height: 240px;
+      width: 97%;
+      background-color: white;
+      display: inline-block;
+    }
+  
+
+  #profilePage .basicInfo {
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 30px;
+    
+  }
+
+  #profilePage .basicInfo div h3{
+    display: block;
+  }
+
+  #profilePage .basicInfo div input{
+    position: relative;
+    top: -6px;
+    width: 50%;
+    display: inline-block;
+    position: relative;
+    margin: 8px;
+  }
+
+    #profilePage .basicInfo .studentInfo{
+      position: relative;
+      display: inline-block;
+    }
+
+    #profilePage .basicInfo .labels h3{
+      margin-top: 20px;
+      display: block;
+    }
+
+    #profilePage .basicInfo .buttons{
+      width: 400px;
+      position: relative;
+      top: 13px;
+      left: 15px;
+      display: block;
+    }
+
+    
+    #profilePage .basicInfo .buttons button{
+      
+      position: relative;
+      left: -48px;
+      top:-5px;
+
+      display: inline-block;
+      border: none;
+      background: #3F99EE;
+      color: white;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+
+    #profilePage .basicInfo .buttons ul{
+      z-index: 3;
+      background: whitesmoke;
+      position: absolute;
+      width: 0 10px;
+      box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);}
+      #profilePage .basicInfo .buttons ul li{
+          position: relative;
+          padding: 5px 10px;  
+          cursor: pointer;
+      }
+      #profilePage .basicInfo .buttons li:hover{
+          background: lightgray;
+          transition: .05s;
+      }
+
+    #profilePage .basicInfo .interestHeading{
+      position: relative;
+      width: 70%;
+      left: 10px;
+      top: 12px;
+    }
+
+    #profilePage .basicInfo .interestHeading input{
+      position: relative;
+      left: -6px;
+      margin-bottom: 2px;
+    }
+
+    #profilePage .basicInfo div .addInterest {
+      position: relative;
+      top: -5px;
+      padding: 4px 15px;
+      display: inline-block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #291ca3;
+      border-radius: 5px;
+    }
+    #profilePage .basicInfo div .addInterest:hover {
+      display: inline;
+      background-color: #291ca3;
+      color: white;
+    }
+    
+    #profilePage .basicInfo .interestHeading .myList{
+      position: relative;
+      top: 10px;
+      left: -3px ;
+      display: inline-block;
+      white-space: normal;
+      overflow: hidden;
+      text-overflow: ellipsis; 
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li{
+      display: inline;
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li button{
+      padding: 4px 15px;
+      display: inline-block;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+      border-radius: 12px;
+      margin: 5px;
+    }
+
+    #profilePage .basicInfo .interestHeading .myList li button:hover {
+      display: inline;
+      background-color: #990000;
+      color: white;
+    }
+
+
+
+   
+
+
+
+
+  #profilePage .editButton {
+      padding: 9px 20px;
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #990000;
+      margin: 10px;
+    }
+
+  #profilePage .editButton:hover {
+      display: inline;
+      background-color: #990000;
+      color: white;
+    }
+
+  #profilePage .delButton {
+      padding: 9px 20px;
+      display: inline;
+      background-color: white; 
+      color: black; 
+      border: 2px solid #19a70c;
+      margin: 10px;
+    }
+
+  #profilePage .delButton:hover {
+      display: inline;
+      background-color: #19a70c;
+      color: white;
+    }

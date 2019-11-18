@@ -21,6 +21,7 @@ export default class SignUpForm extends Component{
             fname: document.getElementById('signup_fname').value,
             lname: document.getElementById('signup_lname').value,
             email: document.getElementById('signup_email').value,
+            userName: document.getElementById("username").value,
             password: document.getElementById('signup_pwd').value,
             signup: true,
             QRCode: this.state.QRCode
@@ -116,7 +117,8 @@ export default class SignUpForm extends Component{
                     <div className="label"><label>Email:</label></div>
                     <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
                     <div className="label"><label>Username:</label></div>
-                    <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
+                    <input type="text" id="username" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
+                    
                     {this.getForm()}
                     <div className="label"><label>Password:</label></div>
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>

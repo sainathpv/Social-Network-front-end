@@ -12,9 +12,6 @@ import axios from 'axios';
 class Profile extends Component {
 
   constructor(props) {
-    
-
-
     super(props);
     this.state = {
       major: '',
@@ -299,39 +296,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-
-/*
-          <br />
-          <p>Profile: </p>
-          <br />
-          <h3>First Name</h3>
-          <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
-
-          <h3>Last Name</h3>
-          <input type="text" id="lastName" onChange={this.handleChange} placeholder="Smith" required></input>
-
-          <h3>Student Type</h3>
-          <select id="studentType" onChange={this.handleChange}>
-            <option value="undergraduate">Undergraduate</option>
-            <option value="graduate">Graduate</option>
-            <option value="phd">Ph.D.</option>
-            <option value="others">Others</option>
-          </select>
-
-          <h3>Year</h3>
-          <select id="year" onChange={this.handleChange}>
-            <option value="freshman">Freshman</option>
-            <option value="sophomore">Sophomore</option>
-            <option value="junior">Junior</option>
-            <option value="senior">Senior</option>
-          </select>
-
-
-          <h3>Your Interests</h3>
-          <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
-          <button onClick={this.addInterest}>Add Interest</button>
-
-
-          <h3>Reset Password</h3>
-          <h3>Re-enter Password</h3>
-          <h3>Change Backgroup</h3>*/

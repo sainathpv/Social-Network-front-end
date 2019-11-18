@@ -14,7 +14,9 @@ button{
 .w-100{
   width: 100%;
 }
-
+a{
+  text-decoration: none;
+}
 .dropdown{
   text-align: left;
   position: relative;}
@@ -177,7 +179,14 @@ hr{
   padding: 5px 10px;
   font-size: 16px;
 }
-
+.btn-warn{
+  background: rgb(216, 15, 15);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 5px 10px;
+  font-size: 16px;
+}
 .darkmode ::-webkit-input-placeholder { /* Edge */
   color: gray;
 }

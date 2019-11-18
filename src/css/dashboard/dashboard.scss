@@ -123,6 +123,44 @@
             }
         }
     }
+    #dash_eventPanel{
+
+    }
+    #dash_chatPanel{
+        
+    }
+
+    #dash_postPanel, #dash_chatPanel, #dash_eventPanel{
+        nav .p-fixed {
+            z-index: 1;
+            text-align: left;
+            height: 65px;
+            padding: 0 5%;
+            ul li {
+               margin: 0 20px;
+               line-height: 65px;
+               font-size: 17px;
+    
+            }
+            .active{
+                color: #840606;
+                position: relative;
+                &::before{
+                    content: '';
+                    position: absolute;
+                    width: 100%;
+                    transform: scaleX(1);
+                    height: 2px;
+                    bottom: 20px;
+                    left: 0;
+                    background: #840606;
+                    transform-origin: bottom right;
+                    transition:  transform 0.25 ease-out;
+                }
+            }
+        }
+    }
+
     #dash_postPanel{
         .postForm{
             top: 80px;
@@ -157,34 +195,6 @@
             }
             form{
                 padding: 10px 40px;
-            }
-        }
-        nav .p-fixed {
-            z-index: 1;
-            text-align: left;
-            height: 65px;
-            padding: 0 5%;
-            ul li {
-               margin: 0 20px;
-               line-height: 65px;
-               font-size: 17px;
-    
-            }
-            .active{
-                color: #840606;
-                position: relative;
-                &::before{
-                    content: '';
-                    position: absolute;
-                    width: 100%;
-                    transform: scaleX(1);
-                    height: 2px;
-                    bottom: 20px;
-                    left: 0;
-                    background: #840606;
-                    transform-origin: bottom right;
-                    transition:  transform 0.25 ease-out;
-                }
             }
         }
         .posts{

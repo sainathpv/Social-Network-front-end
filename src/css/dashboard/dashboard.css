@@ -87,6 +87,29 @@
         #dashboard #dash_profilePanel .p-fixed .activeFriendRequests li button {
           margin: 12.5px 0;
           margin-left: 30px; }
+  #dashboard #dash_postPanel nav .p-fixed, #dashboard #dash_chatPanel nav .p-fixed, #dashboard #dash_eventPanel nav .p-fixed {
+    z-index: 1;
+    text-align: left;
+    height: 65px;
+    padding: 0 5%; }
+    #dashboard #dash_postPanel nav .p-fixed ul li, #dashboard #dash_chatPanel nav .p-fixed ul li, #dashboard #dash_eventPanel nav .p-fixed ul li {
+      margin: 0 20px;
+      line-height: 65px;
+      font-size: 17px; }
+    #dashboard #dash_postPanel nav .p-fixed .active, #dashboard #dash_chatPanel nav .p-fixed .active, #dashboard #dash_eventPanel nav .p-fixed .active {
+      color: #840606;
+      position: relative; }
+      #dashboard #dash_postPanel nav .p-fixed .active::before, #dashboard #dash_chatPanel nav .p-fixed .active::before, #dashboard #dash_eventPanel nav .p-fixed .active::before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        transform: scaleX(1);
+        height: 2px;
+        bottom: 20px;
+        left: 0;
+        background: #840606;
+        transform-origin: bottom right;
+        transition: transform 0.25 ease-out; }
   #dashboard #dash_postPanel .postForm {
     top: 80px;
     left: calc(50% - 15vw);
@@ -112,29 +135,6 @@
       margin: 10px 40px; }
     #dashboard #dash_postPanel .postForm form {
       padding: 10px 40px; }
-  #dashboard #dash_postPanel nav .p-fixed {
-    z-index: 1;
-    text-align: left;
-    height: 65px;
-    padding: 0 5%; }
-    #dashboard #dash_postPanel nav .p-fixed ul li {
-      margin: 0 20px;
-      line-height: 65px;
-      font-size: 17px; }
-    #dashboard #dash_postPanel nav .p-fixed .active {
-      color: #840606;
-      position: relative; }
-      #dashboard #dash_postPanel nav .p-fixed .active::before {
-        content: '';
-        position: absolute;
-        width: 100%;
-        transform: scaleX(1);
-        height: 2px;
-        bottom: 20px;
-        left: 0;
-        background: #840606;
-        transform-origin: bottom right;
-        transition: transform 0.25 ease-out; }
   #dashboard #dash_postPanel .posts {
     padding: 65px 0; }
   #dashboard #dash_networkPanel {

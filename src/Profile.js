@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import profileIMG from './images/college.jpg';
 import './css/profile.css';
 import logo from './images/HC.svg';
-import { Redirect } from 'react-router-dom';
 import DropDownMenu from './Utility/DropDown';
 import Cookie from './Utility/Cookie';
 
@@ -123,12 +121,13 @@ class Profile extends Component {
           { name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false },
           { name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false }
         ]
-        if (result.settings.darkMode) {
-          document.body.className = "darkMode";
+
+        if (result.settings.darkmode) {
+          document.body.className = "darkmode";
         } else {
           document.body.className = "";
         }
-        console.log(result)
+
         this.setState({
           name: result.name,
           profileIMG: result.profileImageUrl,
@@ -152,7 +151,7 @@ class Profile extends Component {
         if(result.bio != ""){
           document.getElementById("profileBio").placeholder = result.bio;
         } else {
-          document.getElementById("profileBio").placeholder = "This dud have nothing on his/her discription";
+          document.getElementById("profileBio").placeholder = "A little section devoted to everything about you.";
         }
 
       });
@@ -172,7 +171,7 @@ class Profile extends Component {
   //TO DO, when jump to another page, the another page seems to losing all its css.
   render() {
     return (
-        <div id="profilePage">
+        <div id="profilePage" className="bg-primary text-primary">
 
           <div className="heading">
             <div>
@@ -180,7 +179,7 @@ class Profile extends Component {
               <h1>Hoosier Connection</h1>
             </div>
             <div>
-              <button className="return" onClick={this.swapToHome}> Back To Dashboard </button>
+              <a className="text-primary" href="../"> <i class="fas fa-arrow-left"></i> Back To Dashboard</a>
             </div>
           </div>
 
@@ -190,7 +189,7 @@ class Profile extends Component {
           <div className="imgAndBio">
             <div className="profileimg">
               <img id="profileIMG" src={"http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt='' />
-              <button className="changeImg" onClick={this.changeImg}> Choose File </button>
+              <input type="file"></input>
 
             </div>
 
@@ -201,8 +200,7 @@ class Profile extends Component {
           </div>
 
           <hr />
-
-          <div className="basicInfo">
+          <div className="basicInfo d-flex space-between p-10">
             <div>
               <h3>First Name: </h3>
               <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
@@ -223,45 +221,37 @@ class Profile extends Component {
 
             <div className="interestHeading">
               <h3>Your Interests: </h3>
-              <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
-              <button onClick={this.addInterest} className="addInterest">Add Interest</button>
+              <input type="text" id="interest" onChange={this.handleChange} placeholder="Ex. Fortnite" required></input>
+              <button onClick={this.addInterest} className="btn-primary">Add Interest</button>
               <br />
-              <ul id="interestsList" className="myList">
-                <li><button onClick={this.delInterest}>Computer Science</button></li>
-                <li><button onClick={this.delInterest}>AI</button></li>
-                <li><button onClick={this.delInterest}>Play Fortnite</button></li>
-                <li><button onClick={this.delInterest}>ok Boomer</button></li>
-                <li><button onClick={this.delInterest}>BringBackNationalDex</button></li>
-                <li><button onClick={this.delInterest}>hos mad</button></li>
+              <ul id="interestsList" className="myList border-lg border-round-small">
+              {
+                this.state.interests.map((interest, i) => {
+                  return(<li className="interest" key={i} >{interest}</li>)
+                })
+              }
               </ul>
             </div>
           </div>
 
           <hr />
 
-          <div className="criticalInfo">
+          <div className="criticalInfo p-10">
             <h3>Reset Email</h3>
-            <input type="text" id="reEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
-
+            <input className="text-input" type="text" id="reEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
             <h3>Current Password</h3>
-            <input type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
-
-            <div>
-              <h3>Reset Password</h3>
-              <input type="text" id="password" onChange={this.handleChange} placeholder="123456" required></input>
-
-              <h3>Re-enter Password</h3>
-              <input type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
-            </div>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
+            <h3>Reset Password</h3>
+            <input className="text-input" type="text" id="password" onChange={this.handleChange} placeholder="123456" required></input>
+            <h3>Re-enter Password</h3>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
           </div>
 
           <hr />
-
-          <button type="submit" className="editButton">Edit Account</button>
-          <button onClick={this.delAccount} className="delButton">Delete Account</button>
-
-
-
+          <div className="p-10">
+            <button type="submit" className="btn-primary">Update Account</button>
+            <button onClick={this.delAccount} className="btn-warn">Delete Account</button>
+          </div>
         </div>
       )
   }

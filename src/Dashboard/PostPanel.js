@@ -2,13 +2,16 @@ import React from 'react';
 import Post from './Post';
 import PostForm from './PostForm';
 import ShareForm from './ShareForm';
+import EventPanel from './EventPanel';
+import ChatPanel from './ChatPanel';
 import Cookie from './../Utility/Cookie';
 class PostPanel extends React.Component{
     constructor(props){
         super(props);
-        this.state = {posts: [], tags: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden, showShareForm: false};
+        this.state = {panel: "post", posts: [], tags: [], showPostForm: props.showPostForm, isPostFormHidden: props.isPostFormHidden, showShareForm: false};
         this.getPosts = this.getPosts.bind(this);
         this.showShareForm = this.showShareForm.bind(this);
+        this.changePanel = this.changePanel.bind(this);
         this.getProfile();
         this.postID = "";
     }
@@ -68,36 +71,45 @@ class PostPanel extends React.Component{
         
     }
 
-    render(){
+    changePanel(event){
+        this.setState({panel: event.target.textContent.toLowerCase()});
+    }
 
-        return (
-        <div id="dash_postPanel">
-            <nav>
-                <div className="p-fixed bg-primary border-lg w-100">
-                    <ul className="d-flex">
-                        <li className="active">Home</li>
-                        <li>Chats</li>
-                        <li>Events</li>
-                    </ul>
-                </div>
-            </nav>
-            {this.renderPostForm()}
-            {this.renderShareForm()}
-            <ul className="posts" >
-                {
-                    this.state.posts.map((post, i) => 
-                    <Post id={post._id} title={post.title} key={i}
-                          tags={post.tags} dislikes={post.numDislikes}
-                          likes={post.numLikes} comments={post.comments}
-                          type={post.type} content={post.content}
-                          user={post.user} name={post.name}
-                          showShareForm={this.showShareForm}
-                          shareable={true}
-                    />)
-                }
-            </ul>
-        </div>
-        );
+    render(){
+        if(this.state.panel === "post"){
+            return (
+            <div id="dash_postPanel">
+                <nav>
+                    <div className="p-fixed bg-primary border-lg w-100">
+                        <ul className="d-flex">
+                            <li className="cursor-pointer active">Home</li>
+                            <li className="cursor-pointer" onClick={this.changePanel}>Chats</li>
+                            <li className="cursor-pointer" onClick={this.changePanel}>Events</li>
+                        </ul>
+                    </div>
+                </nav>
+                {this.renderPostForm()}
+                {this.renderShareForm()}
+                <ul className="posts" >
+                    {
+                        this.state.posts.map((post, i) => 
+                        <Post id={post._id} title={post.title} key={i}
+                            tags={post.tags} dislikes={post.numDislikes}
+                            likes={post.numLikes} comments={post.comments}
+                            type={post.type} content={post.content}
+                            user={post.user} name={post.name}
+                            showShareForm={this.showShareForm}
+                            shareable={true}
+                        />)
+                    }
+                </ul>
+            </div>
+            );
+        }else if(this.state.panel === "chats"){
+            return (<ChatPanel />);
+        }else{
+            return (<EventPanel />);
+        }
     }
 }
 export default PostPanel;

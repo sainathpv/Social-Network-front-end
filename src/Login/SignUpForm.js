@@ -9,7 +9,7 @@ export default class SignUpForm extends Component{
     constructor(props){
         super(props);
         this.img = "";
-        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false, accountType: "Student", userName: ""};
+        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false, accountType: "student", company: "", userName: ""};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
@@ -17,35 +17,64 @@ export default class SignUpForm extends Component{
     }
 
     handleChange(event){
-        this.setState({
-            fname: document.getElementById('signup_fname').value,
-            lname: document.getElementById('signup_lname').value,
-            email: document.getElementById('signup_email').value,
-            userName: document.getElementById("username").value,
-            password: document.getElementById('signup_pwd').value,
-            signup: true,
-            QRCode: this.state.QRCode
-        });
+        if(this.state.accountType === "student"){
+            this.setState({
+                userName: document.getElementById('signup_username').value,
+                fname: document.getElementById('signup_fname').value,
+                lname: document.getElementById('signup_lname').value,
+                email: document.getElementById('signup_email').value,
+                password: document.getElementById('signup_pwd').value,
+                signup: true,
+                QRCode: this.state.QRCode
+            });
+        }else{
+            this.setState({
+                userName: document.getElementById('signup_username').value,
+                company: document.getElementById('signup_company').value,
+                email: document.getElementById('signup_email').value,
+                password: document.getElementById('signup_pwd').value,
+                signup: true,
+                QRCode: this.state.QRCode
+            });
+        }
     }
 
     handleSubmit(event){
         event.preventDefault();
         if(document.getElementById('signup_pwd').value ===
-           document.getElementById('signup_pwd2').value){
-            var options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userName: this.state.userName,
-                    firstName: this.state.fname,
-                    lastName: this.state.lname,
-                    email: this.state.email,
-                    password: this.state.password,
-                    accountType: this.state.accountType
-                })
+            document.getElementById('signup_pwd2').value){
+            var options;
+            if(this.state.accountType == "Student"){
+                options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: this.state.email,
+                        userName: this.state.userName,
+                        firstName: this.state.fname,
+                        lastName: this.state.lname,
+                        password: this.state.password,
+                        accountType: this.state.accountType
+                    })
+                }
+            }else{
+                options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        email: this.state.email,
+                        userName: this.state.userName,
+                        company: this.state.company,
+                        password: this.state.password,
+                        accountType: this.state.accountType
+                    })
+                }
             }
+
 
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/signup", options).then( result =>{
             if(result.status === 200){
@@ -81,10 +110,12 @@ export default class SignUpForm extends Component{
 
     changeType(type){
         event.preventDefault();
+        console.log(type);
         this.setState({accountType: type});
     }
     getForm(){
-        if(this.state.accountType === "Student"){
+        console.log(this.state.accountType);
+        if(this.state.accountType === "student"){
             return (
                 <div>
                     <div className="label"><label>First Name:</label></div>
@@ -117,8 +148,7 @@ export default class SignUpForm extends Component{
                     <div className="label"><label>Email:</label></div>
                     <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
                     <div className="label"><label>Username:</label></div>
-                    <input type="text" id="username" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
-                    
+                    <input type="text" id="signup_username" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
                     {this.getForm()}
                     <div className="label"><label>Password:</label></div>
                     <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>

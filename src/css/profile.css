@@ -57,34 +57,18 @@
     border-radius: 4px; 
   }
 
-  #profilePage select {
-    background: white;
-    font-size: 20px;
-    font-weight: bold;
-    height: 35px;
-    width: 70%;
-    padding-left: 6px;
-    margin: 10px;
-    border: .5px solid lightgray;
-    border-radius: 4px; 
-    padding: 2px 10px;
-    -webkit-appearance: none;
- }
-
+  /*css for heading, include title, logol and back to dashboard botton*/
   #profilePage .heading {
     position: relative;
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /*align-content: flex-start;*/
   }
     
     #profilePage .heading div img{
       display: inline;
     }
-
-    
 
     #profilePage .heading div h1{
       font-weight: bold;
@@ -105,6 +89,7 @@
       background-color: #990000;
       color: white;
     }
+  /*===========================================================*/
 
     
   #profilePage .imgAndBio {
@@ -156,7 +141,6 @@
       display: block;
     }
 
-
     #profilePage .imgAndBio .profilebio textarea{
       padding: 12px 20px;
       box-sizing: border-box;
@@ -188,8 +172,7 @@
 
   #profilePage .basicInfo div input{
     position: relative;
-    top: -6px;
-    width: 50%;
+    width: 100%;
     display: inline-block;
     position: relative;
     margin: 8px;
@@ -200,26 +183,10 @@
       display: inline-block;
     }
 
-    #profilePage .basicInfo .labels h3{
-      margin-top: 20px;
-      display: block;
-    }
-
-    #profilePage .basicInfo .buttons{
-      width: 400px;
-      position: relative;
-      top: 13px;
-      left: 15px;
-      display: block;
-    }
-
     
-    #profilePage .basicInfo .buttons button{
-      
+    #profilePage .basicInfo .dropDownMenu button{
       position: relative;
-      left: -48px;
-      top:-5px;
-
+      left: -50px;
       display: inline-block;
       border: none;
       background: #3F99EE;
@@ -230,38 +197,39 @@
       margin-bottom: 10px;
     }
 
-    #profilePage .basicInfo .buttons ul{
+    #profilePage .basicInfo .dropDownMenu ul{
+      position: relative;
+      left: -48px;
       z-index: 3;
       background: whitesmoke;
       position: absolute;
       width: 0 10px;
       box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);}
-      #profilePage .basicInfo .buttons ul li{
+      #profilePage .basicInfo .dropDownMenu ul li{
           position: relative;
           padding: 5px 10px;  
           cursor: pointer;
       }
-      #profilePage .basicInfo .buttons li:hover{
+      #profilePage .basicInfo .dropDownMenu li:hover{
           background: lightgray;
           transition: .05s;
       }
 
+
+
     #profilePage .basicInfo .interestHeading{
       position: relative;
       width: 70%;
-      left: 10px;
-      top: 12px;
     }
 
     #profilePage .basicInfo .interestHeading input{
       position: relative;
+      width: 72%;
       left: -6px;
       margin-bottom: 2px;
     }
 
     #profilePage .basicInfo div .addInterest {
-      position: relative;
-      top: -5px;
       padding: 4px 15px;
       display: inline-block;
       background-color: white; 
@@ -278,11 +246,16 @@
     #profilePage .basicInfo .interestHeading .myList{
       position: relative;
       top: 10px;
-      left: -3px ;
       display: inline-block;
       white-space: normal;
       overflow: hidden;
       text-overflow: ellipsis; 
+      box-sizing: content-box;  
+      width: 99%;
+      height: 160px;
+      padding: 1px;
+      border: 2px solid black;
+      border-radius: 12px;
     }
 
     #profilePage .basicInfo .interestHeading .myList li{

@@ -63,6 +63,7 @@ class Post extends React.Component{
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
+                
                 var options = {
                     method: 'POST',
                     headers: {

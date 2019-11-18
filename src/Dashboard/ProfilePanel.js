@@ -60,6 +60,8 @@ class ProfilePanel extends React.Component{
                 }else{
                     document.body.className = "";                    
                 }
+                console.log("aha we have a test here")
+                console.log(result)
                 this.setState({
                     name: result.name,
                     profileIMG: result.profileImageUrl,

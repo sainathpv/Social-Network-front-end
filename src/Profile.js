@@ -6,65 +6,36 @@ import { Redirect } from 'react-router-dom';
 import DropDownMenu from './Utility/DropDown';
 import Cookie from './Utility/Cookie';
 
-import axios from 'axios';
 //TODO: check if there is a token redirect to signin if invalid
 
 class Profile extends Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      major: '',
-      infomation: '',
-      tags: '',
-      profileIMG: '',
-      pageStatus: 'profile'
-    };
-    this.toSignIn = this.toSignIn.bind(this);
-    this.toHome = this.toHome.bind(this);
-    this.toChat = this.toChat.bind(this);
-    this.states = {
-      items: props.items,
-      showMenu: false,
-      label: this.props.label,
-      handle: props.handle
-    };
+        name: "",
+        profileIMG: "",
+        major: "",
+        studentType: "",
+        year: "",
+        bio: "",
+        fname: "",
+        lname: "",
+        interests: [],
+        posts: [],
+        events: [],
+        friends: [],
+        chats: []
+    }
     //TODO: check if there is a token redirect to login if invalid
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.checkProfile();
+    this.getProfileData = this.getProfileData.bind(this);
+    this.getProfileData();
   }
-  checkProfile = () => {
-    axios.get('/profile').then(res => {
-      console.log(res.data);
-    });
-  };
-  getMenu(event) {
-    if (this.states.showMenu) {
-      return (
-        <ul>
-          {this.states.items.map((item, i) => (
-            <li
-              onClick={() => {
-                this.states.handle(item.toLowerCase());
-                this.showMenu();
-              }}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      );
-    } else {
-      return '';
-    }
-  }
-
-  showMenu() {
-    event.preventDefault();
-    this.setStates({ showMenu: !this.states.showMenu });
-  }
+  
 
   handleChange(event) {
     this.setState({
@@ -75,7 +46,6 @@ class Profile extends Component {
       pageStatus: 'profile'
     });
   }
-  validateJWT(token) { }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -129,35 +99,66 @@ class Profile extends Component {
     //TODO: post request to Sai's route with contents of key
   }
 
-  //TO DO: Tried using the same method in SignUpForm, the page cannot change, need to be fixed
-  toSignIn() {
-    this.setState({
-      fname: this.state.fname,
-      lname: this.state.lname,
-      email: this.state.email,
-      password: this.state.password,
-      pageStatus: 'signin'
-    });
-  }
+  getProfileData() {
+    var options = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+      }
+    }
+    try {
+      fetch("http://" + process.env.REACT_APP_API_HOST + "/profiles/profile", options).then(result => {
+        return result.json();
+      }).then(result => {
+        var friends = [
+          { name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
+          { name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true },
+          { name: "Tex Mex", profileImageURL: "/assets/images/profiles/person3.png", accepted: true },
+          { name: "Frank Ocean", profileImageURL: "/assets/images/profiles/person4.jpg", accepted: true },
+          { name: "Davis Lee", profileImageURL: "/assets/images/profiles/person5.jpg", accepted: true },
+          { name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
+          { name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true },
+          { name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
+          { name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false },
+          { name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false }
+        ]
+        if (result.settings.darkMode) {
+          document.body.className = "darkMode";
+        } else {
+          document.body.className = "";
+        }
+        console.log(result)
+        this.setState({
+          name: result.name,
+          profileIMG: result.profileImageUrl,
+          major: result.major,
+          studentType: result.studentType,
+          year: result.year,
+          settings: result.settings,
+          interests: result.interests,
+          posts: result.posts,
+          events: result.events,
+          friends: friends,
+          chats: result.chats,
+          bio: result.bio,
+          fname: result.fname,
+          lname: result.lname,
+        });
 
-  toHome() {
-    this.setState({
-      fname: this.state.fname,
-      lname: this.state.lname,
-      email: this.state.email,
-      password: this.state.password,
-      pageStatus: 'home'
-    });
-  }
+        document.getElementById("username").textContent = result.name;
+        document.getElementById("lastName").placeholder = result.lname;
+        document.getElementById("firstName").placeholder = result.fname;
+        if(result.bio != ""){
+          document.getElementById("profileBio").placeholder = result.bio;
+        } else {
+          document.getElementById("profileBio").placeholder = "This dud have nothing on his/her discription";
+        }
 
-  toChat() {
-    this.setState({
-      fname: this.state.fname,
-      lname: this.state.lname,
-      email: this.state.email,
-      password: this.state.password,
-      pageStatus: 'chat'
-    });
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   swapToHome() { }
@@ -170,35 +171,7 @@ class Profile extends Component {
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
   render() {
-    console.log("it works here 1")
-    var options = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-      },
-    };
-
-    fetch("http://" + process.env.REACT_APP_API_HOST + "/profiles/profile", options).then(result => {
-      if (result.status === 200) {
-        console.log(result)
-        return result.json();
-      } else {
-        result.json().then(nr => {
-          document.getElementById("warning").textContent = nr.message;
-        })
-        return null;
-      }
-    }).then(result => {
-      if (result === null) {
-      } else {
-      }
-    });
-    if (
-      this.state.pageStatus === 'profile' ||
-      this.state.pageStatus === 'home' ||
-      this.state.pageStatus === 'chat') {
-      return (
+    return (
         <div id="profilePage">
 
           <div className="heading">
@@ -216,7 +189,7 @@ class Profile extends Component {
 
           <div className="imgAndBio">
             <div className="profileimg">
-              <img id="profileIMG" src={profileIMG} alt='' />
+              <img id="profileIMG" src={"http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt='' />
               <button className="changeImg" onClick={this.changeImg}> Choose File </button>
 
             </div>
@@ -227,21 +200,23 @@ class Profile extends Component {
             </div>
           </div>
 
+          <hr />
 
           <div className="basicInfo">
-            <div className="labels">
+            <div>
               <h3>First Name: </h3>
-              <h3>Last Name: </h3>
-              <h3>Student Type:</h3>
-              <h3>Current Year:</h3>
-            </div>
-
-            <div className="buttons">
               <input type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
-              <br />
-              <input type="text" id="lastName" onChange={this.handleChange} placeholder="Smith" required></input>
-              <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label="Undergraduate" handle={this.changeStudentType} />
-              <DropDownMenu items={["freshman", "sophomore", "junior", "senior"]} label="freshman" handle={this.changeStudentType} />
+
+              <h3>Last Name: </h3>
+              <input type="text" id="firstName" onChange={this.handleChange} placeholder="Smith" required></input>
+              
+              
+              <div className="dropDownMenu">
+                <h3>Student Type:</h3>
+                <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label="Undergraduate" handle={this.changeStudentType} />
+                <h3>Current Year:</h3>
+                <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label="Freshman" handle={this.changeStudentType} />
+              </div>
             </div>
 
             <br />
@@ -288,10 +263,7 @@ class Profile extends Component {
 
 
         </div>
-      );
-    } else if (this.state.pageStatus === 'signin') {
-      return <Redirect to='./Login/SignInForm' />;
-    }
+      )
   }
 }
 

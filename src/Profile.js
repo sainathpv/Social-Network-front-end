@@ -26,7 +26,8 @@ class Profile extends Component {
         posts: [],
         events: [],
         friends: [],
-        chats: []
+        chats: [],
+        changed: false,
     }
     //TODO: check if there is a token redirect to login if invalid
 
@@ -39,36 +40,37 @@ class Profile extends Component {
 
   handleChange(event) {
     this.setState({
-      major: document.getElementById('profile_major').value,
-      infomation: document.getElementById('profile_info').value,
-      tags: document.getElementById('profile_interests').value,
-      profileIMG: document.getElementById('profile_image').value,
-      pageStatus: 'profile'
+      bio: document.getElementById('profileBio').value,
+      fname: document.getElementById('firstName').value,
+      lname: document.getElementById('lastName').value,
+      name: document.getElementById('userName').value,
+      major: document.getElementById('major').value,
+      changed: true,
     });
+    
   }
-
+  
   handleSubmit(event) {
     event.preventDefault();
-    if (
-      //TO DO: this should be checking if there are any state changed by user
-      true
-    ) {
+    if (this.state.changed) {
       var options = {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
         },
         body: JSON.stringify({
-          profileIMG: this.state.profileIMG,
-          basicInfo: this.state.infomation,
-          tags: this.state.tags,
-          major: this.state.major
+          bio: this.state.bio,
+          fname: this.state.fname,
+          lname: this.state.lname,
+          name: this.state.name,
+          major: this.state.major,
         })
       };
 
       fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
         .then(result => {
-          if (result.status === 200) {
+          if (result.status == 201) {
             return result.json();
           } else {
             console.log('failed');
@@ -76,21 +78,6 @@ class Profile extends Component {
           }
         })
         .then(result => {
-          /*if(result === null){
-
-            }else{
-                this.img = result.img;
-                localStorage.setItem("email", document.getElementById('signup_email').value);
-                localStorage.setItem("JWT", result.token);
-                this.setState({
-                    fname: document.getElementById('signup_fname').value,
-                    lname: document.getElementById('signup_lname').value,
-                    email: document.getElementById('signup_email').value,
-                    password: document.getElementById('signup_pwd').value,
-                    signup: true,
-                    QRCode: true
-                });
-            }*/
         });
     } else {
       //TODO notify the user of the bad match
@@ -149,10 +136,18 @@ class Profile extends Component {
         document.getElementById("username").textContent = result.name;
         document.getElementById("lastName").placeholder = result.lname;
         document.getElementById("firstName").placeholder = result.fname;
+        document.getElementById("userName").placeholder = result.name;
+      
         if(result.bio != ""){
           document.getElementById("profileBio").placeholder = result.bio;
         } else {
           document.getElementById("profileBio").placeholder = "This dud have nothing on his/her discription";
+        }
+
+        if(result.major != ""){
+          document.getElementById("major").placeholder = result.bio;
+        } else {
+          document.getElementById("major").placeholder = "Major Unknown";
         }
 
       });
@@ -161,12 +156,17 @@ class Profile extends Component {
     }
   }
 
-  swapToHome() { }
-  changeImg() { }
+  swapToHome() {
+    window.location.href = "http://localhost:3000/";
+   }
+  changeImg() {
+
+  }
   addInterest() { }
   delInterest() { }
   delAccount() { }
   changeStudentType() { }
+  changeStudentYear() { }
 
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
@@ -210,20 +210,29 @@ class Profile extends Component {
               <h3>Last Name: </h3>
               <input type="text" id="firstName" onChange={this.handleChange} placeholder="Smith" required></input>
               
+              <h3>Username: </h3>
+              <input type="text" id="userName" onChange={this.handleChange} placeholder="johnsmith" required></input>
+              
               
               <div className="dropDownMenu">
                 <h3>Student Type:</h3>
                 <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label="Undergraduate" handle={this.changeStudentType} />
                 <h3>Current Year:</h3>
-                <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label="Freshman" handle={this.changeStudentType} />
+                <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label="Freshman" handle={this.changeStudentYear} />
               </div>
             </div>
 
             <br />
 
             <div className="interestHeading">
+            <h3>Major: </h3>
+              <input type="text" id="major" onChange={this.handleChange} placeholder="Computer Science" required></input>
+              
+              <br/><br/>
               <h3>Your Interests: </h3>
               <input type="text" id="interest" onChange={this.handleChange} placeholder="play fortnite" required></input>
+              
+              
               <button onClick={this.addInterest} className="addInterest">Add Interest</button>
               <br />
               <ul id="interestsList" className="myList">
@@ -257,7 +266,7 @@ class Profile extends Component {
 
           <hr />
 
-          <button type="submit" className="editButton">Edit Account</button>
+          <button type="submit" onClick={this.handleSubmit} className="editButton">Edit Account</button>
           <button onClick={this.delAccount} className="delButton">Delete Account</button>
 
 

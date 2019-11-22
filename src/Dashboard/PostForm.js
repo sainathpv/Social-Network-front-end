@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DropDownMenu from './../Utility/DropDown';
-import axios from 'axios';
 import Cookie from './../Utility/Cookie';
 
 class PostForm extends Component {

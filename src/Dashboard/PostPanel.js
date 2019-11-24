@@ -22,7 +22,6 @@ class PostPanel extends React.Component{
     }
 
     renderShareForm(){
-        console.log(this.postID);
         if(this.state.showShareForm){
             return (
                 <ShareForm postID={this.postID} showShareForm={this.showShareForm}/>
@@ -36,7 +35,8 @@ class PostPanel extends React.Component{
         var options = {
             method: 'GET',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
             }
         };
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/getPosts?tags=" + JSON.stringify(tags), options).then( result => {
@@ -99,7 +99,7 @@ class PostPanel extends React.Component{
                             type={post.type} content={post.content}
                             user={post.user} name={post.name}
                             showShareForm={this.showShareForm}
-                            shareable={true}
+                            shareable={true} vote={post.vote}
                         />)
                     }
                 </ul>

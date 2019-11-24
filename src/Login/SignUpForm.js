@@ -1,15 +1,25 @@
 import React, {Component} from 'react';
 import './../css/login/login.css';
 import SignInForm from './SignInForm';
-import QRCode from './QRcode'
 import Cookie from './../Utility/Cookie';
 import logo from './../images/HC.svg';
-import DropDownMenu from '../Utility/DropDown';
+import QuestionForm from './QuestionForm';
+import {Helmet} from "react-helmet";
+
 export default class SignUpForm extends Component{
     constructor(props){
         super(props);
         this.img = "";
-        this.state = {fname: "", lname: "", email: "", password: "", signup: true, QRCode: false, accountType: "student", company: "", userName: ""};
+        this.state = {
+            name: "",
+            email: "",
+            password: "",
+            signup: true,
+            accountType: "student",
+            userName: "",
+            securityQuestions: false,
+            QRimg: ""
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
@@ -17,33 +27,22 @@ export default class SignUpForm extends Component{
     }
 
     handleChange(event){
-        if(this.state.accountType === "student"){
-            this.setState({
-                userName: document.getElementById('signup_username').value,
-                fname: document.getElementById('signup_fname').value,
-                lname: document.getElementById('signup_lname').value,
-                email: document.getElementById('signup_email').value,
-                password: document.getElementById('signup_pwd').value,
-                signup: true,
-                QRCode: this.state.QRCode
-            });
-        }else{
-            this.setState({
-                userName: document.getElementById('signup_username').value,
-                company: document.getElementById('signup_company').value,
-                email: document.getElementById('signup_email').value,
-                password: document.getElementById('signup_pwd').value,
-                signup: true,
-                QRCode: this.state.QRCode
-            });
-        }
+        this.setState({
+            userName: document.getElementById('signup_username').value,
+            name: document.getElementById('signup_name').value,
+            email: document.getElementById('signup_email').value,
+            password: document.getElementById('signup_pwd1').value,
+            signup: true,
+            securityQuestions: false
+        });
     }
 
     handleSubmit(event){
         event.preventDefault();
-        if(document.getElementById('signup_pwd').value ===
-            document.getElementById('signup_pwd2').value){
+        if(document.getElementById('signup_pwd1').value ===
+        document.getElementById('signup_pwd2').value){
             var options;
+            console.log(this.state);
             if(this.state.accountType === "student"){
                 options = {
                     method: 'POST',
@@ -58,7 +57,7 @@ export default class SignUpForm extends Component{
                         password: this.state.password,
                         accountType: this.state.accountType
                     })
-                }
+                };
             }else{
                 options = {
                     method: 'POST',
@@ -72,95 +71,85 @@ export default class SignUpForm extends Component{
                         password: this.state.password,
                         accountType: this.state.accountType
                     })
-                }
+                };
             }
-
-
+    
+    
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/signup", options).then( result =>{
-            if(result.status === 200){
-                return result.json();
-            }else{
-                console.log('failed');
-                result.json().then(nr =>{
-                    document.getElementById("warning").textContent = nr.message;
-                })
-                return null;
-            }
-        }).then( result => {
-            if(result === null){
-
-            }else{
-                this.img = result.data_url;
-                var date = new Date();
-                console.log(result.token);
-                Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
-                this.setState({
-                    QRCode: true
-                });
-            }
-        });
+                if(result.status === 200){
+                    return result.json();
+                }else{
+                    result.json().then(nr =>{
+                        document.getElementById("signup_warning").textContent = nr.message;
+                    });
+                    return null;
+                }
+            }).then( result => {
+                if(result !== null){
+                    var date = new Date();
+                    console.log(result.token);
+                    Cookie.setCookie("HC_JWT", result.token,  new Date(date.getTime() + (60*60*1000))); 
+                    this.setState({QRimg: result.data_url, signup: false, securityQuestions: true});
+                }
+            });
         }else{
-            document.getElementById("warning").textContent = "Your Re-Enter Password is not the same";
+            document.getElementById("signup_warning").textContent = "Your Re-Enter Password is not the same";
         }
     }
-    
-    swapForm(){
+
+    swapForm(event){
+        event.preventDefault();
         this.setState({signup: false});
     }
 
-    changeType(type){
-        event.preventDefault();
-        console.log(type);
-        this.setState({accountType: type});
+    changeType(event){
+        this.setState({accountType: event.target.value});
     }
-    getForm(){
-        console.log(this.state.accountType);
-        if(this.state.accountType === "student"){
-            return (
-                <div>
-                    <div className="label"><label>First Name:</label></div>
-                    <input type="text" id="signup_fname" onChange={this.handleChange} placeholder="Ex. Jon" required></input><br/>
-                    <div className="label"><label>Last Name:</label></div>
-                    <input type="text" id="signup_lname" onChange={this.handleChange} placeholder="Ex. Smith" required></input><br/>
-                </div>
-            );
-        }else{
-            return (
-                <div>
-                    <div className="label"><label>Company:</label></div>
-                    <input type="text" id="signup_company" onChange={this.handleChange} placeholder="Ex. Kroger" required></input><br/>
-                </div>
-            );
-        }
-         
 
-    
-
-    }
     render() {
-        if(this.state.signup && !this.state.QRCode){
+        if(this.state.signup){
             return(
-                <form id="SignUpForm" className="formBox" onSubmit={this.handleSubmit}>
-                    <img src={logo} alt="" />
-                    <h2>Sign Up</h2>
-                    <div className="label"><label>Account Type:</label></div>
-                    <DropDownMenu items={["Student", "Company"]} label="Student" handle={this.changeType}/><br />
-                    <div className="label"><label>Email:</label></div>
-                    <input type="text" id="signup_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
-                    <div className="label"><label>Username:</label></div>
-                    <input type="text" id="signup_username" onChange={this.handleChange} placeholder="Ex. username5000" required></input><br/>
-                    {this.getForm()}
-                    <div className="label"><label>Password:</label></div>
-                    <input type="password" id="signup_pwd" onChange={this.handleChange}  required></input><br/>
-                    <div className="label"><label>Re-Enter Password:</label></div>
-                    <input type="password" id="signup_pwd2" onChange={this.handleChange} required></input><br/>
-                    <p className="warning_msg" id="warning"></p>
-                    <br/>
-                    <span><button  type="submit">Sign Up</button><p onClick={this.swapForm}>Login</p></span>
+                <form id="SignUpForm" onSubmit={this.handleSubmit}>
+                    <Helmet>
+                        <title>Hoosier Connection - Sign Up</title>
+                    </Helmet>
+                    <img src={logo} alt=""/> 
+                    <h2>Create an account</h2>
+                    <p id="signup_warning"></p>
+                    <div className="input m-auto  text-left">
+                        <label>USER NAME</label>
+                        <input id="signup_username" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="text" required></input>
+                    </div>
+                    <div className="input m-auto  text-left">
+                        <label>EMAIL</label>
+                        <input id="signup_email" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="email" required></input>
+                    </div>
+                    <div className="input m-auto  text-left">
+                        <label>PASSWORD</label>
+                        <input id="signup_pwd1" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="password" required></input>
+                    </div>
+                    <div className="input m-auto  text-left">
+                        <label>RE-ENTER PASSWORD</label>
+                        <input id="signup_pwd2" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="password" required></input>
+                    </div>
+                    <br />
+                    <label>Account Type</label>
+                    <div className="radio_btn"><input name="accountType" onChange={this.changeType}  type="radio" value="student" checked={this.state.accountType === "student"}/> Student </div>
+                    <div className="radio_btn"><input name="accountType" onChange={this.changeType} type="radio" value="company" checked={this.state.accountType === "company"}/> Company </div> <br/>
+                    <div className="input m-auto  text-left">
+                        <label>{this.state.accountType === "student" ? "FULL NAME" : "COMPANY" }</label>
+                        <input  id="signup_name" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="text" required></input>
+                    </div>
+                    <div className="submitBox d-flex space-between m-auto">
+                        <button className="d-inline"  type="submit">Sign Up</button>
+                        <p className="d-inline" onClick={this.swapForm}>Have an account?</p>
+                    </div>
                 </form>
             );
-        }else if(this.state.QRCode){
-            return( <QRCode code={this.img} email={this.state.email} />);
+        }else if(this.state.securityQuestions){
+            return (
+                <QuestionForm QRimg={this.state.QRimg} />
+            );
         }else{
             return( <SignInForm />);
         }

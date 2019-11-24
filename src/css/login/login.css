@@ -1,173 +1,127 @@
-#SignInForm {
-  text-align: center; 
-}
-#SignInForm .label {
-  text-align: left;
-  padding-left: 60px; }
-
-#SignInForm input {
-  height: 35px;
-  width: 250px;
-  padding-left: 6px;
-  margin: 10px;
-  border: .5px solid lightgray;
-  border-radius: 4px; 
-}
-.dropdown{
-  margin-left: 54px;
-}
-  
-#SignInForm .google-cap{
-  padding-left: 35px;
-  margin: 10px;
-}
-
-#SignInForm .warning_msg{
-  color: red;
-}
-
-#SignInForm .captcha{
-  height: 35px;
-  width: 80px;
-  margin: 10px;
-  background-color: white;
-  color: black;
-}
-
-#SignInForm .ctc_input{
-  height: 35px;
-  width: 140px;
-  margin: 10px;
-}
-
-#SignInForm span .button, #SignInForm span p {
-  display: inline-block;
-  cursor: pointer; }
-#SignInForm span button {
-  left: 0;
-  width: 70px;
-  padding: 5px 10px;
-  margin: 10px;
-  background: #6e0101;
-  color: white;
-  border: none;
-  border-radius: 10px; }
-#SignInForm a, #SignInForm:visited{
-  text-decoration: none;
-  color: gray;
-}
 
 #SignUpForm {
-  text-align: center; }
-#SignUpForm .label {
-  text-align: left;
-  padding-left: 60px; }
-#SignUpForm input {
-  height: 35px;
-  width: 250px;
-  padding-left: 6px;
-  margin: 10px;
-  border: .5px solid lightgray;
-  border-radius: 4px; }
-
-#SignUpForm .warning_msg{
-  color: red;
+    text-align: center; 
+}
+#SignUpForm h2, #signup_SecQuestions h2,
+#loginQRCode h2, #SignInForm h2,
+#SendResetEmail h2, #SendResetQuestion h2,
+#resetPassword h2, #login_2fForm h2{
+    color: #000;
+    text-align: center;
+    font-size: 40px;
+}
+#SignUpForm .input, #signup_SecQuestions .input,
+#loginQRCode .input, #SignInForm .input,
+#SendResetEmail .input, #SendResetQuestion .input,
+#resetPassword .input, #login_2fForm .input{
+    max-width: 350px;
+    margin-top: 10px;
+    position: relative;
+}
+#SignUpForm .input label, #signup_SecQuestions .input label, 
+#loginQRCode .input label, #SignInForm .input label,
+#SendResetEmail .input label, #SendResetQuestion .input label,
+#resetPassword .input label, #login_2fForm .input label{
+    color: grey;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+}
+#SignUpForm .input input, #signup_SecQuestions .input input,
+#loginQRCode .input input, #SignInForm .input input,
+#SendResetEmail .input input, #SendResetQuestion .input input,
+#resetPassword .input input, #login_2fForm .input input {
+    font-size: 23px;
+    padding: 20px 0 5px 10px;
+    width: 100%;
+    height: 60px;
 }
 
-#SignUpForm span .button, #SignUpForm span p {
-  display: inline-block;
-  cursor: pointer; }
-#SignUpForm span button {
-  left: 0;
-  padding: 10px;
-  margin: 5px;
-  background: #6e0101;
-  color: white;
-  border: none;
-  border-radius: 10px; }
-
-
-
-#login_2fForm {
-  text-align: center; 
+#SignUpForm .radio_btn{
+    font-size: 20px;
+    display: inline;
+    margin: 5px;
 }
 
-.formBox_login_2fForm {
-  display: block;
-  text-align: center;
-  transform: translate(0%, 30vh);
-  border: .5px lightgray solid;
-  border-radius: 4px;
-  background-color: #fff;
-  width: 400px;
-  padding: 10px; }
-
-.formBox_login_2fForm img {
-  display: inline-block;
-  width: 50px; }
-
-#login_2fForm .label {
-  text-align: left;
-  padding-left: 60px; }
-#login_2fForm input {
-  height: 35px;
-  width: 250px;
-  padding-left: 6px;
-  margin: 10px;
-  border: .5px solid lightgray;
-  border-radius: 4px; }
-#login_2fForm button, #login_2fForm span p {
-  display: inline-block;
-  cursor: pointer; }
-
-#login_2fForm .button {
-  width: 60px;
-  height: 30px;
-  margin-left: 50%;
-  background: #6e0101;
-  color: white;
-  border: none;
-  border-radius: 10px; }
-
-
-  
-#loginQRCode {
-  text-align: center; 
+#SignUpForm .radio_btn input{
+    width: 15px;
+    height: 15px;
 }
 
-.formBox_loginQRCode {
-  display: block;
-  text-align: center;
-  transform: translate(0%, 16vh);
-  border: .5px lightgray solid;
-  border-radius: 4px;
-  background-color: #fff;
-  width: 400px;
-  padding: 10px; }
+#SignUpForm .submitBox, #SignInForm .submitBox,
+#SendResetEmail .submitBox, #SendResetQuestion .submitBox,
+#resetPassword .submitBox, #login_2fForm .submitBox{
+    margin-top: 10px;
+    width: 300px;
+}
 
-.formBox_loginQRCode img {
-  display: inline-block;
-  width: 50px; }
-  
-#loginQRCode .label {
-  text-align: left;
-  padding-left: 60px; }
-#loginQRCode input {
-  height: 35px;
-  width: 250px;
-  padding-left: 6px;
-  margin: 10px;
-  border: .5px solid lightgray;
-  border-radius: 4px; }
-#loginQRCode button, #loginQRCode span p {
-  display: inline-block;
-  cursor: pointer; }
+#SignUpForm div p, #SignInForm div p,
+#SendResetEmail p, #SendResetQuestion p,
+#resetPassword p, #login_2fForm p {
+    display: inline-block;
+    cursor: pointer;
+}
 
-#loginQRCode .button {
-  width: 60px;
-  height: 30px;
-  margin-left: 50%;
-  background: #6e0101;
-  color: white;
-  border: none;
-  border-radius: 10px; }
+#SignUpForm div button, #signup_SecQuestions button,
+#loginQRCode button, #SignInForm div button,
+#SendResetEmail div button, #SendResetQuestion div button,
+#resetPassword div button, #login_2fForm div button{
+    left: 0;
+    padding: 10px;
+    font-size: 18px;
+    width: 155px;
+    background: #6e0101;
+    color: white;
+    border: none;
+    border-radius: 15px; 
+}
+
+#signup_SecQuestions div button{
+    position: absolute;
+    top: 20px;
+    right: 0;
+}
+#signup_SecQuestions .button{
+    margin: auto;
+    height: 100px;
+    width: 400px;
+}
+#signup_SecQuestions .questionBox{
+    width: 350px;
+}
+
+#loginQRCode .label, #login_2fForm .label{
+    width: 350px;
+}
+
+#SignInForm a{
+    color: rgb(80, 80, 80);
+}
+
+#SignInForm #g-recaptcha {
+    margin: 15px;
+    display: inline-block;
+}
+
+#SendResetEmail img, #SendResetQuestion img,
+#resetPassword img, #SignUpForm img,
+#SignInForm img, #login_2fForm img{
+    display: block;
+    margin: auto;
+    width: 100px;
+}
+
+#SendResetEmail, #SendResetQuestion, #resetPassword{
+    background: white;
+    display: block;
+    padding: 50px;
+    height: 100vh;
+}
+
+#SendResetEmail .container, #SendResetQuestion .container, #resetPassword .container{
+    transform: translateY(20%);
+}
+#SendResetQuestion .question{
+    width: 350px;
+}

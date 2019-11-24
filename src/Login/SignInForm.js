@@ -7,7 +7,6 @@ import Cookie from '../Utility/Cookie';
 import TwoFactor from './TwoFactor';
 import logo from './../images/HC.svg';
 
-
 export default class SignInForm extends Component{
     constructor(props){
         super(props);
@@ -16,14 +15,17 @@ export default class SignInForm extends Component{
             password: "", 
             signin: true, 
             twofactor: false, 
-            isResetted: props.isResetted};
+            captcha: false,
+            forgotpassword: false
+        };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.swapForm = this.swapForm.bind(this);
         this.callback = this.callback.bind(this);
         this.setCaptcha = this.setCaptcha.bind(this);
+        this.forgotPasswordForm = this.forgotPasswordForm.bind(this);
         this.captcha = "";
-        this.warning_message = "Everything works fine";
+        this.warning_message = "";
     }
 
     handleChange(event){
@@ -56,6 +58,9 @@ export default class SignInForm extends Component{
                 result.json().then(nr =>{
                     document.getElementById("warning").textContent = nr.message;
                 })
+                if(result.status === 412){
+                    this.setState({captcha: true});
+                }
                 return null;
             }
         }).then( result => {
@@ -68,11 +73,6 @@ export default class SignInForm extends Component{
                 Cookie.setCookie('HC_JWT', result.token, date); 
                 //redirect to 2factor
                 this.setState({twofactor: true});
-
-                //redirect directly to dashboard if the user does not reset the password
-                //if(!this.state.isResetted){
-                //    window.location.href = "../";
-                //}
             }
         });
     }
@@ -94,48 +94,52 @@ export default class SignInForm extends Component{
         console.log(response)
         this.captcha = response
     };
-    
+
+    forgotPasswordForm(){
+        this.setState({forgotpassword: true, signin: false});
+    }
+
     render() {
         if(this.state.twofactor){
             return (<TwoFactor email={this.state.email}></TwoFactor>);
         }else if(this.state.signin){
             return(
-                <form id="SignInForm" className="formBox" onSubmit={this.handleSubmit}>  
+                <form id="SignInForm" onSubmit={this.handleSubmit}>  
                     <Helmet>
-                        <script src='https://www.google.com/recaptcha/api.js'>aha</script>
+                        <title>Hoosier Connection - Login</title>
                     </Helmet>
                     <img src={logo} alt="" />
-                    <h2>Login In</h2>
-                    <div className="label"><label>Email:</label><br /></div>    
-                    <input type="text" id="login_email" onChange={this.handleChange} placeholder="Ex. you@gmail.com" required></input><br/>
-                    <div className="label"><label>Password:</label><br /></div>
-                    <input type="password" onChange={this.handleChange} id="login_password" required></input><br />
-        
-                    <div className="google-cap">
-                        <Recaptcha
-                            sitekey="6LeACsAUAAAAAPfVJZqfoO7qLeefTB5qlcjHuOQE"
-                            render="explicit"
-                            verifyCallback={this.setCaptcha}
-                            onloadCallback={this.callback}
-                        />
+                    <h2 className="text-center">Log In</h2>
+                    <div className="text-center"><p id="warning"></p></div>
+                    <div className="input m-auto  text-left">
+                        <label>EMAIL</label>
+                        <input id="login_email" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="text" required></input>
                     </div>
-
-                    <p className="warning_msg" id="warning"></p>
-                    <br/>
-                    <span>
-                        <a href="SendResetEmail">Forgot Password?</a>
-                        <br />
+                    <div className="input m-auto  text-left">
+                        <label>PASSWORD</label>
+                        <input id="login_password" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="password" required></input>
+                    </div>
+                    {this.state.captcha ?
+                        <div className="google-cap text-center">
+                            <Recaptcha
+                                className="d-inline m-auto"
+                                sitekey="6LeACsAUAAAAAPfVJZqfoO7qLeefTB5qlcjHuOQE"
+                                render="explicit"
+                                verifyCallback={this.setCaptcha}
+                                onloadCallback={this.callback}
+                            />
+                        </div>
+                        : <br />
+                    }
+                    <div className="text-center"><a  href="SendReset">Forgot Password?</a></div>
+                    <div className="submitBox m-auto d-flex space-between">
                         <button  type="submit">Log In</button>
-                        <p onClick={this.swapForm}>Sign up</p>
-                        
-                        
-                    </span>
+                        <p onClick={this.swapForm}>Need an account?</p>
+                    </div>
                 </form>
-            );
-            
+            ); 
         }else{
-            console.log("here2");
-           return ( <SignUpForm /> ); 
+            return ( <SignUpForm />);
         }
         
     }

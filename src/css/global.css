@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Odibee+Sans&display=swap');
 body {
   background: #F5F5F5;
 }
@@ -120,6 +121,9 @@ ul{
 }
 .text-right{
   text-align: right;
+}
+.text-left{
+  text-align: left;
 }
 .p-relative{
   position: relative;

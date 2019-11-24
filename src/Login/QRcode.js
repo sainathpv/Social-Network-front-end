@@ -5,7 +5,7 @@ import logo from './../images/HC.svg';
 class QRcode extends Component{
     constructor(props){
         super(props);
-        this.state = {code: props.code, email: props.email};
+        this.state = {code: props.code};
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -54,64 +54,21 @@ class QRcode extends Component{
     }
 
     render(){
-        const header = {
-            color: '#474747',
-            fontFamily: 'Sergoe UI',
-            margin: '10px'
-        }
-        const button = {
-            padding: '5px 20px',
-            background: '#A20909',
-            border: 'none',
-            color: 'white',
-            fontSize: '1.1em',
-            borderRadius: '20px',
-            marginLeft: '200px',
-        }
-        
-        const image = {
-            margin: '20px auto',
-            display: 'block',
-            width: '95%'
-        }
-
-        const form = {
-            width: "80%",
-            margin: "auto"
-        }
-        const input = {
-            border: '.5px solid lightgrey',
-            borderRadius: '4px',
-            height: '35px',
-            width: '250px',
-            paddingLeft: '6px',
-            margin: '10px'
-        }
-
-        const label = {
-            textAlign: 'left',
-        }
-        const container = {
-            width: '400px',
-        }
-
-        const warning_msg = {
-            color: "red",
-        }
 
         return(
-            <div style={container}>
-                <form id="loginQRCode" className="formBox_loginQRCode" style={form} onSubmit={this.handleSubmit}>
-                    <img src={logo} alt="" />
-                    <h3 style={header}>Use your phone to scan the QR code.</h3>
-                    <p id="qr_errorMessage"></p>
-                    <img style={image} src={this.state.code} alt="" />
-                    <label style={label}>Enter Code:</label><br/>
-                    <input style={input} type="text" id="qr_code" required placeholder="Ex. 234565"></input><br />
-                    <p style={warning_msg} id="warning"></p> <br/>
-                    <button type="submit" style={button}>Verify</button>
-                </form>
-            </div>
+            <form id="loginQRCode"  onSubmit={this.handleSubmit}>
+                <img src={logo} alt="" />
+                <h3 >Use your phone to scan the QR code.</h3>
+                <p id="qr_errorMessage"></p>
+                <img style={{width: "350px"}} src={this.state.code} alt="" /><br />
+                <div className="label text-left m-auto"><label>Enter Code:</label></div>
+                <div className="input m-auto  text-left">
+                    <label>CODE:</label>
+                    <input id="qr_code" onChange={this.handleChange} autoComplete="off" spellCheck="false" className="border-lg border-round-small" type="text" required></input>
+                </div>
+                <p id="warning"></p> <br/>
+                <button type="submit" >Verify</button>
+            </form>
         );
     }
 }

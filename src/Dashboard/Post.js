@@ -7,6 +7,7 @@ class Post extends React.Component{
         this.state = {
             id: props.id,
             title: props.title,
+            vote: 0,
             type: props.type,
             name: props.name,
             content: props.content, //text, img, video url, etc
@@ -20,10 +21,13 @@ class Post extends React.Component{
             shareable: props.shareable,
             showShareForm: props.showShareForm          
         }
+        this.votePost = this.votePost.bind(this);
+        this.getVote = this.getVote.bind(this);
         this.share = this.share.bind(this);
         this.showComments = this.showComments.bind(this);
         this.getSharedPost = this.getSharedPost.bind(this);
         this.postComment = this.postComment.bind(this);
+        this.getVote();
     }
 
     getSharedPost(){
@@ -128,9 +132,46 @@ class Post extends React.Component{
         }
 
     }
-    
-    votePost(vote){
+    getVote(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        }
 
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/getvote/" + this.state.id, options).then(result => {
+            return result.json();
+        }).then(result => {
+            this.setState({
+                vote: result.vote
+             });
+        });
+    }
+    votePost(vote){
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            },
+            body: JSON.stringify({
+                postID: this.state.id,
+                vote: this.state.vote != vote ? vote : 0
+            })
+        }
+
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postvote", options).then(result => {
+            return result.json();
+        }).then(result => {
+            console.log(result);
+            this.setState({
+                vote: this.state.vote != vote ? vote : 0,
+                dislikes: result.numDislikes,
+                likes: result.numLikes
+            });
+        });
     }
 
     share(event){
@@ -152,12 +193,13 @@ class Post extends React.Component{
                             <i className="fas fa-comments"></i>
                             <h5 className="d-inline"> {this.state.comments.length}</h5>
                         </div>
-                        <div className="label" onClick={this.votePost(1)}>
-                            <i style={{color: "#45c450"}} className="fas fa-thumbs-up"></i>
+                        <div className="label" onClick={() => this.votePost(1)}>
+                            
+                            <i style={this.state.vote === 1 ? {color: "#45c450"} : {color: "lightgrey"} } className="fas fa-thumbs-up"></i>
                             <h5 className="d-inline">{this.state.likes}</h5>
                         </div>
-                        <div className="label" onClick={this.votePost(-1)}>
-                            <i style={{color: "#c44545"}} className="fas fa-thumbs-down"></i>
+                        <div className="label" onClick={() => this.votePost(-1)}>
+                            <i style={this.state.vote === -1 ? {color: "#c44545"} : {color: "lightgrey"} }  className="fas fa-thumbs-down"></i>
                             <h5 className="d-inline">{this.state.dislikes}</h5>
                         </div>
                         
@@ -213,7 +255,3 @@ class Post extends React.Component{
     }
 }
 export default Post;
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/Post.js

@@ -46,9 +46,12 @@ export default class SignInForm extends Component{
             <form id="login_2fForm" className="formBox_login_2fForm" onSubmit={this.handleSubmit}>  
                 <img src={logo} alt="" />
                 <h2>Two Factor</h2>
-                <div className="label"><label>Code:</label><br /></div>    
-                <input type="text" id="login_2f" onChange={this.handleChange} placeholder="Ex. 123456" required></input><br/>
-                <input type="submit" className="button" value="Verify" /> 
+                <div className="label m-auto text-left"><p>Code:</p><br /></div>    
+                <div className="input m-auto  text-left">
+                    <label>PASSWORD</label>
+                    <input id="login_2f" autoComplete="off" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="text" required></input>
+                </div>
+                <div className="submitBox d-flex space-between m-auto"><button type="submit">Submit</button></div>
             </form>
         );
 

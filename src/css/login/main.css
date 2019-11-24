@@ -1,39 +1,75 @@
-
 #MainPage {
+  background: white;
+}
+#MainPage .background {
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-  background-image: url("../../images/IU_Gates.jpg");
+  background-image: url("../../images/titleBG.jpg");
   height: 100vh;
-  display: flex;
-  justify-content: space-around; }
+  width: calc(100% / 3);
+}
+#MainPage .formBox {
+  background: rgb(255, 255, 255);
+  min-width: 500px;
+  width: calc(100% / 3);
+  margin: auto;
+  height: 100vh;
+}
+#MainPage .titleBox{
+  position: relative;
+  background: #850000;
+  width: calc(100% / 3);
+}
+#MainPage .titleBox .title h1 {
+  color: white;
+  font-size: 80px;
+  line-height: 100px;
+}
+#MainPage .titleBox .title{
+  margin: 30px;
+}
+#MainPage .brand{
+  position: absolute;
+  width: 600px;
+  bottom: 20px;
+  left: -302.5px;
+}
+#MainPage .brand h2{
+  font-size: 30px;
+  line-height: 125px;
+}
+#MainPage .brand .brand-left{
+  color: #850000;
+}
+#MainPage .brand .brand-right{
+  color: white;
+}
+#MainPage .brand .border-round{
+  background: #850000;
+  border: 12px white solid;
+  width: 125px;
+  height: 125px;
+}
+#MainPage .brand .border-round img{
+  height: 70px;
+  display: block;
+  margin: auto;
+  margin-top: 17.5px
+}
+
+@media only screen and (max-width: 1300px) {
+  #MainPage .background {
+    display: none;
+  }
   #MainPage .titleBox {
-    transform: translate(0%, 40vh);
-    color: #fff;
-    height: 200px;
-    text-shadow: 2px 2px black; }
-    #MainPage .titleBox h1 {
-      font-size: 50px; }
-    #MainPage .titleBox h3 {
-      font-size: 20px; }
-    #MainPage .titleBox h4 {
-      font-size: 20px; 
-      padding-left: 40px;
-    }
-  #MainPage .formBox {
-    display: block;
-    text-align: center;
-    transform: translate(0%, 18vh);
-    border: .5px lightgray solid;
-    border-radius: 4px;
-    background-color: #fff;
-    width: 400px;
-    padding: 10px; }
-    #MainPage .formBox img {
-      display: inline-block;
-      width: 50px; }
-    #MainPage .formBox h4 {
-      display: inline-block;
-      position: relative;
-      line-height: 5px;
-    }
+    width: 500px;
+  }
+}
+
+@media only screen and (max-width: 940px) {
+
+  #MainPage .titleBox {
+    display: none;
+  }
+}

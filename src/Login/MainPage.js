@@ -1,8 +1,7 @@
 import React from 'react';
 import './../css/login/main.css';
-import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
-
+import indiana from './../images/Indiana.png'
 class MainPage extends React.Component {
   constructor(props) {
     super(props);
@@ -11,17 +10,25 @@ class MainPage extends React.Component {
 
   render() {
     return (
-      <div id='MainPage'>
-        <div className='titleBox'>
-          <h1>Hoosier Connection</h1>
-          <div>
-            <h2>A Social Network,</h2>
-            <div>
-              <h4>For the students, by the students!</h4>
-            </div>
-          </div>
+      <div id='MainPage' className="d-flex space-between">
+        <div className="background">
+
         </div>
-        <div>{!this.state.login ? <SignInForm /> : <SignUpForm />}</div>
+        <div className="formBox">
+          <SignUpForm />
+        </div>
+        <div className="titleBox">
+            <div className="title">
+              <h1>Hoosier <br /> Connection</h1>
+            </div>
+            <div className="brand d-flex space-between">
+              <h2 className="brand-left">For The Students</h2>
+              <div className="border-round">
+                <img src={indiana} height="100px"></img>
+              </div>
+              <h2 className="brand-right">By The Students</h2>
+            </div>
+        </div>
       </div>
     );
   }

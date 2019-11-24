@@ -123,7 +123,7 @@ export default class SignInForm extends Component{
                     <p className="warning_msg" id="warning"></p>
                     <br/>
                     <span>
-                        <a href="SendResetEmail">Forgot Password?</a>
+                        <a href="SendReset">Forgot Password?</a>
                         <br />
                         <button  type="submit">Log In</button>
                         <p onClick={this.swapForm}>Sign up</p>
@@ -134,7 +134,6 @@ export default class SignInForm extends Component{
             );
             
         }else{
-            console.log("here2");
            return ( <SignUpForm /> ); 
         }
         

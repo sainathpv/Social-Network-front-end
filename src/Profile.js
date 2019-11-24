@@ -148,7 +148,7 @@ class Profile extends Component {
         document.getElementById("username").textContent = result.name;
         document.getElementById("lastName").placeholder = result.lname;
         document.getElementById("firstName").placeholder = result.fname;
-        if(result.bio != ""){
+        if(result.bio !== ""){
           document.getElementById("profileBio").placeholder = result.bio;
         } else {
           document.getElementById("profileBio").placeholder = "A little section devoted to everything about you.";

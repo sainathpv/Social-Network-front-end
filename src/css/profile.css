@@ -17,6 +17,7 @@
 
 
 #profilePage h3{
+  margin-top: 10px;
 font-weight: bold;
 white-space: nowrap;
 overflow: hidden;
@@ -64,16 +65,18 @@ width: 100%;
 }
 
 #profilePage .imgAndBio {
+  margin: auto;
     position: relative;
     padding-top: 10px;
     display: flex;
     justify-content: space-between;
-    width: 100%;
     margin-bottom: 20px;
 }
 #profilePage .p-10{
     padding: 0 10%;
 }
+
+
 #profilePage .imgAndBio .profileimg img {
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -109,7 +112,6 @@ width: 100%;
 
 #profilePage .imgAndBio .profilebio{
     position: relative;
-    left: 2%;
     width: 100%;
     display: block;
 }
@@ -122,8 +124,8 @@ width: 100%;
     background-color: #f8f8f8;
     font-size: 16px;
     resize: none;
-    height: 240px;
-    width: 97%;
+    height: 280px;
+    width: 100%;
     background-color: white;
     display: inline-block;
 }
@@ -132,9 +134,6 @@ width: 100%;
 #profilePage .basicInfo {
     padding-top: 10px;
     margin-bottom: 30px;
-}
-#profile .basicInfo:parent {
-    
 }
 
 #profilePage .basicInfo div h3{
@@ -152,6 +151,8 @@ width: 100%;
 #profilePage .basicInfo .studentInfo{
     position: relative;
     display: inline-block;
+    width: 40%;
+    
 }
 
 
@@ -190,7 +191,9 @@ width: 100%;
 
 #profilePage .basicInfo .interestHeading{
     position: relative;
-    width: 70%;
+    width: 60%;
+    left: 30px;
+    
 }
 
 #profilePage .interest{
@@ -204,9 +207,7 @@ width: 100%;
 
 #profilePage .basicInfo .interestHeading input{
     position: relative;
-    width: 200px;
-    left: -6px;
-    margin-bottom: 2px;
+    width: 70%;
 }
 
 #profilePage .basicInfo div .addInterest {
@@ -228,11 +229,65 @@ width: 100%;
     top: 10px;
     display: inline-block;
     white-space: normal;
-    overflow: hidden;
-    width: 700px;
-    margin: 10px 10px;
+    width: 91%;
     height: 160px;
     padding: 10px;
+}
+
+#profilePage .basicInfo .interestHeading .myList button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white; 
+  border: 2px solid #990000;
+  color: black; 
+  padding: 4px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 5px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+#profilePage .basicInfo .interestHeading .myList button:hover {
+  display: inline;
+  background-color: #990000;
+  color: white;
+}
+
+#profilePage .criticalInfo {
+  position: relative;
+  display: flex;
+}
+
+#profilePage .criticalInfo div input{
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  margin: 8px;
+}
+
+#profilePage .criticalInfo .resetPsw{
+  width: 40%;
+  position: relative;
+  display: inline-block;
+
+}
+
+#profilePage .criticalInfo .resetEml{
+  width: 60%;
+  position: relative;
+  display: inline-block;
+  left: 30px;
+
+}
+
+#profilePage .criticalInfo .resetEml input{
+  position: relative;
+  width: 70%;
 }
 
 #profilePage .editButton {

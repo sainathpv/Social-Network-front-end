@@ -17,6 +17,7 @@
 
 
 #profilePage h3{
+  margin-top: 10px;
 font-weight: bold;
 white-space: nowrap;
 overflow: hidden;
@@ -207,7 +208,6 @@ width: 100%;
 #profilePage .basicInfo .interestHeading input{
     position: relative;
     width: 70%;
-    margin-bottom: 2px;
 }
 
 #profilePage .basicInfo div .addInterest {
@@ -229,10 +229,32 @@ width: 100%;
     top: 10px;
     display: inline-block;
     white-space: normal;
-    overflow: hidden;
     width: 91%;
     height: 160px;
     padding: 10px;
+}
+
+#profilePage .basicInfo .interestHeading .myList button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white; 
+  border: 2px solid #990000;
+  color: black; 
+  padding: 4px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 5px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+#profilePage .basicInfo .interestHeading .myList button:hover {
+  display: inline;
+  background-color: #990000;
+  color: white;
 }
 
 #profilePage .criticalInfo {
@@ -266,7 +288,6 @@ width: 100%;
 #profilePage .criticalInfo .resetEml input{
   position: relative;
   width: 70%;
-  margin-bottom: 2px;
 }
 
 #profilePage .editButton {

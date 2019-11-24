@@ -4,7 +4,39 @@ import logo from './images/HC.svg';
 import DropDownMenu from './Utility/DropDown';
 import Cookie from './Utility/Cookie';
 
-//TODO: check if there is a token redirect to signin if invalid
+//interest field, because of the dynamic adding of interest tags
+//it is more convinient to put the interest field out of the class
+var interests = []
+
+function delInterest(i) {
+  var currentInterest = document.getElementById("interest" + i)
+  currentInterest.parentElement.removeChild(currentInterest)
+
+  interests.splice(i, 1);
+  
+  var options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+    },
+    body: JSON.stringify({
+      interests: interests
+    })
+  };
+
+  fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
+    .then(result => {
+      if (result.status == 201) {
+        return result.json();
+      } else {
+        console.log('failed');
+        return null;
+      }
+    }).then(result => {
+    });
+}
+
 
 class Profile extends Component {
 
@@ -12,19 +44,8 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      name: "",
-      profileIMG: "",
-      major: "",
-      studentType: "",
-      year: "",
-      bio: "",
-      fname: "",
-      lname: "",
-      interests: [],
-      posts: [],
-      events: [],
-      friends: [],
-      chats: [],
+      name: "", profileIMG: "", major: "", studentType: "", year: "", bio: "", fname: "", lname: "",
+      posts: [], events: [], friends: [], chats: [],
       changed: false,
     }
     //TODO: check if there is a token redirect to login if invalid
@@ -33,57 +54,11 @@ class Profile extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getProfileData = this.getProfileData.bind(this);
     this.getProfileData();
+    this.addInterest = this.addInterest.bind(this);
   }
 
 
-  handleChange(event) {
-    this.setState({
-      bio: document.getElementById('profileBio').value,
-      fname: document.getElementById('firstName').value,
-      lname: document.getElementById('lastName').value,
-      name: document.getElementById('userName').value,
-      major: document.getElementById('major').value,
-      changed: true,
-    });
-
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-    if (this.state.changed) {
-      var options = {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-        },
-        body: JSON.stringify({
-          bio: this.state.bio,
-          fname: this.state.fname,
-          lname: this.state.lname,
-          name: this.state.name,
-          major: this.state.major,
-        })
-      };
-
-      fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
-        .then(result => {
-          if (result.status == 201) {
-            return result.json();
-          } else {
-            console.log('failed');
-            return null;
-          }
-        })
-        .then(result => {
-        });
-    } else {
-      //TODO notify the user of the bad match
-    }
-
-    //TODO: post request to Sai's route with contents of key
-  }
-
+  //Initialize the data in profile page
   getProfileData() {
     var options = {
       method: 'GET',
@@ -115,6 +90,8 @@ class Profile extends Component {
           document.body.className = "";
         }
 
+        interests = result.interests
+
         this.setState({
           name: result.name,
           profileIMG: result.profileImageUrl,
@@ -122,7 +99,6 @@ class Profile extends Component {
           studentType: result.studentType,
           year: result.year,
           settings: result.settings,
-          interests: result.interests,
           posts: result.posts,
           events: result.events,
           friends: friends,
@@ -148,21 +124,112 @@ class Profile extends Component {
         } else {
           document.getElementById("major").placeholder = "Major Unknown";
         }
-
       });
     } catch (err) {
       console.log(err);
     }
   }
 
+  //handle changes of the input / textarea in html
+  handleChange(event) {
+    this.setState({
+      bio: document.getElementById('profileBio').value,
+      fname: document.getElementById('firstName').value,
+      lname: document.getElementById('lastName').value,
+      name: document.getElementById('userName').value,
+      major: document.getElementById('major').value,
+      changed: true,
+    });
+  }
+
+  //handle the 'edit profile' button, update all editted informaion
+  handleSubmit(event) {
+    event.preventDefault();
+    if (this.state.changed) {
+      var options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+        },
+        body: JSON.stringify({
+          bio: this.state.bio,
+          fname: this.state.fname,
+          lname: this.state.lname,
+          name: this.state.name,
+          major: this.state.major,
+        })
+      };
+      fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
+        .then(result => {
+          if (result.status == 201) {
+            return result.json();
+          } else {
+            console.log('failed');
+            return null;
+          }
+        }).then(result => {
+
+        });
+    } else {/*TODO notify the user of the bad match*/ }
+    //TODO: post request to Sai's route with contents of key
+  }
+
+  //jump back to homepage, the href link needs to be changed to server after
   swapToHome() {
     window.location.href = "http://localhost:3000/";
   }
+
   changeImg() {
 
   }
-  addInterest() { }
-  delInterest() { }
+
+  //add interest to html and backend database
+  addInterest() {
+    var newInterest = document.getElementById('interest').value
+    if (interests.includes(newInterest)) {
+      document.getElementById("interestWarning").textContent = "Your new interest already exists in the list";
+    } else if (newInterest == "") {
+      document.getElementById("interestWarning").textContent = "Your input interest is empty";
+    } else {
+      var currentLength = interests.length
+      interests.push(newInterest);
+      var interestButton = document.createElement("BUTTON");
+      interestButton.onclick = function delInterest() {
+        console.log(currentLength)
+        this.parentElement.removeChild(this);
+        interests.splice(currentLength, 1);
+        console.log(interests)
+      }
+      var interestText = document.createTextNode(newInterest);
+      interestButton.appendChild(interestText);
+      document.getElementById("interestsList").appendChild(interestButton);
+      this.state.changed = true;
+
+      var options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+        },
+        body: JSON.stringify({
+          interests: interests
+        })
+      };
+
+      fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
+        .then(result => {
+          if (result.status == 201) {
+            return result.json();
+          } else {
+            console.log('failed');
+            return null;
+          }
+        }).then(result => {
+        });
+    }
+  }
+
   delAccount() { }
   changeStudentType() { }
   changeStudentYear() { }
@@ -179,7 +246,9 @@ class Profile extends Component {
             <h1>Hoosier Connection</h1>
           </div>
           <div>
-            <a className="text-primary" href="../"> <i class="fas fa-arrow-left"></i> Back To Dashboard</a>
+            <a className="text-primary" href="../"> 
+              <i className="fas fa-arrow-left"></i> Back To Dashboard
+            </a>
           </div>
         </div>
 
@@ -189,31 +258,31 @@ class Profile extends Component {
           <div className="profileimg">
             <img id="profileIMG" src={"http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt='' />
             <div className="container">
-              <h1 id="username">Cinque Terre</h1>
+              <h1 id="username">Undefined</h1>
               <br />
             </div>
             <input type="file"></input>
-
           </div>
 
           <div className="profilebio">
             <h3>Bio: </h3>
-            <textarea id="profileBio" onChange={this.handleChange} placeholder='A little section dedicated to you!'></textarea>
+            <textarea id="profileBio" onChange={this.handleChange} placeholder='Ex: A little section dedicated to you!'></textarea>
           </div>
+
         </div>
 
         <hr />
+
         <div className="basicInfo d-flex space-between p-10">
           <div className="studentInfo">
             <h3>First Name: </h3>
-            <input className="text-input" type="text" id="lastName" onChange={this.handleChange} placeholder="John" required></input>
+            <input className="text-input" type="text" id="lastName" onChange={this.handleChange} placeholder="Ex: John" required></input>
 
             <h3>Last Name: </h3>
-            <input className="text-input" type="text" id="firstName" onChange={this.handleChange} placeholder="Smith" required></input>
+            <input className="text-input" type="text" id="firstName" onChange={this.handleChange} placeholder="Ex: Smith" required></input>
 
             <h3>Username: </h3>
-            <input className="text-input" type="text" id="userName" onChange={this.handleChange} placeholder="johnsmith" required></input>
-
+            <input className="text-input" type="text" id="userName" onChange={this.handleChange} placeholder="Ex: johnsmith" required></input>
 
             <div className="dropDownMenu">
               <h3>Student Type:</h3>
@@ -227,20 +296,22 @@ class Profile extends Component {
 
           <div className="interestHeading">
             <h3>Major: </h3>
-            <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Computer Science" required></input>
+            <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Ex: Computer Science" required></input>
 
-            <br /><br />
             <h3>Your Interests: </h3>
-            <input className="text-input" type="text" id="interest" onChange={this.handleChange} placeholder="Ex. Fortnite" required></input>
+            <input className="text-input" type="text" id="interest" placeholder="Ex: Fortnite" required></input>
             <button onClick={this.addInterest} className="btn-primary">Add Interest</button>
             <br />
             <ul id="interestsList" className="myList border-lg border-round-small">
               {
-                this.state.interests.map((interest, i) => {
-                  return (<li className="interest" key={i} >{interest}</li>)
+                interests.map((interest, i) => {
+                  return (
+                    <button onClick={() => delInterest(i)} id={"interest" + i} key={i}>{interest}</button>)
                 })
               }
             </ul>
+            <br /><br />
+            <h4 id="interestWarning"> </h4>
           </div>
         </div>
 
@@ -248,26 +319,26 @@ class Profile extends Component {
 
         <div className="criticalInfo p-10">
           <div className="resetPsw">
-            <h3>Current Password</h3>
-            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
-            <h3>Reset Password</h3>
-            <input className="text-input" type="text" id="password" onChange={this.handleChange} placeholder="123456" required></input>
-            <h3>Re-enter Password</h3>
-            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="123456" required></input>
+            <h3>Current Password:</h3>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="The Current Password. Ex: 123456" required></input>
+            <h3>Reset Password:</h3>
+            <input className="text-input" type="text" id="password" onChange={this.handleChange} placeholder="Your New Password.Ex: 123456" required></input>
+            <h3>Re-enter Password:</h3>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="Plz Repeat. Ex: 123456" required></input>
           </div>
 
           <div className="resetEml">
-            <h3>Current Email</h3>
-            <input className="text-input" type="text" id="curEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
-            <h3>Reset Email</h3>
-            <input className="text-input" type="text" id="reEmail" onChange={this.handleChange} placeholder="johnsmith@gg.com" required></input>
+            <h3>Current Email:</h3>
+            <input className="text-input" type="text" id="curEmail" onChange={this.handleChange} placeholder="Ex: johnsmith@gg.com" required></input>
+            <h3>New Email:</h3>
+            <input className="text-input" type="text" id="reEmail" onChange={this.handleChange} placeholder="Ex: johnsmith@gg.com" required></input>
           </div>
 
         </div>
 
         <hr />
         <div className="p-10">
-          <button type="submit" className="btn-primary">Update Account</button>
+          <button type="submit" onClick={this.handleSubmit} className="btn-primary">Update Account</button>
           <button onClick={this.delAccount} className="btn-warn">Delete Account</button>
         </div>
       </div>

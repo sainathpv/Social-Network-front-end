@@ -11,10 +11,10 @@ export default class SignInForm extends Component{
     constructor(props){
         super(props);
         this.state = {
-            email: "", 
-            password: "", 
-            signin: true, 
-            twofactor: false, 
+            email: "",
+            password: "",
+            signin: true,
+            twofactor: false,
             captcha: false,
             forgotpassword: false
         };
@@ -31,7 +31,7 @@ export default class SignInForm extends Component{
     handleChange(event){
 
         this.setState({
-            email: document.getElementById('login_email').value, 
+            email: document.getElementById('login_email').value,
             password: document.getElementById('login_password').value,
         });
     }
@@ -51,7 +51,7 @@ export default class SignInForm extends Component{
         };
 
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/login", options).then( result =>{
-            
+
             if(result.status === 200){
                 return result.json();
             }else{
@@ -70,7 +70,7 @@ export default class SignInForm extends Component{
                 //add cookie
                 var date = new Date();
                 date = new Date(date.getTime() + (60*60*1000));
-                Cookie.setCookie('HC_JWT', result.token, date); 
+                Cookie.setCookie('HC_JWT', result.token, date);
                 //redirect to 2factor
                 this.setState({twofactor: true});
             }
@@ -88,7 +88,7 @@ export default class SignInForm extends Component{
     callback = function () {
 
     };
-       
+
     // specifying verify callback function
     setCaptcha(response) {
         console.log(response)
@@ -104,7 +104,7 @@ export default class SignInForm extends Component{
             return (<TwoFactor email={this.state.email}></TwoFactor>);
         }else if(this.state.signin){
             return(
-                <form id="SignInForm" onSubmit={this.handleSubmit}>  
+                <form id="SignInForm" onSubmit={this.handleSubmit}>
                     <Helmet>
                         <title>Hoosier Connection - Login</title>
                     </Helmet>
@@ -137,10 +137,10 @@ export default class SignInForm extends Component{
                         <p onClick={this.swapForm}>Need an account?</p>
                     </div>
                 </form>
-            ); 
+            );
         }else{
-            return ( <SignUpForm />);
+           return ( <SignUpForm /> );
         }
-        
+
     }
 }

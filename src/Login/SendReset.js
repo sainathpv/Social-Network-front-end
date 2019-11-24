@@ -56,7 +56,7 @@ export default class SendResetEmail extends Component{
                 + "/forgot_psw/forgot_psw_questions/" + email).then(result =>{
                 return result.json();
             }).then( result => {
-                
+
                 this.setState({
                     questions: true,
                     question1: result.questions[0],
@@ -64,7 +64,7 @@ export default class SendResetEmail extends Component{
                     question3: result.questions[2]
                 });
             });
-        }  
+        }
     }
 
     handleEmailSubmit(event){
@@ -141,7 +141,7 @@ export default class SendResetEmail extends Component{
     render() {
         if(this.state.sendResetEmail){
         return(
-            <form id="SendResetEmail" className="m-auto border-round-small"  onSubmit={this.handleEmailSubmit}>  
+            <form id="SendResetEmail" className="m-auto border-round-small"  onSubmit={this.handleEmailSubmit}>
                 <div className="container">
                     <Helmet>
                         <title>Hoosier Connection - Reset Password</title>
@@ -157,17 +157,17 @@ export default class SendResetEmail extends Component{
                         <input id="reset_email" onChange={this.handleChange} spellCheck="false" className="border-lg border-round-small" type="text" required></input>
                     </div>
                     <br />
-                    <div className="submitBox m-auto d-flex space-between"> 
+                    <div className="submitBox m-auto d-flex space-between">
                         <button className="d-inline" type="submit">Send Email</button>
                         <p className="d-inline" onClick={this.changeForm.bind(this)}>Can't access email?</p>
                     </div>
                 </div>
             </form>
 
-        );   
+        );
         }else{
             return (
-                <form id="SendResetQuestion" onSubmit={this.handleQuestionSubmit}>  
+                <form id="SendResetQuestion" onSubmit={this.handleQuestionSubmit}>
                     <div className="container">
                         <img src={logo} alt="" />
                         <h2 className="text-center">Reset Password With Security Questions</h2>
@@ -175,7 +175,7 @@ export default class SendResetEmail extends Component{
                         <p id="reset_email_msg"></p>
                         {this.getQuestions()}
                         <br />
-                        <div className="submitBox m-auto d-flex space-between"> 
+                        <div className="submitBox m-auto d-flex space-between">
                             <button className="d-inline" type="submit">Get Questions</button>
                             <p className="d-inline" onClick={this.changeForm.bind(this)}>Send Email?</p>
                         </div>

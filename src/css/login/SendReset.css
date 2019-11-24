@@ -1,0 +1,60 @@
+#SendResetEmail, #SendResetQuestion{
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+  background-image: url("../../images/IU_Gates.jpg");
+  height: 100vh;
+}
+#SendResetEmail form, #SendResetQuestion form{
+  display: block;
+  position: absolute;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 40px;
+  border: .5px solid lightgey;
+  border-radius: 4px;
+}
+  #SendResetEmail img, #SendResetQuestion img{
+    display: block;
+    margin: auto;
+    width: 100px;
+  }
+  #SendResetEmail .label, #SendResetQuestion .label{
+    text-align: left;
+  }
+  #SendResetEmail label, #SendResetQuestion label{
+    margin: 10px;
+    display: block;
+  }
+  #SendResetEmail input, #SendResetQuestion input{
+    margin-left: 35px;
+    width: 90%;
+    height: 25px;
+    border: .5px solid lightgrey;
+    border-radius: 4px;
+    max-width: 250px;
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  #SendResetEmail p, #SendResetQuestion p{
+    display: inline;
+
+  }
+  #SendResetEmail button, #SendResetQuestion button{
+    border: none;
+    border-radius: 4px;
+    margin: 5px 15px;
+    padding: 7px 10px;
+    color: white;
+    background: #840606; 
+  }
+  #SendResetQuestion .radio_btn{
+    height: 15px;
+    width: 15px;
+  }
+  #SendResetEmail .warning_msg, #SendResetQuestion .warning_msg{
+    color: red;
+  }

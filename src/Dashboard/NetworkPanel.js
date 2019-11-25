@@ -6,7 +6,7 @@ class NetworkPanel extends React.Component{
     constructor(props){
         super(props);
 
-        this.state = {tabOpened: false, events: null, interests: [], friends: []};
+        this.state = {tabOpened: false, events: null, interests: [], friends: null};
         this.closePanel = this.closePanel.bind(this);
         this.expandPanel = this.expandPanel.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -29,11 +29,17 @@ class NetworkPanel extends React.Component{
                 return result.json();
             }).then( result => {
         
-
                 this.setState({
                     interests: result.interests,
-                    events: result.events,
-                    friends: result.friends
+                    events: result.events
+                });
+
+                fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends", options).then( result => {
+                    return result.json();
+                }).then( result => {
+                    this.setState({
+                        friends: result.friends
+                    });
                 });
             });
         }catch(err){
@@ -115,7 +121,7 @@ class NetworkPanel extends React.Component{
                             <div className="friends">
                                 <h3>Friends</h3>
                                 <ul className="d-grid">
-                                    {
+                                    { this.state.friends ? 
                                         this.state.friends.map((friend, i) => {
                                             if(i < 9 && friend.accepted){
                                                 return(
@@ -128,9 +134,9 @@ class NetworkPanel extends React.Component{
                                                 return("")
                                             }
                                         })
+                                        : ""
                                     }
                                 </ul>
-
                             </div>
                             <hr />
                             <div className="interests">

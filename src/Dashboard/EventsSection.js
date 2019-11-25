@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
-
+import Cookie from './../Utility/Cookie';
 class EventsSection extends Component {
 
     constructor(props){
         super(props);
-        this.state = {events: props.events};
+        this.state = {eventsID: props.events, events: []};
+        this.getEvents = this.getEvents.bind(this);
+        this.getEvents();
+    }
+
+
+    getEvents(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        };
+        fetch("http://" + process.env.REACT_APP_API_HOST  + "/events?eventIDs=" + JSON.stringify(this.state.events), options).then(result =>{
+            return result.json();
+        }).then(result => {
+            this.setState({events: result.events});
+        });
     }
 
     render() {

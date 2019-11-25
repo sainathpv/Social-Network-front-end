@@ -24,7 +24,7 @@ class MainPage extends React.Component {
             <div className="brand d-flex space-between">
               <h2 className="brand-left">For The Students</h2>
               <div className="border-round">
-                <img src={indiana} height="100px"></img>
+                <img src={indiana} alt="" height="100px"></img>
               </div>
               <h2 className="brand-right">By The Students</h2>
             </div>

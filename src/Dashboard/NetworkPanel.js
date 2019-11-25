@@ -5,13 +5,8 @@ import Cookie from './../Utility/Cookie';
 class NetworkPanel extends React.Component{
     constructor(props){
         super(props);
-        
-        var events = [
-            {name: "Guy Fawkes Night", location: "232 Walnut Str.", company: "The English Pub", date: "November 5th"},
-            {name: "Thanksgiving Dinner", location: "243 Walnut Str.", company: "Turkey Eaters", date: "November 28th"}
-        ]
 
-        this.state = {tabOpened: false, events: events, interests: [], friends: []};
+        this.state = {tabOpened: false, events: null, interests: [], friends: []};
         this.closePanel = this.closePanel.bind(this);
         this.expandPanel = this.expandPanel.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -33,27 +28,12 @@ class NetworkPanel extends React.Component{
             fetch("http://" + process.env.REACT_APP_API_HOST  + "/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
-
-                var friends = [
-                    {name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Tex Mex", profileImageURL: "/assets/images/profiles/person3.png", accepted: true},
-                    {name: "Frank Ocean", profileImageURL: "/assets/images/profiles/person4.jpg", accepted: true},
-                    {name: "Davis Lee", profileImageURL: "/assets/images/profiles/person5.jpg", accepted: true},
-                    {name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true}
-                ];
         
-                var events = [
-                    {name: "Guy Fawkes Night", location: "232 Walnut Str.", company: "The English Pub", date: "November 5th"},
-                    {name: "Thanksgiving Dinner", location: "243 Walnut Str.", company: "Turkey Eaters", date: "November 28th"}
-                ]
 
                 this.setState({
                     interests: result.interests,
-                    events: events,
-                    friends: friends
+                    events: result.events,
+                    friends: result.friends
                 });
             });
         }catch(err){
@@ -162,13 +142,12 @@ class NetworkPanel extends React.Component{
                                     }else{
                                         return("");
                                     }
-                                    
                                 })}
                                 </ul>
                                 
                             </div>
                             <hr />
-                            <EventsSection events={this.state.events} />
+                            { this.state.events ? <EventsSection events={this.state.events} /> : <h3>Events</h3>}
                         </div>
                     </div>
                 </div>

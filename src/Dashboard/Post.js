@@ -158,7 +158,7 @@ class Post extends React.Component{
             },
             body: JSON.stringify({
                 postID: this.state.id,
-                vote: this.state.vote != vote ? vote : 0
+                vote: this.state.vote !== vote ? vote : 0
             })
         }
 
@@ -167,7 +167,7 @@ class Post extends React.Component{
         }).then(result => {
             console.log(result);
             this.setState({
-                vote: this.state.vote != vote ? vote : 0,
+                vote: this.state.vote !== vote ? vote : 0,
                 dislikes: result.numDislikes,
                 likes: result.numLikes
             });

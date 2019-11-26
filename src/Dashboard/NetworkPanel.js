@@ -37,6 +37,7 @@ class NetworkPanel extends React.Component{
                 fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends", options).then( result => {
                     return result.json();
                 }).then( result => {
+                    console.log(result.friends);
                     this.setState({
                         friends: result.friends
                     });
@@ -121,17 +122,20 @@ class NetworkPanel extends React.Component{
                             <div className="friends">
                                 <h3>Friends</h3>
                                 <ul className="d-grid">
-                                    { this.state.friends ? 
-                                        this.state.friends.map((friend, i) => {
-                                            if(i < 9 && friend.accepted){
+                                    {//this.state.friends !== null prevents it from attempting to view profiles prior to fetching the friends object
+                                    }
+                                    { this.state.friends !== null && this.state.friends.profiles ? 
+                                        this.state.friends.profiles.map((friend, i) => {
+                                            if(i < 9 && friend.status === "accepted"){
                                                 return(
-                                                <li key={i}>
-                                                    <img height="50px" width="50px" className="d-block border-lg border-round m-auto" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileImageURL} alt={person}  />
-                                                    <h5 className="text-center">{friend.name}</h5>
-                                                </li>
-                                                )
+                                                    <li key={i}>
+                                                        <img height="50px" width="50px" className="d-block border-lg border-round m-auto" 
+                                                        src={"http://" + process.env.REACT_APP_API_HOST + friend.profileIMG} alt={person}  />
+                                                        <h5 className="text-center">{friend.name}</h5>
+                                                    </li>
+                                                );
                                             }else{
-                                                return("")
+                                                return("");
                                             }
                                         })
                                         : ""

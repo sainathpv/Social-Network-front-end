@@ -26,6 +26,7 @@ class ProfilePanel extends React.Component{
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.expandPanel = this.expandPanel.bind(this);
         this.closePanel = this.closePanel.bind(this);
+        this.findFriend = this.findFriend.bind(this);
         this.getProfileData = this.getProfileData.bind(this);
         this.getProfileData();
     }
@@ -43,18 +44,7 @@ class ProfilePanel extends React.Component{
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
-                var friends = [
-                    {name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Tex Mex", profileImageURL: "/assets/images/profiles/person3.png", accepted: true},
-                    {name: "Frank Ocean", profileImageURL: "/assets/images/profiles/person4.jpg", accepted: true},
-                    {name: "Davis Lee", profileImageURL: "/assets/images/profiles/person5.jpg", accepted: true},
-                    {name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false},
-                    {name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false}
-                ];
+
                 if(result.settings.darkmode){
                     document.body.className = "darkmode";
                 }else{
@@ -70,8 +60,23 @@ class ProfilePanel extends React.Component{
                     interests: result.interests,
                     posts: result.posts,
                     events: result.events,
-                    friends: friends, 
                     chats: result.chats
+                });
+
+                var options = {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+                    }
+                }
+
+                fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends", options).then( result => {
+                    return result.json();
+                }).then( result => {
+                    this.setState({
+                        friends: result.friends
+                    });
                 });
             });
         }catch(err){
@@ -133,6 +138,64 @@ class ProfilePanel extends React.Component{
         window.location.href = "profile";
     }
 
+    findFriend(event){
+        event.preventDefault();
+        var data = {
+            userName: document.getElementById("dash_findFriend").value
+        }
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            },
+            body: JSON.stringify(data)
+        }
+        fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends/addfriend", options).then(result => {
+            if(result.status === 200){
+                document.getElementById("dash_findFriendNotify").textContent = "Sent!";
+            }else if(result.status === 404){
+                document.getElementById("dash_findFriendNotify").textContent = "Not Found!";
+            }else if(result.status === 409){
+                document.getElementById("dash_findFriendNotify").textContent = "Already Sent!";
+            }else{
+                document.getElementById("dash_findFriendNotify").textContent = "Error!";
+            }
+        })
+    }
+
+    acceptFriend(friend){
+        event.preventDefault();
+        console.log(friend);
+        var data = {
+            friend: {
+                profileID: friend.profileID,
+                status: "accepted"
+            }
+        };
+
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends/editfriends", options).then(result => {
+            if(result.status === 200){
+                
+            }else{
+                
+            }
+        })
+    }
+
+    rejectFriend(friend){
+
+    }
+
     render(){
         return (
             <div>
@@ -145,7 +208,8 @@ class ProfilePanel extends React.Component{
                         </div>
                         <hr />
                         <div className="profile d-flex">
-                            <img onClick={this.goToProfile} className="cursor-pointer border-lg border-round" src={ "http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt=""/>
+                            <img onClick={this.goToProfile} className="cursor-pointer border-lg border-round" 
+                            src={ "http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt=""/>
                             <div className="color-grey description">
                                 <h3 className="text-nunito">{this.state.name}</h3>
                                 <div className="text-roboto ">
@@ -159,32 +223,39 @@ class ProfilePanel extends React.Component{
                         <ul className="activity text-roboto">
                             <li className="space-between"><a className="description">Posts</a><a className="color-red">{this.state.posts.length}</a></li>
                             <li className="space-between"><a className="description">Events</a><a className="color-red">{this.state.events.length}</a></li>
-                            <li className="space-between"><a className="description">Friends</a><a className="color-red">{this.state.friends.filter(friend => friend.accepted).length}</a></li>
+                            <li className="space-between"><a className="description">Friends</a><a className="color-red">
+                            {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
                             <li className="space-between"><a className="description">Messages</a><a className="color-red">{this.state.chats.length}</a></li>
                         </ul>
                         <button id="dash_createPost" className="btn-primary d-block" onClick={this.state.showPostForm}>Create A Post</button>
                         <hr />
-                        <form className="findFriend">
-                            {/* TODO: Find Friend Component */}
+                        <form className="findFriend" onSubmit={this.findFriend}>
+                            <p id="dash_findFriendNotify"></p>
                             <h4>Find Friend</h4>
-                            <input className="d-block m-auto text-primary border-lg border-round-small bg-secondary" placeholder="Username"></input>
+                            <input id="dash_findFriend" className="d-block m-auto text-primary border-lg border-round-small bg-secondary" placeholder="Username"></input>
                             <div className="text-right"><button className="btn-primary" id="btn_findFriend">Send</button></div>
                         </form>
                         <form className="activeFriendRequests">
                             <h4>Current Friend Requests</h4>
                             <ul>
+                                
                                 {
-                                    this.state.friends.filter(friend => !friend.accepted).map((friend, i) => {
+                                    this.state.friends.profiles ? 
+                                    this.state.friends.profiles.filter(friend => friend.status === "requestee").map((friend, i) => {
                                         return(
                                             <li key={i} className="d-flex space-between">
                                                 <div>
-                                                    <img className="border-round border-lg d-inline" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileImageURL} alt={person}/>
+                                                    <img className="border-round border-lg d-inline" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileIMG} alt={person}/>
                                                     <h5 className="d-inline">{friend.name}</h5>
                                                 </div>
-                                                <span> <button className="btn-primary">Accept</button> <i className="cursor-pointer text-secondary  fas fa-times"></i></span>
+                                                <span> 
+                                                    <button onClick={() => this.acceptFriend(friend)} className="btn-primary">Accept</button> 
+                                                    <i onClick={() => this.rejectFriend(friend)} className="cursor-pointer text-secondary  fas fa-times"></i>
+                                                </span>
                                             </li>
                                         )
                                     })
+                                    : ""
                                 }
                             </ul>
                         </form>

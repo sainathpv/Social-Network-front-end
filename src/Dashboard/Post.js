@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookie from './../Utility/Cookie';
+
 import './../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
@@ -82,6 +83,9 @@ class Post extends React.Component{
                 break;
             case "post":
                 this.getSharedPost();
+                break;
+            case "poll":
+                this.setState({post: <Plot data={this.state.content} />})
                 break;
             default:
 

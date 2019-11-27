@@ -189,11 +189,35 @@ class ProfilePanel extends React.Component{
             }else{
                 
             }
-        })
+        });
     }
 
     rejectFriend(friend){
+        event.preventDefault();
+        console.log(friend);
+        var data = {
+            friend: {
+                profileID: friend.profileID,
+                status: "rejected"
+            }
+        };
 
+        var options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            },
+            body: JSON.stringify(data)
+        };
+
+        fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends/editfriends", options).then(result => {
+            if(result.status === 200){
+                
+            }else{
+                
+            }
+        });
     }
 
     render(){

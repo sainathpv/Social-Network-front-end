@@ -29,7 +29,3 @@ class Dashboard extends React.Component{
     }
 }
 export default Dashboard;
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/Dashboard.js

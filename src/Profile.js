@@ -14,6 +14,8 @@ function delInterest(i) {
 
   interests.splice(i, 1);
 
+  console.log(interests)
+
   var options = {
     method: 'POST',
     headers: {
@@ -53,8 +55,11 @@ class Profile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getProfileData = this.getProfileData.bind(this);
-    this.getProfileData();
+    
     this.addInterest = this.addInterest.bind(this);
+    this.handleInterestChange = this.handleInterestChange.bind(this);
+    this.getProfileData();
+
   }
 
 
@@ -175,23 +180,16 @@ class Profile extends Component {
     //TODO: post request to Sai's route with contents of key
   }
 
-  //jump back to homepage, the href link needs to be changed to server after
-  swapToHome() {
-    window.location.href = "http://localhost:3000/";
-  }
-
-  changeImg() {
-
-  }
-
   //add interest to html and backend database
   addInterest() {
-    var newInterest = document.getElementById('interest').value
+    document.getElementById("interestWarning").textContent = "";
+    var newInterest = document.getElementById('inputInterest').value
     if (interests.includes(newInterest)) {
       document.getElementById("interestWarning").textContent = "Your new interest already exists in the list";
     } else if (newInterest == "") {
       document.getElementById("interestWarning").textContent = "Your input interest is empty";
     } else {
+      document.getElementById('inputInterest').value = ''
       var currentLength = interests.length
       interests.push(newInterest);
       var interestButton = document.createElement("BUTTON");
@@ -229,10 +227,23 @@ class Profile extends Component {
         });
     }
   }
+  
+  handleInterestChange(event){
+    document.getElementById("interestWarning").textContent = "";
+    if (event.key === 'Enter'){
+      document.getElementById("addInterestButton").click();
+    }
+  }
 
-  delAccount() { }
-  changeStudentType() { }
-  changeStudentYear() { }
+
+  delAccount() {}
+  changeStudentType() {}
+  changeStudentYear() {}
+  changeImg() {}
+  //jump back to homepage, the href link needs to be changed to server after
+  swapToHome() { window.location.href = "http://localhost:3000/";}
+
+  
 
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
@@ -299,8 +310,8 @@ class Profile extends Component {
             <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Ex: Computer Science" required></input>
 
             <h3>Your Interests: </h3>
-            <input className="text-input" type="text" id="interest" placeholder="Ex: Fortnite" required></input>
-            <button onClick={this.addInterest} className="btn-primary">Add Interest</button>
+            <input className="text-input" type="text" id="inputInterest" onKeyDown={this.handleInterestChange} placeholder="Ex: Fortnite" required></input>
+            <button onClick={this.addInterest} className="btn-primary" id="addInterestButton">Add Interest</button>
             <br />
             <ul id="interestsList" className="myList border-lg border-round-small">
               {
@@ -315,32 +326,50 @@ class Profile extends Component {
           </div>
         </div>
 
+        <div className="p-10">
+          <button type="submit" onClick={this.handleSubmit} className="btn-primary">Update Profile</button>
+        </div>
+
         <hr />
 
         <div className="criticalInfo p-10">
           <div className="resetPsw">
             <h3>Current Password:</h3>
-            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="The Current Password. Ex: 123456" required></input>
-            <h3>Reset Password:</h3>
-            <input className="text-input" type="text" id="password" onChange={this.handleChange} placeholder="Your New Password.Ex: 123456" required></input>
-            <h3>Re-enter Password:</h3>
-            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="Plz Repeat. Ex: 123456" required></input>
+            <input className="text-input" type="text" id="curPassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
+            <h3>New Password:</h3>
+            <input className="text-input" type="text" id="newPassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
+            <h3>Re-enter New Password:</h3>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
+            <br/><br/>
+            <button onClick={this.resetPsw} className="btn-primary">Reset Password</button>
+
           </div>
 
           <div className="resetEml">
             <h3>Current Email:</h3>
             <input className="text-input" type="text" id="curEmail" onChange={this.handleChange} placeholder="Ex: johnsmith@gg.com" required></input>
+            <button onClick={this.resetPsw} className="btn-primary">Send</button>
+
+            <h3>Varification:</h3>
+            <input className="text-input" type="text" id="varifyCode" onChange={this.handleChange} placeholder="Code from your email" required></input>
+            <button onClick={this.varifyEmail} className="btn-primary">Varify</button>
+
             <h3>New Email:</h3>
             <input className="text-input" type="text" id="reEmail" onChange={this.handleChange} placeholder="Ex: johnsmith@gg.com" required></input>
+            <button onClick={this.varifyEmail} className="btn-primary">Reset</button>
+
           </div>
+
+
 
         </div>
 
         <hr />
+
         <div className="p-10">
-          <button type="submit" onClick={this.handleSubmit} className="btn-primary">Update Account</button>
-          <button onClick={this.delAccount} className="btn-warn">Delete Account</button>
+          <button onClick={this.delAccount} className="btn-warn">Delete Profile</button>
         </div>
+        
       </div>
     )
   }

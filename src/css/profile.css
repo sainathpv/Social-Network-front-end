@@ -158,10 +158,9 @@ width: 100%;
 
 #profilePage .basicInfo .dropDownMenu button{
     position: relative;
-    left: -50px;
     display: inline-block;
     border: none;
-    background: #3F99EE;
+    background:  #840606;
     color: white;
     border-radius: 4px;
     padding: 5px 10px;
@@ -171,7 +170,6 @@ width: 100%;
 
 #profilePage .basicInfo .dropDownMenu ul{
     position: relative;
-    left: -48px;
     z-index: 3;
     background: whitesmoke;
     position: absolute;

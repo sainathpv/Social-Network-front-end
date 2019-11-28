@@ -157,33 +157,8 @@ width: 100%;
 
 
 #profilePage .basicInfo .dropDownMenu button{
-    position: relative;
-    display: inline-block;
-    border: none;
-    background:  #840606;
-    color: white;
-    border-radius: 4px;
-    padding: 5px 10px;
-    font-size: 16px;
-    margin-bottom: 10px;
+    background: rgb(200, 21, 21);
 }
-
-#profilePage .basicInfo .dropDownMenu ul{
-    position: relative;
-    z-index: 3;
-    background: whitesmoke;
-    position: absolute;
-    width: 0 10px;
-    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.2);}
-    #profilePage .basicInfo .dropDownMenu ul li{
-        position: relative;
-        padding: 5px 10px;  
-        cursor: pointer;
-    }
-    #profilePage .basicInfo .dropDownMenu li:hover{
-        background: lightgray;
-        transition: .05s;
-    }
 
 
 
@@ -228,8 +203,9 @@ width: 100%;
     display: inline-block;
     white-space: normal;
     width: 91%;
-    height: 160px;
+    height: 180px;
     padding: 10px;
+    overflow: scroll;
 }
 
 #profilePage .basicInfo .interestHeading .myList button {

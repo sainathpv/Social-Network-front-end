@@ -52,8 +52,7 @@ export default class SignUpForm extends Component{
                     body: JSON.stringify({
                         email: this.state.email,
                         userName: this.state.userName,
-                        firstName: this.state.fname,
-                        lastName: this.state.lname,
+                        name: this.state.name,
                         password: this.state.password,
                         accountType: this.state.accountType
                     })

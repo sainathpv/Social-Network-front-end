@@ -6,39 +6,6 @@ import Cookie from './Utility/Cookie';
 
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
-var interests = []
-
-function delInterest(i) {
-  var currentInterest = document.getElementById("interest" + i)
-  currentInterest.parentElement.removeChild(currentInterest)
-
-  interests.splice(i, 1);
-
-  console.log(interests)
-
-  var options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-    },
-    body: JSON.stringify({
-      interests: interests
-    })
-  };
-
-  fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
-    .then(result => {
-      if (result.status === 201) {
-        return result.json();
-      } else {
-        console.log('failed');
-        return null;
-      }
-    }).then(result => {
-    });
-}
-
 
 class Profile extends Component {
 
@@ -46,8 +13,8 @@ class Profile extends Component {
     super(props);
 
     this.state = {
-      name: "", profileIMG: "", major: "", studentType: "", year: "", bio: "", fname: "", lname: "",
-      posts: [], events: [], friends: [], chats: [],
+      name: "", profileIMG: "", major: "", studentType: "fdsafdsa", studentYear: "fdsafdsa", bio: "", trueName: "",
+      posts: [], events: [], friends: [], chats: [], interests: [],
       changed: false,
     }
     //TODO: check if there is a token redirect to login if invalid
@@ -55,9 +22,12 @@ class Profile extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.getProfileData = this.getProfileData.bind(this);
-    
+
     this.addInterest = this.addInterest.bind(this);
     this.handleInterestChange = this.handleInterestChange.bind(this);
+    this.delInterest = this.delInterest.bind(this);
+    this.changeStudentType = this.changeStudentType.bind(this);
+    this.changeStudentYear = this.changeStudentYear.bind(this);
     this.getProfileData();
 
   }
@@ -95,29 +65,30 @@ class Profile extends Component {
           document.body.className = "";
         }
 
-        interests = result.interests
-
         this.setState({
           name: result.name,
           profileIMG: result.profileImageUrl,
           major: result.major,
           studentType: result.studentType,
-          year: result.year,
+          studentYear: result.year,
           settings: result.settings,
           posts: result.posts,
           events: result.events,
           friends: friends,
           chats: result.chats,
           bio: result.bio,
-          fname: result.fname,
-          lname: result.lname,
+          trueName: result.trueName,
+          interests: result.interests
         });
 
-        document.getElementById("username").textContent = result.name;
-        document.getElementById("lastName").placeholder = result.lname;
-        document.getElementById("firstName").placeholder = result.fname;
-        document.getElementById("userName").placeholder = result.name;
-
+        console.log(result)
+        console.log("my student type: " + this.state.studentType);
+        console.log("my student year: " + this.state.studentYear);
+        document.getElementById("nameTitle").textContent = result.name;
+        document.getElementById("trueName").placeholder = result.trueName;
+        document.getElementById("name").placeholder = result.name;
+        var ddm = document.getElementById("ddm")
+        console.log(ddm.innerHTML)
         if (result.bio !== "") {
           document.getElementById("profileBio").placeholder = result.bio;
         } else {
@@ -129,6 +100,14 @@ class Profile extends Component {
         } else {
           document.getElementById("major").placeholder = "Major Unknown";
         }
+
+        if(!result.studentType){
+          this.state.studentType = "Undergraduate";
+        }
+        if(!result.studentYear){
+          this.state.studentYear = "Freshman";
+        }
+
       });
     } catch (err) {
       console.log(err);
@@ -139,9 +118,8 @@ class Profile extends Component {
   handleChange(event) {
     this.setState({
       bio: document.getElementById('profileBio').value,
-      fname: document.getElementById('firstName').value,
-      lname: document.getElementById('lastName').value,
-      name: document.getElementById('userName').value,
+      trueName: document.getElementById('trueName').value,
+      name: document.getElementById('name').value,
       major: document.getElementById('major').value,
       changed: true,
     });
@@ -159,10 +137,11 @@ class Profile extends Component {
         },
         body: JSON.stringify({
           bio: this.state.bio,
-          fname: this.state.fname,
-          lname: this.state.lname,
+          trueName: this.state.trueName,
           name: this.state.name,
           major: this.state.major,
+          studentType: this.state.studentType,
+          studentYear: this.state.studentYear,
         })
       };
       fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
@@ -184,26 +163,15 @@ class Profile extends Component {
   addInterest() {
     document.getElementById("interestWarning").textContent = "";
     var newInterest = document.getElementById('inputInterest').value
-    if (interests.includes(newInterest)) {
+    if (this.state.interests.includes(newInterest)) {
       document.getElementById("interestWarning").textContent = "Your new interest already exists in the list";
     } else if (newInterest === "") {
       document.getElementById("interestWarning").textContent = "Your input interest is empty";
     } else {
       document.getElementById('inputInterest').value = ''
-      var currentLength = interests.length
-      interests.push(newInterest);
-      var interestButton = document.createElement("BUTTON");
-      interestButton.onclick = function delInterest() {
-        console.log(currentLength)
-        this.parentElement.removeChild(this);
-        interests.splice(currentLength, 1);
-        console.log(interests)
-      }
-      var interestText = document.createTextNode(newInterest);
-      interestButton.appendChild(interestText);
-      document.getElementById("interestsList").appendChild(interestButton);
-      this.setState({changed: true});
-
+      this.state.interests.push(newInterest);
+      this.setState({ changed: true });
+      console.log(this.state.interests)
       var options = {
         method: 'POST',
         headers: {
@@ -211,10 +179,9 @@ class Profile extends Component {
           'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
         },
         body: JSON.stringify({
-          interests: interests
+          interests: this.state.interests
         })
       };
-
       fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
         .then(result => {
           if (result.status === 201) {
@@ -227,23 +194,73 @@ class Profile extends Component {
         });
     }
   }
-  
-  handleInterestChange(event){
+
+
+  delInterest(i) {
+    var currentInterest = document.getElementById("interest" + i)
+    currentInterest.parentElement.removeChild(currentInterest)
+
+    this.state.interests.splice(i, 1);
+
+    console.log(this.state.interests)
+
+    var options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+      },
+      body: JSON.stringify({
+        interests: this.state.interests
+      })
+    };
+
+    fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
+      .then(result => {
+        if (result.status === 201) {
+          return result.json();
+        } else {
+          console.log('failed');
+          return null;
+        }
+      }).then(result => {
+      });
+  }
+
+  handleInterestChange(event) {
     document.getElementById("interestWarning").textContent = "";
-    if (event.key === 'Enter'){
+    if (event.key === 'Enter') {
       document.getElementById("addInterestButton").click();
     }
   }
 
 
-  delAccount() {}
-  changeStudentType() {}
-  changeStudentYear() {}
-  changeImg() {}
-  //jump back to homepage, the href link needs to be changed to server after
-  swapToHome() { window.location.href = "http://localhost:3000/";}
+  delAccount() { }
 
+  changeStudentType(sType) { 
+    event.preventDefault();
+    
+    if(sType == 'ph.d.'){
+      sType = 'Ph.D.'
+    } else {
+      sType = sType[0].toUpperCase() + sType.slice(1); 
+    }
+    this.setState({ studentType: sType });
+    this.state.changed = true
+  }
+
+  changeStudentYear(sYear) { 
+    event.preventDefault();
+    this.setState({ studentYear: sYear });
+    this.state.changed = true
+  }
+
+  changeImg() { }
   
+  //jump back to homepage, the href link needs to be changed to server after
+  swapToHome() { window.location.href = "http://localhost:3000/"; }
+
+
 
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
@@ -269,7 +286,7 @@ class Profile extends Component {
           <div className="profileimg">
             <img id="profileIMG" src={"http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt='' />
             <div className="container">
-              <h1 id="username">Undefined</h1>
+              <h1 id="nameTitle">Undefined</h1>
               <br />
             </div>
             <input type="file"></input>
@@ -286,28 +303,26 @@ class Profile extends Component {
 
         <div className="basicInfo d-flex space-between p-10">
           <div className="studentInfo">
-            <h3>First Name: </h3>
-            <input className="text-input" type="text" id="lastName" onChange={this.handleChange} placeholder="Ex: John" required></input>
-
-            <h3>Last Name: </h3>
-            <input className="text-input" type="text" id="firstName" onChange={this.handleChange} placeholder="Ex: Smith" required></input>
-
+            <h3>Your Name: </h3>
+            <input className="text-input" type="text" id="trueName" onChange={this.handleChange} placeholder="Ex: John Smith" required></input>
             <h3>Username: </h3>
-            <input className="text-input" type="text" id="userName" onChange={this.handleChange} placeholder="Ex: johnsmith" required></input>
+            <input className="text-input" type="text" id="name" onChange={this.handleChange} placeholder="Ex: johnsmith" required></input>
 
-            <div className="dropDownMenu">
+            <h3>Major: </h3>
+            <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Ex: Computer Science" required></input>
+
+
+            <div className="dropDownMenu" id="ddm">
               <h3>Student Type:</h3>
-              <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label="Undergraduate" handle={this.changeStudentType} />
+              <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label={this.state.studentType != "" ? <tag />: ""} handle={this.changeStudentType} />
               <h3>Current Year:</h3>
-              <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label="Freshman" handle={this.changeStudentYear} />
+              <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label={this.state.studentYear} handle={this.changeStudentYear} />
             </div>
           </div>
 
           <br />
 
           <div className="interestHeading">
-            <h3>Major: </h3>
-            <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Ex: Computer Science" required></input>
 
             <h3>Your Interests: </h3>
             <input className="text-input" type="text" id="inputInterest" onKeyDown={this.handleInterestChange} placeholder="Ex: Fortnite" required></input>
@@ -315,9 +330,9 @@ class Profile extends Component {
             <br />
             <ul id="interestsList" className="myList border-lg border-round-small">
               {
-                interests.map((interest, i) => {
+                this.state.interests.map((interest, i) => {
                   return (
-                    <button onClick={() => delInterest(i)} id={"interest" + i} key={i}>{interest}</button>)
+                    <button onClick={() => this.delInterest(i)} id={"interest" + i} key={i}>{interest}</button>)
                 })
               }
             </ul>
@@ -335,12 +350,12 @@ class Profile extends Component {
         <div className="criticalInfo p-10">
           <div className="resetPsw">
             <h3>Current Password:</h3>
-            <input className="text-input" type="text" id="curPassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
+            <input className="text-input" type="text" id="curPassword" onChange={this.handlePswChange} placeholder="Ex: 123456" required></input>
             <h3>New Password:</h3>
-            <input className="text-input" type="text" id="newPassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
+            <input className="text-input" type="text" id="newPassword" onChange={this.handlePswChange} placeholder="Ex: 123456" required></input>
             <h3>Re-enter New Password:</h3>
-            <input className="text-input" type="text" id="rePassword" onChange={this.handleChange} placeholder="Ex: 123456" required></input>
-            <br/><br/>
+            <input className="text-input" type="text" id="rePassword" onChange={this.handlePswChange} placeholder="Ex: 123456" required></input>
+            <br /><br />
             <button onClick={this.resetPsw} className="btn-primary">Reset Password</button>
 
           </div>
@@ -369,7 +384,7 @@ class Profile extends Component {
         <div className="p-10">
           <button onClick={this.delAccount} className="btn-warn">Delete Profile</button>
         </div>
-        
+
       </div>
     )
   }

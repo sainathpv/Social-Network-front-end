@@ -133,7 +133,7 @@
       height: 30px; }
     #dashboard #dash_postPanel .postForm h3 {
       margin: 10px 40px; }
-    #dashboard #dash_postPanel .postForm form {
+    #dashboard #dash_postPanel .postForm .form {
       padding: 10px 40px; }
   #dashboard #dash_postPanel .posts {
     padding: 65px 0; }

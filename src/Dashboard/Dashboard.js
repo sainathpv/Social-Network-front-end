@@ -2,6 +2,7 @@ import React from 'react';
 import ProfilePanel from './ProfilePanel';
 import PostPanel from './PostPanel';
 import NetworkPanel from './NetworkPanel';
+import Helmet from 'react-helmet';
 import './../css/dashboard/dashboard.css';
 class Dashboard extends React.Component{
     constructor(props){
@@ -21,6 +22,9 @@ class Dashboard extends React.Component{
     render(){
         return (
             <div id="dashboard" className="d-grid text-primary">
+                <Helmet>
+                    <title>Hoosier Connection</title>
+                </Helmet>
                 <ProfilePanel showPostForm={this.showPostForm} />
                 <PostPanel showPostForm={this.showPostForm} isPostFormHidden={this.isPostFormHidden.bind(this)} />
                 <NetworkPanel />
@@ -29,7 +33,3 @@ class Dashboard extends React.Component{
     }
 }
 export default Dashboard;
-
-
-// WEBPACK FOOTER //
-// src/Dashboard/Dashboard.js

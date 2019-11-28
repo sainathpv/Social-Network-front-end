@@ -29,7 +29,7 @@ function delInterest(i) {
 
   fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
     .then(result => {
-      if (result.status == 201) {
+      if (result.status === 201) {
         return result.json();
       } else {
         console.log('failed');
@@ -118,13 +118,13 @@ class Profile extends Component {
         document.getElementById("firstName").placeholder = result.fname;
         document.getElementById("userName").placeholder = result.name;
 
-        if (result.bio != "") {
+        if (result.bio !== "") {
           document.getElementById("profileBio").placeholder = result.bio;
         } else {
           document.getElementById("profileBio").placeholder = "A little section devoted to everything about you.";
         }
 
-        if (result.major != "") {
+        if (result.major !== "") {
           document.getElementById("major").placeholder = result.major;
         } else {
           document.getElementById("major").placeholder = "Major Unknown";
@@ -167,7 +167,7 @@ class Profile extends Component {
       };
       fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile', options)
         .then(result => {
-          if (result.status == 201) {
+          if (result.status === 201) {
             return result.json();
           } else {
             console.log('failed');
@@ -186,7 +186,7 @@ class Profile extends Component {
     var newInterest = document.getElementById('inputInterest').value
     if (interests.includes(newInterest)) {
       document.getElementById("interestWarning").textContent = "Your new interest already exists in the list";
-    } else if (newInterest == "") {
+    } else if (newInterest === "") {
       document.getElementById("interestWarning").textContent = "Your input interest is empty";
     } else {
       document.getElementById('inputInterest').value = ''
@@ -202,7 +202,7 @@ class Profile extends Component {
       var interestText = document.createTextNode(newInterest);
       interestButton.appendChild(interestText);
       document.getElementById("interestsList").appendChild(interestButton);
-      this.state.changed = true;
+      this.setState({changed: true});
 
       var options = {
         method: 'POST',
@@ -217,7 +217,7 @@ class Profile extends Component {
 
       fetch('http://' + process.env.REACT_APP_API_HOST + '/profiles/editprofile_interest', options)
         .then(result => {
-          if (result.status == 201) {
+          if (result.status === 201) {
             return result.json();
           } else {
             console.log('failed');

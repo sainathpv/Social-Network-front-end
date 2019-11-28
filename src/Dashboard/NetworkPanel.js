@@ -5,13 +5,8 @@ import Cookie from './../Utility/Cookie';
 class NetworkPanel extends React.Component{
     constructor(props){
         super(props);
-        
-        var events = [
-            {name: "Guy Fawkes Night", location: "232 Walnut Str.", company: "The English Pub", date: "November 5th"},
-            {name: "Thanksgiving Dinner", location: "243 Walnut Str.", company: "Turkey Eaters", date: "November 28th"}
-        ]
 
-        this.state = {tabOpened: false, events: events, interests: [], friends: []};
+        this.state = {tabOpened: false, events: null, interests: [], friends: null};
         this.closePanel = this.closePanel.bind(this);
         this.expandPanel = this.expandPanel.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
@@ -33,27 +28,19 @@ class NetworkPanel extends React.Component{
             fetch("http://" + process.env.REACT_APP_API_HOST  + "/profiles/profile", options).then( result => {
                 return result.json();
             }).then( result => {
-
-                var friends = [
-                    {name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Tex Mex", profileImageURL: "/assets/images/profiles/person3.png", accepted: true},
-                    {name: "Frank Ocean", profileImageURL: "/assets/images/profiles/person4.jpg", accepted: true},
-                    {name: "Davis Lee", profileImageURL: "/assets/images/profiles/person5.jpg", accepted: true},
-                    {name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true},
-                    {name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true},
-                    {name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true}
-                ];
         
-                var events = [
-                    {name: "Guy Fawkes Night", location: "232 Walnut Str.", company: "The English Pub", date: "November 5th"},
-                    {name: "Thanksgiving Dinner", location: "243 Walnut Str.", company: "Turkey Eaters", date: "November 28th"}
-                ]
-
                 this.setState({
                     interests: result.interests,
-                    events: events,
-                    friends: friends
+                    events: result.events
+                });
+
+                fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends", options).then( result => {
+                    return result.json();
+                }).then( result => {
+                    console.log(result.friends);
+                    this.setState({
+                        friends: result.friends
+                    });
                 });
             });
         }catch(err){
@@ -135,22 +122,25 @@ class NetworkPanel extends React.Component{
                             <div className="friends">
                                 <h3>Friends</h3>
                                 <ul className="d-grid">
-                                    {
-                                        this.state.friends.map((friend, i) => {
-                                            if(i < 9 && friend.accepted){
+                                    {//this.state.friends !== null prevents it from attempting to view profiles prior to fetching the friends object
+                                    }
+                                    { this.state.friends !== null && this.state.friends.profiles ? 
+                                        this.state.friends.profiles.map((friend, i) => {
+                                            if(i < 9 && friend.status === "accepted"){
                                                 return(
-                                                <li key={i}>
-                                                    <img height="50px" width="50px" className="d-block border-lg border-round m-auto" src={"http://" + process.env.REACT_APP_API_HOST + friend.profileImageURL} alt={person}  />
-                                                    <h5 className="text-center">{friend.name}</h5>
-                                                </li>
-                                                )
+                                                    <li key={i}>
+                                                        <img height="50px" width="50px" className="d-block border-lg border-round m-auto" 
+                                                        src={"http://" + process.env.REACT_APP_API_HOST + friend.profileIMG} alt={person}  />
+                                                        <h5 className="text-center">{friend.name}</h5>
+                                                    </li>
+                                                );
                                             }else{
-                                                return("")
+                                                return("");
                                             }
                                         })
+                                        : ""
                                     }
                                 </ul>
-
                             </div>
                             <hr />
                             <div className="interests">
@@ -162,13 +152,12 @@ class NetworkPanel extends React.Component{
                                     }else{
                                         return("");
                                     }
-                                    
                                 })}
                                 </ul>
                                 
                             </div>
                             <hr />
-                            <EventsSection events={this.state.events} />
+                            { this.state.events ? <EventsSection events={this.state.events} /> : <h3>Events</h3>}
                         </div>
                     </div>
                 </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Cookie from './../Utility/Cookie';
+import Poll from './Poll';
 import './../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
@@ -83,6 +84,9 @@ class Post extends React.Component{
             case "post":
                 this.getSharedPost();
                 break;
+            case "poll":
+                this.setState({post: <Poll data={this.state.content} />})
+                break;
             default:
 
             
@@ -132,6 +136,7 @@ class Post extends React.Component{
         }
 
     }
+    
     getVote(){
         var options = {
             method: 'GET',
@@ -139,7 +144,7 @@ class Post extends React.Component{
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
             }
-        }
+        };
 
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/getvote/" + this.state.id, options).then(result => {
             return result.json();
@@ -149,6 +154,7 @@ class Post extends React.Component{
              });
         });
     }
+
     votePost(vote){
         var options = {
             method: 'POST',
@@ -158,16 +164,15 @@ class Post extends React.Component{
             },
             body: JSON.stringify({
                 postID: this.state.id,
-                vote: this.state.vote != vote ? vote : 0
+                vote: this.state.vote !== vote ? vote : 0
             })
         }
 
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postvote", options).then(result => {
             return result.json();
         }).then(result => {
-            console.log(result);
             this.setState({
-                vote: this.state.vote != vote ? vote : 0,
+                vote: this.state.vote !== vote ? vote : 0,
                 dislikes: result.numDislikes,
                 likes: result.numLikes
             });
@@ -194,7 +199,6 @@ class Post extends React.Component{
                             <h5 className="d-inline"> {this.state.comments.length}</h5>
                         </div>
                         <div className="label" onClick={() => this.votePost(1)}>
-                            
                             <i style={this.state.vote === 1 ? {color: "#45c450"} : {color: "lightgrey"} } className="fas fa-thumbs-up"></i>
                             <h5 className="d-inline">{this.state.likes}</h5>
                         </div>
@@ -202,11 +206,9 @@ class Post extends React.Component{
                             <i style={this.state.vote === -1 ? {color: "#c44545"} : {color: "lightgrey"} }  className="fas fa-thumbs-down"></i>
                             <h5 className="d-inline">{this.state.dislikes}</h5>
                         </div>
-                        
-                            <div className="label">
-                                <i className="fas fa-share" onClick={this.share}></i>
-                            </div>
-
+                        <div className="label">
+                            <i className="fas fa-share" onClick={this.share}></i>
+                        </div>
                         <div>
                             <i className="fas fa-tags"></i>
                             <ul className="d-inline">

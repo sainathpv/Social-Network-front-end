@@ -11,7 +11,6 @@ class QRcode extends Component{
     }
 
     handleChange(event){
-        console.log(event.target.value)
         this.setState({key: event.target.value});
     }
 
@@ -20,9 +19,8 @@ class QRcode extends Component{
         var data = {
             token: document.getElementById('qr_code').value
         }
-        console.log(Cookie.getCookie('HC_JWT'));
+
         var options = {
-        
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,10 +39,7 @@ class QRcode extends Component{
                 return null;
             }
         }).then(result => {
-            if(result === null){
-                //TODO: handle failed login
-            }else{
-                console.log(result.token);
+            if(result !== null){
                 var date = new Date();
                 date = new Date(date.getTime() + (60*60*1000));
                 Cookie.setCookie('HC_JWT', result.token, date); 
@@ -66,8 +61,8 @@ class QRcode extends Component{
                     <label>CODE:</label>
                     <input id="qr_code" onChange={this.handleChange} autoComplete="off" spellCheck="false" className="border-lg border-round-small" type="text" required></input>
                 </div>
-                <p id="warning"></p> <br/>
-                <button type="submit" >Verify</button>
+                <p id="warning"></p>
+                <div className="m-auto submitBox"> <button type="submit" >Verify</button></div>
             </form>
         );
     }

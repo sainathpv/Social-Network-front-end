@@ -27,6 +27,22 @@ class PostForm extends Component {
         this.setState({ content: document.getElementById("postFormContent").value });
     }
 
+    addItem(event){
+        event.preventDefault();
+        var ul = event.target;
+        var input = event.target;
+        while(!input.classList.contains("itemInput")){
+            input = input.previousElementSibling;
+        }
+        while(!ul.classList.contains("itemList")){
+            ul = ul.previousElementSibling;
+        }
+        if(input.value === "") return;
+        const li = document.createElement("li");
+        li.textContent = input.value;
+        ul.appendChild(li);
+    }
+
     createPost(event) {
         event.preventDefault();
         var options = {
@@ -51,6 +67,13 @@ class PostForm extends Component {
                 type: this.state.type,
                 content: this.state.content
             };
+            if(this.state.type === "poll"){
+                var categories = Array.from(document.getElementById("postFormCategories").childNodes)
+                    .map((category, i) => category.textContent);
+                console.log(categories);
+                body.categories = categories;
+                console.log(body.categories);
+            }
 
             if (this.state.type === "image") {
                 var acceptedimages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
@@ -85,7 +108,7 @@ class PostForm extends Component {
                         });
                     });
                 }
-            } else {
+            }else{
 
                 options = {
                     method: 'POST',
@@ -127,7 +150,19 @@ class PostForm extends Component {
                     <input onChange={this.handleChange} id="postFormContent" className="w-100 text-primary border-round-small bg-secondary border-lg d-block" type="text" placeholder="Ex. https://www.youtube.com/watch?v=Tzl0ELY_TiM"></input>
                 </div>
             );
-        } else {
+        }else if(this.state.type === "poll"){
+            return (
+                <div>
+                    <label>Categories:</label>
+                    <ul id="postFormCategories" className="itemList">                          
+                    </ul>
+                    <br />
+                    <label>Category:</label>
+                    <input className="itemInput w-100 text-primary border-round-small bg-secondary border-lg d-block" type="text"></input>
+                    <button onClick={this.addItem} className="btn-primary">Add Category</button>
+                </div>
+            );
+        }else{
 
             return (
                 <div className="p-relative">
@@ -142,11 +177,11 @@ class PostForm extends Component {
             <div className="postForm d-block m-auto bg-primary p-fixed border-lg border-round-small" >
                 <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i></div>
                 <hr />
-                <form onSubmit={this.createPost}>
+                <form className="form" onSubmit={this.createPost}>
                     <label>Title:</label><br />
                     <input id="postFormTitle" className="d-block text-primary border-round-small bg-secondary border-lg w-100"></input>
                     <label>Type Of Post:</label>
-                    <DropDownMenu items={["Video", "Image", "Text"]} label="Text" handle={this.changeType} /><br />
+                    <DropDownMenu items={["Video", "Image", "Text", "Poll"]} label="Text" handle={this.changeType} /><br />
                     <label>Tag:</label>
                     <input id="postFormTag" className="d-block text-primary border-round-small bg-secondary border-lg w-100" placeholder="Ex. Computer Science"></input>
                     {this.getType()}

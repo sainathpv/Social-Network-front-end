@@ -264,6 +264,25 @@ width: 100%;
   width: 70%;
 }
 
+#profilePage .friends_heading{
+    margin: auto;
+    width: 80%;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+}
+
+#profilePage .friends{
+    margin: auto;
+    width: 80%;
+    position: relative;
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+}
+
 #profilePage .editButton {
     padding: 9px 20px;
     display: inline;
@@ -271,6 +290,7 @@ width: 100%;
     color: black; 
     border: 2px solid #990000;
     margin: 10px;
+    
 }
 
 #profilePage .editButton:hover {

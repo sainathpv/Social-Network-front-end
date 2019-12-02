@@ -3,6 +3,7 @@ import './css/profile.css';
 import logo from './images/HC.svg';
 import DropDownMenu from './Utility/DropDown';
 import Cookie from './Utility/Cookie';
+import person from './images/person-generic.jpg';
 
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
@@ -14,7 +15,7 @@ class Profile extends Component {
 
     this.state = {
       name: "", profileImageUrl: "", major: "", studentType: "", studentYear: "", bio: "", trueName: "",
-      posts: [], events: [], friends: [], chats: [], interests: [],
+      posts: [], events: [], friends: null, chats: [], interests: [],
       changed: false, profileImageChanged: false, profileImage: "",
       curPsw: "", newPsw: "", reNewPsw: "",
       curEmail: "", varifyCode: "", newEmail: "",
@@ -37,7 +38,12 @@ class Profile extends Component {
     this.handleCodeChange = this.handleCodeChange.bind(this);
     this.handleNewEmailChange = this.handleNewEmailChange.bind(this);
     this.sendCode = this.sendCode.bind(this);
+    this.resetEmail = this.resetEmail.bind(this);
+    this.getFriendsData = this.getFriendsData.bind(this);
+    this.delAccount = this.delAccount.bind(this);
     this.getProfileData();
+    this.getFriendsData();
+
 
   }
 
@@ -55,25 +61,11 @@ class Profile extends Component {
       fetch("http://" + process.env.REACT_APP_API_HOST + "/profiles/profile", options).then(result => {
         return result.json();
       }).then(result => {
-        var friends = [
-          { name: "John Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
-          { name: "Sally Sue", profileImageURL: "/assets/images/profiles/person2.png", accepted: true },
-          { name: "Tex Mex", profileImageURL: "/assets/images/profiles/person3.png", accepted: true },
-          { name: "Frank Ocean", profileImageURL: "/assets/images/profiles/person4.jpg", accepted: true },
-          { name: "Davis Lee", profileImageURL: "/assets/images/profiles/person5.jpg", accepted: true },
-          { name: "Alan Jons", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
-          { name: "Michelle Zimmer", profileImageURL: "/assets/images/profiles/person2.png", accepted: true },
-          { name: "Quinn Joy", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: true },
-          { name: "James Smith", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false },
-          { name: "Hal Lee", profileImageURL: "/assets/images/profiles/person1.jpg", accepted: false }
-        ]
-
         if (result.settings.darkmode) {
           document.body.className = "darkmode";
         } else {
           document.body.className = "";
         }
-
         this.setState({
           name: result.name,
           profileImageUrl: result.profileImageUrl,
@@ -83,7 +75,6 @@ class Profile extends Component {
           settings: result.settings,
           posts: result.posts,
           events: result.events,
-          friends: friends,
           chats: result.chats,
           bio: result.bio,
           trueName: result.trueName,
@@ -93,7 +84,7 @@ class Profile extends Component {
         //console.log(result)
         //console.log("my student type: " + this.state.studentType);
         //console.log("my student year: " + this.state.studentYear);
-        console.log(result.profileImageUrl)
+        //console.log(result.profileImageUrl)
         document.getElementById("nameTitle").textContent = result.name;
         document.getElementById("trueName").placeholder = result.trueName;
         document.getElementById("name").placeholder = result.name;
@@ -277,9 +268,6 @@ class Profile extends Component {
     }
   }
 
-
-
-
   changeStudentType(sType) {
     event.preventDefault();
 
@@ -379,7 +367,7 @@ class Profile extends Component {
                 }
               }).then(result => {
                 if (result) {
-                  console.log("we did it");
+                  document.getElementById("resetPswWarning").textContent = "Password changed!";
                 }
               });
           } else {
@@ -436,9 +424,70 @@ class Profile extends Component {
       });
   }
 
-  delAccount() { }
+  resetEmail() {
+    var options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+      },
+      body: JSON.stringify({
+        resetEmailToken: this.state.varifyCode,
+        email: this.state.newEmail
+      })
+    };
+    fetch('http://' + process.env.REACT_APP_API_HOST + '/resetCritical/resetEmail', options)
+      .then(result => {
+        if (result.status === 200) {
+          return result.json();
+        } else {
+          result.json().then(nr => {
+            document.getElementById("resetEmailWarning").textContent = nr.message;
+          })
+          console.log(result);
+          return null;
+        }
+      }).then(result => {
+        if (result) {
+          console.log("we did it");
+        }
+      });
+  }
 
-  logout() { }
+  getFriendsData() {
+    try {
+      var options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+        }
+      }
+      fetch("http://" + process.env.REACT_APP_API_HOST + "/friends", options).then(result => {
+        return result.json();
+      }).then(result => {
+        console.log(result.friends);
+        this.setState({
+          friends: result.friends
+        });
+      });
+    } catch (err) {
+      console.log(err);
+      return false;
+    }
+    return true;
+  }
+
+  logout() { 
+    console.log("logout successful")
+    Cookie.deleteCookie('HC_JWT');
+    window.location.href = "/login";
+  }
+
+  delAccount() {
+    
+  }
+
 
 
 
@@ -525,9 +574,10 @@ class Profile extends Component {
             <h3>Re-enter New Password:</h3>
             <input className="text-input" type="text" id="rePassword" onChange={this.handlePswChange} placeholder="Ex: 123456" required></input>
             <br />
-            <h4 id="resetPswWarning"></h4>
+
             <br />
             <button onClick={this.resetPsw} className="btn-primary">Reset Password</button>
+            <br /><h4 id="resetPswWarning"></h4>
           </div>
           <div className="resetEml">
             <h3>Current Email:</h3>
@@ -535,16 +585,43 @@ class Profile extends Component {
             <button onClick={this.sendCode} className="btn-primary">Send</button>
             <h3>Varification:</h3>
             <input className="text-input" type="text" id="varifyCode" onChange={this.handleCodeChange} placeholder="Code from your email" required></input>
-            
+
             <h3>New Email:</h3>
             <input className="text-input" type="text" id="newEmail" onChange={this.handleNewEmailChange} placeholder="Ex: johnsmith@gg.com" required></input>
-            
-            <br /><h4 id="resetEmailWarning"></h4><br />
+
+            <br /><br />
             <button onClick={this.resetEmail} className="btn-primary">Reset Email</button>
+            <br /><h4 id="resetEmailWarning"></h4>
           </div>
         </div>
         <hr />
+        <div className="friends_heading"><h3>List of Friends: </h3></div>
+        <div className="friends">
+          <ul className="d-grid">
+            {//this.state.friends !== null prevents it from attempting to view profiles prior to fetching the friends object
+            }
+            {this.state.friends !== null && this.state.friends.profiles ?
+              this.state.friends.profiles.map((friend, i) => {
+                if (i < 9 && friend.status === "accepted") {
+                  return (
+                    <li key={i}>
+                      <img height="50px" width="50px" className="d-block border-lg border-round m-auto"
+                        src={"http://" + process.env.REACT_APP_API_HOST + friend.profileIMG} alt={person} />
+                      <h5 className="text-center">{friend.name}</h5>
+                    </li>
+                  );
+                } else {
+                  return ("");
+                }
+              })
+              : ""
+            }
+          </ul>
+        </div>
+        <hr />
+
         <div className="p-10">
+          <button onClick={this.logout} className="btn-primary">Logout</button>
           <button onClick={this.delAccount} className="btn-warn">Delete Profile</button>
         </div>
       </div>

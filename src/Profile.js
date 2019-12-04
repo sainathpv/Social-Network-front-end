@@ -485,7 +485,36 @@ class Profile extends Component {
   }
 
   delAccount() {
-    
+    if (confirm("Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!")) {
+      try {
+        var options = {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+          }
+        }
+        fetch("http://" + process.env.REACT_APP_API_HOST + "/users/deleteUser", options).then(result => {
+          if (result.status === 200) {
+            return result.json();
+          } else {
+            result.json().then(nr => {
+              document.getElementById("resetEmailWarning").textContent = nr.message;
+            })
+            console.log(result);
+            return null;
+          }
+        }).then(result => {
+          if (result) {
+            alert(result.message, "\n\nPlease refresh the page");
+            window.location.href = "/login";
+          }
+        });
+      } catch (err) {
+        console.log(err);
+        return false;
+      }
+    }
   }
 
 

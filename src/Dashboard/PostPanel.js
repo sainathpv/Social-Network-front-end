@@ -66,8 +66,8 @@ class PostPanel extends React.Component{
             this.getPosts(result.interests);
         });
     }
+    
     renderPostForm(){
-
         if(this.state.isPostFormHidden()){
             return <PostForm closeForm={this.state.showPostForm} />
         }else{

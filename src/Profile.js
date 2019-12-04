@@ -103,10 +103,10 @@ class Profile extends Component {
         }
 
         if (!result.studentType) {
-          this.state.studentType = "Undergraduate";
+          this.setState({studentType: "Undergraduate"});
         }
         if (!result.studentYear) {
-          this.state.studentYear = "Freshman";
+          this.setState({studentYear: "Freshman"});
         }
 
       });
@@ -271,19 +271,19 @@ class Profile extends Component {
   changeStudentType(sType) {
     event.preventDefault();
 
-    if (sType == 'ph.d.') {
+    if (sType === 'ph.d.') {
       sType = 'Ph.D.'
     } else {
       sType = sType[0].toUpperCase() + sType.slice(1);
     }
     this.setState({ studentType: sType });
-    this.state.changed = true
+    this.setState({changed: true});
   }
 
   changeStudentYear(sYear) {
     event.preventDefault();
     this.setState({ studentYear: sYear });
-    this.state.changed = true
+    this.setState({changed: true});
   }
 
   changeImg(event) {
@@ -301,8 +301,8 @@ class Profile extends Component {
         profileImg.src = event.target.result
       };
       reader.readAsDataURL(inputImg);
-      this.state.profileImageChanged = true;
-      this.state.changed = true;
+      this.setState({profileImageChanged: true});
+      this.setState({changed: true});
     }
   }
 
@@ -536,10 +536,10 @@ class Profile extends Component {
             <input className="text-input" type="text" id="major" onChange={this.handleChange} placeholder="Ex: Computer Science" required></input>
             <div className="dropDownMenu" id="ddm">
               <h3>Student Type:</h3>
-              {this.state.studentType != "" ?
+              {this.state.studentType !== "" ?
                 <DropDownMenu items={["Undergraduate", "Master", "Ph.D."]} label={this.state.studentType} handle={this.changeStudentType} /> : ""}
               <h3>Current Year:</h3>
-              {this.state.studentYear != "" ?
+              {this.state.studentYear !== "" ?
                 <DropDownMenu items={["Freshman", "Sophomore", "Junior", "Senior"]} label={this.state.studentYear} handle={this.changeStudentYear} /> : ""}
             </div>
           </div>

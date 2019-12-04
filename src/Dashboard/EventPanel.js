@@ -1,12 +1,27 @@
 import React, { Component } from 'react';
-import PostPanel from './PostPanel';
-import ChatPanel from './ChatPanel';
 
 class App extends Component {
     constructor(props){
         super(props);
-        this.state = {changePanel: props.changePanel, chats: []};
+        this.state = {changePanel: props.changePanel, events: []};
         this.changePanel = this.changePanel.bind(this);
+        this.getEvents = this.getEvents.bind(this);
+    }
+
+    getEvents(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/events/", options).then( result => {
+            return result.json();
+        }).then( result => {
+            console.log(result);
+            this.setState({events: result.events});
+        });
     }
 
     changePanel(event){
@@ -18,7 +33,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
             <div id="dash_eventPanel">
                 <nav>
@@ -30,8 +44,12 @@ class App extends Component {
                         </ul>
                     </div>
                 </nav>
-                <ul className="event">
-
+                <ul className="events">
+                    {
+                        this.state.events.map((event, i) => {
+                            return <Event key={i} event={event} />
+                        })
+                    }
                 </ul>
             </div>
         );

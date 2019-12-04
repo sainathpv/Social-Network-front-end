@@ -525,7 +525,6 @@ class Profile extends Component {
   render() {
     return (
       <div id="profilePage" className="bg-primary text-primary">
-
         <div className="heading">
           <div>
             <img src={logo} alt='' width='50px' />
@@ -648,7 +647,6 @@ class Profile extends Component {
           </ul>
         </div>
         <hr />
-
         <div className="p-10">
           <button onClick={this.logout} className="btn-primary">Logout</button>
           <button onClick={this.delAccount} className="btn-warn">Delete Profile</button>

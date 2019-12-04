@@ -67,7 +67,6 @@ button:hover {
 }
 .d-inline {
   display: inline;
-  margin-top: 10%;
 }
 * {
   box-sizing: border-box;
@@ -151,7 +150,7 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px solid lightgray;
+  border: solid 0.5px lightgray;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;

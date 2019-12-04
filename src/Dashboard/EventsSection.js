@@ -27,7 +27,7 @@ class EventsSection extends Component {
 
     render() {
         return (
-        <div className="events">
+        <div id="dash_eventPanel" className="events">
             <h3>Your Events</h3>
             <ul>
                 {this.state.events.map((event, i) => {
@@ -35,12 +35,22 @@ class EventsSection extends Component {
                         return(
                             <li key={i.toString()} className="d-flex">
                                 <div>
-                                    <h4>{event.name}</h4>
-                                    <h5>{event.location}</h5>
+                                    <div>
+                                        <h4>{event.eventName}</h4>
+                                    </div>
+                                    <div>
+                                        <h4>Location:</h4>
+                                        <h5>{event.location}</h5>
+                                    </div>
                                 </div>
                                 <div>
-                                    <h4 className="text-right">{event.company}</h4>
-                                    <h5 className="text-right">{event.date}</h5>
+                                    <div>
+                                        <h4 className="text-right">{event.company}</h4>
+                                    </div>
+                                    <div>
+                                        <h4>Date:</h4>
+                                        <h5 className="text-right">{event.date} @ {event.time}</h5>
+                                    </div>
                                 </div>
                             </li>
                         );

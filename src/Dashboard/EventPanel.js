@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-
-class App extends Component {
+import Event from './Event';
+class EventPanel extends Component {
     constructor(props){
         super(props);
         this.state = {changePanel: props.changePanel, events: []};
         this.changePanel = this.changePanel.bind(this);
         this.getEvents = this.getEvents.bind(this);
+        this.getEvents();
     }
 
     getEvents(){
@@ -16,10 +17,9 @@ class App extends Component {
             }
         };
 
-        fetch("http://"+ process.env.REACT_APP_API_HOST +"/events/", options).then( result => {
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/events", options).then( result => {
             return result.json();
         }).then( result => {
-            console.log(result);
             this.setState({events: result.events});
         });
     }
@@ -56,4 +56,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default EventPanel;

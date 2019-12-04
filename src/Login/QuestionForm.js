@@ -55,7 +55,7 @@ class QuestionForm extends React.Component {
                 }],
             })
         };
-        console.log(options.body);
+        
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/users/questions", options).then( result => {
            if(result.status === 200){
                return result.json();
@@ -63,7 +63,6 @@ class QuestionForm extends React.Component {
                return null;
            }
         }).then(result => {
-            console.log(result);
             if(result !== null){
                 this.setState({QRCode: true});
             }

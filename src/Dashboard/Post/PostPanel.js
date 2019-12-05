@@ -2,7 +2,7 @@ import React from 'react';
 import Post from './Post';
 import PostForm from './PostForm';
 import ShareForm from './ShareForm';
-import Cookie from './../Utility/Cookie';
+import Cookie from '../../Utility/Cookie';
 class PostPanel extends React.Component{
     constructor(props){
         super(props);

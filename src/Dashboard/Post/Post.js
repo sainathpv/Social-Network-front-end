@@ -1,7 +1,7 @@
 import React from 'react';
-import Cookie from './../Utility/Cookie';
+import Cookie from '../../Utility/Cookie';
 import Poll from './Poll';
-import './../css/dashboard/post.css';
+import './../../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
         super(props);

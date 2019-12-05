@@ -1,0 +1,96 @@
+.chat {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  background: white;
+  border: solid 0.5px lightgrey;
+  border-radius: 4px;
+}
+.chat h2, .chat h5 {
+  padding: 1px 40px;
+}
+.chat .postMetaData {
+  padding: 0 40px;
+}
+.chat .postMetaData div {
+  margin: 10px;
+}
+.chat .postMetaData h5 {
+  padding: 5px;
+  font-size: 15px;
+}
+.chat .postMetaData i {
+  color: #3F99EE;
+}
+.chat .postMetaData .label {
+  cursor: pointer;
+}
+.chat .postMetaData ul li {
+  margin: 2px;
+  padding: 3px;
+}
+.chat p {
+  padding: 5px 40px;
+}
+
+#dash_chatRoom h3 {
+  font-size: 24px;
+}
+#dash_chatRoom .header {
+  padding: 10px 30px 0 30px;
+  margin: auto;
+}
+#dash_chatRoom .header h4 {
+  color: grey;
+}
+#dash_chatRoom .chatRoom {
+  width: 90%;
+  margin: 10px auto;
+}
+#dash_chatRoom .chatRoom .chatBox {
+  position: relative;
+  height: calc(100vh - 85px);
+}
+#dash_chatRoom .chatRoom .chatBox form {
+  height: 55px;
+  margin: 5px;
+  width: 95%;
+  margin: auto;
+  justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+#dash_chatRoom .chatRoom .chatBox form input {
+  padding: 0 10px;
+  width: calc(100% - 180px);
+  height: 35px;
+}
+#dash_chatRoom .chatRoom .chatBox form .d-flex {
+  justify-content: space-around;
+}
+#dash_chatRoom .messages {
+  padding: 10px 30px;
+}
+#dash_chatRoom .msg-other h5 {
+  display: inline-block;
+}
+#dash_chatRoom .msg-other p {
+  display: inline-block;
+  color: white;
+  border-radius: 10px;
+  background: #8d8d8d;
+  padding: 10px;
+}
+#dash_chatRoom .msg-user h5 {
+  display: inline-block;
+}
+#dash_chatRoom .msg-user p {
+  display: inline-block;
+  color: white;
+  border-radius: 10px;
+  background: #00a2ff;
+  padding: 10px;
+}
+
+/*# sourceMappingURL=chat.css.map */

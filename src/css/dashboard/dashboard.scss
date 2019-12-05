@@ -7,7 +7,6 @@
     }
 }
 
-
 #dashboard {
     grid-template-columns: 400px auto 400px;
     #dash_profilePanel{
@@ -123,14 +122,8 @@
             }
         }
     }
-    #dash_eventPanel{
 
-    }
-    #dash_chatPanel{
-        
-    }
-
-    #dash_postPanel, #dash_chatPanel, #dash_eventPanel{
+    #dash_postPanel, #dash_chatPanel, #dash_eventPanel, #dash_chatRoom{
         nav .p-fixed {
             z-index: 1;
             text-align: left;
@@ -201,9 +194,19 @@
             padding: 65px 0;
         }
     }
+    #dash_chatPanel{
+        .chats{
+            padding: 65px 0 0 0;
+        }
+    }
     #dash_eventPanel{
         .events{
-            padding: 65px 0;
+            padding: 65px 0 0 0;
+        }
+    }
+    #dash_chatRoom{
+        .chatRoom{
+            padding: 65px 0 0 0;
         }
     }
     #dash_networkPanel{

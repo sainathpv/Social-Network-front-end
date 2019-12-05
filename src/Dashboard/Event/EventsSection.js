@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cookie from './../Utility/Cookie';
+import Cookie from '../../Utility/Cookie';
 class EventsSection extends Component {
 
     constructor(props){
@@ -33,10 +33,10 @@ class EventsSection extends Component {
                 {this.state.events.map((event, i) => {
                     if(i < 4){
                         return(
-                            <li key={i.toString()} className="d-flex">
+                            <li key={i.toString()} className="d-flex border-lg border-round-small">
                                 <div>
                                     <div>
-                                        <h4>{event.eventName}</h4>
+                                        <h4 className="color-red text-bold">{event.eventName}</h4>
                                     </div>
                                     <div>
                                         <h4>Location:</h4>
@@ -45,11 +45,11 @@ class EventsSection extends Component {
                                 </div>
                                 <div>
                                     <div>
-                                        <h4 className="text-right">{event.company}</h4>
+                                        <h4 className="color-red text-bold">{event.company}</h4>
                                     </div>
                                     <div>
                                         <h4>Date:</h4>
-                                        <h5 className="text-right">{event.date} @ {event.time}</h5>
+                                        <h5>{event.date} @ {event.time}</h5>
                                     </div>
                                 </div>
                             </li>

@@ -1,6 +1,6 @@
 import React from 'react';
 //import Cookie from './../Utility/Cookie';
-import './../css/dashboard/event.css';
+import './../../css/dashboard/event.css';
 class Event extends React.Component{
     constructor(props){
         super(props);
@@ -41,7 +41,6 @@ class Event extends React.Component{
             paddingBottom: "51%",
             margin: "10px 0"
         };
-        console.log(this.state.event);
         switch(this.state.event.type){
             case "text":
                 return <p>{this.state.event.content}</p>;

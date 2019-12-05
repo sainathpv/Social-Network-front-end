@@ -116,22 +116,22 @@
   margin: 12.5px 0;
   margin-left: 30px;
 }
-#dashboard #dash_postPanel nav .p-fixed, #dashboard #dash_chatPanel nav .p-fixed, #dashboard #dash_eventPanel nav .p-fixed {
+#dashboard #dash_postPanel nav .p-fixed, #dashboard #dash_chatPanel nav .p-fixed, #dashboard #dash_eventPanel nav .p-fixed, #dashboard #dash_chatRoom nav .p-fixed {
   z-index: 1;
   text-align: left;
   height: 65px;
   padding: 0 5%;
 }
-#dashboard #dash_postPanel nav .p-fixed ul li, #dashboard #dash_chatPanel nav .p-fixed ul li, #dashboard #dash_eventPanel nav .p-fixed ul li {
+#dashboard #dash_postPanel nav .p-fixed ul li, #dashboard #dash_chatPanel nav .p-fixed ul li, #dashboard #dash_eventPanel nav .p-fixed ul li, #dashboard #dash_chatRoom nav .p-fixed ul li {
   margin: 0 20px;
   line-height: 65px;
   font-size: 17px;
 }
-#dashboard #dash_postPanel nav .p-fixed .active, #dashboard #dash_chatPanel nav .p-fixed .active, #dashboard #dash_eventPanel nav .p-fixed .active {
+#dashboard #dash_postPanel nav .p-fixed .active, #dashboard #dash_chatPanel nav .p-fixed .active, #dashboard #dash_eventPanel nav .p-fixed .active, #dashboard #dash_chatRoom nav .p-fixed .active {
   color: #840606;
   position: relative;
 }
-#dashboard #dash_postPanel nav .p-fixed .active::before, #dashboard #dash_chatPanel nav .p-fixed .active::before, #dashboard #dash_eventPanel nav .p-fixed .active::before {
+#dashboard #dash_postPanel nav .p-fixed .active::before, #dashboard #dash_chatPanel nav .p-fixed .active::before, #dashboard #dash_eventPanel nav .p-fixed .active::before, #dashboard #dash_chatRoom nav .p-fixed .active::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -178,8 +178,14 @@
 #dashboard #dash_postPanel .posts {
   padding: 65px 0;
 }
+#dashboard #dash_chatPanel .chats {
+  padding: 65px 0 0 0;
+}
 #dashboard #dash_eventPanel .events {
-  padding: 65px 0;
+  padding: 65px 0 0 0;
+}
+#dashboard #dash_chatRoom .chatRoom {
+  padding: 65px 0 0 0;
 }
 #dashboard #dash_networkPanel {
   z-index: 2;

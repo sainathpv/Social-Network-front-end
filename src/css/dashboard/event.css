@@ -1,0 +1,53 @@
+.event {
+  width: 90%;
+  margin: 10px auto;
+  padding: 10px;
+  background: white;
+  border: solid 0.5px lightgrey;
+  border-radius: 4px;
+}
+.event h2, .event h5 {
+  padding: 1px 40px;
+}
+.event .postMetaData {
+  padding: 0 40px;
+}
+.event .postMetaData div {
+  margin: 10px;
+}
+.event .postMetaData h5 {
+  padding: 5px;
+  font-size: 15px;
+}
+.event .postMetaData i {
+  color: #3F99EE;
+}
+.event .postMetaData .label {
+  cursor: pointer;
+}
+.event .postMetaData ul li {
+  margin: 2px;
+  padding: 3px;
+}
+.event p {
+  padding: 5px 40px;
+}
+.event img, .event iframe {
+  margin: 5px 40px;
+}
+.event img {
+  display: block;
+  margin: auto;
+  max-width: calc(100% - 80px);
+  position: relative;
+}
+.event iframe {
+  z-index: 0;
+  position: absolute;
+  width: calc(100% - 80px);
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+/*# sourceMappingURL=event.css.map */

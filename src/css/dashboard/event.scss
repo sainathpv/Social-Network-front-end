@@ -1,0 +1,51 @@
+.event{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background: white;
+    border: solid .5px lightgrey;
+    border-radius: 4px;
+
+    h2, h5{
+        padding: 1px 40px;
+    }
+    .postMetaData{
+        padding: 0 40px;
+        div{ margin: 10px; }
+        h5{
+            padding: 5px;
+            font-size: 15px;
+        }
+        i{
+            color: #3F99EE;
+        }
+        .label{
+            cursor: pointer;
+        }
+        ul li {
+            margin: 2px;
+            padding: 3px;
+        }
+    }
+    p{
+        padding: 5px 40px;
+    }
+    img, iframe{
+        margin: 5px 40px;
+    }
+    img{
+        display: block;
+        margin: auto;
+        max-width: calc(100% - 80px);
+        position: relative;
+    }
+
+    iframe{
+        z-index: 0;
+        position: absolute;
+        width: calc(100% - 80px);
+        height: 100%;
+        left: 0; top: 0;
+    }
+    
+}

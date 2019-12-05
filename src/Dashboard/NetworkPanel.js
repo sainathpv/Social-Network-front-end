@@ -11,7 +11,8 @@ class NetworkPanel extends React.Component{
         this.expandPanel = this.expandPanel.bind(this);
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.getProfileData = this.getProfileData.bind(this);
-        if(!this.getProfileData()){
+        this.getEvents = this.getEvents.bind(this);
+        if(!this.getProfileData() || this.getEvents()){
             window.location.href = "/login";
         }
     }
@@ -26,18 +27,17 @@ class NetworkPanel extends React.Component{
                 }
             }
             fetch("http://" + process.env.REACT_APP_API_HOST  + "/profiles/profile", options).then( result => {
+                if(result.status >= 400) return false; 
                 return result.json();
             }).then( result => {
         
                 this.setState({
-                    interests: result.interests,
-                    events: result.events
+                    interests: result.interests
                 });
 
                 fetch("http://" + process.env.REACT_APP_API_HOST  + "/friends", options).then( result => {
                     return result.json();
                 }).then( result => {
-                    console.log(result.friends);
                     this.setState({
                         friends: result.friends
                     });
@@ -49,6 +49,24 @@ class NetworkPanel extends React.Component{
         }
 
         return true;
+    }
+
+    getEvents(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        }
+
+        fetch("http://" + process.env.REACT_APP_API_HOST  + "/events/getUserEvents", options).then( result => {
+            return result.json();
+        }).then( result => {
+            this.setState({
+                events: result.events
+            });
+        });
     }
 
     updateWindowDimensions() {

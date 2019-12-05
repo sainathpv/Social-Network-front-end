@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import EventPanel from './EventPanel';
-import PostPanel from './PostPanel';
+
 class App extends Component {
     constructor(props){
         super(props);
@@ -12,7 +11,6 @@ class App extends Component {
         this.setState({panel: event.target.textContent.toLowerCase()});
         var panel = event.target.textContent.toLowerCase();
         if(panel === "home" || panel === "events"){
-            console.log(panel);
             this.state.changePanel(panel);
         }
     }

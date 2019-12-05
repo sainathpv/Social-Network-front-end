@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cookie from './../Utility/Cookie';
+import Cookie from './../../Utility/Cookie';
 
 class ShareForm extends Component {
     constructor(props){

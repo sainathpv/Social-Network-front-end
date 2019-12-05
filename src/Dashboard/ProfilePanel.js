@@ -194,7 +194,6 @@ class ProfilePanel extends React.Component{
 
     rejectFriend(friend){
         event.preventDefault();
-        console.log(friend);
         var data = {
             friend: {
                 profileID: friend.profileID,
@@ -227,7 +226,7 @@ class ProfilePanel extends React.Component{
                     <div className="p-fixed h-100vh bg-primary">
                         <div className="d-flex logobox">
                             <img src={logo} alt=""></img>
-                            <h1 className="text-nunito">Hoosier Connection</h1>
+                            <h1 className="text-nunito color-red text-bold">Hoosier Connection</h1>
                             <i onClick={this.closePanel} id="dash_profilePanelCloseIcon" className="p-absolute d-none fas fa-times"></i>
                         </div>
                         <hr />
@@ -235,7 +234,7 @@ class ProfilePanel extends React.Component{
                             <img onClick={this.goToProfile} className="cursor-pointer border-lg border-round" 
                             src={ "http://" + process.env.REACT_APP_API_HOST + this.state.profileIMG} alt=""/>
                             <div className="color-grey description">
-                                <h3 className="text-nunito">{this.state.name}</h3>
+                                <h3 className="text-nunito text-bold">{this.state.name}</h3>
                                 <div className="text-roboto ">
                                     <h4>{this.state.studentType}</h4>
                                     <h5>{this.state.major}</h5>
@@ -245,11 +244,11 @@ class ProfilePanel extends React.Component{
                             </div>
                         </div>
                         <ul className="activity text-roboto">
-                            <li className="space-between"><a className="description">Posts</a><a className="color-red">{this.state.posts.length}</a></li>
-                            <li className="space-between"><a className="description">Events</a><a className="color-red">{this.state.events.length}</a></li>
-                            <li className="space-between"><a className="description">Friends</a><a className="color-red">
+                            <li className="space-between"><a className="description">Posts</a><a className="color-red text-bold">{this.state.posts.length}</a></li>
+                            <li className="space-between"><a className="description">Events</a><a className="color-red text-bold">{this.state.events.length}</a></li>
+                            <li className="space-between"><a className="description">Friends</a><a className="color-red text-bold">
                             {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
-                            <li className="space-between"><a className="description">Messages</a><a className="color-red">{this.state.chats.length}</a></li>
+                            <li className="space-between"><a className="description">Messages</a><a className="color-red text-bold">{this.state.chats.length}</a></li>
                         </ul>
                         <button id="dash_createPost" className="btn-primary d-block" onClick={this.state.showPostForm}>Create A Post</button>
                         <hr />

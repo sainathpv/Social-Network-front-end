@@ -1,6 +1,6 @@
 import React from 'react';
 import person from './../images/person-generic.jpg';
-import EventsSection from './EventsSection';
+import EventsSection from './Event/EventsSection';
 import Cookie from './../Utility/Cookie';
 class NetworkPanel extends React.Component{
     constructor(props){
@@ -166,7 +166,7 @@ class NetworkPanel extends React.Component{
                                 <ul>
                                 {this.state.interests.map((interest, i) => { 
                                     if(i < 9){
-                                        return(<li key={i.toString()} className="color-red">{interest}</li>);
+                                        return(<li key={i.toString()} className="color-red text-bold">{interest}</li>);
                                     }else{
                                         return("");
                                     }

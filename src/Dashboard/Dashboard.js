@@ -1,8 +1,8 @@
 import React from 'react';
 import ProfilePanel from './ProfilePanel';
-import PostPanel from './PostPanel';
-import ChatPanel from './ChatPanel';
-import EventPanel from './EventPanel';
+import PostPanel from './Post/PostPanel';
+import ChatPanel from './Chat/ChatPanel';
+import EventPanel from './Event/EventPanel';
 import NetworkPanel from './NetworkPanel';
 import Helmet from 'react-helmet';
 import './../css/dashboard/dashboard.css';

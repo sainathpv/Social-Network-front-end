@@ -15,7 +15,7 @@ class Profile extends Component {
 
     this.state = {
       name: "", profileImageUrl: "", major: "", studentType: "", studentYear: "", bio: "", trueName: "",
-      posts: [], events: [], friends: null, chats: [], interests: [],
+      posts: [], events: [], friends: [], chats: [], interests: [],
       changed: false, profileImageChanged: false, profileImage: "",
       curPsw: "", newPsw: "", reNewPsw: "",
       curEmail: "", varifyCode: "", newEmail: "",
@@ -81,10 +81,23 @@ class Profile extends Component {
           interests: result.interests
         });
 
-        //console.log(result)
-        //console.log("my student type: " + this.state.studentType);
-        //console.log("my student year: " + this.state.studentYear);
-        //console.log(result.profileImageUrl)
+        var options = {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+          }
+        }
+
+        fetch("http://" + process.env.REACT_APP_API_HOST + "/friends", options).then(result => {
+          return result.json();
+        }).then(result => {
+          console.log(result.friends)
+          this.setState({
+            friends: result.friends
+          });
+        });
+
         document.getElementById("nameTitle").textContent = result.name;
         document.getElementById("trueName").placeholder = result.trueName;
         document.getElementById("name").placeholder = result.name;
@@ -553,6 +566,8 @@ class Profile extends Component {
             <h3>Bio: </h3>
             <textarea id="profileBio" onChange={this.handleChange} placeholder='Ex: A little section dedicated to you!'></textarea>
           </div>
+
+        
         </div>
         <hr />
         <div className="basicInfo d-flex space-between p-10">
@@ -659,3 +674,14 @@ class Profile extends Component {
 }
 
 export default Profile;
+
+
+/*
+  <ul className="activity text-roboto">
+            <li className="space-between"><a className="description">Posts</a><a className="color-red">{this.state.posts.length}</a></li>
+            <li className="space-between"><a className="description">Events</a><a className="color-red">{this.state.events.length}</a></li>
+            <li className="space-between"><a className="description">Friends</a><a className="color-red">
+              {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
+            <li className="space-between"><a className="description">Messages</a><a className="color-red">{this.state.chats.length}</a></li>
+          </ul>
+*/

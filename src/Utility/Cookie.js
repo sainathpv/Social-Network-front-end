@@ -11,7 +11,8 @@ class Cookie{
     }
     
     static deleteCookie(name){
-        Cookie.setCookie(name, '', -1);
+        var date = new Date();
+        Cookie.setCookie(name, '', date);
     }
 }
 

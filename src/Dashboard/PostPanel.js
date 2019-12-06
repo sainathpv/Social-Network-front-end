@@ -6,6 +6,7 @@ import EventPanel from './EventPanel';
 import ChatPanel from './ChatPanel';
 import Cookie from './../Utility/Cookie';
 import SearchBox from '../SearchBox/SearchBox';
+import axios from 'axios';
 class PostPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -20,9 +21,12 @@ class PostPanel extends React.Component {
     this.getPosts = this.getPosts.bind(this);
     this.showShareForm = this.showShareForm.bind(this);
     this.changePanel = this.changePanel.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
     this.getProfile();
     this.postID = '';
   }
+
+  componentDidMount() {}
 
   showShareForm(postID) {
     this.postID = postID;
@@ -59,6 +63,7 @@ class PostPanel extends React.Component {
       })
       .then(result => {
         this.setState({ posts: result.return });
+        //this.state.posts = result.return;
       });
   }
 
@@ -94,6 +99,18 @@ class PostPanel extends React.Component {
     this.setState({ panel: event.target.textContent.toLowerCase() });
   }
 
+  async searchHandler(event) {
+    const text = document.getElementById('search_text').value;
+    //alert(text);
+    const res = await axios.get(
+      `http://localhost:8080/searchposts?text=${text}`
+    );
+    const searchedPosts = res.data.result;
+    console.log(this.state.posts);
+    console.log(searchedPosts);
+    this.setState({ posts: searchedPosts });
+  }
+
   render() {
     if (this.state.panel === 'post') {
       return (
@@ -108,7 +125,7 @@ class PostPanel extends React.Component {
                 <li className="cursor-pointer" onClick={this.changePanel}>
                   Events
                 </li>
-                <SearchBox />
+                <SearchBox searchHandler={this.searchHandler} />
               </ul>
             </div>
           </nav>

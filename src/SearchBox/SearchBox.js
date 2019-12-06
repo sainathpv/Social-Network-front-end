@@ -67,11 +67,13 @@ class SearchBox extends Component {
                 },
                 placeholder: 'Search posts'
               })}
+              id="search_text"
               style={inputStyles}
             />
             <img
               src={searchBoxIcon}
               alt="searchbox Icon"
+              onClick={this.props.searchHandler}
               style={{
                 marginTop: '10px',
                 paddingTop: '4px',

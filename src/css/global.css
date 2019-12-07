@@ -138,7 +138,7 @@ ul {
   position: absolute;
 }
 hr {
-  border: solid lightgray 0.5px;
+  border: solid crimson 0.5px;
   margin: 5px 30px;
 }
 .m-0 {
@@ -184,8 +184,9 @@ hr {
 .bg-red {
   background: #840606;
 }
+
 .btn-primary {
-  background: black;
+  background: #850000;
   color: white;
   border: none;
   border-radius: 10px;

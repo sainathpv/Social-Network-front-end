@@ -24,7 +24,7 @@ class Profile extends Component {
       trueName: '',
       posts: [],
       events: [],
-      friends: null,
+      friends: [],
       chats: [],
       interests: [],
       changed: false,
@@ -664,28 +664,42 @@ class Profile extends Component {
         <hr />
         <br />
         <div className='imgAndBio p-10'>
-          <div className='profileimg'>
-            <img
-              id='profileImageUrl'
-              src={
-                'http://' +
-                process.env.REACT_APP_API_HOST +
-                this.state.profileImageUrl
-              }
-              alt=''
-            />
-            <div className='container'>
-              <h1 id='nameTitle'>Undefined</h1>
+          <div className="imgAndStatus">
+            <div className='profileimg'>
+              <img
+                id='profileImageUrl'
+                src={
+                  'http://' +
+                  process.env.REACT_APP_API_HOST +
+                  this.state.profileImageUrl
+                }
+                alt=''
+              />
+              <br />
+              <br />
+              <h4 id='profileImgWarning'></h4>
             </div>
+            <div className="profileStatus">
+              <div className="profileName">
+                <div className='container'>
+                  <h1 id='nameTitle'>Undefined</h1>
+                </div>
 
-            <div class='upload-btn-wrapper'>
-              <button class='btn'>Upload photo</button>
-              <input type='file' name='myfile' onChange={this.changeImg} />
+                <div class='upload-btn-wrapper'>
+                  <button class='btn'>Upload photo</button>
+                  <input type='file' name='myfile' onChange={this.changeImg} />
+                </div>
+              </div>
+              <h3>Account Status: </h3>
+              <ul className="activity text-roboto">
+                <li className="space-between"><a className="description">Posts Number: </a><a className="color-red">{this.state.posts.length}</a></li>
+                <li className="space-between"><a className="description">Events Number: </a><a className="color-red">{this.state.events.length}</a></li>
+                <li className="space-between"><a className="description">Friends Number: </a><a className="color-red">
+                  {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
+                <li className="space-between"><a className="description">Liked Number: </a><a className="color-red">{this.state.events.length}</a></li>
+                <li className="space-between"><a className="description">Disliked Number: </a><a className="color-red">{this.state.events.length}</a></li>
+              </ul>
             </div>
-
-            <br />
-            <br />
-            <h4 id='profileImgWarning'></h4>
           </div>
           <div className='profilebio'>
             <h3>
@@ -728,18 +742,6 @@ class Profile extends Component {
               placeholder='Ex: johnsmith'
               required
             ></input>
-            <div className='fields'>
-              <input type="image" id="majorFields" src={show} onClick={this.hideShowMajor}></input>
-              <h3>Major: </h3>
-            </div>
-            <input
-              className='text-input'
-              type='text'
-              id='major'
-              onChange={this.handleChange}
-              placeholder='Ex: Computer Science'
-              required
-            ></input>
             <div className='dropDownMenu' id='ddm'>
               <div>
                 <div className='fields'>
@@ -775,6 +777,18 @@ class Profile extends Component {
           </div>
           <br />
           <div className='interestHeading'>
+          <div className='fields'>
+              <input type="image" id="majorFields" src={show} onClick={this.hideShowMajor}></input>
+              <h3>Major: </h3>
+            </div>
+            <input
+              className='text-input'
+              type='text'
+              id='major'
+              onChange={this.handleChange}
+              placeholder='Ex: Computer Science'
+              required
+            ></input>
             <div className='fields'>
               <input type="image" id="interestFields" src={show} onClick={this.hideShowInterest}></input>
               <h3>Your Interests: </h3>
@@ -956,13 +970,3 @@ class Profile extends Component {
 
 export default Profile;
 
-
-/*
-  <ul className="activity text-roboto">
-            <li className="space-between"><a className="description">Posts</a><a className="color-red">{this.state.posts.length}</a></li>
-            <li className="space-between"><a className="description">Events</a><a className="color-red">{this.state.events.length}</a></li>
-            <li className="space-between"><a className="description">Friends</a><a className="color-red">
-              {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
-            <li className="space-between"><a className="description">Messages</a><a className="color-red">{this.state.chats.length}</a></li>
-          </ul>
-*/

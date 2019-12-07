@@ -650,18 +650,19 @@ class Profile extends Component {
   render() {
     return (
       <div id='profilePage' className='bg-primary text-primary'>
+        {' '}
         <div className='heading'>
           <div>
-            <img src={logo} alt='' width='50px' />
-            <h1>Hoosier Connection</h1>
+            <img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1>
           </div>
           <div>
-            <a className='text-primary' href='../'>
+            <a className='text-white' href='../'>
               <i className='fas fa-arrow-left'></i> Back To Dashboard
             </a>
           </div>
         </div>
         <hr />
+        <br />
         <div className='imgAndBio p-10'>
           <div className='profileimg'>
             <img
@@ -675,9 +676,13 @@ class Profile extends Component {
             />
             <div className='container'>
               <h1 id='nameTitle'>Undefined</h1>
-              <br />
             </div>
-            <input type='file' onChange={this.changeImg}></input>
+
+            <div class='upload-btn-wrapper'>
+              <button class='btn'>Upload photo</button>
+              <input type='file' name='myfile' onChange={this.changeImg} />
+            </div>
+
             <br />
             <br />
             <h4 id='profileImgWarning'></h4>
@@ -936,7 +941,6 @@ class Profile extends Component {
           </ul>
         </div>
         <hr />
-
         <div className='p-10'>
           <button onClick={this.logout} className='btn-primary'>
             Logout

@@ -138,10 +138,10 @@ ul {
   position: absolute;
 }
 hr {
-  border: solid lightgray 0.5px;
+  border: solid crimson 0.5px;
   margin: 5px 30px;
 }
-.m-0{
+.m-0 {
   margin: 0;
 }
 .darkmode hr {
@@ -154,7 +154,7 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px lightgray;
+  border: solid 0.5px solid lightgray;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;
@@ -184,8 +184,9 @@ hr {
 .bg-red {
   background: #840606;
 }
+
 .btn-primary {
-  background: black;
+  background: #850000;
   color: white;
   border: none;
   border-radius: 10px;
@@ -204,7 +205,7 @@ hr {
   /* Edge */
   color: gray;
 }
-.text-bold{
+.text-bold {
   font-weight: bold;
 }
 .darkmode :-ms-input-placeholder {

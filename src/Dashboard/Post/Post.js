@@ -1,7 +1,7 @@
 import React from 'react';
-import Cookie from './../Utility/Cookie';
+import Cookie from '../../Utility/Cookie';
 import Poll from './Poll';
-import './../css/dashboard/post.css';
+import './../../css/dashboard/post.css';
 class Post extends React.Component{
     constructor(props){
         super(props);
@@ -107,7 +107,7 @@ class Post extends React.Component{
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
             }
-        }
+        };
         try{
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
                 return result.json();
@@ -124,7 +124,7 @@ class Post extends React.Component{
                         profile: result._id,
                         postID: this.state.id
                     })
-                }
+                };
                 fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postComment", options).then( result => {
                     return result.json();
                 }).then(result => {
@@ -244,6 +244,7 @@ class Post extends React.Component{
             );
         }
     }
+
     render(){
         return (
         <div className="post bg-primary border-lg border-round-small">

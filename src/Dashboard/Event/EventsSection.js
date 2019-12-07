@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Cookie from './../Utility/Cookie';
+import Cookie from '../../Utility/Cookie';
 class EventsSection extends Component {
 
     constructor(props){
@@ -27,20 +27,30 @@ class EventsSection extends Component {
 
     render() {
         return (
-        <div className="events">
+        <div id="dash_eventPanel" className="events">
             <h3>Your Events</h3>
             <ul>
                 {this.state.events.map((event, i) => {
                     if(i < 4){
                         return(
-                            <li key={i.toString()} className="d-flex">
+                            <li key={i.toString()} className="d-flex border-lg border-round-small">
                                 <div>
-                                    <h4>{event.name}</h4>
-                                    <h5>{event.location}</h5>
+                                    <div>
+                                        <h4 className="color-red text-bold">{event.eventName}</h4>
+                                    </div>
+                                    <div>
+                                        <h4>Location:</h4>
+                                        <h5>{event.location}</h5>
+                                    </div>
                                 </div>
                                 <div>
-                                    <h4 className="text-right">{event.company}</h4>
-                                    <h5 className="text-right">{event.date}</h5>
+                                    <div>
+                                        <h4 className="color-red text-bold">{event.company}</h4>
+                                    </div>
+                                    <div>
+                                        <h4>Date:</h4>
+                                        <h5>{event.date} @ {event.time}</h5>
+                                    </div>
                                 </div>
                             </li>
                         );

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Profile from './Profile';
+import Profile from './Profile/Profile';
 import MainPage from './Login/MainPage';
 import DashBoard from './Dashboard/Dashboard';
 import SendResetEmail from './Login/SendReset';

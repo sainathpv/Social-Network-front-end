@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import DropDownMenu from './../Utility/DropDown';
-import Cookie from './../Utility/Cookie';
+import DropDownMenu from '../../Utility/DropDown';
+import Cookie from '../../Utility/Cookie';
 
 class PostForm extends Component {
     constructor(props) {

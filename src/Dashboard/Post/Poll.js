@@ -26,8 +26,7 @@ class Poll extends React.Component{
 
     render(){
         var layout = {
-            width: "100%",
-            height: "500px",
+            autosize: true
         };
 
         if(this.state.data === null){

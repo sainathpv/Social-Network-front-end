@@ -1,0 +1,102 @@
+.chat{
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    background: white;
+    border: solid .5px lightgrey;
+    border-radius: 4px;
+
+    h2, h5{
+        padding: 1px 40px;
+    }
+    .postMetaData{
+        padding: 0 40px;
+        div{ margin: 10px; }
+        h5{
+            padding: 5px;
+            font-size: 15px;
+        }
+        i{
+            color: #3F99EE;
+        }
+        .label{
+            cursor: pointer;
+        }
+        ul li {
+            margin: 2px;
+            padding: 3px;
+        }
+    }
+    p{
+        padding: 5px 40px;
+    }    
+}
+
+#dash_chatRoom {
+    h3{
+        font-size: 24px;
+    }
+    .header{
+        padding: 10px 30px 0 30px;
+        margin: auto;
+        h4{
+            color: grey;
+        }
+    }
+    .chatRoom{
+        width: 90%;
+        margin: 10px auto;
+        .chatBox{
+            position: relative;
+            height: calc(100vh - 85px);
+            form{
+                height: 55px;
+                margin: 5px;
+                width: 95%;
+                margin: auto;
+                justify-content: space-around;
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                input{
+                    padding: 0 10px;
+                    width: calc(100% - 180px);
+                    height: 35px;
+                }
+                .d-flex{
+                    justify-content: space-around;
+                }
+            }
+        }
+    }
+
+    .messages{
+        padding: 10px 30px;
+    }
+    .msg-other{
+        h5{
+            display: inline-block;
+        }
+        p{
+
+            display: inline-block;
+            color: white;
+            border-radius: 10px;
+            background: rgb(141, 141, 141);
+            padding: 10px;
+        }
+    }
+    .msg-user {
+        h5{
+            display: inline-block;
+        }
+        p{
+
+            display: inline-block;
+            color: white;
+            border-radius: 10px;
+            background: rgb(0, 162, 255);
+            padding: 10px;
+        }
+    }
+}

@@ -67,7 +67,6 @@ button:hover {
 }
 .d-inline {
   display: inline;
-  margin-top: 10%;
 }
 * {
   box-sizing: border-box;
@@ -92,6 +91,7 @@ h2,
 h3 {
   font-weight: normal;
   font-family: 'Nunito Sans', sans-serif;
+  margin: 10px;
 }
 h4,
 h5 {
@@ -141,6 +141,9 @@ hr {
   border: solid lightgray 0.5px;
   margin: 5px 30px;
 }
+.m-0{
+  margin: 0;
+}
 .darkmode hr {
   border: solid rgb(92, 92, 92) 0.5px;
 }
@@ -151,7 +154,7 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px solid lightgray;
+  border: solid 0.5px lightgray;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;
@@ -182,7 +185,7 @@ hr {
   background: #840606;
 }
 .btn-primary {
-  background: #3f99ee;
+  background: black;
   color: white;
   border: none;
   border-radius: 10px;
@@ -201,7 +204,9 @@ hr {
   /* Edge */
   color: gray;
 }
-
+.text-bold{
+  font-weight: bold;
+}
 .darkmode :-ms-input-placeholder {
   /* Internet Explorer 10-11 */
   color: gray;

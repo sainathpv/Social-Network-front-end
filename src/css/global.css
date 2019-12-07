@@ -169,6 +169,13 @@ hr {
 .color-red {
   color: #840606;
 }
+.lightgray {
+  background-color: lightgray;
+}
+.buttonsize {
+  width: 15px;
+  height: 8px;
+}
 .bg-primary {
   background: white;
 }

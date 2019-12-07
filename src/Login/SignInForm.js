@@ -6,6 +6,7 @@ import SignUpForm from './SignUpForm';
 import Cookie from '../Utility/Cookie';
 import TwoFactor from './TwoFactor';
 import logo from './../images/HC.svg';
+import GoogleLogin from 'react-google-login';
 
 export default class SignInForm extends Component {
   constructor(props) {
@@ -95,7 +96,18 @@ export default class SignInForm extends Component {
   forgotPasswordForm() {
     this.setState({ forgotpassword: true, signin: false });
   }
-
+  responseGoogle = response => {
+    console.log(response);
+    if (response) {
+      sessionStorage.setItem('jwt', response['accessToken']);
+      sessionStorage.setItem('name', response['w3']['ig']);
+      console.log(response);
+      this.tryToGoogleLogin(response);
+      //this.setState({firstName: response.name, newEmail:response.email, fbAccessToken: response.accessToken},
+      //()=>{      this.tryToLogin(response);
+      //});
+    }
+  };
   render() {
     if (this.state.twofactor) {
       return <TwoFactor email={this.state.email}></TwoFactor>;
@@ -154,6 +166,21 @@ export default class SignInForm extends Component {
               <br />
               Need an account?
             </p>
+          </div>
+          <div
+            style={{
+              marginTop: 16,
+              alignCenter: 'center'
+            }}
+            className='text-center '
+          >
+            <GoogleLogin
+              clientId='722327594409-hh0pobkmlnqqpnrm9m8nrni7fsfhrcqm.apps.googleusercontent.com'
+              buttonText='Login with Google'
+              onSuccess={this.responseGoogle}
+              onFailure={this.responseGoogle}
+              cookiePolicy={'single_host_origin'}
+            />
           </div>
         </form>
       );

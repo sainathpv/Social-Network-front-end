@@ -91,6 +91,7 @@ h2,
 h3 {
   font-weight: normal;
   font-family: 'Nunito Sans', sans-serif;
+  margin: 10px;
 }
 h4,
 h5 {
@@ -105,6 +106,10 @@ ul {
 }
 .d-block {
   display: block;
+}
+.width {
+  width: 25px;
+  margin-left: 18px;
 }
 .d-flex {
   display: flex;
@@ -124,6 +129,15 @@ ul {
 .text-center {
   text-align: center;
 }
+.senddiv {
+  align-content: center;
+  margin-left: 150px;
+  width: 60px;
+}
+.sendbutton {
+  width: 80px;
+  margin-top: 45px;
+}
 .text-right {
   text-align: right;
 }
@@ -137,10 +151,10 @@ ul {
   position: absolute;
 }
 hr {
-  border: solid lightgray 0.5px;
+  border: solid crimson 0.5px;
   margin: 5px 30px;
 }
-.m-0{
+.m-0 {
   margin: 0;
 }
 .darkmode hr {
@@ -153,7 +167,7 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px lightgray;
+  border: solid 0.5px solid lightgray;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;
@@ -168,8 +182,18 @@ hr {
 .color-red {
   color: #840606;
 }
+.lightgray {
+  background-color: lightgray;
+}
+.buttonsize {
+  width: 15px;
+  height: 8px;
+}
 .bg-primary {
   background: white;
+}
+.bg-navbar {
+  background: rgb(236, 234, 234);
 }
 .bg-secondary {
   background: #f5f5f5;
@@ -183,8 +207,9 @@ hr {
 .bg-red {
   background: #840606;
 }
+
 .btn-primary {
-  background: #3f99ee;
+  background: #850000;
   color: white;
   border: none;
   border-radius: 10px;
@@ -203,7 +228,7 @@ hr {
   /* Edge */
   color: gray;
 }
-.text-bold{
+.text-bold {
   font-weight: bold;
 }
 .darkmode :-ms-input-placeholder {

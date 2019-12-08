@@ -5,7 +5,7 @@
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-  background-image: url("../../images/titleBG.jpg");
+  background-image: url('../../images/titleBG.jpg');
   height: 100vh;
   width: calc(100% / 3);
 }
@@ -16,7 +16,7 @@
   margin: auto;
   height: 100vh;
 }
-#MainPage .titleBox{
+#MainPage .titleBox {
   position: relative;
   background: #850000;
   width: calc(100% / 3);
@@ -26,36 +26,36 @@
   font-size: 80px;
   line-height: 100px;
 }
-#MainPage .titleBox .title{
+#MainPage .titleBox .title {
   margin: 30px;
 }
-#MainPage .brand{
+#MainPage .brand {
   position: absolute;
   width: 600px;
   bottom: 20px;
   left: -302.5px;
 }
-#MainPage .brand h2{
+#MainPage .brand h2 {
   font-size: 30px;
   line-height: 125px;
 }
-#MainPage .brand .brand-left{
+#MainPage .brand .brand-left {
   color: #850000;
 }
-#MainPage .brand .brand-right{
+#MainPage .brand .brand-right {
   color: white;
 }
-#MainPage .brand .border-round{
+#MainPage .brand .border-round {
   background: #850000;
   border: 12px white solid;
   width: 125px;
   height: 125px;
 }
-#MainPage .brand .border-round img{
+#MainPage .brand .border-round img {
   height: 70px;
   display: block;
   margin: auto;
-  margin-top: 17.5px
+  margin-top: 17.5px;
 }
 
 @media only screen and (max-width: 1300px) {
@@ -68,7 +68,6 @@
 }
 
 @media only screen and (max-width: 940px) {
-
   #MainPage .titleBox {
     display: none;
   }

@@ -1,219 +1,328 @@
-#profilePage{
-    margin: 20px auto;
-    padding: 30px;
-    width: calc(100% - 40px);
-    justify-content: space-around;
+#profilePage {
+  margin: 20px auto;
+  padding: 30px;
+  width: calc(100% - 40px);
+  justify-content: space-around;
+  background-color: white;
 }
 
-#profilePage p{
-    width: 400px;
-    font-weight: bold;
-    font-size: 20px;
-    display: inline-block;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; 
+#profilePage .fields{
+  display: flex;
+  position: relative;
+  left: -10px;
+}
+#profilePage .fields input{
+  width: 22px;
+  height: 22px;
+  position: relative;
+  top: 9px;
+  left: 10px;
 }
 
+#profilePage p {
+  width: 400px;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-#profilePage h3{
-  margin-top: 10px;
-font-weight: bold;
-white-space: nowrap;
-overflow: hidden;
-text-overflow: ellipsis; 
+#profilePage h3 {
+  margin-top: 15px;
+  margin-bottom: 0px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #profilePage hr {
-display: block;
-margin-top: 0.5em;
-margin-bottom: 0.5em;
-margin-left: auto;
-margin-right: auto;
-border-style: inset;
-border-width: 1px;
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  color: white;
 }
 
 #profilePage .text-input {
-height: 35px;
-width: 300px;
-padding-left: 6px;
-margin: 10px;
-border: .5px solid lightgray;
-border-radius: 4px; 
+  height: 45px;
+  width: 300px;
+  padding-left: 6px;
+  margin: 10px;
+  border: solid 0.5px solid lightgray;
+  border-radius: 4px;
+  font-size: 17px;
 }
 
 /*css for heading, include title, logol and back to dashboard botton*/
 #profilePage .heading {
-position: relative;
-padding-top: 10px;
-display: flex;
-justify-content: space-between;
-width: 100%;
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  background-color: #850000;
+  margin-left: 10px;
+}
+a.text-white {
+  margin-right: 10px;
+  color: white;
+}
+c91b1b #profilePage .heading div img {
+  display: inline;
 }
 
-#profilePage .heading div img{
-    display: inline;
-}
-
-#profilePage .heading div h1{
-    font-weight: bold;
-    position: relative;
-    top: -13px;
-    display: inline-block;
-    margin: 0 10px;
+#profilePage .heading div h1 {
+  font-weight: bold;
+  position: relative;
+  top: -13px;
+  display: inline-block;
+  margin: 0 10px;
+  color: #f4f4f4;
 }
 
 #profilePage .imgAndBio {
   margin: auto;
-    position: relative;
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
-#profilePage .p-10{
-    padding: 0 10%;
+
+#profilePage .p-10 {
+  padding: 0 10%;
+}
+
+#profilePage .imgAndBio .imgAndStatus {
+  display: flex;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg{
+  width: 60%;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 280px;
+  height: 300px;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg img:hover {
+  box-shadow: 0 0 2px 2px #850000;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg h3 {
+  margin-top: 10px;
+  font-size: 15px;
+  display: block;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg .changeImg {
+  margin-top: 10px;
+  padding: 4px 15px;
+  display: block;
+  background-color: white;
+  color: black;
+  border: solid 2px solid #850000;
+}
+#profilePage .imgAndBio .imgAndStatus .profileimg .uploadimage {
+  width: 1000px;
+  height: 100px;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileimg .changeImg:hover {
+  display: block;
+  background-color: #850000;
+  color: white;
+}
+
+
+
+
+#profilePage .imgAndBio .imgAndStatus .profileStatus {
+  width: 300px;
+  margin-right: 20px;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileStatus .profileName{
+  display: flex;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileStatus .profileName button{
+  position: relative;
+  top: 11px;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileStatus .activity {
+  width: 100%;
+
+}
+#profilePage .imgAndBio .imgAndStatus .profileStatus .activity li {
+  display: flex;
+  padding: 5px 10%;
+  font-size: 18px;
+}
+
+#profilePage .imgAndBio .imgAndStatus .profileStatus .description {
+
+  position: relative;
+  right: 20px;
 }
 
 
-#profilePage .imgAndBio .profileimg img {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 5px;
-    width: 220px; 
-    height: 220px;
+#profilePage .imgAndBio .profilebio {
+  position: relative;
+  width: 100%;
+  display: block;
 }
 
-#profilePage .imgAndBio .profileimg img:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+#profilePage .imgAndBio .profilebio textarea {
+  
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: solid 0.5px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  font-size: 16px;
+  resize: none;
+  height: 280px;
+  width: 100%;
+  background-color: white;
+  display: inline-block;
 }
-
-#profilePage .imgAndBio .profileimg h3{
-    margin-top: 10px;
-    font-size: 15px;
-    display: block;
-}
-
-#profilePage .imgAndBio .profileimg .changeImg {
-    margin-top: 10px;
-    padding: 4px 15px;
-    display: block;
-    background-color: white; 
-    color: black; 
-    border: 2px solid #990000;
-}
-
-#profilePage .imgAndBio .profileimg .changeImg:hover {
-    display: block;
-    background-color: #990000;
-    color: white;
-}
-
-#profilePage .imgAndBio .profilebio{
-    position: relative;
-    width: 100%;
-    display: block;
-}
-
-#profilePage .imgAndBio .profilebio textarea{
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    font-size: 16px;
-    resize: none;
-    height: 280px;
-    width: 100%;
-    background-color: white;
-    display: inline-block;
-}
-
 
 #profilePage .basicInfo {
-    padding-top: 10px;
-    margin-bottom: 30px;
+  padding-top: 10px;
+  margin-bottom: 30px;
 }
 
-#profilePage .basicInfo div h3{
+
+
+#profilePage .basicInfo div h3 {
+  display: block;
+}
+
+#profilePage .basicInfo div input {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  margin: 8px;
+}
+
+#profilePage .basicInfo .fields input {
+  width: 22px;
+  height: 22px;
+}
+
+#profilePage .basicInfo .studentInfo {
+  position: relative;
+  display: inline-block;
+  width: 40%;
+}
+
+
+
+
+#profilePage .basicInfo .dropDownMenu{
+  display: flex;
+}
+
+@media only screen and (max-width: 1100px) {
+
+
+  #profilePage .imgAndBio .imgAndStatus .profileStatus {
+    width: 50%;
+  }
+
+
+  #profilePage .imgAndBio .imgAndStatus .profileStatus .activity li {
+    padding: 5px 10%;
+  }
+
+  #profilePage .imgAndBio {
     display: block;
-}
+  }
 
-#profilePage .basicInfo div input{
-    position: relative;
+  #profilePage .imgAndBio .profilebio {
     width: 100%;
-    display: inline-block;
-    position: relative;
-    margin: 8px;
-}
+  }
 
-#profilePage .basicInfo .studentInfo{
-    position: relative;
-    display: inline-block;
-    width: 40%;
-    
-}
-
-
-#profilePage .basicInfo .dropDownMenu button{
-    background: rgb(200, 21, 21);
+  #profilePage .basicInfo .dropDownMenu{
+    display: inline;
+  }
 }
 
 
 
-#profilePage .basicInfo .interestHeading{
-    position: relative;
-    width: 60%;
-    left: 30px;
-    
+
+#profilePage .basicInfo .dropDownMenu button {
+  background: #d93b41;
 }
 
-#profilePage .interest{
-    display: inline-block;
-    color: 2px solid #840606;
-    border: 2px solid #840606;
-    border-radius: 10px;
-    padding: 2px 10px;
-    margin: 4px 5px;
+#profilePage .basicInfo .interestHeading {
+  position: relative;
+  width: 60%;
+  left: 30px;
 }
 
-#profilePage .basicInfo .interestHeading input{
-    position: relative;
-    width: 70%;
+#profilePage .interest {
+  display: inline-block;
+  color: 2px solid #850000;
+  border: 2px solid #850000;
+  border-radius: 10px;
+  padding: 2px 10px;
+  margin: 4px 5px;
+}
+
+#profilePage .basicInfo .interestHeading input {
+  position: relative;
+  width: 70%;
+}
+
+#profilePage .basicInfo .interestHeading .fields input {
+  width: 22px;
+  height: 22px;
 }
 
 #profilePage .basicInfo div .addInterest {
-    padding: 4px 15px;
-    display: inline-block;
-    background-color: white; 
-    color: black; 
-    border: 2px solid #291ca3;
-    border-radius: 5px;
+  padding: 4px 15px;
+  display: inline-block;
+  background-color: white;
+  color: black;
+  border: 2px solid #291ca3;
+  border-radius: 5px;
 }
 #profilePage .basicInfo div .addInterest:hover {
-    display: inline;
-    background-color: #291ca3;
-    color: white;
+  display: inline;
+  background-color: #291ca3;
+  color: white;
 }
 
-#profilePage .basicInfo .interestHeading .myList{
-    position: relative;
-    top: 10px;
-    display: inline-block;
-    white-space: normal;
-    width: 91%;
-    height: 180px;
-    padding: 10px;
-    overflow: scroll;
+#profilePage .basicInfo .interestHeading .myList {
+  position: relative;
+  display: inline-block;
+  white-space: normal;
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  overflow: auto;
 }
 
 #profilePage .basicInfo .interestHeading .myList button {
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  background-color: white; 
-  border: 2px solid #990000;
-  color: black; 
+  background-color: white;
+  border: 2px solid #850000;
+  color: black;
   padding: 4px 15px;
   text-align: center;
   text-decoration: none;
@@ -227,7 +336,7 @@ width: 100%;
 
 #profilePage .basicInfo .interestHeading .myList button:hover {
   display: inline;
-  background-color: #990000;
+  background-color: #850000;
   color: white;
 }
 
@@ -236,7 +345,7 @@ width: 100%;
   display: flex;
 }
 
-#profilePage .criticalInfo div input{
+#profilePage .criticalInfo div input {
   position: relative;
   width: 100%;
   display: inline-block;
@@ -244,61 +353,87 @@ width: 100%;
   margin: 8px;
 }
 
-#profilePage .criticalInfo .resetPsw{
+#profilePage .criticalInfo .resetPsw {
   width: 40%;
   position: relative;
   display: inline-block;
-
 }
 
-#profilePage .criticalInfo .resetEml{
+#profilePage .criticalInfo .resetEml {
   width: 60%;
   position: relative;
   display: inline-block;
   left: 30px;
-
 }
 
-#profilePage .criticalInfo .resetEml input{
+#profilePage .criticalInfo .resetEml input {
   position: relative;
   width: 70%;
 }
 
-#profilePage .friends_heading{
-    margin: auto;
-    width: 80%;
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+#profilePage .friends_heading {
+  margin: auto;
+  width: 80%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
 }
 
-#profilePage .friends{
-    margin: auto;
-    width: 80%;
-    position: relative;
-    padding-top: 10px;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-
+#profilePage .friends {
+  margin: auto;
+  width: 80%;
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 #profilePage .editButton {
-    padding: 9px 20px;
-    display: inline;
-    background-color: white; 
-    color: black; 
-    border: 2px solid #990000;
-    margin: 10px;
-    
+  padding: 9px 20px;
+  display: inline;
+  background-color: white;
+  color: black;
+  border: 2px solid #850000;
+  margin: 10px;
 }
 
 #profilePage .editButton:hover {
   display: inline;
-  background-color: #990000;
+  background-color: #850000;
   color: white;
 }
 
 #profilePage .btn-warn {
   margin: 5px 25px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: white;
+  background-color: #850000;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 130px;
+  height: 40px;
+}
+
+.btn:hover {
+  background-color: #850000;
+  cursor: pointer;
+}
+.upload-btn-wrapper input[type='file'] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }

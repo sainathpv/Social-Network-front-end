@@ -45,35 +45,19 @@ export default class SignUpForm extends Component {
     ) {
       var options;
       console.log(this.state);
-      if (this.state.accountType === 'student') {
-        options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: this.state.email,
-            userName: this.state.userName,
-            name: this.state.name,
-            password: this.state.password,
-            accountType: this.state.accountType
-          })
-        };
-      } else {
-        options = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({
-            email: this.state.email,
-            userName: this.state.userName,
-            company: this.state.company,
-            password: this.state.password,
-            accountType: this.state.accountType
-          })
-        };
-      }
+      options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: this.state.email,
+          userName: this.state.userName,
+          name: this.state.name,
+          password: this.state.password,
+          accountType: this.state.accountType
+        })
+      };
 
       fetch(
         'http://' + process.env.REACT_APP_API_HOST + '/users/signup',

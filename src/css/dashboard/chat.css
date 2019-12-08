@@ -49,7 +49,7 @@
 }
 #dash_chatRoom .chatRoom .chatBox {
   position: relative;
-  height: calc(100vh - 85px);
+  max-height: calc(100vh - 85px);
 }
 #dash_chatRoom .chatRoom .chatBox form {
   height: 55px;
@@ -70,7 +70,13 @@
   justify-content: space-around;
 }
 #dash_chatRoom .messages {
+  overflow: auto;
+  max-height: calc(100vh - 150px);
   padding: 10px 30px;
+}
+#dash_chatRoom form {
+  width: 100% !important;
+  background: white;
 }
 #dash_chatRoom .msg-other h5 {
   display: inline-block;

@@ -1,27 +1,22 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import Chat from './Chat';
 import ChatRoom from './ChatRoom';
+import io from 'socket.io-client';
+import Cookie from './../../Utility/Cookie';
 class App extends Component {
     constructor(props){
         super(props);
 
-        const chats = [
-            {
-                chatName: "Chat One",
-                users: ["bsiefers", "bsiefers1", "bsiefers2"]
-            },
-            {
-                chatName: "Chat Two",
-                users: ["bsiefers", "bsiefers1", "bsiefers2"]
-
-            },
-            {
-                chatName: "Chat Three",
-                users: ["bsiefers", "bsiefers1", "bsiefers2"]
-            }
-        ];
-
-        this.state = {changePanel: props.changePanel, chats: chats, openChatRoom: null};
+        this.state = {
+            changePanel: props.changePanel,
+            chats: [],
+            openChatRoom: null,
+            profile: props.profile,
+            chatUser: null,
+            rooms: null
+        };
         this.changePanel = this.changePanel.bind(this);
         this.openChatRoom = this.openChatRoom.bind(this);
     }
@@ -29,11 +24,30 @@ class App extends Component {
     changePanel(event){
         this.setState({panel: event.target.textContent.toLowerCase()});
         var panel = event.target.textContent.toLowerCase();
-        if(panel === "home" || panel === "events"){
+        if(panel === "home" || panel === "chats" || panel === "events"){
             this.state.changePanel(panel);
         }
     }
+    componentDidMount(){
+        var options = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            }
+        };
 
+        fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
+            return result.json();
+        }).then( profile => {
+            fetch("http://"+ process.env.REACT_APP_API_HOST +"/chats", options).then( result => {
+                return result.json();
+            }).then( result => {
+                this.setState({chats: result.chats, profile: profile});
+            });
+        });
+    }
+    
     openChatRoom(chat){
         this.setState({openChatRoom: chat});
     }
@@ -41,7 +55,7 @@ class App extends Component {
     render() {
         if(this.state.openChatRoom != null){
             return (
-                <ChatRoom changePanel={this.state.changePanel} openChatRoom={this.openChatRoom} chat={this.state.openChatRoom} />
+                <ChatRoom profile={this.state.profile} changePanel={this.state.changePanel} openChatRoom={this.openChatRoom} chat={this.state.openChatRoom} />
             );
         }else{
             return (

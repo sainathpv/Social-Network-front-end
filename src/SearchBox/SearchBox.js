@@ -8,7 +8,7 @@ const inputStyles = {
   height: '40px',
   borderRadius: '2px',
   border: 'none',
-  backgroundColor: 'rgba(138,138,138,0.08)',
+  backgroundColor: 'white',
   padding: '5px 8px',
   fontSize: '15px',
   fontWeight: '500',
@@ -37,7 +37,7 @@ class SearchBox extends Component {
       this.setState({ isLoading: true });
       const {
         data: { result }
-      } = await axios.get(`http://localhost:8080/searchposts?text=${value}`);
+      } = await axios.get(`http://` + process.env.REACT_APP_API_HOST + `/searchposts?text=${value}`);
       this.setState({ posts: result, isLoading: false });
     }
   }, 500);

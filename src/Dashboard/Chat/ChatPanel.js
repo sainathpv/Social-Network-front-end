@@ -1,14 +1,10 @@
 import React, { Component, useState } from 'react';
-import { Link } from 'react-router-dom';
-
 import Chat from './Chat';
 import ChatRoom from './ChatRoom';
-import io from 'socket.io-client';
 import Cookie from './../../Utility/Cookie';
-class App extends Component {
+class ChatPanel extends Component {
     constructor(props){
         super(props);
-
         this.state = {
             changePanel: props.changePanel,
             chats: [],
@@ -22,7 +18,6 @@ class App extends Component {
     }
 
     changePanel(event){
-        this.setState({panel: event.target.textContent.toLowerCase()});
         var panel = event.target.textContent.toLowerCase();
         if(panel === "home" || panel === "chats" || panel === "events"){
             this.state.changePanel(panel);
@@ -61,7 +56,7 @@ class App extends Component {
             return (
                 <div id="dash_chatPanel">
                     <nav>
-                        <div className="p-fixed bg-primary border-lg w-100">
+                        <div className="p-fixed bg-navbar w-100">
                             <ul className="d-flex">
                                 <li className="cursor-pointer" onClick={this.changePanel}>Home</li>
                                 <li className="cursor-pointer active">Chats</li>
@@ -82,4 +77,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default ChatPanel;

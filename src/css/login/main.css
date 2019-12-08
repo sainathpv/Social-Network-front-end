@@ -31,9 +31,9 @@
 }
 #MainPage .brand {
   position: absolute;
-  width: 600px;
-  bottom: 20px;
-  left: -302.5px;
+  width: 700px;
+  bottom: 0px;
+  left: -355px;
 }
 #MainPage .brand h2 {
   font-size: 30px;

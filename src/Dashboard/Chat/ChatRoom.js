@@ -101,7 +101,7 @@ class ChatRoom extends React.Component{
         return (
         <div id="dash_chatRoom" >
             <nav>
-                <div className="p-fixed bg-primary border-lg w-100">
+                <div className="p-fixed bg-navbar w-100">
                     <ul className="d-flex">
                         <li className="cursor-pointer" onClick={this.changePanel}>Home</li>
                         <li className="cursor-pointer active">Chats</li>
@@ -123,7 +123,7 @@ class ChatRoom extends React.Component{
                             );
                         })}
                     </ul>
-                    <form onSubmit={this.sendMessage}>
+                    <form className="bg-primary" onSubmit={this.sendMessage}>
                         <hr />
                         <div className="d-flex">
                             <input type="text" className="border-lg border-round-small" placeholder="Enter A Message"

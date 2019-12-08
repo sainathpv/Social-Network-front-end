@@ -44,6 +44,7 @@ class Profile extends Component {
         year: false,
         interests: false,
       },
+      accountType: "student"
     };
     //TODO: check if there is a token redirect to login if invalid
 
@@ -68,6 +69,11 @@ class Profile extends Component {
     this.delAccount = this.delAccount.bind(this);
     this.hideShowName = this.hideShowName.bind(this);
     this.hideShowtrueName = this.hideShowtrueName.bind(this);
+    this.hideShowMajor = this.hideShowMajor.bind(this);
+    this.hideShowDegree = this.hideShowDegree.bind(this);
+    this.hideShowYear = this.hideShowYear.bind(this);
+    this.hideShowInterest = this.hideShowInterest.bind(this);
+
     this.getProfileData();
     this.getFriendsData();
     
@@ -91,6 +97,9 @@ class Profile extends Component {
           return result.json();
         })
         .then(result => {
+          if(result.accountType == "company"){
+            window.location.href = "/profileCompany";
+          }
           if (result.settings.darkmode) {
             document.body.className = 'darkmode';
           } else {
@@ -108,8 +117,9 @@ class Profile extends Component {
             chats: result.chats,
             bio: result.bio,
             trueName: result.trueName,
-            interests: result.interests
+            interests: result.interests,
           });
+          console.log(result)
 
           if (result.hided) {
             this.setState({
@@ -117,10 +127,6 @@ class Profile extends Component {
             })
           }
 
-          //console.log(result)
-          //console.log("my student type: " + this.state.studentType);
-          //console.log("my student year: " + this.state.studentYear);
-          //console.log(result.profileImageUrl)
           document.getElementById('nameTitle').textContent = result.name;
           document.getElementById('trueName').placeholder = result.trueName;
           document.getElementById('name').placeholder = result.name;
@@ -220,7 +226,8 @@ class Profile extends Component {
           major: this.state.major,
           studentType: this.state.studentType,
           studentYear: this.state.studentYear,
-          profileImageUrl: imageUrl
+          profileImageUrl: imageUrl,
+          hided: this.state.hided
         })
       };
       fetch(
@@ -617,6 +624,7 @@ class Profile extends Component {
       document.getElementById("trueNameFields").src = hide;
     }
     console.log(this.state.hided)
+    this.state.changed = true;
   }
 
   hideShowName(){
@@ -628,22 +636,56 @@ class Profile extends Component {
       document.getElementById("nameFields").src = hide;
     }
     console.log(this.state.hided);
+    this.state.changed = true;
   }
 
   hideShowMajor(){
+    if(this.state.hided.major){
+      this.state.hided.major = false;
+      document.getElementById("majorFields").src = show;
+    } else {
+      this.state.hided.major = true;
+      document.getElementById("majorFields").src = hide;
+    }
+    console.log(this.state.hided);
+    this.state.changed = true;
 
   }
 
   hideShowDegree(){
-
+    if(this.state.hided.studentType){
+      this.state.hided.studentType = false;
+      document.getElementById("degreeFields").src = show;
+    } else {
+      this.state.hided.studentType = true;
+      document.getElementById("degreeFields").src = hide;
+    }
+    console.log(this.state.hided);
+    this.state.changed = true;
   }
 
   hideShowYear(){
-
+    if(this.state.hided.year){
+      this.state.hided.year = false;
+      document.getElementById("yearFields").src = show;
+    } else {
+      this.state.hided.year = true;
+      document.getElementById("yearFields").src = hide;
+    }
+    console.log(this.state.hided);
+    this.state.changed = true;
   }
 
   hideShowInterest(){
-
+    if(this.state.hided.interests){
+      this.state.hided.interests = false;
+      document.getElementById("interestFields").src = show;
+    } else {
+      this.state.hided.interests = true;
+      document.getElementById("interestFields").src = hide;
+    }
+    console.log(this.state.hided);
+    this.state.changed = true;
   }
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.

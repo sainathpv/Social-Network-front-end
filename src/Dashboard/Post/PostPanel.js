@@ -114,15 +114,15 @@ class PostPanel extends React.Component {
   render() {
     if (this.state.panel === 'post') {
       return (
-        <div id="dash_postPanel">
+        <div id='dash_postPanel'>
           <nav>
-            <div className="p-fixed bg-primary border-lg w-100">
-              <ul className="d-flex">
-                <li className="cursor-pointer active">Home</li>
-                <li className="cursor-pointer" onClick={this.changePanel}>
+            <div className='p-fixed bg-navbar border-lg w-100'>
+              <ul className='d-flex'>
+                <li className='cursor-pointer active'>Home</li>
+                <li className='cursor-pointer' onClick={this.changePanel}>
                   Chats
                 </li>
-                <li className="cursor-pointer" onClick={this.changePanel}>
+                <li className='cursor-pointer' onClick={this.changePanel}>
                   Events
                 </li>
                 <SearchBox searchHandler={this.searchHandler} />
@@ -131,7 +131,7 @@ class PostPanel extends React.Component {
           </nav>
           {this.renderPostForm()}
           {this.renderShareForm()}
-          <ul className="posts">
+          <ul className='posts'>
             {this.state.posts.map((post, i) => (
               <Post
                 id={post._id}

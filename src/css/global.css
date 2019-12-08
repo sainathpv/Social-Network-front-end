@@ -107,6 +107,10 @@ ul {
 .d-block {
   display: block;
 }
+.width {
+  width: 25px;
+  margin-left: 18px;
+}
 .d-flex {
   display: flex;
 }
@@ -124,6 +128,15 @@ ul {
 }
 .text-center {
   text-align: center;
+}
+.senddiv {
+  align-content: center;
+  margin-left: 150px;
+  width: 60px;
+}
+.sendbutton {
+  width: 80px;
+  margin-top: 45px;
 }
 .text-right {
   text-align: right;
@@ -178,6 +191,9 @@ hr {
 }
 .bg-primary {
   background: white;
+}
+.bg-navbar {
+  background: rgb(236, 234, 234);
 }
 .bg-secondary {
   background: #f5f5f5;

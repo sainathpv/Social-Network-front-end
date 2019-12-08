@@ -316,11 +316,14 @@ class ProfilePanel extends React.Component {
               </h2>
               <input
                 id='dash_findFriend'
-                className='d-block m-auto text-primary border-lg border-round-small bg-secondary'
+                className='d-block m-auto text-primary border-lg border-round-small bg-secondary width'
                 placeholder='Username'
               ></input>
-              <div className='text-right'>
-                <button className='btn-primary' id='btn_findFriend'>
+              <div className='senddiv'>
+                <button
+                  className='btn-primary d-block sendbutton'
+                  id='btn_findFriend'
+                >
                   Send
                 </button>
               </div>

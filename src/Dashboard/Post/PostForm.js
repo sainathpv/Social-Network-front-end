@@ -175,7 +175,10 @@ class PostForm extends Component {
     render() {
         return (
             <div className="postForm d-block m-auto bg-primary p-fixed border-lg border-round-small" >
-                <div className="d-flex space-between header"><h3 className="d-inline">Create Post:</h3><i onClick={this.state.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i></div>
+                <div className="d-flex space-between header">
+                    <h3 className="d-inline">Create Post:</h3>
+                    <i onClick={this.state.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i>
+                </div>
                 <hr />
                 <form className="form" onSubmit={this.createPost}>
                     <label>Title:</label><br />

@@ -249,126 +249,124 @@ class ProfilePanel extends React.Component {
                 className='p-absolute d-none fas fa-times'
               ></i>
             </div>
-            <hr />
-            <div className='profile d-flex'>
-              <img
-                onClick={this.goToProfile}
-                className='cursor-pointer border-lg border-round'
-                src={
-                  'http://' +
-                  process.env.REACT_APP_API_HOST +
-                  this.state.profileIMG
-                }
-                alt=''
-              />
-              <div className='color-grey description'>
-                <h3 className='text-nunito text-bold'>{this.state.name}</h3>
-                <div className='text-roboto '>
-                  <h4>{this.state.studentType}</h4>
-                  <h5>{this.state.major}</h5>
-                  <h5>{this.state.year}</h5>
-                </div>
-                <i
+            <div className="box-shadow">
+              <div className='profile d-flex'>
+                <img
                   onClick={this.goToProfile}
-                  id='dash_profilePanelEditIcon'
-                  className='cursor-pointer text-secondary fas fa-pen'
-                ></i>
+                  className='cursor-pointer border-lg border-round'
+                  src={
+                    'http://' +
+                    process.env.REACT_APP_API_HOST +
+                    this.state.profileIMG
+                  }
+                  alt=''
+                />
+                <div className='color-grey description'>
+                  <h3 className='text-nunito text-bold'>{this.state.name}</h3>
+                  <div className='text-roboto '>
+                    <h4>{this.state.studentType}</h4>
+                    <h5>{this.state.major}</h5>
+                    <h5>{this.state.year}</h5>
+                  </div>
+                  <i
+                    onClick={this.goToProfile}
+                    id='dash_profilePanelEditIcon'
+                    className='cursor-pointer text-secondary fas fa-pen'
+                  ></i>
+                </div>
               </div>
-            </div>
-            <ul className='activity text-roboto'>
-              <li className='space-between'>
-                <a className='description'>Posts</a>
-                <a className='color-red text-bold'>{this.state.posts.length}</a>
-              </li>
-              <li className='space-between'>
-                <a className='description'>Events</a>
-                <a className='color-red text-bold'>
-                  {this.state.events.length}
-                </a>
-              </li>
-              <li className='space-between'>
-                <a className='description'>Friends</a>
-                <a className='color-red text-bold'>
-                  {this.state.friends.profiles
-                    ? this.state.friends.profiles.filter(
-                        friend => friend.accepted
-                      ).length
-                    : 0}
-                </a>
-              </li>
-              <li className='space-between'>
-                <a className='description'>Messages</a>
-                <a className='color-red text-bold'>{this.state.chats.length}</a>
-              </li>
-            </ul>
-            <button
-              id='dash_createPost'
-              className='btn-primary d-block'
-              onClick={this.state.showPostForm}
-            >
-              Create A Post
-            </button>
-            <hr />
-            <form className='findFriend' onSubmit={this.findFriend}>
-              <p id='dash_findFriendNotify'></p>
-              <h2>
-                <b>Send a friend request</b>
-              </h2>
-              <input
-                id='dash_findFriend'
-                className='d-block m-auto text-primary border-lg border-round-small bg-secondary width'
-                placeholder='Username'
-              ></input>
-              <div className='senddiv'>
-                <button
-                  className='btn-primary d-block sendbutton'
-                  id='btn_findFriend'
-                >
-                  Send
-                </button>
-              </div>
-            </form>
-            <form className='activeFriendRequests'>
-              <h2>
-                <b>Current Friend Requests</b>
-              </h2>
-              <ul>
-                {this.state.friends.profiles
-                  ? this.state.friends.profiles
-                      .filter(friend => friend.status === 'requestee')
-                      .map((friend, i) => {
-                        return (
-                          <li key={i} className='d-flex space-between'>
-                            <div>
-                              <img
-                                className='border-round border-lg d-inline'
-                                src={
-                                  'http://' +
-                                  process.env.REACT_APP_API_HOST +
-                                  friend.profileIMG
-                                }
-                                alt={person}
-                              />
-                              <h5 className='d-inline'>{friend.name}</h5>
-                            </div>
-                            <span>
-                              <button
-                                onClick={() => this.acceptFriend(friend)}
-                                className='btn-primary'
-                              >
-                                Accept
-                              </button>
-                              <i
-                                onClick={() => this.rejectFriend(friend)}
-                                className='cursor-pointer text-secondary  fas fa-times'
-                              ></i>
-                            </span>
-                          </li>
-                        );
-                      })
-                  : ''}
+              <ul className='activity text-roboto'>
+                <li className='space-between'>
+                  <a className='description'>Posts</a>
+                  <a className='color-red text-bold'>{this.state.posts.length}</a>
+                </li>
+                <li className='space-between'>
+                  <a className='description'>Events</a>
+                  <a className='color-red text-bold'>
+                    {this.state.events.length}
+                  </a>
+                </li>
+                <li className='space-between'>
+                  <a className='description'>Friends</a>
+                  <a className='color-red text-bold'>
+                    {this.state.friends.profiles
+                      ? this.state.friends.profiles.filter(
+                          friend => friend.accepted
+                        ).length
+                      : 0}
+                  </a>
+                </li>
+                <li className='space-between'>
+                  <a className='description'>Messages</a>
+                  <a className='color-red text-bold'>{this.state.chats.length}</a>
+                </li>
               </ul>
-            </form>
+              <button
+                id='dash_createPost'
+                className='btn-primary d-block'
+                onClick={this.state.showPostForm}
+              >
+                Create A Post
+              </button>
+              <hr />
+              <form className='findFriend' onSubmit={this.findFriend}>
+                <p id='dash_findFriendNotify'></p>
+                <h3>Send a friend request</h3>
+                <div className="findFriendInput">
+                  <input
+                    id='dash_findFriend'
+                    className='d-inline m-auto text-primary border-lg border-round-small bg-secondary width'
+                    placeholder='Username'
+                  ></input>
+                  <button
+                    className='btn-primary d-inline sendbutton'
+                    id='btn_findFriend'
+                  >
+                    Send
+                  </button>
+                </div>
+
+              </form>
+              <form className='activeFriendRequests'>
+                <h3>Current Friend Requests</h3>
+                <ul>
+                  {this.state.friends.profiles
+                    ? this.state.friends.profiles
+                        .filter(friend => friend.status === 'requestee')
+                        .map((friend, i) => {
+                          return (
+                            <li key={i} className='d-flex space-between'>
+                              <div>
+                                <img
+                                  className='border-round border-lg d-inline'
+                                  src={
+                                    'http://' +
+                                    process.env.REACT_APP_API_HOST +
+                                    friend.profileIMG
+                                  }
+                                  alt={person}
+                                />
+                                <h5 className='d-inline'>{friend.name}</h5>
+                              </div>
+                              <span>
+                                <button
+                                  onClick={() => this.acceptFriend(friend)}
+                                  className='btn-primary'
+                                >
+                                  Accept
+                                </button>
+                                <i
+                                  onClick={() => this.rejectFriend(friend)}
+                                  className='cursor-pointer text-secondary  fas fa-times'
+                                ></i>
+                              </span>
+                            </li>
+                          );
+                        })
+                    : ''}
+                </ul>
+              </form>
+            </div>
           </div>
         </div>
         <div

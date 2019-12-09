@@ -45,13 +45,13 @@
     }
     .chatRoom{
         width: 90%;
+        
         margin: 10px auto;
         .chatBox{
             position: relative;
-            height: calc(100vh - 85px);
+            max-height: calc(100vh - 75px);
             form{
                 height: 55px;
-                margin: 5px;
                 width: 95%;
                 margin: auto;
                 justify-content: space-around;
@@ -71,7 +71,13 @@
     }
 
     .messages{
+        overflow: auto;
+        max-height: calc(100vh - 150px);
         padding: 10px 30px;
+    }
+    form{
+        width: 100% !important;
+        background: white;
     }
     .msg-other{
         h5{

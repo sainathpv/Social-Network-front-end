@@ -22,7 +22,7 @@ class PostPanel extends React.Component {
       isPostFormHidden: props.isPostFormHidden,
       isMiniProfileHidden: props.isMiniProfileHidden,
       showShareForm: false,
-      currentProfileID: ""
+      changePanel: props.changePanel
     };
     this.getPosts = this.getPosts.bind(this);
     this.showShareForm = this.showShareForm.bind(this);
@@ -117,7 +117,10 @@ class PostPanel extends React.Component {
   }
 
   changePanel(event) {
-    this.setState({ panel: event.target.textContent.toLowerCase() });
+    var panel = event.target.textContent.toLowerCase();
+    if(panel === "home" || panel === "chats" || panel === "events"){
+        this.state.changePanel(panel);
+    }
   }
 
   async searchHandler(event) {
@@ -133,11 +136,11 @@ class PostPanel extends React.Component {
   }
 
   render() {
-    if (this.state.panel === 'post') {
+
       return (
         <div id='dash_postPanel'>
-          <nav>
-            <div className='p-fixed bg-navbar border-lg w-100'>
+          <nav className="">
+            <div className='p-fixed bg-navbar w-100'>
               <ul className='d-flex'>
                 <li className='cursor-pointer active'>Home</li>
                 <li className='cursor-pointer' onClick={this.changePanel}>
@@ -178,11 +181,7 @@ class PostPanel extends React.Component {
           </ul>
         </div>
       );
-    } else if (this.state.panel === 'chats') {
-      return <ChatPanel />;
-    } else {
-      return <EventPanel />;
-    }
+
   }
 }
 export default PostPanel;

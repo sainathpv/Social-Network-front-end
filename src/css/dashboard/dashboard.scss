@@ -16,15 +16,21 @@
             width: 400px;
             z-index: 2;
             left: 0;
-            box-shadow: 2px 0 2px 0 lightgray;
+            .box-shadow{
+                box-shadow: 2px 0 2px 0 lightgray;
+                height: calc(100vh - 65px);
+            }
             .logobox{
+                height: 65px;
+                background: #840606;
                 padding: 5px;
                 img{
                     width: 50px;
                 }
                 h1{
-                line-height: 50px;
-                margin-left: 10px; 
+                    color: white;
+                    line-height: 50px;
+                    margin-left: 10px; 
                 }
                 i{
                     color: darkgray;
@@ -85,15 +91,21 @@
                 }
             }
             .findFriend{
-                input{
-                    height: 30px;
-                    padding: 5px;
-                    width: 55%;
-                    max-width: 400px;
-                }
-                button{
-                    display: inline;
-                    margin: 5px 25% 0 0;
+                .findFriendInput{
+                    text-align: center;
+                    padding: 0 20px;
+                    width: 100%;
+                    input{
+                        height: 30px;
+                        padding: 5px;
+                        width: 55%;
+                        max-width: 400px;
+                        margin-right: 10px;
+                    }
+                    button{
+                        display: inline;
+                        margin: 5px 25% 0 0;
+                    }
                 }
             }
             .activeFriendRequests{
@@ -130,13 +142,13 @@
             height: 65px;
             padding: 0 5%;
             ul li {
+               color: whitesmoke; 
                margin: 0 20px;
                line-height: 65px;
                font-size: 17px;
-    
             }
             .active{
-                color: #840606;
+                color: white;
                 position: relative;
                 &::before{
                     content: '';
@@ -146,7 +158,7 @@
                     height: 2px;
                     bottom: 20px;
                     left: 0;
-                    background: #840606;
+                    background: white;
                     transform-origin: bottom right;
                     transition:  transform 0.25 ease-out;
                 }
@@ -212,7 +224,7 @@
     #dash_networkPanel{
         z-index: 2;
         .panel-header{
-            height: 65px;
+            height: 45px;
             width: 400px;
             h2{
                 line-height: 65px;
@@ -225,7 +237,7 @@
             }
         }
         .network-panel{
-            height: calc(100vh - 65.5px);
+            height: calc(100vh - 65px);
             border: 0;
             border-left: .5px solid lightgray;
             h3{ padding: 4px 0 0 20px; }

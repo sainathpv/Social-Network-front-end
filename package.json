@@ -9,7 +9,6 @@
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",
     "plotly.js": "^1.51.2",
-    "pusher-chatkit-client": "^0.6.2",
     "react": "^16.10.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.0",
@@ -18,7 +17,10 @@
     "react-plotly.js": "^2.4.0",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.1.1",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "socket.io-client": "^2.3.0",
+    "react-stripe-checkout": "^2.6.3",
+    "react-stripe-elements": "^6.0.1"
   },
   "devDependencies": {},
   "scripts": {

@@ -15,11 +15,17 @@ class Dashboard extends React.Component{
             profile: null
         };
         this.showPostForm = this.showPostForm.bind(this);
+        this.showMiniProfilePage = this.showMiniProfilePage.bind(this);
         this.changePanel = this.changePanel.bind(this);
     }
 
     showPostForm(){
         this.setState({showPostForm: !this.state.showPostForm}); 
+    }
+
+    showMiniProfilePage(){
+        console.log("I have been clicked miniprofile")
+        this.setState({showMiniProfilePage: !this.state.showMiniProfilePage}); 
     }
 
     changePanel(panel){
@@ -30,6 +36,11 @@ class Dashboard extends React.Component{
         return this.state.showPostForm;
     }
 
+    isMiniProfileHidden(){
+        console.log(this.state.showMiniProfilePage);
+        return this.state.showMiniProfilePage
+    }
+
     render(){
         
         if(this.state.panel === "home"){
@@ -38,8 +49,14 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel key={this.state.panel} panel={this.state.panel} showPostForm={this.showPostForm} />
-                    <PostPanel  changePanel={this.changePanel} showPostForm={this.showPostForm} isPostFormHidden={this.isPostFormHidden.bind(this)} />
+                    <ProfilePanel showPostForm={this.showPostForm} />
+                    <PostPanel
+                        changePanel={this.changePanel}
+                        showPostForm={this.showPostForm}
+                        showMiniProfilePage={this.showMiniProfilePage}
+                        isPostFormHidden={this.isPostFormHidden.bind(this)}
+                        isMiniProfileHidden={this.isMiniProfileHidden.bind(this)}
+                    />
                     <NetworkPanel />
                 </div>
             );
@@ -47,7 +64,7 @@ class Dashboard extends React.Component{
             return (
                 <div id="dashboard" className="d-grid text-primary">
                     <Helmet>
-                        <title>Hoosier Connection</title>
+                        <title>Hoosier Connection</title> 
                     </Helmet>
                     <ProfilePanel key={this.state.panel} panel={this.state.panel}  showPostForm={this.showPostForm} />
                     <ChatPanel changePanel={this.changePanel} />

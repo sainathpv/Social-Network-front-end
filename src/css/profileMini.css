@@ -1,0 +1,238 @@
+#profilePageMini {
+  top: 43px;
+  left: calc(50% - 400px * 0.5);
+  z-index: 3;
+  margin: 20px auto;
+  padding: 10px;
+  width: 400px;
+  height: 600px;
+  overflow: auto;
+  justify-content: space-around;
+  background-color: rgb(167, 167, 167);
+}
+
+#profilePageMini i{
+  position: relative;
+  top: 20px;
+  left: -20px;
+}
+
+#profilePageMini p {
+  width: 400px;
+  font-weight: bold;
+  font-size: 20px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#profilePageMini h3 {
+  margin: 5px;
+  font-weight: bold;
+}
+
+#profilePageMini hr {
+  display: block;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  color: white;
+}
+
+#profilePageMini .text-input {
+  height: 45px;
+  width: 300px;
+  padding-left: 6px;
+  margin: 10px;
+  border: solid 0.5px solid lightgray;
+  border-radius: 4px;
+  font-size: 17px;
+}
+
+/*css for heading, include title, logol and back to dashboard botton*/
+#profilePageMini .heading {
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  background-color: #850000;
+}
+a.text-white {
+  margin-right: 10px;
+  color: white;
+}
+c91b1b #profilePageMini .heading div img {
+  display: inline;
+}
+
+#profilePageMini .heading div h1 {
+  font-size: 26px;
+  font-weight: bold;
+  position: relative;
+  top: -16px;
+  display: inline-block;
+  margin: 0 10px;
+  color: #f4f4f4;
+}
+
+#profilePageMini .headshot {
+  margin: auto;
+  position: relative;
+  padding-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+#profilePageMini .p-10 {
+  padding: 0 6%;
+}
+
+#profilePageMini .headshot img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+  height: 150px;
+}
+
+#profilePageMini .headshot .profileName{
+  display: block;
+  position: relative;
+  top: 10px;
+}
+
+#profilePageMini .headshot .profileName button{
+  position: relative;
+  left: 10px;
+  top: 10px;
+}
+
+#profilePageMini .profilebio {
+  position: relative;
+  display: block;
+
+}
+
+#profilePageMini .profilebio h3{
+  position: relative;
+}
+
+#profilePageMini .profilebio h4 {
+  font-size: 15px;
+  padding: 4px;
+  border-style: groove;
+  border-radius: 5px;
+  height: 80px;
+  overflow: auto;
+}
+
+#profilePageMini .basicInfo {
+  width: 100%;
+  display: inline-block;
+}
+
+#profilePageMini .basicInfo h4{
+  margin: 5px;
+  position: relative;
+  top: 3px;
+}
+
+#profilePageMini .basicInfo li{
+  background: #909192;
+  margin: 5px;
+  display: flex;
+  top: 18px;
+}
+
+#profilePageMini .basicInfo .nameFields{
+  display: flex;
+}
+
+#profilePageMini .basicInfo .degreeFields{
+  display: flex;
+}
+
+#profilePageMini .basicInfo .yearFields{
+  display: flex;
+}
+
+#profilePageMini .interest {
+  display: inline-block;
+}
+
+#profilePageMini .interest h3{
+  position: relative;
+  top: 10px;
+}
+
+#profilePageMini .interest .myList {
+  position: relative;
+  display: inline-block;
+  white-space: normal;
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  overflow: auto;
+}
+
+#profilePageMini .interest .myList button {
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white;
+  border: 2px solid #850000;
+  color: black;
+  padding: 4px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 5px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+#profilePageMini .interest .myList button:hover {
+  display: inline;
+  background-color: #850000;
+  color: white;
+}
+
+#profilePageMini .btn-warn {
+  margin: 5px 25px;
+}
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn {
+  border: 2px solid gray;
+  color: white;
+  background-color: #850000;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: bold;
+  width: 130px;
+  height: 40px;
+}
+
+.btn:hover {
+  background-color: #850000;
+  cursor: pointer;
+}
+.upload-btn-wrapper input[type='file'] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

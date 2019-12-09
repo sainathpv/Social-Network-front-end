@@ -20,7 +20,10 @@ class Post extends React.Component{
             showComments: false,
             post: "",
             shareable: props.shareable,
-            showShareForm: props.showShareForm          
+            showShareForm: props.showShareForm,
+            showMiniProfilePage: props.showMiniProfilePage,
+            currentProfileID: props.currentProfileID,
+            profileIDHandler: props.profileIDHandler
         }
         this.votePost = this.votePost.bind(this);
         this.getVote = this.getVote.bind(this);
@@ -28,6 +31,7 @@ class Post extends React.Component{
         this.showComments = this.showComments.bind(this);
         this.getSharedPost = this.getSharedPost.bind(this);
         this.postComment = this.postComment.bind(this);
+        this.showMiniProfile = this.showMiniProfile.bind(this);
         this.getVote();
     }
 
@@ -42,12 +46,21 @@ class Post extends React.Component{
         fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postByID/" + this.state.content, options).then( result => {
             return result.json();
         }).then(result => {
-
             this.setState({post: 
-                <Post id={result._id} title={result.title} tags={result.tags}
-                dislikes={result.numDislikes} likes={result.numLikes}
-                comments={result.comments} type={result.type}
-                user={result.user} name={result.name} shareable={false} content={result.content} />
+                <Post
+                    id={result._id}
+                    title={result.title}
+                    tags={result.tags}
+                    dislikes={result.numDislikes}
+                    likes={result.numLikes}
+                    comments={result.comments}
+                    type={result.type}
+                    user={result.user}
+                    name={result.name}
+                    shareable={false}
+                    content={result.content} 
+                    currentProfileID={result.profileID}
+                />
             });
         });
     }
@@ -233,7 +246,7 @@ class Post extends React.Component{
                             {
                             this.state.comments.map((comment, i) =>
                             <li key={i.toString()} className="comment bg-secondary">
-                                <h5>{comment.user}</h5>
+                                <button onClick={() => this.showMiniProfile(comment.profile, comment.user)}>{comment.user}</button>
                                 <hr />
                                 <p>{comment.comment}</p>
                             </li>)
@@ -244,12 +257,17 @@ class Post extends React.Component{
             );
         }
     }
+    showMiniProfile(profileID, name){
+        this.state.profileIDHandler(profileID, name);
+        this.state.showMiniProfilePage()
+    }
 
     render(){
+        
         return (
         <div className="post bg-primary border-lg border-round-small">
             <h2>{this.state.title}</h2>
-            <h5>{this.state.name}</h5>
+            <button onClick={() => this.showMiniProfile(this.state.currentProfileID, this.state.name)}>{this.state.name}</button>
             <hr />
             {this.state.post}
             {this.getPostMetaData()}

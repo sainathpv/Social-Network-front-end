@@ -1,80 +1,187 @@
 import React, { Component } from 'react';
-import Cookie from './../../Utility/Cookie';
+import '../css/profileMini.css';
+import logo from '../images/HC.svg';
+import Cookie from '.././Utility/Cookie';
 
-class ShareForm extends Component {
-    constructor(props){
-        super(props);
-        this.state = {title: "", tag: "", content: props.postID, closeForm: props.showShareForm};
-        this.createPost = this.createPost.bind(this);
-        this.closeForm = this.closeForm.bind(this);
-    }
+//interest field, because of the dynamic adding of interest tags
+//it is more convinient to put the interest field out of the class
 
-    handleChange(event){
-        event.preventDefault();
-        this.setState({content: document.getElementById("postFormContent").value});
-    }
+class Profile extends Component {
+  constructor(props) {
+    super(props);
 
-    createPost(event){
-        event.preventDefault();
-        var options = {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-            }
-        };
+    this.state = {
+      profileID: props.profileID,
+      closeForm: props.closeForm, 
+      name: '',
+      profileImageUrl: '',
+      major: '',
+      studentType: '',
+      studentYear: '',
+      bio: '',
+      trueName: '',
+      posts: [],
+      events: [],
+      friends: [],
+      chats: [],
+      interests: [],
+      changed: false,
+      profileImageChanged: false,
+      profileImage: '',
+      accountType: "student", 
+      currentProfileID: props.currentProfileID
+    };
 
-        fetch("http://"+ process.env.REACT_APP_API_HOST +"/profiles/profile", options).then( result => {
-            return result.json();
-        }).then( result => {
+    console.log(props)
 
-            var body = {
-                profileID: result._id,
-                numLikes: 0,
-                numDislikes: 0,
-                tags: document.getElementById("postFormTag").value,
-                comments: [],
-                name: result.name,
-                title: document.getElementById("postFormTitle").value,
-                type: "post",
-                content: this.state.content
-            };
-            options = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
-                },
-                body: JSON.stringify(body)
-            };
+    //TODO: check if there is a token redirect to login if invalid
 
-            fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postPosts", options).then(result => {
-                result.json()
-            }).then(result => {
-                location.reload();
-            });
+    this.getMiniProfile = this.getMiniProfile.bind(this);
+    this.closeMiniProfile = this.closeMiniProfile.bind(this);
+    this.getMiniProfile();
+    
+  }
+
+  getMiniProfile(){
+    var options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
+      },
+      body: JSON.stringify({profileID: this.state.profileID})
+    };
+    try {
+      fetch(
+        'http://' + process.env.REACT_APP_API_HOST + '/profiles/miniProfile',
+        options
+      ).then(result => {
+          return result.json();
+        }).then(result => {
+          console.log(result.result.bio)
+          this.setState({
+            name: result.result.name,
+            profileImageUrl: result.result.profileImageUrl,
+            major: result.result.major,
+            studentType: result.result.studentType,
+            studentYear: result.result.year,
+            bio: result.result.bio,
+            trueName: result.result.trueName,
+            interests: result.result.interests,
+          });
+          console.log(this.state)
+
+          document.getElementById('nameTitle').textContent = result.result.name;
+          if (result.result.trueName){
+            document.getElementById('trueName').innerHTML = result.result.trueName;
+          }
+          if (result.result.bio) {
+            document.getElementById('profileBio').innerHTML = result.result.bio;
+          } else {
+            document.getElementById('profileBio').innerHTML =
+              'The user has nothing to say lol';
+          }
+
+          if (result.result.major) {
+            document.getElementById('major').innerHTML = result.result.major;
+          } else {
+            document.getElementById('major').innerHTML = 'Major not mentioned';
+          }
+
+          if (!result.result.studentType) {
+            this.state.studentType = 'Degree not mentioned';
+          }
+          if (!result.result.year) {
+            this.state.studentYear = 'Year not mentioned';
+          }
+
+          document.getElementById('studentType').innerHTML = this.state.studentType;
+          document.getElementById('studentYear').innerHTML = this.state.studentYear;
         });
+    } catch (err) {
+      console.log(err);
     }
+  }
 
-    closeForm(){
-        this.state.closeForm();
-    }
+  closeMiniProfile(){
+    this.state.closeForm();
+  }
 
-    render(){
-        return (
-            <div className="postForm d-block m-auto bg-primary p-fixed border-lg border-round-small" >
-                <div className="d-flex space-between header"><h3 className="d-inline">Share Post:</h3><i onClick={this.closeForm} className="text-secondary cursor-pointer d-inline fas fa-times"></i></div>
-                <hr />
-                <form onSubmit={this.createPost}>
-                    <label>Title:</label><br />
-                    <input id="postFormTitle" className="d-block text-primary border-round-small bg-secondary border-lg w-100"></input>
-                    <label>Tag:</label>
-                    <input id="postFormTag" className="d-block text-primary border-round-small bg-secondary border-lg w-100" placeholder="Ex. Computer Science"></input>
-                    <div className="text-right"><button className="btn-primary" type="submit">Post</button></div>
-                </form>
-            </div>
-        );
-    }
+
+
+  //TO DO, for some reason the button part does not work
+  //TO DO, when jump to another page, the another page seems to losing all its css.
+  render() {
+    return (
+      <div id='profilePageMini' className='d-block m-auto bg-primary p-fixed border-lg border-round-small'>
+        {' '}
+        <div className='heading'>
+          <div><img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1></div>
+          <i onClick={this.closeMiniProfile} className="text-secondary cursor-pointer d-inline fas fa-times"></i>
+        </div>
+        <hr />
+        <div className='headshot p-10'>
+          <img id='profileImageUrl' src={'http://' + process.env.REACT_APP_API_HOST + this.state.profileImageUrl } alt='' />
+          <div className='profileName container'>
+            <h1 id='nameTitle'>Undefined</h1>
+            <button onClick={this.logout} className='btn-primary'>
+              Add Friends
+              </button>
+          </div>
+
+        </div>
+
+        <div className='profilebio p-10'>
+          <h3>About {this.state.name}: </h3>
+          <h4 id='profileBio'>{this.state.bio}</h4>
+        </div>
+
+        <ul className='basicInfo p-10 text-roboto'>
+          <li className="space-between nameFields">
+            <h3>{this.state.name}'s Name: </h3>
+            <h4 id='trueName'></h4>
+          </li>
+          <li className="space-between degreeFields">
+            <h3>{this.state.name}'s Degree:</h3>
+            <h4 id='studentType'></h4>
+          </li>
+          <li className="space-between yearFields">
+            <h3>{this.state.name}'s Year:</h3>
+            <h4 id="studentYear"></h4>
+          </li>
+          <li className="space-between majorFields">
+            <h3>{this.state.name}'s Major: </h3>
+            <h4 id='major'></h4>
+          </li>
+        </ul>
+          
+          <div className='interest p-10'>
+              <h3>Your Interests: </h3>
+            <ul
+              id='interestsList'
+              className='myList border-lg border-round-small'
+            >
+              {this.state.interests.map((interest, i) => {
+                return (
+                  <button
+                    onClick={() => this.delInterest(i)}
+                    id={'interest' + i}
+                    key={i}
+                  >
+                    {interest}
+                  </button>
+                );
+              })}
+            </ul>
+          </div>
+        
+        <div className='p-10'>
+          
+        </div>
+      </div>
+    );
+  }
 }
 
-export default ShareForm;
+export default Profile;
+

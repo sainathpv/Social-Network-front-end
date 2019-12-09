@@ -67,7 +67,6 @@ class Profile extends Component {
     this.resetEmail = this.resetEmail.bind(this);
     this.getFriendsData = this.getFriendsData.bind(this);
     this.delAccount = this.delAccount.bind(this);
-    this.hideShowName = this.hideShowName.bind(this);
     this.hideShowtrueName = this.hideShowtrueName.bind(this);
     this.hideShowMajor = this.hideShowMajor.bind(this);
     this.hideShowDegree = this.hideShowDegree.bind(this);
@@ -125,6 +124,26 @@ class Profile extends Component {
             this.setState({
               hided: result.hided,
             })
+          }
+
+          if (result.hided.trueName){
+            document.getElementById("trueNameFields").src = hide
+          }
+
+          if (result.hided.studentType){
+            document.getElementById("degreeFields").src = hide
+          }
+
+          if (result.hided.year){
+            document.getElementById("yearFields").src = hide
+          }
+
+          if (result.hided.major){
+            document.getElementById("majorFields").src = hide
+          }
+
+          if (result.hided.interests){
+            document.getElementById("interestFields").src = hide
           }
 
           document.getElementById('nameTitle').textContent = result.name;
@@ -627,18 +646,6 @@ class Profile extends Component {
     this.state.changed = true;
   }
 
-  hideShowName(){
-    if(this.state.hided.name){
-      this.state.hided.name = false;
-      document.getElementById("nameFields").src = show;
-    } else {
-      this.state.hided.name = true;
-      document.getElementById("nameFields").src = hide;
-    }
-    console.log(this.state.hided);
-    this.state.changed = true;
-  }
-
   hideShowMajor(){
     if(this.state.hided.major){
       this.state.hided.major = false;
@@ -772,10 +779,7 @@ class Profile extends Component {
               placeholder='Ex: John Smith'
               required
             ></input>
-            <div className='fields'>
-              <input type="image" id="nameFields" src={show} onClick={this.hideShowName}></input>
-              <h3>Username: </h3>
-            </div>
+            <h3>Username: </h3>
             <input
               className='text-input'
               type='text'

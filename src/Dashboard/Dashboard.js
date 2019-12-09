@@ -11,11 +11,17 @@ class Dashboard extends React.Component{
         super(props);
         this.state = {showPostForm: false, panel: "home"};
         this.showPostForm = this.showPostForm.bind(this);
+        this.showMiniProfilePage = this.showMiniProfilePage.bind(this);
         this.changePanel = this.changePanel.bind(this);
     }
 
     showPostForm(){
         this.setState({showPostForm: !this.state.showPostForm}); 
+    }
+
+    showMiniProfilePage(){
+        console.log("I have been clicked miniprofile")
+        this.setState({showMiniProfilePage: !this.state.showMiniProfilePage}); 
     }
 
     changePanel(panel){
@@ -24,6 +30,11 @@ class Dashboard extends React.Component{
 
     isPostFormHidden(){
         return this.state.showPostForm;
+    }
+
+    isMiniProfileHidden(){
+        console.log(this.state.showMiniProfilePage);
+        return this.state.showMiniProfilePage
     }
 
     render(){
@@ -35,7 +46,13 @@ class Dashboard extends React.Component{
                         <title>Hoosier Connection</title>
                     </Helmet>
                     <ProfilePanel showPostForm={this.showPostForm} />
-                    <PostPanel changePanel={this.changePanel} showPostForm={this.showPostForm} isPostFormHidden={this.isPostFormHidden.bind(this)} />
+                    <PostPanel
+                        changePanel={this.changePanel}
+                        showPostForm={this.showPostForm}
+                        showMiniProfilePage={this.showMiniProfilePage}
+                        isPostFormHidden={this.isPostFormHidden.bind(this)}
+                        isMiniProfileHidden={this.isMiniProfileHidden.bind(this)}
+                    />
                     <NetworkPanel />
                 </div>
             );
@@ -43,7 +60,7 @@ class Dashboard extends React.Component{
             return (
                 <div id="dashboard" className="d-grid text-primary">
                     <Helmet>
-                        <title>Hoosier Connection</title>
+                        <title>Hoosier Connection</title> 
                     </Helmet>
                     <ProfilePanel showPostForm={this.showPostForm} />
                     <ChatPanel changePanel={this.changePanel} />

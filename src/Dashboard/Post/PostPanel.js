@@ -6,24 +6,36 @@ import EventPanel from './../Event/EventPanel';
 import ChatPanel from './../Chat/ChatPanel';
 import Cookie from '../../Utility/Cookie';
 import SearchBox from '../../SearchBox/SearchBox';
+import MiniProfile from '../../Profile/miniProfile';
 import axios from 'axios';
 class PostPanel extends React.Component {
   constructor(props) {
     super(props);
+    
+    console.log(props)
     this.state = {
       panel: 'post',
       posts: [],
       tags: [],
       showPostForm: props.showPostForm,
+      showMiniProfilePage: props.showMiniProfilePage,
       isPostFormHidden: props.isPostFormHidden,
-      showShareForm: false
+      isMiniProfileHidden: props.isMiniProfileHidden,
+      showShareForm: false,
+      currentProfileID: ""
     };
     this.getPosts = this.getPosts.bind(this);
     this.showShareForm = this.showShareForm.bind(this);
     this.changePanel = this.changePanel.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
+    this.profileIDHandler = this.profileIDHandler.bind(this);
     this.getProfile();
     this.postID = '';
+  }
+
+  profileIDHandler(profileID, name){
+    console.log(profileID, name, "here is my print in postpanels")
+    this.state.currentProfileID = profileID
   }
 
   componentDidMount() {}
@@ -87,9 +99,18 @@ class PostPanel extends React.Component {
         this.getPosts(result.interests);
       });
   }
+
   renderPostForm() {
     if (this.state.isPostFormHidden()) {
       return <PostForm closeForm={this.state.showPostForm} />;
+    } else {
+      return;
+    }
+  }
+
+  renderMiniProfile() {
+    if (this.state.isMiniProfileHidden()) {
+      return <MiniProfile closeForm={this.state.showMiniProfilePage} currentProfileID={this.state.currentProfileID} profileID={this.state.currentProfileID}/>;
     } else {
       return;
     }
@@ -129,6 +150,7 @@ class PostPanel extends React.Component {
               </ul>
             </div>
           </nav>
+          {this.renderMiniProfile()}
           {this.renderPostForm()}
           {this.renderShareForm()}
           <ul className='posts'>
@@ -146,8 +168,11 @@ class PostPanel extends React.Component {
                 user={post.user}
                 name={post.name}
                 showShareForm={this.showShareForm}
+                showMiniProfilePage = {this.state.showMiniProfilePage}
                 shareable={true}
                 vote={post.vote}
+                profileIDHandler={this.profileIDHandler}
+                currentProfileID={post.profileID}
               />
             ))}
           </ul>

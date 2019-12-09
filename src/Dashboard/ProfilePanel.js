@@ -1,21 +1,19 @@
 import React from 'react';
-import logo from './../images/HC.svg';
+import logo from './../images/hc_white.png';
 import person from './../images/person-generic.jpg';
 import Cookie from './../Utility/Cookie';
 class ProfilePanel extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       showPostForm: props.showPostForm,
       tabOpened: false,
-
+      panel: props.panel,
       name: '',
       profileIMG: '',
       major: '',
       studentType: '',
       year: '',
-
       interests: [],
       posts: [],
       events: [],
@@ -54,6 +52,7 @@ class ProfilePanel extends React.Component {
           }
           this.setState({
             name: result.name,
+            accountType: result.accountType,
             profileIMG: result.profileImageUrl,
             major: result.major,
             studentType: result.studentType,
@@ -127,7 +126,6 @@ class ProfilePanel extends React.Component {
     this.setState({ tabOpened: false });
     var tab = document.getElementById('tab_profilePanel');
     var panel = document.getElementById('dash_profilePanel');
-
     var post = document.getElementById('dash_postPanel');
     var network = document.getElementById('dash_networkPanel');
     var icon = document.getElementById('dash_profilePanelCloseIcon');
@@ -178,7 +176,6 @@ class ProfilePanel extends React.Component {
 
   acceptFriend(friend) {
     event.preventDefault();
-    console.log(friend);
     var data = {
       friend: {
         profileID: friend.profileID,
@@ -203,6 +200,28 @@ class ProfilePanel extends React.Component {
       } else {
       }
     });
+  }
+
+  getFormButton(){
+    if(this.state.panel === "chats"){
+      return (
+        <button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showPostForm}>
+        Create A Chat Group
+        </button>
+      );
+    }else if(this.state.panel === "home"){
+      return (<button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showPostForm}>
+      Create A Post
+      </button>);
+    }else{
+      if(this.state.accountType === "company"){
+        return (<button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showPostForm}>
+        Create An Event
+        </button>);
+      }else{
+        return "";
+      }
+    }
   }
 
   rejectFriend(friend) {
@@ -301,13 +320,7 @@ class ProfilePanel extends React.Component {
                   <a className='color-red text-bold'>{this.state.chats.length}</a>
                 </li>
               </ul>
-              <button
-                id='dash_createPost'
-                className='btn-primary d-block'
-                onClick={this.state.showPostForm}
-              >
-                Create A Post
-              </button>
+              {this.getFormButton()}
               <hr />
               <form className='findFriend' onSubmit={this.findFriend}>
                 <p id='dash_findFriendNotify'></p>

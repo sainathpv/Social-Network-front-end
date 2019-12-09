@@ -38,7 +38,7 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel  showPostForm={this.showPostForm} />
+                    <ProfilePanel key={this.state.panel} panel={this.state.panel} showPostForm={this.showPostForm} />
                     <PostPanel  changePanel={this.changePanel} showPostForm={this.showPostForm} isPostFormHidden={this.isPostFormHidden.bind(this)} />
                     <NetworkPanel />
                 </div>
@@ -49,8 +49,8 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel  showPostForm={this.showPostForm} />
-                    <ChatPanel test={"test"} changePanel={this.changePanel} />
+                    <ProfilePanel key={this.state.panel} panel={this.state.panel}  showPostForm={this.showPostForm} />
+                    <ChatPanel changePanel={this.changePanel} />
                     <NetworkPanel />
                 </div>
             );
@@ -60,7 +60,7 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel  showPostForm={this.showPostForm} />
+                    <ProfilePanel panel={this.state.panel}  showPostForm={this.showPostForm} />
                     <EventPanel changePanel={this.changePanel} />
                     <NetworkPanel />
                 </div>

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .post {
   width: 90%;
   margin: 10px auto;
@@ -6,11 +7,9 @@
   border: solid 0.5px lightgrey;
   border-radius: 4px;
 }
-.post h2,
-.post h5 {
+.post h2, .post h5 {
   padding: 1px 40px;
 }
-
 .post .postMetaData {
   padding: 0 40px;
 }
@@ -22,7 +21,7 @@
   font-size: 15px;
 }
 .post .postMetaData i {
-  color: #3f99ee;
+  color: #3F99EE;
 }
 .post .postMetaData .label {
   cursor: pointer;
@@ -34,8 +33,7 @@
 .post p {
   padding: 5px 40px;
 }
-.post img,
-.post iframe {
+.post img, .post iframe {
   margin: 5px 40px;
 }
 .post img {
@@ -80,11 +78,44 @@
 .post .comments button {
   border: none;
   border-radius: 10px;
-  background: #3f99ee;
+  background: #3F99EE;
   color: white;
   margin: 0 15%;
   width: 75px;
   height: 30px;
+}
+
+.pollVote ul {
+  padding: 0 30px;
+}
+.pollVote ul li {
+  margin-bottom: 5px;
+  padding: 4px 10px;
+}
+.pollVote ul li input[type=radio] {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+.pollVote ul li input[type=radio] ~ label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "";
+  letter-spacing: 10px;
+  font-size: 1.2em;
+  color: #535353;
+  width: 1.4em;
+}
+.pollVote ul li input[type=radio]:checked ~ label:before {
+  content: "";
+  font-size: 1.2em;
+  color: darkgreen;
+  letter-spacing: 5px;
 }
 
 /*# sourceMappingURL=post.css.map */

@@ -84,3 +84,41 @@
         }
     }
 }
+
+.pollVote{
+    ul{
+        padding: 0 30px;
+        li{
+            margin-bottom: 5px;
+            padding: 4px 10px;
+            input[type=radio] {
+                border: 0;
+                clip: rect(0 0 0 0);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+            }
+                
+            input[type=radio] ~ label:before {
+                font-family: FontAwesome;
+                display: inline-block;
+                content: "\f1db";
+                letter-spacing: 10px;
+                font-size: 1.2em;
+                color: #535353;
+                width: 1.4em;
+            }
+            
+            input[type=radio]:checked ~ label:before {
+                content: "\f00c";
+                font-size: 1.2em;
+                color: darkgreen;
+                letter-spacing: 5px;
+            }
+        }
+    }
+    
+}

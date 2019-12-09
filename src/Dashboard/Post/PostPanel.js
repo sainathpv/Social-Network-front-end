@@ -2,8 +2,6 @@ import React from 'react';
 import Post from './Post';
 import PostForm from './PostForm';
 import ShareForm from './ShareForm';
-import EventPanel from './../Event/EventPanel';
-import ChatPanel from './../Chat/ChatPanel';
 import Cookie from '../../Utility/Cookie';
 import SearchBox from '../../SearchBox/SearchBox';
 import axios from 'axios';

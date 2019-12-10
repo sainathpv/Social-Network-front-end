@@ -453,8 +453,7 @@ class Profile extends Component {
               process.env.REACT_APP_API_HOST +
               '/resetCritical/resetPsw',
               options
-            )
-              .then(result => {
+            ).then(result => {
                 if (result.status === 200) {
                   return result.json();
                 } else {
@@ -701,7 +700,7 @@ class Profile extends Component {
       <div id='profilePage' className='bg-primary text-primary'>
         {' '}
         <div className='heading'>
-          <div>
+        <div>
             <img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1>
           </div>
           <div>
@@ -713,42 +712,28 @@ class Profile extends Component {
         <hr />
         <br />
         <div className='imgAndBio p-10'>
-          <div className="imgAndStatus">
-            <div className='profileimg'>
-              <img
-                id='profileImageUrl'
-                src={
-                  'http://' +
-                  process.env.REACT_APP_API_HOST +
-                  this.state.profileImageUrl
-                }
-                alt=''
-              />
-              <br />
-              <br />
-              <h4 id='profileImgWarning'></h4>
+          <div className='profileimg'>
+            <img
+              id='profileImageUrl'
+              src={
+                'http://' +
+                process.env.REACT_APP_API_HOST +
+                this.state.profileImageUrl
+              }
+              alt=''
+            />
+            <div className='container'>
+              <h1 id='nameTitle'>Undefined</h1>
             </div>
-            <div className="profileStatus">
-              <div className="profileName">
-                <div className='container'>
-                  <h1 id='nameTitle'>Undefined</h1>
-                </div>
 
-                <div class='upload-btn-wrapper'>
-                  <button class='btn'>Upload photo</button>
-                  <input type='file' name='myfile' onChange={this.changeImg} />
-                </div>
-              </div>
-              <h3>Account Status: </h3>
-              <ul className="activity text-roboto">
-                <li className="space-between"><a className="description">Posts Number: </a><a className="color-red">{this.state.posts.length}</a></li>
-                <li className="space-between"><a className="description">Events Number: </a><a className="color-red">{this.state.events.length}</a></li>
-                <li className="space-between"><a className="description">Friends Number: </a><a className="color-red">
-                  {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
-                <li className="space-between"><a className="description">Liked Number: </a><a className="color-red">{this.state.events.length}</a></li>
-                <li className="space-between"><a className="description">Disliked Number: </a><a className="color-red">{this.state.events.length}</a></li>
-              </ul>
+            <div class='upload-btn-wrapper'>
+              <button class='btn'>Upload photo</button>
+              <input type='file' name='myfile' onChange={this.changeImg} />
             </div>
+
+            <br />
+            <br />
+            <h4 id='profileImgWarning'></h4>
           </div>
           <div className='profilebio'>
             <h3>
@@ -763,10 +748,20 @@ class Profile extends Component {
           </div>
 
 
+
         </div>
         <hr />
         <div className='basicInfo d-flex space-between p-10'>
           <div className='studentInfo'>
+          <h3>Username: </h3>
+            <input
+              className='text-input'
+              type='text'
+              id='name'
+              onChange={this.handleChange}
+              placeholder='Ex: johnsmith'
+              required
+            ></input>
             <div className="fields">
               <input type="image" id="trueNameFields" src={show} onClick={this.hideShowtrueName}></input>
               <h3>Your Name: </h3>
@@ -779,15 +774,7 @@ class Profile extends Component {
               placeholder='Ex: John Smith'
               required
             ></input>
-            <h3>Username: </h3>
-            <input
-              className='text-input'
-              type='text'
-              id='name'
-              onChange={this.handleChange}
-              placeholder='Ex: johnsmith'
-              required
-            ></input>
+            
             <div className='dropDownMenu' id='ddm'>
               <div>
                 <div className='fields'>

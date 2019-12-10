@@ -30,6 +30,7 @@ export default class SignInForm extends Component {
   }
 
   handleChange(event) {
+    document.getElementById('warning').textContent = "";
     this.setState({
       email: document.getElementById('login_email').value,
       password: document.getElementById('login_password').value
@@ -38,6 +39,7 @@ export default class SignInForm extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    document.getElementById('warning').textContent = 'Logging in ...';
     var options = {
       method: 'POST',
       headers: {
@@ -175,7 +177,7 @@ export default class SignInForm extends Component {
             className='text-center '
           >
             <GoogleLogin
-              clientId='722327594409-hh0pobkmlnqqpnrm9m8nrni7fsfhrcqm.apps.googleusercontent.com'
+              clientId='1082460203272-udo0ofk3fhrrlujdla85a9hsegbdp6fn.apps.googleusercontent.com'
               buttonText='Login with Google'
               onSuccess={this.responseGoogle}
               onFailure={this.responseGoogle}

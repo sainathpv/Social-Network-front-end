@@ -72,10 +72,33 @@
 #SendResetEmail .submitBox,
 #SendResetQuestion .submitBox,
 #resetPassword .submitBox,
-#login_2fForm .submitBox,
+
 #loginQRCode .submitBox {
   margin-top: 10px;
   width: 300px;
+}
+#login_2fForm .buttons{
+  position: relative;
+  left: 85px;
+  top: 10px;
+  display: flex;
+  width: 70%;
+}
+#login_2fForm .submitBox{
+  position: relative;
+  margin-top: 10px;
+  width: 300px;
+}
+
+#login_2fForm .jumpback{
+  position: relative;
+  margin-top: 10px;
+  width: 300px;
+}
+
+#login_2fForm p{
+  position: relative;
+  left: 130px;
 }
 
 #SignUpForm div p,

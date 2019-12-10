@@ -4,7 +4,7 @@ import axios from 'axios';
 import debounce from 'lodash.debounce';
 import searchBoxIcon from '../images/search.png';
 const inputStyles = {
-  width: '410px',
+  width: '310px',
   height: '40px',
   borderRadius: '2px',
   border: 'none',
@@ -27,10 +27,14 @@ const dropdownStyles = highLighted => {
   };
 };
 class SearchBox extends Component {
-  state = {
-    posts: [],
-    isLoading: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      posts: [],
+      isLoading: false,
+      searchHandler: props.searchHandler
+    };
+  }
 
   onInputChange = debounce(async ({ target: { value } }) => {
     if (value.length > 3) {
@@ -70,10 +74,11 @@ class SearchBox extends Component {
               id="search_text"
               style={inputStyles}
             />
-            <img
+            <input
+              type="image"
               src={searchBoxIcon}
               alt="searchbox Icon"
-              onClick={this.props.searchHandler}
+              onClick={this.state.searchHandler}
               style={{
                 marginTop: '10px',
                 paddingTop: '4px',

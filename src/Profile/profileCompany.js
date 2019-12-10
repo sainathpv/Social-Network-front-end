@@ -141,7 +141,7 @@ class ProfileCompany extends Component {
             bio: document.getElementById('profileBio').value,
             trueName: document.getElementById('trueName').value,
             name: document.getElementById('name').value,
-            studentType: document.getElementById('studentType').value, 
+            studentType: document.getElementById('studentType').value,
             major: document.getElementById('major').value,
             changed: true
         });
@@ -594,47 +594,33 @@ class ProfileCompany extends Component {
                 <hr />
                 <br />
                 <div className='imgAndBio p-10'>
-                    <div className="imgAndStatus">
-                        <div className='profileimg'>
-                            <img
-                                id='profileImageUrl'
-                                src={
-                                    'http://' +
-                                    process.env.REACT_APP_API_HOST +
-                                    this.state.profileImageUrl
-                                }
-                                alt=''
-                            />
-                            <br />
-                            <br />
-                            <h4 id='profileImgWarning'></h4>
+                    <div className='profileimg'>
+                        <img
+                            id='profileImageUrl'
+                            src={
+                                'http://' +
+                                process.env.REACT_APP_API_HOST +
+                                this.state.profileImageUrl
+                            }
+                            alt=''
+                        />
+                        <div className='container'>
+                            <h1 id='nameTitle'>Undefined</h1>
                         </div>
-                        <div className="profileStatus">
-                            <div className="profileName">
-                                <div className='container'>
-                                    <h1 id='nameTitle'>Undefined</h1>
-                                </div>
 
-                                <div class='upload-btn-wrapper'>
-                                    <button class='btn'>Upload photo</button>
-                                    <input type='file' name='myfile' onChange={this.changeImg} />
-                                </div>
-                            </div>
-                            <h3>Account Status: </h3>
-                            <ul className="activity text-roboto">
-                                <li className="space-between"><a className="description">Posts Number: </a><a className="color-red">{this.state.posts.length}</a></li>
-                                <li className="space-between"><a className="description">Events Number: </a><a className="color-red">{this.state.events.length}</a></li>
-                                <li className="space-between"><a className="description">Followers Number: </a><a className="color-red">
-                                    {this.state.friends.profiles ? this.state.friends.profiles.filter(friend => friend.accepted).length : 0}</a></li>
-                                <li className="space-between"><a className="description">Liked Number: </a><a className="color-red">{this.state.events.length}</a></li>
-                                <li className="space-between"><a className="description">Disliked Number: </a><a className="color-red">{this.state.events.length}</a></li>
-                            </ul>
+                        <div class='upload-btn-wrapper'>
+                            <button class='btn'>Upload photo</button>
+                            <input type='file' name='myfile' onChange={this.changeImg} />
                         </div>
+
+                        <br />
+                        <br />
+                        <h4 id='profileImgWarning'></h4>
                     </div>
                     <div className='profilebio'>
                         <h3>
                             {' '}
-                            <b>Company Description: </b>
+                            <b>About You: </b>
                         </h3>
                         <textarea
                             id='profileBio'
@@ -643,11 +629,19 @@ class ProfileCompany extends Component {
                         ></textarea>
                     </div>
 
-
                 </div>
                 <hr />
                 <div className='basicInfo d-flex space-between p-10'>
                     <div className='studentInfo'>
+                    <h3>Username: </h3>
+                        <input
+                            className='text-input'
+                            type='text'
+                            id='name'
+                            onChange={this.handleChange}
+                            placeholder='Ex: johnsmith'
+                            required
+                        ></input>
                         <h3>Company Full Name: </h3>
                         <input
                             className='text-input'
@@ -657,15 +651,7 @@ class ProfileCompany extends Component {
                             placeholder='Ex: John Smith'
                             required
                         ></input>
-                        <h3>Username: </h3>
-                        <input
-                            className='text-input'
-                            type='text'
-                            id='name'
-                            onChange={this.handleChange}
-                            placeholder='Ex: johnsmith'
-                            required
-                        ></input>
+                        
                         <h3>Company Type:</h3>
                         <input className='text-input' type='text' id='studentType'
                             onChange={this.handleChange}

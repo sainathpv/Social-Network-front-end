@@ -37,7 +37,6 @@ class Dashboard extends React.Component{
     }
 
     isMiniProfileHidden(){
-        console.log(this.state.showMiniProfilePage);
         return this.state.showMiniProfilePage
     }
 

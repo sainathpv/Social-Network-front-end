@@ -7,7 +7,7 @@ class Post extends React.Component {
     super(props);
     this.state = {
       id: props.id,
-      title: props.title,
+      title: props.title === "shit" || props.title === "fuck" ? "%$@#" : props.title,
       vote: 0,
       type: props.type,
       name: props.name,
@@ -19,13 +19,14 @@ class Post extends React.Component {
       tags: props.tags,
       showComments: false,
       post: '',
+      censor: false,
       shareable: props.shareable,
       showShareForm: props.showShareForm,
       showMiniProfilePage: props.showMiniProfilePage,
       currentProfileID: props.currentProfileID,
       profileIDHandler: props.profileIDHandler
     };
-    console.log('this is my message in post', props);
+    
     this.votePost = this.votePost.bind(this);
     this.getVote = this.getVote.bind(this);
     this.share = this.share.bind(this);
@@ -86,7 +87,7 @@ class Post extends React.Component {
     };
     switch (this.state.type) {
       case 'text':
-        this.setState({ post: <p>{this.state.content}</p> });
+        this.setState({ post: <p>{this.state.content.replace("shit","%#$%").replace("fuck","%#$%")}</p> });
         break;
       case 'video':
         this.setState({
@@ -311,7 +312,7 @@ class Post extends React.Component {
                 <form className='text-right' onSubmit={this.postComment}>
                   <textarea
                     id='postComment'
-                    className='d-block m-auto border-round-small border-black lightgray'
+                    className='d-block m-auto border-round-small border-black'
                     required
                   ></textarea>
                   <br />

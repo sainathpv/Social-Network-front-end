@@ -149,7 +149,7 @@ hr {
   margin: 0;
 }
 .darkmode hr {
-  border: solid rgb(92, 92, 92) 0.5px;
+  border: solid rgb(92, 92, 92) 2.5px;
 }
 .h-100vh {
   height: 100vh;
@@ -158,10 +158,10 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px solid lightgray;
+  border: 2.5px solid lightgray;
 }
 .border-black {
-  border: solid 0.5px solid black;
+  border: 2.5px solid black;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;

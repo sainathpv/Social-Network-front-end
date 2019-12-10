@@ -25,12 +25,14 @@ class PostPanel extends React.Component {
       searchedPosts: [],
       searched: false,
       searchedPostDisplay: [],
+      censor: true
     };
     this.getPosts = this.getPosts.bind(this);
     this.showShareForm = this.showShareForm.bind(this);
     this.changePanel = this.changePanel.bind(this);
     this.searchHandler = this.searchHandler.bind(this);
     this.profileIDHandler = this.profileIDHandler.bind(this);
+    this.getProfile = this.getProfile.bind(this);
     this.getProfile();
     this.deleteOldPosts = this.deleteOldPosts.bind(this);
     this.switchToPost = this.switchToPost.bind(this);
@@ -225,6 +227,7 @@ class PostPanel extends React.Component {
         return result.json();
       })
       .then(result => {
+        this.setState({censor: result.settings.censor});
         this.getPosts(result.interests);
       });
   }
@@ -370,6 +373,7 @@ class PostPanel extends React.Component {
                 vote={post.vote}
                 profileIDHandler={this.profileIDHandler}
                 currentProfileID={post.profileID}
+                censor={this.state.censor}
               />
             ))}
           </ul>

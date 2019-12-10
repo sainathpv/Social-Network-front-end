@@ -224,7 +224,7 @@ class PostForm extends Component {
   render() {
     return (
       <div className='postForm d-block m-auto bg-primary p-fixed border-lg border-round-small'>
-        <div className='d-flex space-between header lightgray border-lg'>
+        <div className='d-flex space-between header '>
           <h3 className='d-inline'>
             <b>Create Post:</b>
           </h3>
@@ -235,7 +235,7 @@ class PostForm extends Component {
         </div>
         <hr />
         <form
-          className='form lightgray border-black'
+          className='form'
           onSubmit={this.createPost}
         >
           <label>Title:</label>

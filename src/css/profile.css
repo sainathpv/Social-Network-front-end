@@ -1,9 +1,8 @@
 #profilePage {
-  margin: 20px auto;
+  margin: auto;
   padding: 30px;
-  width: calc(100% - 40px);
+  width: 100%;
   justify-content: space-around;
-  background-color: white;
 }
 
 #profilePage .fields{

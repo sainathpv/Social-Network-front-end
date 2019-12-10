@@ -1,4 +1,4 @@
-.darkmode #dash_profilePanel .p-fixed {
+.darkmode #dash_profilePanel .p-fixed .box-shadow {
   box-shadow: 2px 0 2px 0 #2c2c2c !important;
 }
 .darkmode #dash_networkPanel .network-panel {
@@ -157,57 +157,6 @@
   transform-origin: bottom right;
   transition: transform 0.25 ease-out;
 }
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .searchBar{
-  width: 250px;
-  height: 35px;
-  width: 300px;
-  padding-left: 6px;
-  margin: 10px;
-  border: solid 0.5px solid lightgray;
-  border-radius: 4px;
-  font-size: 17px;
-
-}
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .searchImg{
-  position: relative;
-  left: -45px;
-  top: 8px;
-  width: 30px;
-}
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .postList{
-  filter: drop-shadow(3px 3px 3px #222);
-  border-radius: 25px;
-  position: relative;
-  top: -15px;
-  left: -8px;
-  width: 335px;
-}
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .postList li{
-  margin: 4px;
-  position: relative;
-  height: 50px;
-  padding: 5px;
-  background: white;
-  color: black;
-}
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .postList li p{
-  position: relative;
-  top: -12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-#dashboard #dash_postPanel .p-fixed .d-flex .search .postList li:hover {
-  background-color: #850000;
-  color: white;
-}
-
 #dashboard #dash_postPanel .postForm {
   top: 80px;
   left: calc(50% - 15vw);

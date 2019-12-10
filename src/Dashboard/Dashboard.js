@@ -38,6 +38,14 @@ class Dashboard extends React.Component{
         return this.state.showChatForm;
     }
 
+    showEventForm(){
+        console.log(this.state.showChatForm);
+        this.setState({showEventForm: !this.state.showEventForm}); 
+    }
+
+    isEventFormHidden(){
+        return this.state.showEventForm;
+    }
     showMiniProfilePage(){
         this.setState({showMiniProfilePage: !this.state.showMiniProfilePage}); 
     }
@@ -88,7 +96,7 @@ class Dashboard extends React.Component{
                         <title>Hoosier Connection</title>
                     </Helmet>
                     <ProfilePanel key={this.state.panel} panel={this.state.panel}  showEventForm={this.showEventForm} />
-                    <EventPanel showChatForm={this.showEventForm} isChatFormHidden={this.isEventFormHidden.bind(this)}  changePanel={this.changePanel} />
+                    <EventPanel showEventForm={this.showEventForm} isEventFormHidden={this.isEventFormHidden.bind(this)}  changePanel={this.changePanel} />
                     <NetworkPanel />
                 </div>
             );

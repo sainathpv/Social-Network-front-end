@@ -30,6 +30,27 @@
   margin: 2px;
   padding: 3px;
 }
+
+
+.post .miniProfile {
+  position: relative;
+  left: 40px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white;
+  color: black;
+  border: 2px;
+  padding: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+
 .post p {
   padding: 5px 40px;
 }
@@ -58,7 +79,7 @@
   border-radius: 4px;
   padding: 20px 10px;
   background: whitesmoke;
-  width: 90%;
+  width: 80%;
   margin: 10px auto;
 }
 .post .comments textarea {
@@ -83,6 +104,29 @@
   margin: 0 15%;
   width: 75px;
   height: 30px;
+}
+
+.post .comments .miniProfile {
+  position: relative;
+  left: -50px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color:  whitesmoke;
+  color: black;
+  padding: 4px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+
+.post .comments p {
+  position: relative;
+  width: 80%;
 }
 
 .pollVote ul {

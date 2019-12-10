@@ -383,3 +383,10 @@ c91b1b #profilePage .heading div img {
   top: 0;
   opacity: 0;
 }
+
+@media only screen and (max-width: 1100px) {
+
+  #profilePage .basicInfo .dropDownMenu{
+    display: inline;
+  }
+}

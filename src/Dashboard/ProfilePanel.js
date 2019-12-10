@@ -63,8 +63,18 @@ class ProfilePanel extends React.Component {
             interests: result.interests,
             posts: result.posts,
             events: result.events,
-            chats: result.chats
+            chats: result.chats,
+            trueName: result.trueName,
           });
+
+
+          if(this.state.accountType === 'company'){
+            this.setState({
+              studentType: this.state.trueName + " Inc.",
+              major: this.state.studentType,
+              year: this.state.major
+            })
+          }
 
           var options = {
             method: 'GET',

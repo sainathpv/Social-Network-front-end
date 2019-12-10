@@ -247,7 +247,7 @@ class Post extends React.Component{
                             {
                             this.state.comments.map((comment, i) =>
                             <li key={i.toString()} className="comment bg-secondary">
-                                <button onClick={() => this.showMiniProfile(comment.profile, comment.user)}>{comment.user}</button>
+                                <button className="miniProfile" onClick={() => this.showMiniProfile(comment.profile, comment.user)}>{comment.user}</button>
                                 <hr />
                                 <p>{comment.comment}</p>
                             </li>)
@@ -268,7 +268,7 @@ class Post extends React.Component{
         return (
         <div className="post bg-primary border-lg border-round-small">
             <h2>{this.state.title}</h2>
-            <button onClick={() => this.showMiniProfile(this.state.currentProfileID, this.state.name)}>{this.state.name}</button>
+            <button className="miniProfile" onClick={() => this.showMiniProfile(this.state.currentProfileID, this.state.name)}>{this.state.name}</button>
             <hr />
             {this.state.post}
             {this.getPostMetaData()}

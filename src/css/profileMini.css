@@ -5,7 +5,7 @@
   margin: 20px auto;
   padding: 10px;
   width: 400px;
-  height: 600px;
+  height: 500px;
   overflow: auto;
   justify-content: space-around;
   background-color: rgb(167, 167, 167);
@@ -143,22 +143,13 @@ c91b1b #profilePageMini .heading div img {
 }
 
 #profilePageMini .basicInfo li{
+  padding: 2px;
   background: #909192;
   margin: 5px;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   top: 18px;
-}
-
-#profilePageMini .basicInfo .nameFields{
-  display: flex;
-}
-
-#profilePageMini .basicInfo .degreeFields{
-  display: flex;
-}
-
-#profilePageMini .basicInfo .yearFields{
-  display: flex;
 }
 
 #profilePageMini .interest {

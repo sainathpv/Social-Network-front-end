@@ -10,6 +10,8 @@ import hide from '../images/hide.png';
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
 
+var changedOutSide = false
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -44,7 +46,10 @@ class Profile extends Component {
         year: false,
         interests: false,
       },
-      accountType: "student"
+      accountType: "student",
+      setting: "",
+      darkmode: 'Off',
+      showOnlyToFriends: 'to All'
     };
     //TODO: check if there is a token redirect to login if invalid
 
@@ -72,14 +77,76 @@ class Profile extends Component {
     this.hideShowDegree = this.hideShowDegree.bind(this);
     this.hideShowYear = this.hideShowYear.bind(this);
     this.hideShowInterest = this.hideShowInterest.bind(this);
+    this.switchDarkMode = this.switchDarkMode.bind(this);
+    this.switchShowPost = this.switchShowPost.bind(this);
 
     this.getProfileData();
     this.getFriendsData();
     
   }
 
+
+  switchDarkMode(){
+    if(this.state.setting.darkmode){
+      this.setState({
+        darkmode: 'Off'
+      })
+      this.setState({
+        setting: {
+          darkmode: false, 
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends
+        }
+      });
+    } else {
+      this.setState({
+        darkmode: 'On'
+      })
+      this.setState({
+        setting: {
+          darkmode: true, 
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends
+        }
+      });
+    }
+  }
+
+  switchShowPost(){
+    if(this.state.setting.postsSeenOnlyByFriends){
+      this.setState({
+        showOnlyToFriends: 'to All'
+      })
+      this.setState({
+        setting: {
+          darkmode: this.state.setting.darkmode, 
+          postsSeenOnlyByFriends: false
+        }
+      });
+    } else {
+      this.setState({
+        showOnlyToFriends: 'Only to Friends'
+      })
+      this.setState({
+        setting: {
+          darkmode: this.state.setting.darkmode, 
+          postsSeenOnlyByFriends: true
+        }
+      });
+    }
+
+  }
+
   //Initialize the data in profile page
   getProfileData() {
+    window.addEventListener('beforeunload', function(e) {
+      if(changedOutSide) {
+        document.getElementById("profileWarning").textContent = "Please Click This To Save Changes"
+        //following two lines will cause the browser to ask the user if they
+        //want to leave. The text of this dialog is controlled by the browser.
+        e.preventDefault(); //per the standard
+        e.returnValue = ''; //required for Chrome
+      }
+      //else: user is allowed to leave without a warning dialog
+    });
     var options = {
       method: 'GET',
       headers: {
@@ -119,6 +186,18 @@ class Profile extends Component {
             interests: result.interests,
           });
           console.log(result)
+          if (result.settings.darkmode){
+            console.log('dark mode on')
+            this.setState({
+              darkmode: 'On'
+            })
+          }
+
+          if (result.settings.postsSeenOnlyByFriends){
+            this.setState({
+              showOnlyToFriends: "Only to Friends"
+            })
+          }
 
           if (result.hided) {
             this.setState({
@@ -185,6 +264,7 @@ class Profile extends Component {
       major: document.getElementById('major').value,
       changed: true
     });
+    changedOutSide = true
   }
 
   //handle the 'edit profile' button, update all editted informaion
@@ -246,7 +326,8 @@ class Profile extends Component {
           studentType: this.state.studentType,
           studentYear: this.state.studentYear,
           profileImageUrl: imageUrl,
-          hided: this.state.hided
+          hided: this.state.hided, 
+          settings: this.state.setting
         })
       };
       fetch(
@@ -262,7 +343,7 @@ class Profile extends Component {
           }
         })
         .then(result => {
-          //location.reload();
+          location.reload();
         });
     } else {
       /*TODO notify the user of the bad match*/
@@ -284,6 +365,7 @@ class Profile extends Component {
       document.getElementById('inputInterest').value = '';
       this.state.interests.push(newInterest);
       this.setState({ changed: true });
+      changedOutSide = true
       console.log(this.state.interests);
       var options = {
         method: 'POST',
@@ -366,12 +448,14 @@ class Profile extends Component {
     }
     this.setState({ studentType: sType });
     this.state.changed = true;
+    changedOutSide = true
   }
 
   changeStudentYear(sYear) {
     event.preventDefault();
     this.setState({ studentYear: sYear });
     this.state.changed = true;
+    changedOutSide = true
   }
 
   changeImg(event) {
@@ -392,6 +476,7 @@ class Profile extends Component {
       reader.readAsDataURL(inputImg);
       this.state.profileImageChanged = true;
       this.state.changed = true;
+      changedOutSide = true
     }
   }
 
@@ -643,6 +728,7 @@ class Profile extends Component {
     }
     console.log(this.state.hided)
     this.state.changed = true;
+    changedOutSide = true
   }
 
   hideShowMajor(){
@@ -655,6 +741,7 @@ class Profile extends Component {
     }
     console.log(this.state.hided);
     this.state.changed = true;
+    changedOutSide = true
 
   }
 
@@ -668,6 +755,7 @@ class Profile extends Component {
     }
     console.log(this.state.hided);
     this.state.changed = true;
+    changedOutSide = true
   }
 
   hideShowYear(){
@@ -680,6 +768,7 @@ class Profile extends Component {
     }
     console.log(this.state.hided);
     this.state.changed = true;
+    changedOutSide = true
   }
 
   hideShowInterest(){
@@ -692,6 +781,7 @@ class Profile extends Component {
     }
     console.log(this.state.hided);
     this.state.changed = true;
+    changedOutSide = true
   }
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
@@ -745,6 +835,11 @@ class Profile extends Component {
               onChange={this.handleChange}
               placeholder='Ex: A little section dedicated to you!'
             ></textarea>
+
+            <div className="setting">
+            <button id="darkmode" className="darkmode" onClick={this.switchDarkMode}>Darkmode {this.state.darkmode}</button>
+            <button id="showPostToFriend" className="showPostToFriend" onClick={this.switchShowPost}>Show Post {this.state.showOnlyToFriends}</button>
+            </div>
           </div>
 
 
@@ -870,6 +965,7 @@ class Profile extends Component {
             className='btn-primary'>
             Update Profile
           </button>
+          <p id="profileWarning"></p>
         </div>
         <hr />
         <div className='criticalInfo p-10'>

@@ -10,6 +10,8 @@ import hide from '../images/hide.png';
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
 
+var changedOutSide = false
+
 class ProfileCompany extends Component {
     constructor(props) {
         super(props);
@@ -60,10 +62,23 @@ class ProfileCompany extends Component {
         this.getProfileData();
         this.getFriendsData();
 
+        
+
     }
 
     //Initialize the data in profile page
     getProfileData() {
+        window.addEventListener('beforeunload', function(e) {
+            if(changedOutSide) {
+                document.getElementById("profileWarning").textContent = "Please Click This To Save Changes"
+        
+              //following two lines will cause the browser to ask the user if they
+              //want to leave. The text of this dialog is controlled by the browser.
+              e.preventDefault(); //per the standard
+              e.returnValue = ''; //required for Chrome
+            }
+            //else: user is allowed to leave without a warning dialog
+          });
         var options = {
             method: 'GET',
             headers: {
@@ -145,6 +160,7 @@ class ProfileCompany extends Component {
             major: document.getElementById('major').value,
             changed: true
         });
+        changedOutSide = true
     }
 
     //handle the 'edit profile' button, update all editted informaion
@@ -244,6 +260,7 @@ class ProfileCompany extends Component {
             document.getElementById('inputInterest').value = '';
             this.state.interests.push(newInterest);
             this.setState({ changed: true });
+            changedOutSide = true
             console.log(this.state.interests);
             var options = {
                 method: 'POST',
@@ -334,6 +351,7 @@ class ProfileCompany extends Component {
             reader.readAsDataURL(inputImg);
             this.state.profileImageChanged = true;
             this.state.changed = true;
+            changedOutSide = true
         }
     }
 
@@ -620,7 +638,7 @@ class ProfileCompany extends Component {
                     <div className='profilebio'>
                         <h3>
                             {' '}
-                            <b>About You: </b>
+                            <b>About the Company: </b>
                         </h3>
                         <textarea
                             id='profileBio'
@@ -715,6 +733,7 @@ class ProfileCompany extends Component {
                         className='btn-primary'>
                         Update Profile
           </button>
+          <p id="profileWarning"></p>
                 </div>
                 <hr />
                 <div className='criticalInfo p-10'>

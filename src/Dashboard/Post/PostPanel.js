@@ -25,7 +25,7 @@ class PostPanel extends React.Component {
       searchedPosts: [],
       searched: false,
       searchedPostDisplay: [],
-      censor: true
+      censor: false
     };
     this.getPosts = this.getPosts.bind(this);
     this.showShareForm = this.showShareForm.bind(this);
@@ -135,10 +135,8 @@ class PostPanel extends React.Component {
   swtichAllPosts(){
     var listOfPosts = document.getElementById("listOfPosts")
     ReactDOM.unmountComponentAtNode(listOfPosts)
-    console.log("swtichAllPosts is executed")
     
     while(listOfPosts.firstChild){
-      console.log("this is the child I removed", listOfPosts.firstChild.state)
       listOfPosts.removeChild(listOfPosts.firstChild);
     }
     ReactDOM.render(
@@ -258,7 +256,6 @@ class PostPanel extends React.Component {
   searchHandler(event) {
     document.getElementById("postList").style.display = "block";
     const text = document.getElementById('search_text').value;
-    console.log(text);
     if (text != "") {
       var options = {
         method: 'POST',
@@ -313,7 +310,7 @@ class PostPanel extends React.Component {
         searchedPosts: []
       });
     }
-    console.log("I have my test printed at here", this.state.searchedPostDisplay)
+
   }
 
   render() {
@@ -339,7 +336,7 @@ class PostPanel extends React.Component {
                   />
                   <ul id='postList' className="postList">
                     {this.state.searchedPosts.map((post, i) => 
-                        <li
+                        <li 
                           key={i.toString()}
                           onClick={() => this.switchToPost(post)}>
                           <p>By {post.name}: [{post.title}] Type:{post.type}</p>

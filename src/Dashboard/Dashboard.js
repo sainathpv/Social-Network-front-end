@@ -10,11 +10,14 @@ class Dashboard extends React.Component{
     constructor(props){
         super(props);
         this.state = {
+            showEventForm: false,
+            showChatForm: false,
             showPostForm: false,
             panel: "home",
             profile: null
         };
         this.showPostForm = this.showPostForm.bind(this);
+        this.showChatForm = this.showChatForm.bind(this);
         this.showMiniProfilePage = this.showMiniProfilePage.bind(this);
         this.changePanel = this.changePanel.bind(this);
     }
@@ -22,9 +25,20 @@ class Dashboard extends React.Component{
     showPostForm(){
         this.setState({showPostForm: !this.state.showPostForm}); 
     }
+    isPostFormHidden(){
+        return this.state.showPostForm;
+    }
+
+    showChatForm(){
+        console.log(this.state.showChatForm);
+        this.setState({showChatForm: !this.state.showChatForm}); 
+    }
+
+    isChatFormHidden(){
+        return this.state.showChatForm;
+    }
 
     showMiniProfilePage(){
-        console.log("I have been clicked miniprofile")
         this.setState({showMiniProfilePage: !this.state.showMiniProfilePage}); 
     }
 
@@ -32,12 +46,7 @@ class Dashboard extends React.Component{
         this.setState({panel: panel});
     }
 
-    isPostFormHidden(){
-        return this.state.showPostForm;
-    }
-
     isMiniProfileHidden(){
-        console.log(this.state.showMiniProfilePage);
         return this.state.showMiniProfilePage
     }
 
@@ -49,8 +58,9 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel showPostForm={this.showPostForm} />
+                    <ProfilePanel key={this.state.panel} panel={this.state.panel} showPostForm={this.showPostForm} />
                     <PostPanel
+                        
                         changePanel={this.changePanel}
                         showPostForm={this.showPostForm}
                         showMiniProfilePage={this.showMiniProfilePage}
@@ -66,8 +76,8 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title> 
                     </Helmet>
-                    <ProfilePanel key={this.state.panel} panel={this.state.panel}  showPostForm={this.showPostForm} />
-                    <ChatPanel changePanel={this.changePanel} />
+                    <ProfilePanel key={this.state.panel} panel={this.state.panel}  showChatForm={this.showChatForm}  />
+                    <ChatPanel showChatForm={this.showChatForm} isChatFormHidden={this.isChatFormHidden.bind(this)} changePanel={this.changePanel} />
                     <NetworkPanel />
                 </div>
             );
@@ -77,8 +87,8 @@ class Dashboard extends React.Component{
                     <Helmet>
                         <title>Hoosier Connection</title>
                     </Helmet>
-                    <ProfilePanel panel={this.state.panel}  showPostForm={this.showPostForm} />
-                    <EventPanel changePanel={this.changePanel} />
+                    <ProfilePanel key={this.state.panel} panel={this.state.panel}  showEventForm={this.showEventForm} />
+                    <EventPanel showChatForm={this.showEventForm} isChatFormHidden={this.isEventFormHidden.bind(this)}  changePanel={this.changePanel} />
                     <NetworkPanel />
                 </div>
             );

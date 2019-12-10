@@ -44,12 +44,10 @@ class Poll extends React.Component{
     }
 
     selectCategory(category){
-        console.log(category);
         this.setState({seletedCategory: category});
     }
 
     onChange(event){
-        console.log(event.target.value);
         this.setState({seletedCategory: event.target.value});
     }
 
@@ -70,6 +68,7 @@ class Poll extends React.Component{
             return result.json();
         }).then(result => {
             this.setState({data: result.data});
+            location.reload();
         });
     }
 

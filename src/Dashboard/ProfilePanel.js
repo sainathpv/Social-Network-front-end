@@ -6,6 +6,8 @@ class ProfilePanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showChatForm: props.showChatForm,
+      showEventForm: props.showEventForm,
       showPostForm: props.showPostForm,
       tabOpened: false,
       panel: props.panel,
@@ -196,16 +198,14 @@ class ProfilePanel extends React.Component {
       'http://' + process.env.REACT_APP_API_HOST + '/friends/editfriends',
       options
     ).then(result => {
-      if (result.status === 200) {
-      } else {
-      }
+      location.reload();
     });
   }
 
   getFormButton(){
     if(this.state.panel === "chats"){
       return (
-        <button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showPostForm}>
+        <button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showChatForm}>
         Create A Chat Group
         </button>
       );
@@ -215,7 +215,7 @@ class ProfilePanel extends React.Component {
       </button>);
     }else{
       if(this.state.accountType === "company"){
-        return (<button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showPostForm}>
+        return (<button id='dash_createPost' className='btn-primary d-block' onClick={this.state.showEventForm}>
         Create An Event
         </button>);
       }else{

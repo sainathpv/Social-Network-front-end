@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardElement, injectStripe } from 'react-stripe-elements';
+import Cookie from './../../Utility/Cookie';
 import StripeCheckout from 'react-stripe-checkout';
 
 //import Cookie from './../Utility/Cookie';
@@ -12,14 +12,33 @@ class Event extends React.Component {
     };
     this.getPostMetaData = this.getPostMetaData.bind(this);
     this.getContent = this.getContent.bind(this);
+    this.going = this.going.bind(this);
     this.getContent();
+  }
+  going(){
+    var options = {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
+      },
+      body: JSON.stringify({
+        eventID: this.state.event.eventID
+      })
+    };
+
+    fetch("http://"+ process.env.REACT_APP_API_HOST +"/events/going", options).then( result => {
+        return result.json();
+    }).then( result => {
+
+    });
   }
 
   getPostMetaData() {
     return (
       <div className='d-flex postMetaData'>
         <div className='d-flex'>
-          <i className='fas fa-calendar-plus'></i>
+          <i onClick={this.going} className='cursor-pointer fas fa-calendar-plus'></i>
           <h5>Going: {this.state.event.going}</h5>
         </div>
         <div className='d-flex'>
@@ -37,7 +56,7 @@ class Event extends React.Component {
           <h5>Entry fee: {this.state.event.fee}</h5>
         </div>
         <StripeCheckout
-          amount='500'
+          amount={500}
           billingAddress
           description={this.state.event.eventName}
           image='https://yourdomain.tld/images/logo.svg'

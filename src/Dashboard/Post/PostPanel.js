@@ -9,8 +9,6 @@ import axios from 'axios';
 class PostPanel extends React.Component {
   constructor(props) {
     super(props);
-    
-    console.log(props)
     this.state = {
       panel: 'post',
       posts: [],
@@ -32,11 +30,8 @@ class PostPanel extends React.Component {
   }
 
   profileIDHandler(profileID, name){
-    console.log(profileID, name, "here is my print in postpanels")
     this.state.currentProfileID = profileID
   }
-
-  componentDidMount() {}
 
   showShareForm(postID) {
     this.postID = postID;
@@ -73,7 +68,6 @@ class PostPanel extends React.Component {
       })
       .then(result => {
         this.setState({ posts: result.return });
-        //this.state.posts = result.return;
       });
   }
 
@@ -123,13 +117,10 @@ class PostPanel extends React.Component {
 
   async searchHandler(event) {
     const text = document.getElementById('search_text').value;
-    //alert(text);
     const res = await axios.get(
       `http://localhost:8080/searchposts?text=${text}`
     );
     const searchedPosts = res.data.result;
-    console.log(this.state.posts);
-    console.log(searchedPosts);
     this.setState({ posts: searchedPosts });
   }
 

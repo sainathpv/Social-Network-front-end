@@ -1,11 +1,14 @@
 import React, { Component, useState } from 'react';
 import Chat from './Chat';
 import ChatRoom from './ChatRoom';
+import ChatForm from './ChatForm';
 import Cookie from './../../Utility/Cookie';
 class ChatPanel extends Component {
     constructor(props){
         super(props);
         this.state = {
+            showChatForm: props.showChatForm,
+            isChatFormHidden: props.isChatFormHidden,
             changePanel: props.changePanel,
             chats: [],
             openChatRoom: null,
@@ -46,7 +49,17 @@ class ChatPanel extends Component {
     openChatRoom(chat){
         this.setState({openChatRoom: chat});
     }
+    
+    renderChatForm() {
+        console.log(this.state.isChatFormHidden());
+        if (this.state.isChatFormHidden()) {
+            return <ChatForm closeForm={this.state.showChatForm} />;
+        } else {
+            return;
+        }
+    }
 
+      
     render() {
         if(this.state.openChatRoom != null){
             return (
@@ -64,6 +77,7 @@ class ChatPanel extends Component {
                             </ul>
                         </div>
                     </nav>
+                    {this.renderChatForm()}
                     <ul className="chats">
                         {this.state.chats.map((chat, i) => {
                             return <Chat openChatRoom={this.openChatRoom} key={i} chat={chat} />;

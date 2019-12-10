@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/profile.css';
-import logo from '../images/HC.svg';
+import logo from './../images/hc_white.png';
 import DropDownMenu from '../Utility/DropDown';
 import Cookie from '.././Utility/Cookie';
 import person from '../images/person-generic.jpg';
@@ -42,9 +42,9 @@ class Profile extends Component {
         major: false,
         studentType: false,
         year: false,
-        interests: false,
+        interests: false
       },
-      accountType: "student"
+      accountType: 'student'
     };
     //TODO: check if there is a token redirect to login if invalid
 
@@ -75,7 +75,6 @@ class Profile extends Component {
 
     this.getProfileData();
     this.getFriendsData();
-    
   }
 
   //Initialize the data in profile page
@@ -96,8 +95,8 @@ class Profile extends Component {
           return result.json();
         })
         .then(result => {
-          if(result.accountType == "company"){
-            window.location.href = "/profileCompany";
+          if (result.accountType == 'company') {
+            window.location.href = '/profileCompany';
           }
           if (result.settings.darkmode) {
             document.body.className = 'darkmode';
@@ -116,34 +115,34 @@ class Profile extends Component {
             chats: result.chats,
             bio: result.bio,
             trueName: result.trueName,
-            interests: result.interests,
+            interests: result.interests
           });
-          console.log(result)
+          console.log(result);
 
           if (result.hided) {
             this.setState({
-              hided: result.hided,
-            })
+              hided: result.hided
+            });
           }
 
-          if (result.hided.trueName){
-            document.getElementById("trueNameFields").src = hide
+          if (result.hided.trueName) {
+            document.getElementById('trueNameFields').src = hide;
           }
 
-          if (result.hided.studentType){
-            document.getElementById("degreeFields").src = hide
+          if (result.hided.studentType) {
+            document.getElementById('degreeFields').src = hide;
           }
 
-          if (result.hided.year){
-            document.getElementById("yearFields").src = hide
+          if (result.hided.year) {
+            document.getElementById('yearFields').src = hide;
           }
 
-          if (result.hided.major){
-            document.getElementById("majorFields").src = hide
+          if (result.hided.major) {
+            document.getElementById('majorFields').src = hide;
           }
 
-          if (result.hided.interests){
-            document.getElementById("interestFields").src = hide
+          if (result.hided.interests) {
+            document.getElementById('interestFields').src = hide;
           }
 
           document.getElementById('nameTitle').textContent = result.name;
@@ -212,8 +211,8 @@ class Profile extends Component {
         };
         fetch(
           'http://' +
-          process.env.REACT_APP_API_HOST +
-          '/profiles/editProfileImage',
+            process.env.REACT_APP_API_HOST +
+            '/profiles/editProfileImage',
           options
         )
           .then(result => {
@@ -297,8 +296,8 @@ class Profile extends Component {
       };
       fetch(
         'http://' +
-        process.env.REACT_APP_API_HOST +
-        '/profiles/editprofile_interest',
+          process.env.REACT_APP_API_HOST +
+          '/profiles/editprofile_interest',
         options
       )
         .then(result => {
@@ -309,7 +308,7 @@ class Profile extends Component {
             return null;
           }
         })
-        .then(result => { });
+        .then(result => {});
     }
   }
 
@@ -334,8 +333,8 @@ class Profile extends Component {
 
     fetch(
       'http://' +
-      process.env.REACT_APP_API_HOST +
-      '/profiles/editprofile_interest',
+        process.env.REACT_APP_API_HOST +
+        '/profiles/editprofile_interest',
       options
     )
       .then(result => {
@@ -346,7 +345,7 @@ class Profile extends Component {
           return null;
         }
       })
-      .then(result => { });
+      .then(result => {});
   }
 
   handleInterestChange(event) {
@@ -386,7 +385,7 @@ class Profile extends Component {
 
       var profileImg = document.getElementById('profileImageUrl');
 
-      reader.onload = function (event) {
+      reader.onload = function(event) {
         profileImg.src = event.target.result;
       };
       reader.readAsDataURL(inputImg);
@@ -450,10 +449,11 @@ class Profile extends Component {
             };
             fetch(
               'http://' +
-              process.env.REACT_APP_API_HOST +
-              '/resetCritical/resetPsw',
+                process.env.REACT_APP_API_HOST +
+                '/resetCritical/resetPsw',
               options
-            ).then(result => {
+            )
+              .then(result => {
                 if (result.status === 200) {
                   return result.json();
                 } else {
@@ -510,8 +510,8 @@ class Profile extends Component {
     };
     fetch(
       'http://' +
-      process.env.REACT_APP_API_HOST +
-      '/resetCritical/sendEmailValCode',
+        process.env.REACT_APP_API_HOST +
+        '/resetCritical/sendEmailValCode',
       options
     )
       .then(result => {
@@ -601,31 +601,41 @@ class Profile extends Component {
   }
 
   delAccount() {
-    if (confirm("Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!")) {
+    if (
+      confirm(
+        'Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!'
+      )
+    ) {
       try {
         var options = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
           }
-        }
-        fetch("http://" + process.env.REACT_APP_API_HOST + "/users/deleteUser", options).then(result => {
-          if (result.status === 200) {
-            return result.json();
-          } else {
-            result.json().then(nr => {
-              document.getElementById("resetEmailWarning").textContent = nr.message;
-            })
-            console.log(result);
-            return null;
-          }
-        }).then(result => {
-          if (result) {
-            alert(result.message, "\n\nPlease refresh the page");
-            window.location.href = "/login";
-          }
-        });
+        };
+        fetch(
+          'http://' + process.env.REACT_APP_API_HOST + '/users/deleteUser',
+          options
+        )
+          .then(result => {
+            if (result.status === 200) {
+              return result.json();
+            } else {
+              result.json().then(nr => {
+                document.getElementById('resetEmailWarning').textContent =
+                  nr.message;
+              });
+              console.log(result);
+              return null;
+            }
+          })
+          .then(result => {
+            if (result) {
+              alert(result.message, '\n\nPlease refresh the page');
+              window.location.href = '/login';
+            }
+          });
       } catch (err) {
         console.log(err);
         return false;
@@ -634,61 +644,60 @@ class Profile extends Component {
   }
 
   hideShowtrueName() {
-    if(this.state.hided.trueName){
+    if (this.state.hided.trueName) {
       this.state.hided.trueName = false;
-      document.getElementById("trueNameFields").src = show;
+      document.getElementById('trueNameFields').src = show;
     } else {
       this.state.hided.trueName = true;
-      document.getElementById("trueNameFields").src = hide;
+      document.getElementById('trueNameFields').src = hide;
     }
-    console.log(this.state.hided)
+    console.log(this.state.hided);
     this.state.changed = true;
   }
 
-  hideShowMajor(){
-    if(this.state.hided.major){
+  hideShowMajor() {
+    if (this.state.hided.major) {
       this.state.hided.major = false;
-      document.getElementById("majorFields").src = show;
+      document.getElementById('majorFields').src = show;
     } else {
       this.state.hided.major = true;
-      document.getElementById("majorFields").src = hide;
+      document.getElementById('majorFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
-
   }
 
-  hideShowDegree(){
-    if(this.state.hided.studentType){
+  hideShowDegree() {
+    if (this.state.hided.studentType) {
       this.state.hided.studentType = false;
-      document.getElementById("degreeFields").src = show;
+      document.getElementById('degreeFields').src = show;
     } else {
       this.state.hided.studentType = true;
-      document.getElementById("degreeFields").src = hide;
+      document.getElementById('degreeFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
   }
 
-  hideShowYear(){
-    if(this.state.hided.year){
+  hideShowYear() {
+    if (this.state.hided.year) {
       this.state.hided.year = false;
-      document.getElementById("yearFields").src = show;
+      document.getElementById('yearFields').src = show;
     } else {
       this.state.hided.year = true;
-      document.getElementById("yearFields").src = hide;
+      document.getElementById('yearFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
   }
 
-  hideShowInterest(){
-    if(this.state.hided.interests){
+  hideShowInterest() {
+    if (this.state.hided.interests) {
       this.state.hided.interests = false;
-      document.getElementById("interestFields").src = show;
+      document.getElementById('interestFields').src = show;
     } else {
       this.state.hided.interests = true;
-      document.getElementById("interestFields").src = hide;
+      document.getElementById('interestFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
@@ -700,7 +709,7 @@ class Profile extends Component {
       <div id='profilePage' className='bg-primary text-primary'>
         {' '}
         <div className='heading'>
-        <div>
+          <div>
             <img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1>
           </div>
           <div>
@@ -746,14 +755,11 @@ class Profile extends Component {
               placeholder='Ex: A little section dedicated to you!'
             ></textarea>
           </div>
-
-
-
         </div>
         <hr />
         <div className='basicInfo d-flex space-between p-10'>
           <div className='studentInfo'>
-          <h3>Username: </h3>
+            <h3>Username: </h3>
             <input
               className='text-input'
               type='text'
@@ -762,8 +768,13 @@ class Profile extends Component {
               placeholder='Ex: johnsmith'
               required
             ></input>
-            <div className="fields">
-              <input type="image" id="trueNameFields" src={show} onClick={this.hideShowtrueName}></input>
+            <div className='fields'>
+              <input
+                type='image'
+                id='trueNameFields'
+                src={show}
+                onClick={this.hideShowtrueName}
+              ></input>
               <h3>Your Name: </h3>
             </div>
             <input
@@ -774,11 +785,16 @@ class Profile extends Component {
               placeholder='Ex: John Smith'
               required
             ></input>
-            
+
             <div className='dropDownMenu' id='ddm'>
               <div>
                 <div className='fields'>
-                  <input type="image" id="degreeFields" src={show} onClick={this.hideShowDegree}></input>
+                  <input
+                    type='image'
+                    id='degreeFields'
+                    src={show}
+                    onClick={this.hideShowDegree}
+                  ></input>
                   <h3>Degree:</h3>
                 </div>
                 {this.state.studentType != '' ? (
@@ -788,12 +804,17 @@ class Profile extends Component {
                     handle={this.changeStudentType}
                   />
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
               </div>
               <div>
                 <div className='fields'>
-                  <input type="image" id="yearFields" src={show} onClick={this.hideShowYear}></input>
+                  <input
+                    type='image'
+                    id='yearFields'
+                    src={show}
+                    onClick={this.hideShowYear}
+                  ></input>
                   <h3>Year:</h3>
                 </div>
                 {this.state.studentYear != '' ? (
@@ -803,15 +824,20 @@ class Profile extends Component {
                     handle={this.changeStudentYear}
                   />
                 ) : (
-                    ''
-                  )}
+                  ''
+                )}
               </div>
             </div>
           </div>
           <br />
           <div className='interestHeading'>
-          <div className='fields'>
-              <input type="image" id="majorFields" src={show} onClick={this.hideShowMajor}></input>
+            <div className='fields'>
+              <input
+                type='image'
+                id='majorFields'
+                src={show}
+                onClick={this.hideShowMajor}
+              ></input>
               <h3>Major: </h3>
             </div>
             <input
@@ -823,7 +849,12 @@ class Profile extends Component {
               required
             ></input>
             <div className='fields'>
-              <input type="image" id="interestFields" src={show} onClick={this.hideShowInterest}></input>
+              <input
+                type='image'
+                id='interestFields'
+                src={show}
+                onClick={this.hideShowInterest}
+              ></input>
               <h3>Your Interests: </h3>
             </div>
             <input
@@ -867,7 +898,8 @@ class Profile extends Component {
           <button
             type='submit'
             onClick={this.handleSubmit}
-            className='btn-primary'>
+            className='btn-primary'
+          >
             Update Profile
           </button>
         </div>
@@ -963,27 +995,27 @@ class Profile extends Component {
             }
             {this.state.friends !== null && this.state.friends.profiles
               ? this.state.friends.profiles.map((friend, i) => {
-                if (i < 9 && friend.status === 'accepted') {
-                  return (
-                    <li key={i}>
-                      <img
-                        height='50px'
-                        width='50px'
-                        className='d-block border-lg border-round m-auto'
-                        src={
-                          'http://' +
-                          process.env.REACT_APP_API_HOST +
-                          friend.profileIMG
-                        }
-                        alt={person}
-                      />
-                      <h5 className='text-center'>{friend.name}</h5>
-                    </li>
-                  );
-                } else {
-                  return '';
-                }
-              })
+                  if (i < 9 && friend.status === 'accepted') {
+                    return (
+                      <li key={i}>
+                        <img
+                          height='50px'
+                          width='50px'
+                          className='d-block border-lg border-round m-auto'
+                          src={
+                            'http://' +
+                            process.env.REACT_APP_API_HOST +
+                            friend.profileIMG
+                          }
+                          alt={person}
+                        />
+                        <h5 className='text-center'>{friend.name}</h5>
+                      </li>
+                    );
+                  } else {
+                    return '';
+                  }
+                })
               : ''}
           </ul>
         </div>
@@ -1002,4 +1034,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-

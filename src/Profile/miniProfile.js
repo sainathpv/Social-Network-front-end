@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/profileMini.css';
-import logo from '../images/HC.svg';
+import logo from './../images/hc_white.png';
 import Cookie from '.././Utility/Cookie';
 
 //interest field, because of the dynamic adding of interest tags

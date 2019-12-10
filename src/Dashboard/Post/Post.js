@@ -311,7 +311,7 @@ class Post extends React.Component {
                 <form className='text-right' onSubmit={this.postComment}>
                   <textarea
                     id='postComment'
-                    className='d-block m-auto border-round-small border-lg'
+                    className='d-block m-auto border-round-small border-black lightgray'
                     required
                   ></textarea>
                   <br />

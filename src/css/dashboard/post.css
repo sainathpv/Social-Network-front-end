@@ -10,9 +10,21 @@
 .lightgray {
   background-color: lightgray;
 }
+.border-black {
+  border: solid 0.5px solid black;
+}
 .post h2,
 .post h5 {
   padding: 1px 40px;
+}
+.text-input {
+  height: 45px;
+  width: 300px;
+  padding-left: 6px;
+  margin: 10px;
+  border: solid 0.5px solid lightgray;
+  border-radius: 4px;
+  font-size: 20px;
 }
 .post .postMetaData {
   padding: 0 40px;
@@ -68,7 +80,7 @@
 }
 .post .comments textarea {
   border: 0.5px solid lightgray;
-  font-size: 15px;
+  font-size: 20px;
   padding: 5px;
   border-radius: 4px;
   display: block;

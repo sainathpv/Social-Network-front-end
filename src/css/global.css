@@ -92,7 +92,8 @@ h3 {
   font-family: 'Nunito Sans', sans-serif;
   margin: 10px;
 }
-h4, h5 {
+h4,
+h5 {
   font-weight: normal;
   font-family: 'Roboto', sans-serif;
 }
@@ -157,7 +158,10 @@ hr {
   cursor: pointer;
 }
 .border-lg {
-  border: solid 0.5px lightgray;
+  border: solid 0.5px solid lightgray;
+}
+.border-black {
+  border: solid 0.5px solid black;
 }
 .darkmode .border-lg {
   border: solid rgb(92, 92, 92) 0.5px;

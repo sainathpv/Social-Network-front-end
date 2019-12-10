@@ -7,7 +7,11 @@
   border: solid 0.5px lightgrey;
   border-radius: 4px;
 }
-.post h2, .post h5 {
+.lightgray {
+  background-color: lightgray;
+}
+.post h2,
+.post h5 {
   padding: 1px 40px;
 }
 .post .postMetaData {
@@ -21,7 +25,7 @@
   font-size: 15px;
 }
 .post .postMetaData i {
-  color: #3F99EE;
+  color: #3f99ee;
 }
 .post .postMetaData .label {
   cursor: pointer;
@@ -33,7 +37,8 @@
 .post p {
   padding: 5px 40px;
 }
-.post img, .post iframe {
+.post img,
+.post iframe {
   margin: 5px 40px;
 }
 .post img {
@@ -78,7 +83,7 @@
 .post .comments button {
   border: none;
   border-radius: 10px;
-  background: #3F99EE;
+  background: #3f99ee;
   color: white;
   margin: 0 15%;
   width: 75px;
@@ -92,7 +97,7 @@
   margin-bottom: 5px;
   padding: 4px 10px;
 }
-.pollVote ul li input[type=radio] {
+.pollVote ul li input[type='radio'] {
   border: 0;
   clip: rect(0 0 0 0);
   height: 1px;
@@ -102,17 +107,17 @@
   position: absolute;
   width: 1px;
 }
-.pollVote ul li input[type=radio] ~ label:before {
+.pollVote ul li input[type='radio'] ~ label:before {
   font-family: FontAwesome;
   display: inline-block;
-  content: "";
+  content: '';
   letter-spacing: 10px;
   font-size: 1.2em;
   color: #535353;
   width: 1.4em;
 }
-.pollVote ul li input[type=radio]:checked ~ label:before {
-  content: "";
+.pollVote ul li input[type='radio']:checked ~ label:before {
+  content: '';
   font-size: 1.2em;
   color: darkgreen;
   letter-spacing: 5px;

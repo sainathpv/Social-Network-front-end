@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/profile.css';
-import logo from '../images/HC.svg';
+import logo from './../images/hc_white.png';
 import DropDownMenu from '../Utility/DropDown';
 import Cookie from '.././Utility/Cookie';
 import person from '../images/person-generic.jpg';
@@ -44,12 +44,13 @@ class Profile extends Component {
         major: false,
         studentType: false,
         year: false,
-        interests: false,
+        interests: false
       },
       accountType: "student",
       setting: "",
       darkmode: 'Off',
-      showOnlyToFriends: 'to All'
+      showOnlyToFriends: 'to All',
+      censor: 'Off'
     };
     //TODO: check if there is a token redirect to login if invalid
 
@@ -79,22 +80,54 @@ class Profile extends Component {
     this.hideShowInterest = this.hideShowInterest.bind(this);
     this.switchDarkMode = this.switchDarkMode.bind(this);
     this.switchShowPost = this.switchShowPost.bind(this);
+    this.switchCensor = this.switchCensor.bind(this)
 
     this.getProfileData();
     this.getFriendsData();
-    
+  }
+
+  switchCensor() {
+    console.log(this.state)
+    this.setState({ changed: true });
+    changedOutSide = true
+    if (this.state.setting.censor) {
+      this.setState({
+        censor: 'Off'
+      })
+      this.setState({
+        setting: {
+          darkmode: this.state.setting.darkmode,
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+          censor: false
+        }
+      });
+    } else {
+      this.setState({
+        censor: 'On'
+      })
+      this.setState({
+        setting: {
+          darkmode: this.state.setting.darkmode,
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+          censor: true
+        }
+      });
+    }
   }
 
 
-  switchDarkMode(){
-    if(this.state.setting.darkmode){
+  switchDarkMode() {
+    this.setState({ changed: true });
+    changedOutSide = true
+    if (this.state.setting.darkmode) {
       this.setState({
         darkmode: 'Off'
       })
       this.setState({
         setting: {
-          darkmode: false, 
-          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends
+          darkmode: false,
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+          censor: this.state.setting.censor
         }
       });
     } else {
@@ -103,22 +136,26 @@ class Profile extends Component {
       })
       this.setState({
         setting: {
-          darkmode: true, 
-          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends
+          darkmode: true,
+          postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+          censor: this.state.setting.censor
         }
       });
     }
   }
 
-  switchShowPost(){
-    if(this.state.setting.postsSeenOnlyByFriends){
+  switchShowPost() {
+    this.setState({ changed: true });
+    changedOutSide = true
+    if (this.state.setting.postsSeenOnlyByFriends) {
       this.setState({
         showOnlyToFriends: 'to All'
       })
       this.setState({
         setting: {
-          darkmode: this.state.setting.darkmode, 
-          postsSeenOnlyByFriends: false
+          darkmode: this.state.setting.darkmode,
+          postsSeenOnlyByFriends: false,
+          censor: this.state.setting.censor
         }
       });
     } else {
@@ -127,18 +164,18 @@ class Profile extends Component {
       })
       this.setState({
         setting: {
-          darkmode: this.state.setting.darkmode, 
-          postsSeenOnlyByFriends: true
+          darkmode: this.state.setting.darkmode,
+          postsSeenOnlyByFriends: true,
+          censor: this.state.setting.censor
         }
       });
     }
-
   }
 
   //Initialize the data in profile page
   getProfileData() {
-    window.addEventListener('beforeunload', function(e) {
-      if(changedOutSide) {
+    window.addEventListener('beforeunload', function (e) {
+      if (changedOutSide) {
         document.getElementById("profileWarning").textContent = "Please Click This To Save Changes"
         //following two lines will cause the browser to ask the user if they
         //want to leave. The text of this dialog is controlled by the browser.
@@ -163,8 +200,8 @@ class Profile extends Component {
           return result.json();
         })
         .then(result => {
-          if(result.accountType == "company"){
-            window.location.href = "/profileCompany";
+          if (result.accountType == 'company') {
+            window.location.href = '/profileCompany';
           }
           if (result.settings.darkmode) {
             document.body.className = 'darkmode';
@@ -177,52 +214,63 @@ class Profile extends Component {
             major: result.major,
             studentType: result.studentType,
             studentYear: result.year,
-            settings: result.settings,
+            setting: result.settings,
             posts: result.posts,
             events: result.events,
             chats: result.chats,
             bio: result.bio,
             trueName: result.trueName,
-            interests: result.interests,
+            interests: result.interests
           });
           console.log(result)
-          if (result.settings.darkmode){
+          if (result.settings.darkmode) {
             console.log('dark mode on')
             this.setState({
               darkmode: 'On'
             })
           }
 
-          if (result.settings.postsSeenOnlyByFriends){
+          if (result.settings.postsSeenOnlyByFriends) {
             this.setState({
               showOnlyToFriends: "Only to Friends"
+            })
+          }
+          if (result.settings.censor) {
+            this.setState({
+              censor: "On"
             })
           }
 
           if (result.hided) {
             this.setState({
-              hided: result.hided,
-            })
+              hided: result.hided
+            });
           }
 
-          if (result.hided.trueName){
-            document.getElementById("trueNameFields").src = hide
+          if (result.hided) {
+            this.setState({
+              hided: result.hided
+            });
           }
 
-          if (result.hided.studentType){
-            document.getElementById("degreeFields").src = hide
+          if (result.hided.trueName) {
+            document.getElementById('trueNameFields').src = hide;
           }
 
-          if (result.hided.year){
-            document.getElementById("yearFields").src = hide
+          if (result.hided.studentType) {
+            document.getElementById('degreeFields').src = hide;
           }
 
-          if (result.hided.major){
-            document.getElementById("majorFields").src = hide
+          if (result.hided.year) {
+            document.getElementById('yearFields').src = hide;
           }
 
-          if (result.hided.interests){
-            document.getElementById("interestFields").src = hide
+          if (result.hided.major) {
+            document.getElementById('majorFields').src = hide;
+          }
+
+          if (result.hided.interests) {
+            document.getElementById('interestFields').src = hide;
           }
 
           document.getElementById('nameTitle').textContent = result.name;
@@ -326,7 +374,7 @@ class Profile extends Component {
           studentType: this.state.studentType,
           studentYear: this.state.studentYear,
           profileImageUrl: imageUrl,
-          hided: this.state.hided, 
+          hided: this.state.hided,
           settings: this.state.setting
         })
       };
@@ -343,6 +391,10 @@ class Profile extends Component {
           }
         })
         .then(result => {
+          this.setState({
+            changed: false
+          })
+          changedOutSide = false 
           location.reload();
         });
     } else {
@@ -538,7 +590,8 @@ class Profile extends Component {
               process.env.REACT_APP_API_HOST +
               '/resetCritical/resetPsw',
               options
-            ).then(result => {
+            )
+              .then(result => {
                 if (result.status === 200) {
                   return result.json();
                 } else {
@@ -686,31 +739,41 @@ class Profile extends Component {
   }
 
   delAccount() {
-    if (confirm("Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!")) {
+    if (
+      confirm(
+        'Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!'
+      )
+    ) {
       try {
         var options = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': 'Bearer ' + Cookie.getCookie('HC_JWT')
+            Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
           }
-        }
-        fetch("http://" + process.env.REACT_APP_API_HOST + "/users/deleteUser", options).then(result => {
-          if (result.status === 200) {
-            return result.json();
-          } else {
-            result.json().then(nr => {
-              document.getElementById("resetEmailWarning").textContent = nr.message;
-            })
-            console.log(result);
-            return null;
-          }
-        }).then(result => {
-          if (result) {
-            alert(result.message, "\n\nPlease refresh the page");
-            window.location.href = "/login";
-          }
-        });
+        };
+        fetch(
+          'http://' + process.env.REACT_APP_API_HOST + '/users/deleteUser',
+          options
+        )
+          .then(result => {
+            if (result.status === 200) {
+              return result.json();
+            } else {
+              result.json().then(nr => {
+                document.getElementById('resetEmailWarning').textContent =
+                  nr.message;
+              });
+              console.log(result);
+              return null;
+            }
+          })
+          .then(result => {
+            if (result) {
+              alert(result.message, '\n\nPlease refresh the page');
+              window.location.href = '/login';
+            }
+          });
       } catch (err) {
         console.log(err);
         return false;
@@ -719,25 +782,25 @@ class Profile extends Component {
   }
 
   hideShowtrueName() {
-    if(this.state.hided.trueName){
+    if (this.state.hided.trueName) {
       this.state.hided.trueName = false;
-      document.getElementById("trueNameFields").src = show;
+      document.getElementById('trueNameFields').src = show;
     } else {
       this.state.hided.trueName = true;
-      document.getElementById("trueNameFields").src = hide;
+      document.getElementById('trueNameFields').src = hide;
     }
-    console.log(this.state.hided)
+    console.log(this.state.hided);
     this.state.changed = true;
     changedOutSide = true
   }
 
-  hideShowMajor(){
-    if(this.state.hided.major){
+  hideShowMajor() {
+    if (this.state.hided.major) {
       this.state.hided.major = false;
-      document.getElementById("majorFields").src = show;
+      document.getElementById('majorFields').src = show;
     } else {
       this.state.hided.major = true;
-      document.getElementById("majorFields").src = hide;
+      document.getElementById('majorFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
@@ -745,39 +808,39 @@ class Profile extends Component {
 
   }
 
-  hideShowDegree(){
-    if(this.state.hided.studentType){
+  hideShowDegree() {
+    if (this.state.hided.studentType) {
       this.state.hided.studentType = false;
-      document.getElementById("degreeFields").src = show;
+      document.getElementById('degreeFields').src = show;
     } else {
       this.state.hided.studentType = true;
-      document.getElementById("degreeFields").src = hide;
+      document.getElementById('degreeFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
     changedOutSide = true
   }
 
-  hideShowYear(){
-    if(this.state.hided.year){
+  hideShowYear() {
+    if (this.state.hided.year) {
       this.state.hided.year = false;
-      document.getElementById("yearFields").src = show;
+      document.getElementById('yearFields').src = show;
     } else {
       this.state.hided.year = true;
-      document.getElementById("yearFields").src = hide;
+      document.getElementById('yearFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
     changedOutSide = true
   }
 
-  hideShowInterest(){
-    if(this.state.hided.interests){
+  hideShowInterest() {
+    if (this.state.hided.interests) {
       this.state.hided.interests = false;
-      document.getElementById("interestFields").src = show;
+      document.getElementById('interestFields').src = show;
     } else {
       this.state.hided.interests = true;
-      document.getElementById("interestFields").src = hide;
+      document.getElementById('interestFields').src = hide;
     }
     console.log(this.state.hided);
     this.state.changed = true;
@@ -790,7 +853,7 @@ class Profile extends Component {
       <div id='profilePage' className='bg-primary text-primary'>
         {' '}
         <div className='heading'>
-        <div>
+          <div>
             <img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1>
           </div>
           <div>
@@ -837,18 +900,16 @@ class Profile extends Component {
             ></textarea>
 
             <div className="setting">
-            <button id="darkmode" className="darkmode" onClick={this.switchDarkMode}>Darkmode {this.state.darkmode}</button>
-            <button id="showPostToFriend" className="showPostToFriend" onClick={this.switchShowPost}>Show Post {this.state.showOnlyToFriends}</button>
+              <button id="darkmode" className="darkmode" onClick={this.switchDarkMode}>Darkmode {this.state.darkmode}</button>
+              <button id="showPostToFriend" className="showPostToFriend" onClick={this.switchShowPost}>Show Post {this.state.showOnlyToFriends}</button>
+              <button id="censor" className="censor" onClick={this.switchCensor}>Language Censor {this.state.censor}</button>
             </div>
           </div>
-
-
-
         </div>
         <hr />
         <div className='basicInfo d-flex space-between p-10'>
           <div className='studentInfo'>
-          <h3>Username: </h3>
+            <h3>Username: </h3>
             <input
               className='text-input'
               type='text'
@@ -857,8 +918,13 @@ class Profile extends Component {
               placeholder='Ex: johnsmith'
               required
             ></input>
-            <div className="fields">
-              <input type="image" id="trueNameFields" src={show} onClick={this.hideShowtrueName}></input>
+            <div className='fields'>
+              <input
+                type='image'
+                id='trueNameFields'
+                src={show}
+                onClick={this.hideShowtrueName}
+              ></input>
               <h3>Your Name: </h3>
             </div>
             <input
@@ -869,11 +935,16 @@ class Profile extends Component {
               placeholder='Ex: John Smith'
               required
             ></input>
-            
+
             <div className='dropDownMenu' id='ddm'>
               <div>
                 <div className='fields'>
-                  <input type="image" id="degreeFields" src={show} onClick={this.hideShowDegree}></input>
+                  <input
+                    type='image'
+                    id='degreeFields'
+                    src={show}
+                    onClick={this.hideShowDegree}
+                  ></input>
                   <h3>Degree:</h3>
                 </div>
                 {this.state.studentType != '' ? (
@@ -888,7 +959,12 @@ class Profile extends Component {
               </div>
               <div>
                 <div className='fields'>
-                  <input type="image" id="yearFields" src={show} onClick={this.hideShowYear}></input>
+                  <input
+                    type='image'
+                    id='yearFields'
+                    src={show}
+                    onClick={this.hideShowYear}
+                  ></input>
                   <h3>Year:</h3>
                 </div>
                 {this.state.studentYear != '' ? (
@@ -905,8 +981,13 @@ class Profile extends Component {
           </div>
           <br />
           <div className='interestHeading'>
-          <div className='fields'>
-              <input type="image" id="majorFields" src={show} onClick={this.hideShowMajor}></input>
+            <div className='fields'>
+              <input
+                type='image'
+                id='majorFields'
+                src={show}
+                onClick={this.hideShowMajor}
+              ></input>
               <h3>Major: </h3>
             </div>
             <input
@@ -918,7 +999,12 @@ class Profile extends Component {
               required
             ></input>
             <div className='fields'>
-              <input type="image" id="interestFields" src={show} onClick={this.hideShowInterest}></input>
+              <input
+                type='image'
+                id='interestFields'
+                src={show}
+                onClick={this.hideShowInterest}
+              ></input>
               <h3>Your Interests: </h3>
             </div>
             <input
@@ -962,7 +1048,8 @@ class Profile extends Component {
           <button
             type='submit'
             onClick={this.handleSubmit}
-            className='btn-primary'>
+            className='btn-primary'
+          >
             Update Profile
           </button>
           <p id="profileWarning"></p>
@@ -1098,4 +1185,3 @@ class Profile extends Component {
 }
 
 export default Profile;
-

@@ -170,6 +170,30 @@ c91b1b #profilePage .heading div img {
   display: inline-block;
 }
 
+#profilePage .imgAndBio .profilebio .setting button{
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  background-color: white;
+  border: 2px solid #850000;
+  color: black;
+  padding: 4px 15px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 5px;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+
+#profilePage .imgAndBio .profilebio .setting button:hover {
+  display: inline;
+  background-color: #850000;
+  color: white;
+}
+
 #profilePage .basicInfo {
   padding-top: 10px;
   margin-bottom: 30px;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../css/profileMini.css';
-import logo from '../images/HC.svg';
+import logo from './../images/hc_white.png';
 import Cookie from '.././Utility/Cookie';
 import { runInThisContext } from 'vm';
 
@@ -13,7 +13,7 @@ class Profile extends Component {
 
     this.state = {
       profileID: props.profileID,
-      closeForm: props.closeForm, 
+      closeForm: props.closeForm,
       name: '',
       profileImageUrl: '',
       major: '',
@@ -39,33 +39,34 @@ class Profile extends Component {
       accountType: '',
     };
 
-    console.log(props)
+    console.log(props);
 
     //TODO: check if there is a token redirect to login if invalid
 
     this.getMiniProfile = this.getMiniProfile.bind(this);
     this.closeMiniProfile = this.closeMiniProfile.bind(this);
     this.getMiniProfile();
-    
   }
 
-  getMiniProfile(){
+  getMiniProfile() {
     var options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
       },
-      body: JSON.stringify({profileID: this.state.profileID})
+      body: JSON.stringify({ profileID: this.state.profileID })
     };
     try {
       fetch(
         'http://' + process.env.REACT_APP_API_HOST + '/profiles/miniProfile',
         options
-      ).then(result => {
+      )
+        .then(result => {
           return result.json();
-        }).then(result => {
-          console.log(result.result.bio)
+        })
+        .then(result => {
+          console.log(result.result.bio);
           this.setState({
             name: result.result.name,
             profileImageUrl: result.result.profileImageUrl,
@@ -116,14 +117,14 @@ class Profile extends Component {
           console.log("my account type is here", this.state.accountType)
 
           document.getElementById('nameTitle').textContent = result.result.name;
-          
+
           if (result.result.bio) {
             document.getElementById('profileBio').innerHTML = result.result.bio;
           } else {
             document.getElementById('profileBio').innerHTML =
               'The user has nothing to say lol';
           }
-          console.log("my true name is here", result.result.trueName)
+          console.log('my true name is here', result.result.trueName);
           if (result.result.trueName) {
             if (result.result.trueName !== 'No') {
               if(result.result.accountType == 'company'){
@@ -132,18 +133,18 @@ class Profile extends Component {
                 document.getElementById('trueName').innerHTML = result.result.trueName;
               }
             } else {
-
-              document.getElementById('tnFields').style.display = 'none'
+              document.getElementById('tnFields').style.display = 'none';
             }
           } else {
-            document.getElementById('trueName').innerHTML = "Full name not mentioned";
+            document.getElementById('trueName').innerHTML =
+              'Full name not mentioned';
           }
 
           if (result.result.major) {
             if (result.result.major !== 'No') {
               document.getElementById('major').innerHTML = result.result.major;
             } else {
-              document.getElementById('majorFields').style.display = 'none'
+              document.getElementById('majorFields').style.display = 'none';
             }
           } else {
             document.getElementById('major').innerHTML = 'Major not mentioned';
@@ -151,77 +152,89 @@ class Profile extends Component {
 
           if (result.result.studentType) {
             if (result.result.major !== 'No') {
-              document.getElementById('studentType').innerHTML = result.result.studentType
+              document.getElementById('studentType').innerHTML =
+                result.result.studentType;
             } else {
-              document.getElementById('tFields').style.display = 'none'
+              document.getElementById('tFields').style.display = 'none';
             }
           } else {
-            document.getElementById('studentType').innerHTML = 'Degree not mentioned'
+            document.getElementById('studentType').innerHTML =
+              'Degree not mentioned';
           }
 
           if (result.result.year) {
             if (result.result.major !== 'No') {
-              document.getElementById('studentYear').innerHTML = result.result.year
+              document.getElementById('studentYear').innerHTML =
+                result.result.year;
             } else {
-              document.getElementById('yearFields').style.display = 'none'
+              document.getElementById('yearFields').style.display = 'none';
             }
           } else {
-            document.getElementById('studentYear').innerHTML = "Year not mentioned"
+            document.getElementById('studentYear').innerHTML =
+              'Year not mentioned';
           }
 
           if (!result.result.interests || result.result.interests === 'No') {
-            document.getElementById('interestCollection').style.display = 'none'
+            document.getElementById('interestCollection').style.display =
+              'none';
             this.setState({
-              interests: [],
+              interests: []
             });
           } else {
             this.setState({
               interests: result.result.interests
-            })
+            });
           }
-
         });
     } catch (err) {
       console.log(err);
     }
   }
 
-  closeMiniProfile(){
+  closeMiniProfile() {
     this.state.closeForm();
   }
-
-
 
   //TO DO, for some reason the button part does not work
   //TO DO, when jump to another page, the another page seems to losing all its css.
   render() {
     return (
-      <div id='profilePageMini' className='d-block m-auto bg-primary p-fixed border-lg border-round-small'>
+      <div
+        id='profilePageMini'
+        className='d-block m-auto bg-primary p-fixed border-lg border-round-small '
+      >
         {' '}
         <div className='heading'>
-          <div><img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1></div>
-          <i onClick={this.closeMiniProfile} className="text-secondary cursor-pointer d-inline fas fa-times"></i>
+          <div>
+            <img src={logo} alt='' width='50px' /> <h1>Hoosier Connection</h1>
+          </div>
+          <i
+            onClick={this.closeMiniProfile}
+            className='text-secondary cursor-pointer d-inline fas fa-times'
+          ></i>
         </div>
         <hr />
         <div className='headshot p-10'>
-          <img id='profileImageUrl' src={'http://' + process.env.REACT_APP_API_HOST + this.state.profileImageUrl } alt='' />
+          <img
+            id='profileImageUrl'
+            src={
+              'http://' +
+              process.env.REACT_APP_API_HOST +
+              this.state.profileImageUrl
+            }
+            alt=''
+          />
           <div className='profileName container'>
             <h1 id='nameTitle'>Undefined</h1>
             <button onClick={this.logout} className='btn-primary'>
               Add Friends
-              </button>
+            </button>
           </div>
-
         </div>
-
         <div className='profilebio p-10'>
-          
           <h3>About {this.state.name}: </h3>
           <h4 id='profileBio'>{this.state.bio}</h4>
         </div>
-
-
-
         <ul className='basicInfo p-10 text-roboto'>
           <li id="tnFields" className="space-between nameFields">
             <h3>{this.state.name}'s {this.state.nameTag}: </h3>
@@ -264,10 +277,10 @@ class Profile extends Component {
         <div className='p-10'>
           
         </div>
+        <div className='p-10'></div>
       </div>
     );
   }
 }
 
 export default Profile;
-

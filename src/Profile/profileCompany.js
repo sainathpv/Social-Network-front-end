@@ -38,6 +38,10 @@ class ProfileCompany extends Component {
             curEmail: '',
             varifyCode: '',
             newEmail: '',
+            setting: "",
+            darkmode: 'Off',
+            showOnlyToFriends: 'to All',
+            censor: 'Off'
         };
         //TODO: check if there is a token redirect to login if invalid
 
@@ -59,26 +63,115 @@ class ProfileCompany extends Component {
         this.getFriendsData = this.getFriendsData.bind(this);
         this.delAccount = this.delAccount.bind(this);
 
+        this.switchDarkMode = this.switchDarkMode.bind(this);
+        this.switchShowPost = this.switchShowPost.bind(this);
+        this.switchCensor = this.switchCensor.bind(this)
+
         this.getProfileData();
         this.getFriendsData();
 
-        
+
 
     }
 
+
+    switchCensor() {
+        this.setState({ changed: true });
+        changedOutSide = true
+        if (this.state.setting.censor) {
+            this.setState({
+                censor: 'Off'
+            })
+            this.setState({
+                setting: {
+                    darkmode: this.state.setting.darkmode,
+                    postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+                    censor: false
+                }
+            });
+        } else {
+            this.setState({
+                censor: 'On'
+            })
+            this.setState({
+                setting: {
+                    darkmode: this.state.setting.darkmode,
+                    postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+                    censor: true
+                }
+            });
+        }
+    }
+
+
+    switchDarkMode() {
+        this.setState({ changed: true });
+        changedOutSide = true
+        if (this.state.setting.darkmode) {
+            this.setState({
+                darkmode: 'Off'
+            })
+            this.setState({
+                setting: {
+                    darkmode: false,
+                    postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+                    censor: this.state.setting.censor
+                }
+            });
+        } else {
+            this.setState({
+                darkmode: 'On'
+            })
+            this.setState({
+                setting: {
+                    darkmode: true,
+                    postsSeenOnlyByFriends: this.state.setting.postsSeenOnlyByFriends,
+                    censor: this.state.setting.censor
+                }
+            });
+        }
+    }
+
+    switchShowPost() {
+        this.setState({ changed: true });
+        changedOutSide = true
+        if (this.state.setting.postsSeenOnlyByFriends) {
+            this.setState({
+                showOnlyToFriends: 'to All'
+            })
+            this.setState({
+                setting: {
+                    darkmode: this.state.setting.darkmode,
+                    postsSeenOnlyByFriends: false,
+                    censor: this.state.setting.censor
+                }
+            });
+        } else {
+            this.setState({
+                showOnlyToFriends: 'Only to Friends'
+            })
+            this.setState({
+                setting: {
+                    darkmode: this.state.setting.darkmode,
+                    postsSeenOnlyByFriends: true,
+                    censor: this.state.setting.censor
+                }
+            });
+        }
+    }
     //Initialize the data in profile page
     getProfileData() {
-        window.addEventListener('beforeunload', function(e) {
-            if(changedOutSide) {
+        window.addEventListener('beforeunload', function (e) {
+            if (changedOutSide) {
                 document.getElementById("profileWarning").textContent = "Please Click This To Save Changes"
-        
-              //following two lines will cause the browser to ask the user if they
-              //want to leave. The text of this dialog is controlled by the browser.
-              e.preventDefault(); //per the standard
-              e.returnValue = ''; //required for Chrome
+
+                //following two lines will cause the browser to ask the user if they
+                //want to leave. The text of this dialog is controlled by the browser.
+                e.preventDefault(); //per the standard
+                e.returnValue = ''; //required for Chrome
             }
             //else: user is allowed to leave without a warning dialog
-          });
+        });
         var options = {
             method: 'GET',
             headers: {
@@ -95,6 +188,7 @@ class ProfileCompany extends Component {
                     return result.json();
                 })
                 .then(result => {
+                    console.log(result)
                     if (result.settings.darkmode) {
                         document.body.className = 'darkmode';
                     } else {
@@ -106,7 +200,7 @@ class ProfileCompany extends Component {
                         major: result.major,
                         studentType: result.studentType,
                         studentYear: result.year,
-                        settings: result.settings,
+                        setting: result.settings,
                         posts: result.posts,
                         events: result.events,
                         chats: result.chats,
@@ -118,6 +212,24 @@ class ProfileCompany extends Component {
                     if (result.hided) {
                         this.setState({
                             hided: result.hided,
+                        })
+                    }
+
+                    if (result.settings.darkmode) {
+                        console.log('dark mode on')
+                        this.setState({
+                            darkmode: 'On'
+                        })
+                    }
+
+                    if (result.settings.postsSeenOnlyByFriends) {
+                        this.setState({
+                            showOnlyToFriends: "Only to Friends"
+                        })
+                    }
+                    if (result.settings.censor) {
+                        this.setState({
+                            censor: "On"
                         })
                     }
 
@@ -223,6 +335,7 @@ class ProfileCompany extends Component {
                     studentYear: this.state.studentYear,
                     profileImageUrl: imageUrl,
                     hided: this.state.hided,
+                    settings: this.state.setting
                 })
             };
             fetch(
@@ -238,7 +351,11 @@ class ProfileCompany extends Component {
                     }
                 })
                 .then(result => {
-                    //location.reload();
+                    this.setState({
+                        changed: false
+                      })
+                      changedOutSide = false 
+                    location.reload();
                 });
         } else {
             /*TODO notify the user of the bad match*/
@@ -645,13 +762,19 @@ class ProfileCompany extends Component {
                             onChange={this.handleChange}
                             placeholder='Ex: A little section dedicated to you!'
                         ></textarea>
+
+                        <div className="setting">
+                            <button id="darkmode" className="darkmode" onClick={this.switchDarkMode}>Darkmode {this.state.darkmode}</button>
+                            <button id="showPostToFriend" className="showPostToFriend" onClick={this.switchShowPost}>Show Post {this.state.showOnlyToFriends}</button>
+                            <button id="censor" className="censor" onClick={this.switchCensor}>Language Censor {this.state.censor}</button>
+                        </div>
                     </div>
 
                 </div>
                 <hr />
                 <div className='basicInfo d-flex space-between p-10'>
                     <div className='studentInfo'>
-                    <h3>Username: </h3>
+                        <h3>Username: </h3>
                         <input
                             className='text-input'
                             type='text'
@@ -669,7 +792,7 @@ class ProfileCompany extends Component {
                             placeholder='Ex: John Smith'
                             required
                         ></input>
-                        
+
                         <h3>Company Type:</h3>
                         <input className='text-input' type='text' id='studentType'
                             onChange={this.handleChange}
@@ -733,7 +856,7 @@ class ProfileCompany extends Component {
                         className='btn-primary'>
                         Update Profile
           </button>
-          <p id="profileWarning"></p>
+                    <p id="profileWarning"></p>
                 </div>
                 <hr />
                 <div className='criticalInfo p-10'>

@@ -8,10 +8,10 @@
   height: 500px;
   overflow: auto;
   justify-content: space-around;
-  background-color: rgb(167, 167, 167);
+  background-color: rgb(221, 219, 219);
 }
 
-#profilePageMini i{
+#profilePageMini i {
   position: relative;
   top: 20px;
   left: -20px;
@@ -100,13 +100,13 @@ c91b1b #profilePageMini .heading div img {
   height: 150px;
 }
 
-#profilePageMini .headshot .profileName{
+#profilePageMini .headshot .profileName {
   display: block;
   position: relative;
   top: 10px;
 }
 
-#profilePageMini .headshot .profileName button{
+#profilePageMini .headshot .profileName button {
   position: relative;
   left: 10px;
   top: 10px;
@@ -115,10 +115,9 @@ c91b1b #profilePageMini .heading div img {
 #profilePageMini .profilebio {
   position: relative;
   display: block;
-
 }
 
-#profilePageMini .profilebio h3{
+#profilePageMini .profilebio h3 {
   position: relative;
 }
 
@@ -136,7 +135,7 @@ c91b1b #profilePageMini .heading div img {
   display: inline-block;
 }
 
-#profilePageMini .basicInfo h4{
+#profilePageMini .basicInfo h4 {
   margin: 5px;
   position: relative;
   top: 3px;
@@ -156,7 +155,7 @@ c91b1b #profilePageMini .heading div img {
   display: inline-block;
 }
 
-#profilePageMini .interest h3{
+#profilePageMini .interest h3 {
   position: relative;
   top: 10px;
 }

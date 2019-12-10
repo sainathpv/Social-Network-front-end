@@ -25,6 +25,7 @@ class Post extends React.Component{
             currentProfileID: props.currentProfileID,
             profileIDHandler: props.profileIDHandler
         }
+        console.log("this is my message in post", props)
         this.votePost = this.votePost.bind(this);
         this.getVote = this.getVote.bind(this);
         this.share = this.share.bind(this);

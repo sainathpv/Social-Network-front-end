@@ -67,36 +67,72 @@ class Profile extends Component {
             studentYear: result.result.year,
             bio: result.result.bio,
             trueName: result.result.trueName,
-            interests: result.result.interests,
+            //interests: result.result.interests,
           });
+          console.log(result)
           console.log(this.state)
 
           document.getElementById('nameTitle').textContent = result.result.name;
-          if (result.result.trueName){
-            document.getElementById('trueName').innerHTML = result.result.trueName;
-          }
+          
           if (result.result.bio) {
             document.getElementById('profileBio').innerHTML = result.result.bio;
           } else {
             document.getElementById('profileBio').innerHTML =
               'The user has nothing to say lol';
           }
+          console.log("my true name is here", result.result.trueName)
+          if (result.result.trueName) {
+            if (result.result.trueName !== 'No') {
+              document.getElementById('trueName').innerHTML = result.result.trueName;
+            } else {
+
+              document.getElementById('tnFields').style.display = 'none'
+            }
+          } else {
+            document.getElementById('trueName').innerHTML = "Full name not mentioned";
+          }
 
           if (result.result.major) {
-            document.getElementById('major').innerHTML = result.result.major;
+            if (result.result.major !== 'No') {
+              document.getElementById('major').innerHTML = result.result.major;
+            } else {
+              document.getElementById('majorFields').style.display = 'none'
+            }
           } else {
             document.getElementById('major').innerHTML = 'Major not mentioned';
           }
 
-          if (!result.result.studentType) {
-            this.state.studentType = 'Degree not mentioned';
-          }
-          if (!result.result.year) {
-            this.state.studentYear = 'Year not mentioned';
+          if (result.result.studentType) {
+            if (result.result.major !== 'No') {
+              document.getElementById('studentType').innerHTML = result.result.studentType
+            } else {
+              document.getElementById('tFields').style.display = 'none'
+            }
+          } else {
+            document.getElementById('studentType').innerHTML = 'Degree not mentioned'
           }
 
-          document.getElementById('studentType').innerHTML = this.state.studentType;
-          document.getElementById('studentYear').innerHTML = this.state.studentYear;
+          if (result.result.year) {
+            if (result.result.major !== 'No') {
+              document.getElementById('studentYear').innerHTML = result.result.year
+            } else {
+              document.getElementById('yearFields').style.display = 'none'
+            }
+          } else {
+            document.getElementById('studentYear').innerHTML = "Year not mentioned"
+          }
+
+          if (!result.result.interests || result.result.interests === 'No') {
+            document.getElementById('interestCollection').style.display = 'none'
+            this.setState({
+              interests: [],
+            });
+          } else {
+            this.setState({
+              interests: result.result.interests
+            })
+          }
+
         });
     } catch (err) {
       console.log(err);
@@ -132,30 +168,31 @@ class Profile extends Component {
         </div>
 
         <div className='profilebio p-10'>
+          
           <h3>About {this.state.name}: </h3>
           <h4 id='profileBio'>{this.state.bio}</h4>
         </div>
 
         <ul className='basicInfo p-10 text-roboto'>
-          <li className="space-between nameFields">
+          <li id="tnFields" className="space-between nameFields">
             <h3>{this.state.name}'s Name: </h3>
             <h4 id='trueName'></h4>
           </li>
-          <li className="space-between degreeFields">
+          <li id="tFields" className="space-between degreeFields">
             <h3>{this.state.name}'s Degree:</h3>
             <h4 id='studentType'></h4>
           </li>
-          <li className="space-between yearFields">
+          <li id="yearFields" className="space-between yearFields">
             <h3>{this.state.name}'s Year:</h3>
             <h4 id="studentYear"></h4>
           </li>
-          <li className="space-between majorFields">
+          <li id="majorFields" className="space-between majorFields">
             <h3>{this.state.name}'s Major: </h3>
             <h4 id='major'></h4>
           </li>
         </ul>
           
-          <div className='interest p-10'>
+          <div id="interestCollection" className='interest p-10'>
               <h3>Your Interests: </h3>
             <ul
               id='interestsList'

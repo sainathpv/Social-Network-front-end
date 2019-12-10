@@ -99,15 +99,19 @@ c91b1b #profilePage .heading div img {
   padding: 0 10%;
 }
 
-#profilePage .imgAndBio .imgAndStatus {
+#profilePage .imgAndBio {
+  margin: auto;
+  position: relative;
+  padding-top: 10px;
   display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+#profilePage .p-10 {
+  padding: 0 10%;
 }
 
-#profilePage .imgAndBio .imgAndStatus .profileimg{
-  width: 60%;
-}
-
-#profilePage .imgAndBio .imgAndStatus .profileimg img {
+#profilePage .imgAndBio .profileimg img {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
@@ -115,17 +119,17 @@ c91b1b #profilePage .heading div img {
   height: 300px;
 }
 
-#profilePage .imgAndBio .imgAndStatus .profileimg img:hover {
+#profilePage .imgAndBio .profileimg img:hover {
   box-shadow: 0 0 2px 2px #850000;
 }
 
-#profilePage .imgAndBio .imgAndStatus .profileimg h3 {
+#profilePage .imgAndBio .profileimg h3 {
   margin-top: 10px;
   font-size: 15px;
   display: block;
 }
 
-#profilePage .imgAndBio .imgAndStatus .profileimg .changeImg {
+#profilePage .imgAndBio .profileimg .changeImg {
   margin-top: 10px;
   padding: 4px 15px;
   display: block;
@@ -133,51 +137,19 @@ c91b1b #profilePage .heading div img {
   color: black;
   border: solid 2px solid #850000;
 }
-#profilePage .imgAndBio .imgAndStatus .profileimg .uploadimage {
+#profilePage .imgAndBio .profileimg .uploadimage {
   width: 1000px;
   height: 100px;
 }
 
-#profilePage .imgAndBio .imgAndStatus .profileimg .changeImg:hover {
+#profilePage .imgAndBio .profileimg .changeImg:hover {
   display: block;
   background-color: #850000;
   color: white;
 }
 
-
-
-
-#profilePage .imgAndBio .imgAndStatus .profileStatus {
-  width: 300px;
-  margin-right: 20px;
-}
-
-#profilePage .imgAndBio .imgAndStatus .profileStatus .profileName{
-  display: flex;
-}
-
-#profilePage .imgAndBio .imgAndStatus .profileStatus .profileName button{
-  position: relative;
-  top: 11px;
-}
-
-#profilePage .imgAndBio .imgAndStatus .profileStatus .activity {
-  width: 100%;
-
-}
-#profilePage .imgAndBio .imgAndStatus .profileStatus .activity li {
-  display: flex;
-  padding: 5px 10%;
-  font-size: 18px;
-}
-
-#profilePage .imgAndBio .imgAndStatus .profileStatus .description {
-  position: relative;
-  right: 20px;
-}
-
-
 #profilePage .imgAndBio .profilebio {
+  margin-left: 20px;
   position: relative;
   width: 100%;
   display: block;
@@ -233,31 +205,6 @@ c91b1b #profilePage .heading div img {
 
 #profilePage .basicInfo .dropDownMenu{
   display: flex;
-}
-
-@media only screen and (max-width: 1100px) {
-
-
-  #profilePage .imgAndBio .imgAndStatus .profileStatus {
-    width: 50%;
-  }
-
-
-  #profilePage .imgAndBio .imgAndStatus .profileStatus .activity li {
-    padding: 5px 10%;
-  }
-
-  #profilePage .imgAndBio {
-    display: block;
-  }
-
-  #profilePage .imgAndBio .profilebio {
-    width: 100%;
-  }
-
-  #profilePage .basicInfo .dropDownMenu{
-    display: inline;
-  }
 }
 
 

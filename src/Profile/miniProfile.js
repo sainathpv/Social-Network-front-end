@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../css/profileMini.css';
 import logo from './../images/hc_white.png';
 import Cookie from '.././Utility/Cookie';
-import { runInThisContext } from 'vm';
 
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
@@ -35,8 +34,7 @@ class Profile extends Component {
       degreeTag: 'Degree',
       yearTag: 'Year',
       majorTag: 'Major',
-      interestTag: 'Interest',
-      accountType: '',
+      interestTag: 'Interest'
     };
 
     console.log(props);
@@ -127,7 +125,7 @@ class Profile extends Component {
           console.log('my true name is here', result.result.trueName);
           if (result.result.trueName) {
             if (result.result.trueName !== 'No') {
-              if(result.result.accountType == 'company'){
+              if(result.result.accountType === 'company'){
               document.getElementById('trueName').innerHTML = result.result.trueName + " Inc.";
               } else {
                 document.getElementById('trueName').innerHTML = result.result.trueName;
@@ -237,25 +235,25 @@ class Profile extends Component {
         </div>
         <ul className='basicInfo p-10 text-roboto'>
           <li id="tnFields" className="space-between nameFields">
-            <h3>{this.state.name}'s {this.state.nameTag}: </h3>
-            <h4 id='trueName'></h4>
+            <h3>{this.state.name}'s {this.state.nameTag}:  </h3>
+            <p id='trueName'></p>
           </li>
           <li id="tFields" className="space-between degreeFields">
             <h3>{this.state.name}'s {this.state.degreeTag}:</h3>
-            <h4 id='studentType'></h4>
+            <p id='studentType'></p>
           </li>
           <li id="yearFields" className="space-between yearFields">
             <h3>{this.state.name}'s {this.state.yearTag}:</h3>
-            <h4 id="studentYear"></h4>
+            <p id="studentYear"></p>
           </li>
           <li id="majorFields" className="space-between majorFields">
             <h3>{this.state.name}'s {this.state.majorTag}: </h3>
-            <h4 id='major'></h4>
+            <p id='major'></p>
           </li>
         </ul>
           
           <div id="interestCollection" className='interest p-10'>
-              <h3>{this.state.name}'s {this.state.interestTag}: </h3>
+            <h3>{this.state.name}'s {this.state.interestTag}: </h3>
             <ul
               id='interestsList'
               className='myList border-lg border-round-small'

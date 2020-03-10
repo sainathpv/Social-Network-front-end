@@ -187,7 +187,7 @@ class ProfilePanel extends React.Component {
   }
 
   acceptFriend(friend) {
-    event.preventDefault();
+    
     var data = {
       friend: {
         profileID: friend.profileID,
@@ -208,7 +208,7 @@ class ProfilePanel extends React.Component {
       'http://' + process.env.REACT_APP_API_HOST + '/friends/editfriends',
       options
     ).then(result => {
-      location.reload();
+      window.location.reload();
     });
   }
 
@@ -235,7 +235,6 @@ class ProfilePanel extends React.Component {
   }
 
   rejectFriend(friend) {
-    event.preventDefault();
     var data = {
       friend: {
         profileID: friend.profileID,
@@ -306,28 +305,28 @@ class ProfilePanel extends React.Component {
               </div>
               <ul className='activity text-roboto'>
                 <li className='space-between'>
-                  <a className='description'>Posts</a>
-                  <a className='color-red text-bold'>{this.state.posts.length}</a>
+                  <p className='description'>Posts</p>
+                  <p className='color-red text-bold'>{this.state.posts.length}</p>
                 </li>
                 <li className='space-between'>
-                  <a className='description'>Events</a>
-                  <a className='color-red text-bold'>
+                  <p className='description'>Events</p>
+                  <p className='color-red text-bold'>
                     {this.state.events.length}
-                  </a>
+                  </p>
                 </li>
                 <li className='space-between'>
-                  <a className='description'>Friends</a>
-                  <a className='color-red text-bold'>
+                  <p className='description'>Friends</p>
+                  <p className='color-red text-bold'>
                     {this.state.friends.profiles
                       ? this.state.friends.profiles.filter(
                           friend => friend.accepted
                         ).length
                       : 0}
-                  </a>
+                  </p>
                 </li>
                 <li className='space-between'>
-                  <a className='description'>Messages</a>
-                  <a className='color-red text-bold'>{this.state.chats.length}</a>
+                  <p className='description'>Messages</p>
+                  <p className='color-red text-bold'>{this.state.chats.length}</p>
                 </li>
               </ul>
               {this.getFormButton()}

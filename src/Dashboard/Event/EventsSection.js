@@ -61,7 +61,7 @@ class EventsSection extends Component {
 
                 { 
                     this.state.events.length > 3 ?
-                    <div className="text-right color-red"><a>See More</a></div> 
+                    <div className="text-right color-red">See More</div> 
                     : ""
                 }
             </ul>

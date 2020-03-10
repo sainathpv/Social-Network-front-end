@@ -6,8 +6,6 @@ import SendResetEmail from './Login/SendReset';
 import ResetPassword from './Login/ResetPassword';
 import ProfileCompany from './Profile/profileCompany';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Elements, StripeProvider } from 'react-stripe-elements';
-import CheckoutForm from './Dashboard/Event/Event.js';
 
 class App extends Component {
   render() {

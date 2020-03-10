@@ -68,7 +68,7 @@ class Poll extends React.Component{
             return result.json();
         }).then(result => {
             this.setState({data: result.data});
-            location.reload();
+            window.location.reload();
         });
     }
 

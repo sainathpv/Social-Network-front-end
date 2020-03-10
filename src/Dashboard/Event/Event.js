@@ -84,7 +84,7 @@ class Event extends React.Component {
       case 'video':
         return (
           <div className='vidcontainer' style={s}>
-            <iframe src={this.state.content} frameBorder='0' allowFullScreen />
+            <iframe src={this.state.content} title={this.state.event.content} frameBorder='0' allowFullScreen />
           </div>
         );
       case 'advert':
@@ -107,7 +107,7 @@ class Event extends React.Component {
           ></img>
         );
       case 'article':
-        return <a href={this.state.content}></a>;
+        return <a href={this.state.content}>{this.state.content}</a>;
       default:
     }
   }

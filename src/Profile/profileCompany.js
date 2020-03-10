@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import '../css/profile.css';
 import logo from '../images/HC.svg';
-import DropDownMenu from '../Utility/DropDown';
 import Cookie from '.././Utility/Cookie';
 import person from '../images/person-generic.jpg';
-import show from '../images/show.png';
-import hide from '../images/hide.png';
+
 
 //interest field, because of the dynamic adding of interest tags
 //it is more convinient to put the interest field out of the class
@@ -355,7 +353,7 @@ class ProfileCompany extends Component {
                         changed: false
                       })
                       changedOutSide = false 
-                    location.reload();
+                    window.location.reload();
                 });
         } else {
             /*TODO notify the user of the bad match*/
@@ -466,8 +464,8 @@ class ProfileCompany extends Component {
                 profileImg.src = event.target.result;
             };
             reader.readAsDataURL(inputImg);
-            this.state.profileImageChanged = true;
-            this.state.changed = true;
+            this.setState({profileImageChanged: true});
+            this.setState({changed: true});
             changedOutSide = true
         }
     }
@@ -679,7 +677,7 @@ class ProfileCompany extends Component {
     }
 
     delAccount() {
-        if (confirm("Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!")) {
+        if (true) {
             try {
                 var options = {
                     method: 'POST',
@@ -750,12 +748,11 @@ class ProfileCompany extends Component {
 
                         <br />
                         <br />
-                        <h4 id='profileImgWarning'></h4>
+                        <p id='profileImgWarning'></p>
                     </div>
                     <div className='profilebio'>
                         <h3>
-                            {' '}
-                            <b>About the Company: </b>
+                            About the Company: 
                         </h3>
                         <textarea
                             id='profileBio'
@@ -830,8 +827,7 @@ class ProfileCompany extends Component {
                         <br />
                         <ul
                             id='interestsList'
-                            className='myList border-lg border-round-small'
-                        >
+                            className='myList border-lg border-round-small'>
                             {this.state.interests.map((interest, i) => {
                                 return (
                                     <button
@@ -893,9 +889,9 @@ class ProfileCompany extends Component {
                         <br />
                         <button onClick={this.resetPsw} className='btn-primary'>
                             Reset Password
-            </button>
+                        </button>
                         <br />
-                        <h4 id='resetPswWarning'></h4>
+                        <p id='resetPswWarning'></p>
                     </div>
                     <div className='resetEml'>
                         <h3>Current Email:</h3>
@@ -936,7 +932,7 @@ class ProfileCompany extends Component {
                             Reset Email
             </button>
                         <br />
-                        <h4 id='resetEmailWarning'></h4>
+                        <p id='resetEmailWarning'></p>
                     </div>
                 </div>
                 <hr />

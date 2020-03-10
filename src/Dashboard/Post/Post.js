@@ -95,6 +95,7 @@ class Post extends React.Component {
             <div className='vidcontainer' style={s}>
               <iframe
                 src={this.state.content}
+                title={this.state.content + this.state.profileID}
                 frameBorder='0'
                 allowFullScreen
               />
@@ -128,7 +129,7 @@ class Post extends React.Component {
         });
         break;
       case 'article':
-        this.setState({ post: <a href={this.state.content}></a> });
+        this.setState({ post: <a href={this.state.content}>{this.state.content}</a> });
         break;
       case 'post':
         this.getSharedPost();
@@ -142,6 +143,7 @@ class Post extends React.Component {
   componentDidMount() {
     this.getContent();
   }
+
   showComments(event) {
     this.setState({ showComments: !this.state.showComments });
   }
@@ -184,7 +186,7 @@ class Post extends React.Component {
               return result.json();
             })
             .then(result => {
-              location.reload();
+              window.location.reload();
             });
         });
     } catch (err) {
@@ -200,14 +202,8 @@ class Post extends React.Component {
         Authorization: 'Bearer ' + Cookie.getCookie('HC_JWT')
       }
     };
-
     fetch(
-      'http://' +
-        process.env.REACT_APP_API_HOST +
-        '/posts/getvote/' +
-        this.state.id,
-      options
-    )
+      'http://' + process.env.REACT_APP_API_HOST + '/posts/getvote/' + this.state.id, options)
       .then(result => {
         return result.json();
       })

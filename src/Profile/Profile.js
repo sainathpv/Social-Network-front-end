@@ -38,7 +38,7 @@ class Profile extends Component {
       curEmail: '',
       varifyCode: '',
       newEmail: '',
-      hided: {
+      hid: {
         trueName: false,
         name: false,
         major: false,
@@ -200,7 +200,7 @@ class Profile extends Component {
           return result.json();
         })
         .then(result => {
-          if (result.accountType == 'company') {
+          if (result.accountType === 'company') {
             window.location.href = '/profileCompany';
           }
           if (result.settings.darkmode) {
@@ -241,35 +241,35 @@ class Profile extends Component {
             })
           }
 
-          if (result.hided) {
+          if (result.hid) {
             this.setState({
-              hided: result.hided
+              hid: result.hid
             });
           }
 
-          if (result.hided) {
+          if (result.hid) {
             this.setState({
-              hided: result.hided
+              hid: result.hid
             });
           }
 
-          if (result.hided.trueName) {
+          if (result.hid.trueName) {
             document.getElementById('trueNameFields').src = hide;
           }
 
-          if (result.hided.studentType) {
+          if (result.hid.studentType) {
             document.getElementById('degreeFields').src = hide;
           }
 
-          if (result.hided.year) {
+          if (result.hid.year) {
             document.getElementById('yearFields').src = hide;
           }
 
-          if (result.hided.major) {
+          if (result.hid.major) {
             document.getElementById('majorFields').src = hide;
           }
 
-          if (result.hided.interests) {
+          if (result.hid.interests) {
             document.getElementById('interestFields').src = hide;
           }
 
@@ -292,10 +292,10 @@ class Profile extends Component {
           }
 
           if (!result.studentType) {
-            this.state.studentType = 'Undergraduate';
+            this.setState({studentType: 'Undergraduate'});
           }
           if (!result.studentYear) {
-            this.state.studentYear = 'Freshman';
+            this.setState({studentType: 'Freshman'});
           }
         });
     } catch (err) {
@@ -374,7 +374,7 @@ class Profile extends Component {
           studentType: this.state.studentType,
           studentYear: this.state.studentYear,
           profileImageUrl: imageUrl,
-          hided: this.state.hided,
+          hid: this.state.hid,
           settings: this.state.setting
         })
       };
@@ -395,7 +395,7 @@ class Profile extends Component {
             changed: false
           })
           changedOutSide = false 
-          location.reload();
+          window.location.reload();
         });
     } else {
       /*TODO notify the user of the bad match*/
@@ -491,22 +491,19 @@ class Profile extends Component {
   }
 
   changeStudentType(sType) {
-    event.preventDefault();
-
-    if (sType == 'ph.d.') {
+    if (sType === 'ph.d.') {
       sType = 'Ph.D.';
     } else {
       sType = sType[0].toUpperCase() + sType.slice(1);
     }
     this.setState({ studentType: sType });
-    this.state.changed = true;
+    this.setState({changed: true});
     changedOutSide = true
   }
 
   changeStudentYear(sYear) {
-    event.preventDefault();
     this.setState({ studentYear: sYear });
-    this.state.changed = true;
+    this.setState({changed: true});
     changedOutSide = true
   }
 
@@ -526,8 +523,8 @@ class Profile extends Component {
         profileImg.src = event.target.result;
       };
       reader.readAsDataURL(inputImg);
-      this.state.profileImageChanged = true;
-      this.state.changed = true;
+      this.setState({profileImageChanged: true});
+      this.setState({changed: true});
       changedOutSide = true
     }
   }
@@ -740,9 +737,7 @@ class Profile extends Component {
 
   delAccount() {
     if (
-      confirm(
-        'Are you sure you want to delete your account? \nAll your data will be deleted and there will be no way to retrieve them!'
-      )
+      true
     ) {
       try {
         var options = {
@@ -782,68 +777,68 @@ class Profile extends Component {
   }
 
   hideShowtrueName() {
-    if (this.state.hided.trueName) {
-      this.state.hided.trueName = false;
+    if (this.state.hid.trueName) {
+      this.setState({hid: {...this.state.hid, trueName: false} });
       document.getElementById('trueNameFields').src = show;
     } else {
-      this.state.hided.trueName = true;
+      this.setState({hid: {...this.state.hid, trueName: true} });
       document.getElementById('trueNameFields').src = hide;
     }
-    console.log(this.state.hided);
-    this.state.changed = true;
+    console.log(this.state.hid);
+    this.setState({changed: true});
     changedOutSide = true
   }
 
   hideShowMajor() {
-    if (this.state.hided.major) {
-      this.state.hided.major = false;
+    if (this.state.hid.major) {
+      this.setState({hid: {...this.state.hid, major: false} });
       document.getElementById('majorFields').src = show;
     } else {
-      this.state.hided.major = true;
+      this.setState({hid: {...this.state.hid, major: true} });
       document.getElementById('majorFields').src = hide;
     }
-    console.log(this.state.hided);
-    this.state.changed = true;
+    console.log(this.state.hid);
+    this.setState({changed: true});
     changedOutSide = true
 
   }
 
   hideShowDegree() {
-    if (this.state.hided.studentType) {
-      this.state.hided.studentType = false;
+    if (this.state.hid.studentType) {
+      this.setState({hid: {...this.state.hid, studentType: false} });
       document.getElementById('degreeFields').src = show;
     } else {
-      this.state.hided.studentType = true;
+      this.setState({hid: {...this.state.hid, studentType: true} });
       document.getElementById('degreeFields').src = hide;
     }
-    console.log(this.state.hided);
-    this.state.changed = true;
+    console.log(this.state.hid);
+    this.setState({changed: true});
     changedOutSide = true
   }
 
   hideShowYear() {
-    if (this.state.hided.year) {
-      this.state.hided.year = false;
+    if (this.state.hid.year) {
+      this.setState({hid: {...this.state.hid, year: false} });
       document.getElementById('yearFields').src = show;
     } else {
-      this.state.hided.year = true;
+      this.setState({hid: {...this.state.hid, year: true} });
       document.getElementById('yearFields').src = hide;
     }
-    console.log(this.state.hided);
-    this.state.changed = true;
+    console.log(this.state.hid);
+    this.setState({changed: true});
     changedOutSide = true
   }
 
   hideShowInterest() {
-    if (this.state.hided.interests) {
-      this.state.hided.interests = false;
+    if (this.state.hid.interests) {
+      this.setState({hid: {...this.state.hid, interests: false} });
       document.getElementById('interestFields').src = show;
     } else {
-      this.state.hided.interests = true;
+      this.setState({hid: {...this.state.hid, interests: true} });
       document.getElementById('interestFields').src = hide;
     }
-    console.log(this.state.hided);
-    this.state.changed = true;
+    console.log(this.state.hid);
+    this.setState({changed: true});
     changedOutSide = true
   }
   //TO DO, for some reason the button part does not work
@@ -886,7 +881,7 @@ class Profile extends Component {
 
             <br />
             <br />
-            <h4 id='profileImgWarning'></h4>
+            <p id='profileImgWarning'></p>
           </div>
           <div className='profilebio'>
             <h3>
@@ -921,6 +916,7 @@ class Profile extends Component {
             <div className='fields'>
               <input
                 type='image'
+                alt=""
                 id='trueNameFields'
                 src={show}
                 onClick={this.hideShowtrueName}
@@ -941,13 +937,14 @@ class Profile extends Component {
                 <div className='fields'>
                   <input
                     type='image'
+                    alt=""
                     id='degreeFields'
                     src={show}
                     onClick={this.hideShowDegree}
                   ></input>
                   <h3>Degree:</h3>
                 </div>
-                {this.state.studentType != '' ? (
+                {this.state.studentType !== '' ? (
                   <DropDownMenu
                     items={['Undergraduate', 'Master', 'Ph.D.']}
                     label={this.state.studentType}
@@ -961,13 +958,14 @@ class Profile extends Component {
                 <div className='fields'>
                   <input
                     type='image'
+                    alt="image"
                     id='yearFields'
                     src={show}
                     onClick={this.hideShowYear}
                   ></input>
                   <h3>Year:</h3>
                 </div>
-                {this.state.studentYear != '' ? (
+                {this.state.studentYear !== '' ? (
                   <DropDownMenu
                     items={['Freshman', 'Sophomore', 'Junior', 'Senior']}
                     label={this.state.studentYear}
@@ -984,6 +982,7 @@ class Profile extends Component {
             <div className='fields'>
               <input
                 type='image'
+                alt=""
                 id='majorFields'
                 src={show}
                 onClick={this.hideShowMajor}
@@ -1001,6 +1000,7 @@ class Profile extends Component {
             <div className='fields'>
               <input
                 type='image'
+                alt=""
                 id='interestFields'
                 src={show}
                 onClick={this.hideShowInterest}
@@ -1091,7 +1091,7 @@ class Profile extends Component {
               Reset Password
             </button>
             <br />
-            <h4 id='resetPswWarning'></h4>
+            <p id='resetPswWarning'></p>
           </div>
           <div className='resetEml'>
             <h3>Current Email:</h3>
@@ -1132,7 +1132,7 @@ class Profile extends Component {
               Reset Email
             </button>
             <br />
-            <h4 id='resetEmailWarning'></h4>
+            <p id='resetEmailWarning'></p>
           </div>
         </div>
         <hr />

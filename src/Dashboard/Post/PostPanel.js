@@ -6,9 +6,8 @@ import ShareForm from './ShareForm';
 import Cookie from '../../Utility/Cookie';
 import MiniProfile from '../../Profile/miniProfile';
 import searchBoxIcon from '../../images/search.png';
-import ReactHTMLConverter from 'react-html-converter/node'
 
-var searchedPosts = [];
+
 class PostPanel extends React.Component {
   constructor(props) {
     super(props);
@@ -167,7 +166,7 @@ class PostPanel extends React.Component {
   }
 
   profileIDHandler(profileID, name){
-    this.state.currentProfileID = profileID
+    this.setState({currentProfileID: profileID});
   }
 
   showShareForm(postID) {
@@ -256,7 +255,7 @@ class PostPanel extends React.Component {
   searchHandler(event) {
     document.getElementById("postList").style.display = "block";
     const text = document.getElementById('search_text').value;
-    if (text != "") {
+    if (text !== "") {
       var options = {
         method: 'POST',
         headers: {

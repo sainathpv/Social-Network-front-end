@@ -51,7 +51,7 @@ class ShareForm extends Component {
             fetch("http://"+ process.env.REACT_APP_API_HOST +"/posts/postPosts", options).then(result => {
                 result.json()
             }).then(result => {
-                location.reload();
+                window.location.reload();
             });
         });
     }

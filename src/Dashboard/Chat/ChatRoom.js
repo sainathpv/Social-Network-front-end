@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 //import Cookie from './../Utility/Cookie';
 import './../../css/dashboard/chat.css';
 import io from 'socket.io-client';

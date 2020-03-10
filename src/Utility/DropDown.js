@@ -5,6 +5,7 @@ class App extends Component {
         super(props);
         this.state = {items: props.items, showMenu: false, label: this.props.label + "  ▾", handle: props.handle };
         this.changeLabel = this.changeLabel.bind(this);
+        this.showMenu = this.showMenu.bind(this);
     }
 
     changeLabel(label){
@@ -27,15 +28,16 @@ class App extends Component {
         }
     }
 
-    showMenu(){
-        event.preventDefault();
+    showMenu(event){
+        if(event)
+            event.preventDefault();
         this.setState({showMenu: !this.state.showMenu});
     }
     
     render() {    
         return (
             <div className="dropdown">
-                <button onClick={this.showMenu.bind(this)}>{this.state.label}</button>
+                <button onClick={this.showMenu}>{this.state.label}</button>
                 {this.getMenu()}
             </div>
         );

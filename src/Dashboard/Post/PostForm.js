@@ -19,7 +19,6 @@ class PostForm extends Component {
   }
 
   changeType(type) {
-    event.preventDefault();
     this.setState({ type: type });
   }
 
@@ -137,7 +136,7 @@ class PostForm extends Component {
                     result.json();
                   })
                   .then(result => {
-                    location.reload();
+                    window.location.reload();
                   });
               });
           };
@@ -159,7 +158,7 @@ class PostForm extends Component {
               result.json();
             })
             .then(result => {
-              location.reload();
+              window.location.reload();
             });
         }
       });

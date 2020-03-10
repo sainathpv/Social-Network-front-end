@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import DropDownMenu from '../../Utility/DropDown';
-import Cookie from '../../Utility/Cookie';
 
 class ChatForm extends Component {
     constructor(props) {
@@ -13,7 +11,6 @@ class ChatForm extends Component {
     }
 
     changeType(type) {
-        event.preventDefault();
         this.setState({ type: type });
     }
 

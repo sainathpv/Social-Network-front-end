@@ -8,7 +8,7 @@
     "downshift": "^3.4.5",
     "lodash": "^4.17.15",
     "lodash.debounce": "^4.0.8",
-    "plotly.js": "^1.51.2",
+    "plotly.js": "^1.52.3",
     "react": "^16.10.0",
     "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.10.0",
@@ -18,7 +18,7 @@
     "react-plotly.js": "^2.4.0",
     "react-recaptcha": "^2.3.10",
     "react-router-dom": "^5.1.1",
-    "react-scripts": "0.9.5",
+    "react-scripts": "3.1.0",
     "react-stripe-checkout": "^2.6.3",
     "react-stripe-elements": "^6.0.1",
     "socket.io-client": "^2.3.0"
@@ -29,5 +29,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
